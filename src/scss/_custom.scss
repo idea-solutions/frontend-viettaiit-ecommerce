@@ -1,0 +1,8 @@
+@use "variables" as *;
+
+// THEME COLOR
+$primary: $black;
+$secondary: $red;
+
+// BUTTON
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
