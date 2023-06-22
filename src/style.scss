@@ -1,0 +1,8 @@
+@use "./scss/" as *;
+@use './scss/components/button';
+
+
+body {
+    box-sizing: border-box;
+    background-color: rgba(128, 128, 128, 0.554);
+}
