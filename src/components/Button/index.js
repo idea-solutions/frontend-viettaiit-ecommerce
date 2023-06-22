@@ -1,18 +1,26 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-function Button({ type, text, icon, left, className }) {
+import "./button.scss";
+function Button({ type, text, icon, iconLeft, iconRight, className }) {
   return (
-    <button className={`btn btn-${type} ${className ? className : ""}`}>
-      {left ? (
-        <>
-          <FontAwesomeIcon icon={icon} /> <span>{text}</span>
-        </>
-      ) : (
-        <>
-          <span>{text}</span> <FontAwesomeIcon icon={icon} />
-        </>
-      )}
-    </button>
+    <span className="wrapper">
+      <button className={`btn btn-${type} ${className ? className : ""}`}>
+        {iconLeft ? (
+          <>
+            <FontAwesomeIcon icon={iconLeft} /> <span>{text}</span>
+          </>
+        ) : (
+          <>
+            {iconRight ? (
+              <>
+                <span>{text}</span> <FontAwesomeIcon icon={iconRight} />
+              </>
+            ) : (
+              <span>{text}</span>
+            )}
+          </>
+        )}
+      </button>
+    </span>
   );
 }
 

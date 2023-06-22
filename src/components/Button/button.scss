@@ -1,0 +1,47 @@
+@use "../../scss/" as *;
+.wrapper {
+  & .btn {
+    transition: all 0.3s ease-in-out;
+    display: inline-flex;
+    gap: 8px;
+    align-items: center;
+    // button primary
+    &-primary {
+      &:hover {
+        background-color: $red;
+      }
+    }
+    // button outline one
+    &-outline-one {
+      border-color: $red;
+      color: $red;
+
+      &:hover {
+        color: $white;
+        background-color: $red;
+      }
+    }
+    // button outline two
+    &-outline-two {
+      color: $black;
+      border-color: currentColor;
+
+      &:hover {
+        color: $white;
+        background-color: $red;
+      }
+    }
+    // button secondary
+    &-secondary {
+      color: $white;
+      border-color: currentColor;
+      &:hover {
+        border-color: currentColor;
+        background-color: $black;
+      }
+    }
+    &:hover {
+      border-color: transparent;
+    }
+  }
+}
