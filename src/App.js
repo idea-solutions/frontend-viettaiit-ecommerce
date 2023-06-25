@@ -1,17 +1,24 @@
-import Button from "./components/Button";
-import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { privateRoutes } from "./routes";
+import Layout from "./components/Layout";
+import NotFound from "./pages/notFound";
 function App() {
+  const admin = true;
   return (
     <div className="App">
-      <Button
-        type={"primary"}
-        text="primary"
-        iconLeft={faCheck}
-        
-      />
-      <Button type={"outline-one"} text="outline one" />
-      <Button type={"outline-two"} text="outline two" iconRight={faCheck} />
-      <Button type={"secondary"} text="secondary" />
+      <Router>
+        <Routes>
+          {[...privateRoutes].map((route, idx) => {
+            let Comp;
+            if (admin) {
+              Comp = <Layout>{route.com}</Layout>;
+            } else {
+              Comp = <NotFound />;
+            }
+            return <Route key={idx} element={Comp} path={route.path} />;
+          })}
+        </Routes>
+      </Router>
     </div>
   );
 }
