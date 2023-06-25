@@ -10,12 +10,15 @@ function App() {
         <Routes>
           {[...privateRoutes].map((route, idx) => {
             let Comp;
+            let path;
             if (admin) {
               Comp = <Layout>{route.com}</Layout>;
+              path = route.path;
             } else {
               Comp = <NotFound />;
+              path = "/admin/not-found";
             }
-            return <Route key={idx} element={Comp} path={route.path} />;
+            return <Route key={idx} element={Comp} path={path} />;
           })}
         </Routes>
       </Router>
