@@ -1,0 +1,56 @@
+@use "../../scss/" as *;
+.side-bar {
+  width: 250px;
+  .header {
+    svg {
+      cursor: pointer;
+      padding: 5px;
+    }
+  }
+  .accordion {
+    .card {
+      border: none;
+      .card-header {
+        background-color: transparent;
+        border-bottom: 0px solid transparent;
+        transform: color 0.2s ease-in-out;
+        &:hover {
+          color: $red;
+          cursor: pointer;
+        }
+        & svg {
+          transform: rotate(0deg);
+          transition: transform 0.3s ease-in-out;
+          &.active {
+            transform: rotate(90deg);
+          }
+        }
+
+        &.active {
+          background-color: $red;
+          color: $white;
+        }
+      }
+
+      .card-body {
+        padding: 0px;
+
+        a {
+          display: flex;
+          align-items: center;
+          padding: 10px 5px 10px 71px;
+          text-decoration: none;
+          transform: color 0.2s ease-in-out;
+          &:hover {
+            color: $red;
+          }
+
+          &.active {
+            background-color: $red;
+            color: $white;
+          }
+        }
+      }
+    }
+  }
+}
