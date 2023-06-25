@@ -2,8 +2,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { Accordion, Card, useAccordionButton } from "react-bootstrap";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-function CustomToggle({ children, eventKey, setShow, show }) {
-  const decoratedOnClick = useAccordionButton(eventKey, (e) => setShow(!show));
+function CustomToggle({ children, eventKey, setShow, show, title }) {
+  const decoratedOnClick = useAccordionButton(eventKey, (e) => {
+    if (title === "Products") {
+      setShow(!show);
+      return;
+    }
+    setShow(false);
+  });
   return <div onClick={decoratedOnClick}>{children}</div>;
 }
 function AccordionCustom({ menuSideBar }) {
@@ -16,15 +22,19 @@ function AccordionCustom({ menuSideBar }) {
     navigate(item.to);
   };
   const location = useLocation();
-  console.log(location);
   return (
     <Accordion>
       {menuSideBar.map((item, idx) => (
-        <Card key={idx}>
+        <Card key={idx} className="py-2">
           <Card.Header
             className={`${location.pathname === item.to ? "active" : ""}`}
           >
-            <CustomToggle eventKey={idx} setShow={setShow} show={show}>
+            <CustomToggle
+              eventKey={idx}
+              setShow={setShow}
+              show={show}
+              title={item.title}
+            >
               <div
                 className="d-flex justify-content-between"
                 onClick={() => handleNavigate(item, idx)}
@@ -37,7 +47,6 @@ function AccordionCustom({ menuSideBar }) {
                     }}
                   >
                     <span className="d-flex justify-content-center align-items-center">
-                      {" "}
                       <FontAwesomeIcon className="fs-5" icon={item.iconLeft} />
                     </span>
                   </small>

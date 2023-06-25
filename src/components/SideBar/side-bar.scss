@@ -27,8 +27,8 @@
         }
 
         &.active {
-          background-color: $red;
-          color: $white;
+          background-color: $gray-200;
+      
         }
       }
 
@@ -46,8 +46,7 @@
           }
 
           &.active {
-            background-color: $red;
-            color: $white;
+            background-color: $gray-200;
           }
         }
       }
