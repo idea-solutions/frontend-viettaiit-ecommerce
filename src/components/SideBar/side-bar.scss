@@ -1,6 +1,6 @@
 @use "../../scss/" as *;
 .side-bar {
-  width: 250px;
+  width: 300px;
   .header {
     svg {
       cursor: pointer;
@@ -27,8 +27,12 @@
         }
 
         &.active {
-          background-color: $gray-200;
-      
+          background-color: $gray-100;
+          transition: background-color 0.5s ease-in-out;
+          span {
+            color: $red !important;
+            border-radius: 0px;
+          }
         }
       }
 
@@ -38,15 +42,18 @@
         a {
           display: flex;
           align-items: center;
-          padding: 10px 5px 10px 71px;
+          padding: 8px 5px 8px 20px;
+          margin-left: 50px;
+          margin-right: 10px;
           text-decoration: none;
           transform: color 0.2s ease-in-out;
           &:hover {
             color: $red;
           }
-
           &.active {
-            background-color: $gray-200;
+            background-color: $gray-100;
+            transition: background-color 0.5s ease-in-out;
+            color: $red !important;
           }
         }
       }

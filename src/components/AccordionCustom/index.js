@@ -12,7 +12,7 @@ function CustomToggle({ children, eventKey, setShow, show, title }) {
   });
   return <div onClick={decoratedOnClick}>{children}</div>;
 }
-function AccordionCustom({ menuSideBar }) {
+function AccordionCustom({ menuSideBar, color }) {
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
   const handleNavigate = (item, idx) => {
@@ -25,7 +25,7 @@ function AccordionCustom({ menuSideBar }) {
   return (
     <Accordion>
       {menuSideBar.map((item, idx) => (
-        <Card key={idx} className="py-2">
+        <Card key={idx} className="py-2 bg-dark">
           <Card.Header
             className={`${location.pathname === item.to ? "active" : ""}`}
           >
@@ -39,7 +39,7 @@ function AccordionCustom({ menuSideBar }) {
                 className="d-flex justify-content-between"
                 onClick={() => handleNavigate(item, idx)}
               >
-                <div className="d-flex align-items-center">
+                <div className="d-flex align-items-center text-white">
                   <small
                     style={{
                       width: "40px",
@@ -55,7 +55,7 @@ function AccordionCustom({ menuSideBar }) {
                 <div>
                   {item.subMenu && (
                     <FontAwesomeIcon
-                      className={`${show ? "active" : ""} fs-3 pe-2`}
+                      className={`text-white ${show ? "active" : ""} fs-3 pe-2`}
                       icon={item.iconRight}
                     />
                   )}
@@ -68,7 +68,7 @@ function AccordionCustom({ menuSideBar }) {
               <Card.Body>
                 {item.subMenu.map((subItem, idx) => (
                   <Link
-                    className={`${
+                    className={`text-white rounded-1 ${
                       location.pathname === subItem.to ? "active" : ""
                     }`}
                     to={subItem.to}

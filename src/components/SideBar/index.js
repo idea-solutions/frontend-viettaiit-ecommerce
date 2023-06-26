@@ -10,12 +10,12 @@ import "./side-bar.scss";
 import AccordionCustom from "../AccordionCustom";
 function SideBar() {
   return (
-    <div className="side-bar bg-white shadow-sm vh-100">
+    <div className="side-bar bg-dark shadow-sm vh-100">
       <div className="header d-flex justify-content-between align-items-center p-3">
         <Logo />
-        <FontAwesomeIcon bounce className="fs-4" icon={faSquareCaretLeft} />
+        <FontAwesomeIcon bounce className="fs-4 text-white" icon={faSquareCaretLeft} />
       </div>
-      <AccordionCustom menuSideBar={menuSideBar}></AccordionCustom>
+      <AccordionCustom menuSideBar={menuSideBar} color="text-white"></AccordionCustom>
     </div>
   );
 }
