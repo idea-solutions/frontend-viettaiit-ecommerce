@@ -7,7 +7,11 @@ import {
   faSignal,
   faStarHalfStroke,
   faUserTie,
-
+  faUser,
+  faComment,
+  faBell,
+  faArrowRightToBracket,
+  faSun,faMagnifyingGlass
 } from "@fortawesome/free-solid-svg-icons";
 export {
   faCaretRight,
@@ -18,5 +22,10 @@ export {
   faSignal,
   faStarHalfStroke,
   faUserTie,
-  
+  faUser,
+  faComment,
+  faBell,
+  faArrowRightToBracket,
+  faSun,faMagnifyingGlass
 };
+
