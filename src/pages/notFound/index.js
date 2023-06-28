@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import defaultRoutes from "../../assets/defaultRoutes";
+import { privateRoutes } from "../../routes";
 import { Image } from "react-bootstrap";
-import AnimationPage from "../../components/AnimationPage";
+import AnimationPage from "../../components/admin/AnimationPage";
 function NotFound() {
   return (
     <AnimationPage>
@@ -12,7 +12,7 @@ function NotFound() {
             Xin lỗi, trang này không tồn tại, vui lòng quay lại trang chủ
           </p>
           <Link
-            to={defaultRoutes.dashboard}
+            to={privateRoutes.dashboard}
             type="button"
             className="btn btn-secondary"
           >

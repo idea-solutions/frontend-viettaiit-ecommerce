@@ -1,14 +1,14 @@
-import Management from "../pages/products/management";
-import DashBoard from "../pages/products/dashboard";
-import defaultRoutes from "../assets/defaultRoutes";
-import Order from "../pages/order";
+import { privateRoutes } from "./routes";
+import Order from "../pages/admin/order";
+import DashBoard from "../pages/admin/products/dashboard";
+import Management from "../pages/admin/products/management";
 import Notfound from "../pages/notFound";
 // routes admin
-const privateRoutes = [
-  { com: <Management />, path: defaultRoutes.productManagement },
-  { com: <DashBoard />, path: defaultRoutes.dashboard },
-  { com: <Order />, path: defaultRoutes.orders },
+const adminRoutes = [
+  { com: <Management />, path: privateRoutes.productManagement },
+  { com: <DashBoard />, path: privateRoutes.dashboard },
+  { com: <Order />, path: privateRoutes.orders },
   { com: <Notfound />, path: "*" },
 ];
 
-export { privateRoutes };
+export { adminRoutes, privateRoutes };

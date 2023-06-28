@@ -1,4 +1,4 @@
- const defaultRoutes = {
+const privateRoutes = {
   dashboard: "/admin/dash-board",
   topProducts: "/admin/top-products",
   productGrid: "/admin/product-grip",
@@ -12,5 +12,4 @@
   transactions: "/admin/transactions",
 };
 
-
-export default defaultRoutes
+export { privateRoutes };

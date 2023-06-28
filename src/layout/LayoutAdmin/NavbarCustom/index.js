@@ -8,8 +8,8 @@ import {
   faMagnifyingGlass,
   faSun,
   faUser,
-} from "../../assets/icons";
-import CustomToggle from "../Toggle";
+} from "../../../assets/icons";
+import CustomToggle from "../../../components/Toggle";
 
 import "./navbar.scss";
 function NavbarCustom() {

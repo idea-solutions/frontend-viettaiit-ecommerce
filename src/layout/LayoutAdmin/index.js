@@ -1,6 +1,7 @@
-import NavbarCustom from "../NavbarCustom";
-import SideBar from "../SideBar";
-function Layout({ children }) {
+import NavbarCustom from "./NavbarCustom";
+import SideBar from "./SideBar";
+
+function LayOutAdmin({ children }) {
   return (
     <div className="d-flex">
       <SideBar />
@@ -12,4 +13,4 @@ function Layout({ children }) {
   );
 }
 
-export default Layout;
+export default LayOutAdmin;

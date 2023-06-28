@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import AnimationPage from "../../components/AnimationPage";
+import AnimationPage from "../../../components/AnimationPage";
 function Addproduct() {
   return (
     <AnimationPage>

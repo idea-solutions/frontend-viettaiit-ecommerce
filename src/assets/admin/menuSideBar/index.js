@@ -6,52 +6,52 @@ import {
   faSignal,
   faStarHalfStroke,
   faUserTie,
-} from "./icons";
-import defaultRoutes  from "./defaultRoutes";
+} from "../../icons";
+import { privateRoutes } from "../../../routes";
 
 const menuSideBar = [
   {
     title: "Dashboard",
     iconLeft: faTableColumns,
-    to: defaultRoutes.dashboard,
+    to: privateRoutes.dashboard,
   },
   {
     title: "Products",
     iconRight: faCaretRight,
     iconLeft: faBookmark,
     subMenu: [
-      { title: "Top Products", to: defaultRoutes.topProducts },
-      { title: "Product Grip", to: defaultRoutes.productGrid },
-      { title: "Product Management", to: defaultRoutes.productManagement },
-      { title: "Product Categories", to: defaultRoutes.productCategories },
-      { title: "Add New Product", to: defaultRoutes.addNewProduct },
+      { title: "Top Products", to: privateRoutes.topProducts },
+      { title: "Product Grip", to: privateRoutes.productGrid },
+      { title: "Product Management", to: privateRoutes.productManagement },
+      { title: "Product Categories", to: privateRoutes.productCategories },
+      { title: "Add New Product", to: privateRoutes.addNewProduct },
     ],
   },
 
   {
     title: "Orders",
     iconLeft: faCartPlus,
-    to: defaultRoutes.orders,
+    to: privateRoutes.orders,
   },
   {
     title: "Statistics",
     iconLeft: faSignal,
-    to: defaultRoutes.statistics,
+    to: privateRoutes.statistics,
   },
   {
     title: "Reviews",
     iconLeft: faStarHalfStroke,
-    to: defaultRoutes.reviews,
+    to: privateRoutes.reviews,
   },
   {
     title: "Customers",
     iconLeft: faUserTie,
-    to: defaultRoutes.customers,
+    to: privateRoutes.customers,
   },
   {
     title: "Transactions",
     iconLeft: faTableColumns,
-    to: defaultRoutes.transactions,
+    to: privateRoutes.transactions,
   },
 ];
 

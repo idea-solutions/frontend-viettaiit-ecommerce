@@ -1,6 +1,6 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import { privateRoutes } from "./routes";
-import Layout from "./components/Layout";
+import { adminRoutes } from "./routes";
+import LayoutAdmin from "./layout/LayoutAdmin";
 import { AnimatePresence } from "framer-motion";
 function App() {
   const admin = true;
@@ -9,11 +9,11 @@ function App() {
       <Router>
         <AnimatePresence onExitComplete={true}>
           <Routes>
-            {[...privateRoutes].map((route, idx) => {
+            {[...adminRoutes].map((route, idx) => {
               let Comp;
               let path;
               if (admin) {
-                Comp = <Layout>{route.com}</Layout>;
+                Comp = <LayoutAdmin>{route.com}</LayoutAdmin>;
                 path = route.path;
               }
               if (path === "*") {
