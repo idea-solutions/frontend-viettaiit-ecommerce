@@ -1,26 +1,28 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import { privateRoutes } from "./routes";
 import Layout from "./components/Layout";
-import NotFound from "./pages/notFound";
+import { AnimatePresence } from "framer-motion";
 function App() {
   const admin = true;
   return (
     <div className="App">
       <Router>
-        <Routes>
-          {[...privateRoutes].map((route, idx) => {
-            let Comp;
-            let path;
-            if (admin) {
-              Comp = <Layout>{route.com}</Layout>;
-              path = route.path;
-            } else {
-              Comp = <NotFound />;
-              path = "/admin/not-found";
-            }
-            return <Route key={idx} element={Comp} path={path} />;
-          })}
-        </Routes>
+        <AnimatePresence onExitComplete={true}>
+          <Routes>
+            {[...privateRoutes].map((route, idx) => {
+              let Comp;
+              let path;
+              if (admin) {
+                Comp = <Layout>{route.com}</Layout>;
+                path = route.path;
+              }
+              if (path === "*") {
+                Comp = route.com;
+              }
+              return <Route key={idx} element={Comp} path={path} />;
+            })}
+          </Routes>
+        </AnimatePresence>
       </Router>
     </div>
   );
