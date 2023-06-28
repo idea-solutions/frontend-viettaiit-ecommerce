@@ -13,9 +13,15 @@ function SideBar() {
     <div className="side-bar bg-dark shadow-sm vh-100">
       <div className="header d-flex justify-content-between align-items-center p-3">
         <Logo />
-        <FontAwesomeIcon bounce className="fs-4 text-white" icon={faSquareCaretLeft} />
+        <FontAwesomeIcon
+          bounce
+          className="fs-4 text-secondary"
+          icon={faSquareCaretLeft}
+        />
       </div>
-      <AccordionCustom menuSideBar={menuSideBar} color="text-white"></AccordionCustom>
+      <AccordionCustom
+        menuSideBar={menuSideBar}
+      ></AccordionCustom>
     </div>
   );
 }
