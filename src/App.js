@@ -1,25 +1,31 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import { adminRoutes } from "./routes";
+import { adminPages, clientPages } from "./routes";
 import LayoutAdmin from "./layout/LayoutAdmin";
 import { AnimatePresence } from "framer-motion";
+import LayoutClient from "./layout/LayoutClient";
+import NotFound from "./pages/notFound";
 function App() {
-  const admin = true;
+  const rule = "client";
+  const combinationPages = rule === "admin" ? adminPages : clientPages;
   return (
     <div className="App">
       <Router>
         <AnimatePresence onExitComplete={true}>
           <Routes>
-            {[...adminRoutes].map((route, idx) => {
+            {combinationPages.map((route, idx) => {
               let Comp;
-              let path;
-              if (admin) {
+              if (rule === "admin") {
                 Comp = <LayoutAdmin>{route.com}</LayoutAdmin>;
-                path = route.path;
+                if (route.path === "*") {
+                  Comp = <NotFound></NotFound>;
+                }
+              } else if (rule === "client") {
+                Comp = <LayoutClient>{route.com}</LayoutClient>;
+                if (route.path === "*") {
+                  Comp = <NotFound></NotFound>;
+                }
               }
-              if (path === "*") {
-                Comp = route.com;
-              }
-              return <Route key={idx} element={Comp} path={path} />;
+              return <Route key={idx} element={Comp} path={route.path} />;
             })}
           </Routes>
         </AnimatePresence>
@@ -27,5 +33,9 @@ function App() {
     </div>
   );
 }
+
+// chua login => Xem duoc client
+// login - admin => Xem duoc client , admin
+// login - client => Xem duoc client
 
 export default App;

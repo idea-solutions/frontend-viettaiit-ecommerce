@@ -12,4 +12,10 @@ const privateRoutes = {
   transactions: "/admin/transactions",
 };
 
-export { privateRoutes };
+const publicRoutes = {
+  home: "/",
+  login: "/account/login",
+  register: "/account/register",
+};
+
+export { privateRoutes, publicRoutes };
