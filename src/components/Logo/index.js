@@ -1,9 +1,14 @@
-import './logo.scss';
-function Logo() {
+import { Link } from "react-router-dom";
+import "./logo.scss";
+function Logo({ size }) {
+  const rule = "client";
   return (
-    <span className="logo d-block fs-4 text-white rounded">
-        Sudes Phone
-    </span>
+    <Link
+      to={rule === "client" ? "/" : "/admin/dash-board"}
+      className={`logo d-block ${size ? size : "fs-4"} text-white rounded`}
+    >
+      Sudes Phone
+    </Link>
   );
 }
 
