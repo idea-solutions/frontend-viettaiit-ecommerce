@@ -5,6 +5,7 @@
     svg {
       cursor: pointer;
       padding: 5px;
+      color: currentColor;
     }
   }
   .accordion {
@@ -35,10 +36,8 @@
           }
         }
       }
-
       .card-body {
         padding: 0px;
-
         a {
           display: flex;
           align-items: center;

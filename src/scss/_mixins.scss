@@ -1,1 +1,5 @@
-
+@mixin text-greadient() {
+  background: linear-gradient(to right, white 3%, #cf1512 76%)!important;
+  -webkit-background-clip: text!important;
+  -webkit-text-fill-color: transparent!important;
+}

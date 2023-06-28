@@ -12,7 +12,7 @@ function CustomToggle({ children, eventKey, setShow, show, title }) {
   });
   return <div onClick={decoratedOnClick}>{children}</div>;
 }
-function AccordionCustom({ menuSideBar, color }) {
+function AccordionCustom({ menuSideBar }) {
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
   const handleNavigate = (item, idx) => {
