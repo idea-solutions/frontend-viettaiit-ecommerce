@@ -1,8 +1,8 @@
-import { Link } from "react-router-dom";
-import { privateRoutes } from "../../routes";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Image } from "react-bootstrap";
 import AnimationPage from "../../components/admin/AnimationPage";
 function NotFound() {
+  const navigate = useNavigate();
   return (
     <AnimationPage>
       <div className="container-fuild">
@@ -11,13 +11,13 @@ function NotFound() {
           <p className=" w-50 text-center text-wrap fs-4 text-primary d-flex align-items-center flex-column gap-1">
             Xin lỗi, trang này không tồn tại, vui lòng quay lại trang chủ
           </p>
-          <Link
-            to={privateRoutes.dashboard}
+          <button
+            onClick={() => navigate(-1)}
             type="button"
             className="btn btn-secondary"
           >
             Quay lại trang chủ
-          </Link>
+          </button>
         </div>
       </div>
     </AnimationPage>
