@@ -1,5 +1,11 @@
+import AnimationPage from "../../../components/AnimationPage";
+
 function Login() {
-  return <div>Login</div>;
+  return (
+    <AnimationPage>
+      <div>Login</div>
+    </AnimationPage>
+  );
 }
 
 export default Login;

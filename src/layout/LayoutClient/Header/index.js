@@ -1,11 +1,11 @@
 import AnimationPage from "../../../components/AnimationPage";
 
-function Register() {
+function Header() {
   return (
     <AnimationPage>
-      <div>Register</div>
+      <div>Header</div>
     </AnimationPage>
   );
 }
 
-export default Register;
+export default Header;

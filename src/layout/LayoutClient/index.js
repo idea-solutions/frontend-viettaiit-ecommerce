@@ -1,8 +1,14 @@
+// LAYOUT
+import Footer from "./Footer";
+import Header from "./Header";
+// STYLES
+import "./layout-client.scss";
 function LayoutClient({ children }) {
   return (
-    <div>
-      <h1>Header</h1>
+    <div className="">
+      <Header />
       {children}
+      <Footer />
     </div>
   );
 }
