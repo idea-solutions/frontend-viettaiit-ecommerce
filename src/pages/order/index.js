@@ -1,10 +1,10 @@
 import AnimationPage from "../../components/AnimationPage";
-function DashBoard() {
+function Order() {
   return (
     <AnimationPage>
-      <div className="">DashBoard</div>
+      <div className="container-fuild"> Order </div>
     </AnimationPage>
   );
 }
 
-export default DashBoard;
+export default Order;

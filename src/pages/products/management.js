@@ -1,5 +1,10 @@
+import AnimationPage from "../../components/AnimationPage";
 function Management() {
-  return <div className="">Management</div>;
+  return (
+    <AnimationPage>
+      <div className="">Management</div>
+    </AnimationPage>
+  );
 }
 
 export default Management;
