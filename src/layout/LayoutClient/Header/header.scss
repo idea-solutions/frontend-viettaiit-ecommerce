@@ -1,0 +1,186 @@
+@use "../../../assets/scss/" as *;
+
+.header {
+  height: $header-height;
+  @include background-gradient;
+  position: relative;
+  &::after {
+    position: absolute;
+    top: 64px;
+    left: 0%;
+    width: 100%;
+    background-color: $gray-500;
+    height: 0.5px;
+    content: "";
+  }
+
+  @include media-breakpoint-down(lg) {
+    &::after {
+      display: none;
+    }
+  }
+  .header-top {
+    padding: 2px 0px;
+    @include flex-between;
+    gap: 20px;
+    @include media-breakpoint-down(lg) {
+      & {
+        padding: 0px 10px;
+      }
+    }
+    color: $white;
+    .left {
+      @include flex-gap($gap: 4px);
+      a {
+        font-size: $px-40 !important;
+        color: $white;
+        font-weight: bold;
+        @include media-breakpoint-down(lg) {
+          & {
+            font-size: $px-30 !important;
+          }
+        }
+      }
+      cursor: pointer;
+    }
+
+    .right {
+      @include flex-center($gap: 22px);
+      .item {
+        @include flex-center($gap: 10px);
+        position: relative;
+        ::after {
+          position: absolute;
+          content: "";
+          height: 16px;
+          background-color: transparent;
+          width: 36%;
+          top: -5%;
+          right: 10%;
+        }
+        cursor: pointer;
+        span {
+          @include flex-column($gap: 4px);
+          transition: all 0.2s ease-in-out;
+          @include media-breakpoint-down(lg) {
+            & {
+              display: none;
+            }
+          }
+          &:hover {
+            opacity: 0.5;
+          }
+          .title {
+            font-size: $px-10;
+            font-weight: 300;
+          }
+          small {
+            font-size: $px-12;
+          }
+        }
+        .circle {
+          @include position-top-right($top: -21%, $right: 60%);
+          background-color: red;
+          border-radius: 50%;
+          width: 15px;
+          height: 15px;
+          font-size: $px-14;
+          padding: 1px;
+          @include flex-center;
+        }
+
+        .frame-hover {
+          ::before {
+            position: absolute;
+            content: "";
+            border-width: 10px;
+            border-style: solid;
+            border-color: transparent transparent #fff transparent;
+            top: -6%;
+            right: 8%;
+            cursor: pointer;
+          }
+          .account {
+            &__item {
+              margin: 2px;
+              padding: 5px;
+              @include flex-gap($gap: 6px);
+              @include hover-primary-white;
+              small {
+                font-size: $px-14;
+              }
+            }
+          }
+          .cart {
+            padding: 10px;
+            &__none {
+              @include flex-column;
+            }
+            &__display {
+              @include flex-column($gap: 0px);
+
+              .cart__item {
+                border-top: 1px solid $gray-700;
+                padding: 10px 0px;
+                @include flex-gap($gap: 10px);
+                .left {
+                  width: 65px;
+                  height: 65px;
+                }
+                .right {
+                  flex: 1;
+                  @include flex-column($gap: 4px);
+                  div {
+                    width: 100%;
+                    @include flex-between($align: unset);
+                    .icon-close {
+                      height: 15px;
+                      padding: 4px;
+                      @include hover-text-secondary;
+                    }
+                    .name {
+                      font-size: $px-14;
+                      @include hover-text-secondary;
+                    }
+                    span {
+                      @include flex-center;
+                      flex-direction: unset;
+                    }
+
+                    .price {
+                      color: $red;
+                      font-size:$px-12;
+                    }
+
+                    small {
+                      display: flex;
+                      text-align: right;
+                    }
+                  }
+                }
+              }
+            }
+            .total {
+              border-top: 1px solid $gray-700;
+              @include flex-between;
+              padding: 6px 8px;
+
+              .left {
+                flex-direction: column;
+                small {
+                  cursor: default;
+                  &:last-child {
+                    color: $secondary;
+                    font-weight: 800;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .header-bottom {
+  }
+}
