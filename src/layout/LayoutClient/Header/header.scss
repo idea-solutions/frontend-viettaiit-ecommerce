@@ -49,15 +49,7 @@
       .item {
         @include flex-center($gap: 10px);
         position: relative;
-        ::after {
-          position: absolute;
-          content: "";
-          height: 16px;
-          background-color: transparent;
-          width: 36%;
-          top: -5%;
-          right: 10%;
-        }
+
         cursor: pointer;
         span {
           @include flex-column($gap: 4px);
@@ -90,17 +82,10 @@
         }
 
         .frame-hover {
-          ::before {
-            position: absolute;
-            content: "";
-            border-width: 10px;
-            border-style: solid;
-            border-color: transparent transparent #fff transparent;
-            top: -6%;
-            right: 8%;
-            cursor: pointer;
-          }
           .account {
+            position: relative;
+            @include triangle-before($top: -20%, $right: 8%);
+            @include triangle-after($top: -18%, $right: 10% , $width:30%);
             &__item {
               margin: 2px;
               padding: 5px;
@@ -113,6 +98,9 @@
           }
           .cart {
             padding: 10px;
+            position: relative;
+            @include triangle-before($top: -8%, $right: 8%);
+            @include triangle-after($top: -6%, $right: 2% , $width:20%);
             &__none {
               @include flex-column;
             }
@@ -149,7 +137,7 @@
 
                     .price {
                       color: $red;
-                      font-size:$px-12;
+                      font-size: $px-12;
                     }
 
                     small {
