@@ -10,7 +10,7 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <AnimatePresence onExitComplete={true}>
+        <AnimatePresence>
           <Routes>
             {combinationPages.map((route, idx) => {
               let Comp;

@@ -11,8 +11,21 @@ import {
   faComment,
   faBell,
   faArrowRightToBracket,
-  faSun,faMagnifyingGlass
+  faSun,
+  faMagnifyingGlass,
+  faPhoneVolume,
+  faPlus,
+  faAngleDown,
+  faHeart,
+  faRotate,
+  faFaceSmileBeam,
+  faSearch,
+  faFaceSmile,
+  faFire,
+  faClose,
+  faBars,
 } from "@fortawesome/free-solid-svg-icons";
+
 export {
   faCaretRight,
   faSquareCaretLeft,
@@ -26,6 +39,17 @@ export {
   faComment,
   faBell,
   faArrowRightToBracket,
-  faSun,faMagnifyingGlass
+  faSun,
+  faMagnifyingGlass,
+  faPhoneVolume,
+  faAngleDown,
+  faPlus,
+  faHeart,
+  faRotate,
+  faFaceSmileBeam,
+  faSearch,
+  faFaceSmile,
+  faFire,
+  faClose,
+  faBars,
 };
-
