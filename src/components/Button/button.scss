@@ -1,0 +1,11 @@
+@use "../../assets/scss/" as *;
+
+.btn-custom {
+  &__primary {
+    &:hover {
+      background-color: $red!important;
+      border-color: $red!important;
+      color: $white;
+    }
+  }
+}
