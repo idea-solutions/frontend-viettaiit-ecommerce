@@ -5,3 +5,73 @@ body {
   box-sizing: border-box;
   font-family: "Nunito", sans-serif;
 }
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+//  ICONS SIZE
+.elastic-fai-xl {
+  font-size: calc($px-1 * 80);
+}
+.elastic-fai-lg {
+  font-size: calc($px-1 * 50);
+}
+.elastic-fai-md {
+  font-size: calc($px-1 * 40);
+}
+.elastic-fai-sm {
+  font-size:calc($px-1 * 30);
+}
+.elastic-fai-2xs {
+  font-size: calc($px-1 * 20);
+}
+.elastic-fai-xs {
+  font-size: calc($px-1 * 15);
+}
+
+// BREAKPOINTS
+@include media-breakpoint-down(sm) {
+  .max-sm-none {
+    display: none !important;
+  }
+
+  .max-sm-display {
+    display: flex !important;
+  }
+  // SPACES
+}
+@include media-breakpoint-down(md) {
+  .max-md-none {
+    display: none !important;
+  }
+  .max-md-display {
+    display: flex !important;
+  }
+}
+@include media-breakpoint-down(lg) {
+  .max-lg-none {
+    display: none !important;
+  }
+  .max-lg-display {
+    display: flex !important;
+  }
+}
+@include media-breakpoint-down(xl) {
+  .max-xl-none {
+    display: none !important;
+  }
+  .max-xl-display {
+    display: flex !important;
+  }
+}
+@include media-breakpoint-down(xxl) {
+  .max-xxl-none {
+    display: none !important;
+  }
+  .max-xxl-display {
+    display: flex !important;
+  }
+}
