@@ -5,7 +5,7 @@ import { Image } from "react-bootstrap";
 import "swiper/css";
 import "swiper/css/navigation";
 import "./home.scss";
-import sliders from "../../../assets/client/slider";
+import { sliders1, sliders2 } from "../../../assets/client/sliders";
 import promoBoxes from "../../../assets/client/promoBox";
 function Home() {
   return (
@@ -17,7 +17,7 @@ function Home() {
           autoplay={{ delay: 2000 }}
           className="home__slider"
         >
-          {sliders.map((slider, idx) => (
+          {sliders1.map((slider, idx) => (
             <SwiperSlide key={idx}>
               <Image src={slider} />
             </SwiperSlide>
@@ -42,6 +42,18 @@ function Home() {
               </div>
             </div>
           ))}
+        </div>
+        <div className="section">
+          <div className="row mx-1">
+            {sliders2.map((image, idx) => (
+              <div
+                key={idx}
+                className="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 mb-2"
+              >
+                <Image className="section__item" src={image} />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </AnimationPage>
