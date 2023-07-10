@@ -1,14 +1,12 @@
-import {
-  faAngleDown,
-  faAngleRight,
-  faClose,
-} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { publicRoutes } from "../../../routes";
 import { Link } from "react-router-dom";
-import { motion, easeInOut, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import "./navbar-down-desktop.scss";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleNavBar } from "../../../redux/client/features/navBarSlice";
+import { faAngleDown, faAngleRight, faClose } from "../../../assets/icons";
 const menuBottom = [
   { title: "Trang chủ", to: publicRoutes.home },
   { title: "Giới thiệu", to: publicRoutes.home },
@@ -111,18 +109,48 @@ const menuBottom = [
   { title: "Tin tức", to: publicRoutes.home },
   { title: "Liên hệ", to: publicRoutes.home },
 ];
+const variants = {
+  initial: { x: -200, opacity: 0.5 },
+  open: { x: 0, opacity: 1 },
+  exit: { x: -300, opacity: 0.5 },
+  transition: { duration: 12, ease: "linear" },
+};
 function NavBarDownDeskTop() {
   const [numberShow, setNumberShow] = useState(100);
+  const { isOpen } = useSelector((store) => store.navBar);
+  const dispatch = useDispatch();
+  const wrapperRef = useRef();
+
   return (
-    <div className="wrapper-bar">
-      <div className="nav-bar">
+    <div
+      className="wrapper-bar d-lg-none"
+      onClick={(e) => {
+        if (e.target === wrapperRef.current) {
+          dispatch(toggleNavBar());
+        }
+      }}
+      ref={wrapperRef}
+    >
+      <motion.div
+        variants={variants}
+        initial="initial"
+        exit="exit"
+        transition="transition"
+        animate={isOpen ? "open" : "exit"}
+        className="nav-bar"
+      >
         <div className="nav-bar__header">
           <span>DANH MỤC</span>
-          <FontAwesomeIcon className="elastic-fai-sm" icon={faClose} />
+          <FontAwesomeIcon
+            onClick={() => dispatch(toggleNavBar())}
+            className="elastic-fai-sm"
+            icon={faClose}
+          />
         </div>
         <div className="nav-bar__menu">
           {menuBottom.map((item, idx) => (
             <motion.li
+              key={idx}
               animate={numberShow === idx ? "open" : "closed"}
               whileTap={{ scale: 0.97 }}
               className="nav-bar__menu__parent-item"
@@ -161,7 +189,7 @@ function NavBarDownDeskTop() {
             </motion.li>
           ))}
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }
