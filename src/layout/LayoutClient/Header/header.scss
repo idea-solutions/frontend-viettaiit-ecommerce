@@ -4,6 +4,7 @@
   height: $header-height;
   @include background-gradient;
   position: relative;
+  border-bottom: 1px solid $gray-500;
   &::after {
     position: absolute;
     top: 64px;
@@ -171,6 +172,7 @@
   }
   .header-bottom {
     max-height: 40px;
+
     @include media-breakpoint-down(lg) {
       display: none;
     }
@@ -185,6 +187,7 @@
         margin-top: 5px;
         position: relative;
         cursor: pointer;
+        z-index: 9;
         .link {
           display: block;
           font-size: $px-16;
