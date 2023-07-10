@@ -85,6 +85,7 @@
         .frame-hover {
           .account {
             position: relative;
+           
             @include triangle-before($top: -20%, $right: 8%);
             @include triangle-after($top: -18%, $right: 10%, $width: 30%);
             &__item {
