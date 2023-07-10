@@ -1,5 +1,5 @@
 // FRAMEWORKS
-import { easeInOut, motion } from "framer-motion";
+import { AnimatePresence, easeInOut, motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { Image } from "react-bootstrap";
@@ -10,6 +10,7 @@ import FrameHover from "../../../components/FrameHover";
 import ButtonQuantity from "../../../components/ButtonQuantity";
 import Button from "../../../components/Button";
 import Search from "../../../components/Search";
+import NavbarDownDeskTop from "../../../components/client/NavBarDownDeskTop";
 import {
   faAngleDown,
   faArrowRightToBracket,
@@ -21,17 +22,124 @@ import {
   faUser,
   faClose,
   faBars,
+  faAngleRight,
+  faAngleLeft,
 } from "../../../assets/icons";
+// ROUTES
+import { publicRoutes } from "../../../routes";
 // STYLES
 import "./header.scss";
+import { Link } from "react-router-dom";
 
+const menuBottom = [
+  { title: "Trang chủ", to: publicRoutes.home },
+  { title: "Giới thiệu", to: publicRoutes.home },
+  {
+    title: "Iphone",
+    to: publicRoutes.home,
+    iconDown: faAngleDown,
+    subMenu: [
+      {
+        title: "IPHONE 14 Series",
+        items: [
+          "Iphone 14",
+          "Iphone 14 Plus",
+          "Iphone 14 Pro",
+          "Iphone 14 Pro Max",
+        ],
+      },
+      {
+        title: "IPHONE 13 Series",
+        items: [
+          "Iphone 13",
+          "Iphone 13 Mini",
+          "Iphone 13 Pro",
+          "Iphone 13 Pro Max",
+        ],
+      },
+      {
+        title: "IPHONE 12 Series",
+        items: [
+          "Iphone 12",
+          "Iphone 12 Mini",
+          "Iphone 12 Pro",
+          "Iphone 12 Pro Max",
+        ],
+      },
+      {
+        title: "IPHONE 11 Series",
+        items: ["Iphone 11", "Iphone 11 Pro", "Iphone 11 Pro Max"],
+      },
+    ],
+  },
+  {
+    title: "Ipad",
+    to: publicRoutes.home,
+    iconDown: faAngleDown,
+    subMenu: [
+      {
+        title: "Ipad Pro",
+        iconRight: faAngleRight,
+        items: [
+          "Ipad Pro M2 2022",
+          "Ipad Pro 2021",
+          "Ipad Pro 12.9",
+          "Ipad Pro 11",
+        ],
+      },
+      {
+        title: "Ipad Air",
+        iconRight: faAngleRight,
+        items: ["Ipad Air 4", "Ipad Air 5"],
+      },
+      { title: "Ipad 10.9" },
+      { title: "Ipad 10.2" },
+      { title: "Ipad Mini" },
+    ],
+  },
+  {
+    title: "Macbook",
+    to: publicRoutes.home,
+    iconDown: faAngleDown,
+    subMenu: [{ title: "Macbook Pro" }, { title: "Macbook Air" }],
+  },
+  {
+    title: "Apple Watch",
+    to: publicRoutes.home,
+    iconDown: faAngleDown,
+    subMenu: [
+      { title: "Apple Watch Ultra" },
+      { title: "Apple Watch S7" },
+      { title: "Apple Watch S6" },
+      { title: "Apple Watch SE" },
+      { title: "Apple Watch S8" },
+      { title: "Apple Watch S3" },
+    ],
+  },
+  { title: "Airpods", to: publicRoutes.home },
+  {
+    title: "Phụ kiện",
+    to: publicRoutes.home,
+    iconDown: faAngleDown,
+    subMenu: [
+      { title: "Phụ kiện Apple" },
+      { title: "Cốc - Cáp sạc" },
+      { title: "Bao da - Ốp lưng" },
+      { title: "Dán cường lực" },
+      { title: "Sạc dự phòng" },
+    ],
+  },
+  { title: "Chính sách", to: publicRoutes.home },
+  { title: "Tin tức", to: publicRoutes.home },
+  { title: "Liên hệ", to: publicRoutes.home },
+];
 function Header() {
   const [isHoveredAccount, setIsHoveredAccount] = useState(false);
   const [isHoveredCart, setIsHoveredCart] = useState(false);
   return (
     <AnimationPage>
       <div className="header">
-        <div className="header-top container">
+        <div className="header-top container-xxl">
           <div className="left">
             <FontAwesomeIcon
               icon={faBars}
@@ -127,7 +235,6 @@ function Header() {
                         Không có sản phẩm nào trong giỏ hàng của bạn
                       </span>
                     </div> */}
-
                     <h6>GIỎ HÀNG</h6>
                     <div className="cart__display">
                       <div className="cart__item">
@@ -202,8 +309,26 @@ function Header() {
             </motion.div>
           </div>
         </div>
+        <div className="container-xl header-bottom">
+          <ul className="items">
+            <AnimatePresence>
+              {menuBottom.map((item, idx) => (
+                <HeaderBottomItem key={idx} item={item} />
+              ))}
+            </AnimatePresence>
+          </ul>
+          <div className="text-white d-flex gap-1 justify-content-center align-items-center ms-5">
+            <div className="px-1 py-1">
+              <FontAwesomeIcon icon={faAngleLeft} />
+            </div>
+            <div className="px-1 py-1">
+              <FontAwesomeIcon icon={faAngleRight} />
+            </div>
+          </div>
+        </div>
         <Search className="d-lg-none max-lg-display mx-3" />
       </div>
+      <NavbarDownDeskTop />
     </AnimationPage>
   );
 }
@@ -214,5 +339,80 @@ const account = {
   initial: { scale: 0.3, originX: 1, originY: 0, opacity: 0.5 },
   animate: { scale: 1, originX: 0, originY: 1, opacity: 1 },
   exit: { scale: 0.5, originX: 0, originY: 1, opacity: 0.5 },
-  transition: { duration: 1, ease: easeInOut(0.5) },
+  transition: { duration: 1, ease: easeInOut(2) },
+};
+
+const firstMenuItem1 = {
+  initial: { y: 100, opacity: 0, display: "none" },
+  hover: { y: 0, opacity: 1, display: "block" },
+  exit: { y: 100, opacity: 0 },
+  transition: { duration: 1, ease: easeInOut(2) },
+};
+const firstMenuItem2 = {
+  initial: { y: 100, opacity: 0, display: "none" },
+  hover: { y: 0, opacity: 1, display: "flex" },
+  exit: { y: 100, opacity: 0 },
+  transition: { duration: 1, ease: easeInOut(2) },
+};
+const subMenuIconRight = {
+  initial: { height: 0, opacity: 0 },
+  hover: { height: "auto", opacity: 1 },
+  exit: { height: 0, opacity: 0 },
+  transition: { duration: 1, ease: easeInOut(4) },
+};
+
+const HeaderBottomItem = ({ item }) => {
+  return (
+    <motion.li whileHover="hover" initial="initial" className="item">
+      <Link to={item.to} className="link">
+        {item.title}
+      </Link>
+      {item.iconDown && <FontAwesomeIcon icon={item.iconDown} />}
+      {item.subMenu &&
+        (item.title === "Iphone" ? (
+          <motion.ul variants={firstMenuItem2} className="iphone-submenu">
+            {item.subMenu.map((subItem, idx2) => (
+              <li className="iphone-sub-item" key={idx2 + 10}>
+                <Link className="iphone-sub-link">{subItem.title}</Link>
+                <div className="iphone-sub-item-2">
+                  {subItem.items.map((ipItem, ipIdx) => (
+                    <Link key={ipIdx}>{ipItem}</Link>
+                  ))}
+                </div>
+              </li>
+            ))}
+          </motion.ul>
+        ) : (
+          <motion.ul variants={firstMenuItem1} className="submenu-first">
+            {item.subMenu.map((subItem, idx2) => (
+              <motion.span
+                whileHover="hover"
+                initial="initial"
+                className="sub-item d-flex justify-content-between"
+                key={idx2 + 10}
+              >
+                <Link className="sub-link">{subItem.title}</Link>
+                {subItem.iconRight && (
+                  <span className="icon">
+                    <FontAwesomeIcon icon={subItem.iconRight} />
+                  </span>
+                )}
+                {subItem.iconRight && (
+                  <motion.div
+                    variants={subMenuIconRight}
+                    className="sub-menu-2 d-flex flex-column gap-2"
+                  >
+                    {subItem.items.map((item3, idx3) => (
+                      <Link className="link-2" key={idx3}>
+                        {item3}
+                      </Link>
+                    ))}
+                  </motion.div>
+                )}
+              </motion.span>
+            ))}
+          </motion.ul>
+        ))}
+    </motion.li>
+  );
 };

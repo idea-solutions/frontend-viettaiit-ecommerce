@@ -39,17 +39,19 @@ function Search({ className }) {
     >
       <Form.Control type="text" placeholder="Tìm kiếm..." />
       <FontAwesomeIcon className="search-icon" icon={faSearch} />
-      <motion.div variants={search} className="suggest">
-        <div className="suggest__top">
-          <FontAwesomeIcon icon={faFire} />
-          <span>TÌM KIẾM NHIỀU NHẤT</span>
-        </div>
-        <div className="suggest__bottom">
-          {listSuggestSearch.map((item, idx) => (
-            <span key={idx}>{item}</span>
-          ))}
-        </div>
-      </motion.div>
+      {isFocus && (
+        <motion.div variants={search} className="suggest">
+          <div className="suggest__top">
+            <FontAwesomeIcon icon={faFire} />
+            <span>TÌM KIẾM NHIỀU NHẤT</span>
+          </div>
+          <div className="suggest__bottom">
+            {listSuggestSearch.map((item, idx) => (
+              <span key={idx}>{item}</span>
+            ))}
+          </div>
+        </motion.div>
+      )}
     </motion.div>
   );
 }
