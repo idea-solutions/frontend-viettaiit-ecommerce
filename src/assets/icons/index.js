@@ -24,6 +24,8 @@ import {
   faFire,
   faClose,
   faBars,
+  faAngleRight,
+  faAngleLeft,
 } from "@fortawesome/free-solid-svg-icons";
 
 export {
@@ -52,4 +54,6 @@ export {
   faFire,
   faClose,
   faBars,
+  faAngleRight,
+  faAngleLeft,
 };

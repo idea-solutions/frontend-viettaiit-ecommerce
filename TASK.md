@@ -9,7 +9,7 @@
         Components
             1. Header 
                 + top : have (logo search option ) => OK
-                + bottom :have (menu items)
+                + bottom :have (menu items) => Đang làm 
             2. Footer
         Pages
             1. Home /
