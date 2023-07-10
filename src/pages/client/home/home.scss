@@ -61,6 +61,7 @@
         }
       }
       @include flex-gap($gap: 10px);
+      justify-content: center;
       @include media-breakpoint-down(lg) {
         @include flex-column($gap: 10px);
       }
