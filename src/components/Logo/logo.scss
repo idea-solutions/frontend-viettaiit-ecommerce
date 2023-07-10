@@ -1,8 +1,10 @@
-@use "../../assets/scss/" as * ;
+@use "../../assets/scss/" as *;
 .logo {
   display: flex;
   cursor: pointer;
   background: linear-gradient(to right, white 3%, #cf1512 76%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+
+  
 }

@@ -3,6 +3,7 @@ import { AnimatePresence, easeInOut, motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { Image } from "react-bootstrap";
+import { Link } from "react-router-dom";
 // COMPONENTS
 import AnimationPage from "../../../components/AnimationPage";
 import Logo from "../../../components/Logo";
@@ -29,7 +30,9 @@ import {
 import { publicRoutes } from "../../../routes";
 // STYLES
 import "./header.scss";
-import { Link } from "react-router-dom";
+// REDUX
+import { useDispatch, useSelector } from "react-redux";
+import { toggleNavBar } from "../../../redux/client/features/navBarSlice";
 
 const menuBottom = [
   { title: "Trang chủ", to: publicRoutes.home },
@@ -133,9 +136,12 @@ const menuBottom = [
   { title: "Tin tức", to: publicRoutes.home },
   { title: "Liên hệ", to: publicRoutes.home },
 ];
+
 function Header() {
   const [isHoveredAccount, setIsHoveredAccount] = useState(false);
   const [isHoveredCart, setIsHoveredCart] = useState(false);
+  const { isOpen } = useSelector((store) => store.navBar);
+  const dispatch = useDispatch();
   return (
     <AnimationPage>
       <div className="header">
@@ -143,9 +149,9 @@ function Header() {
           <div className="left">
             <FontAwesomeIcon
               icon={faBars}
+              onClick={() => dispatch(toggleNavBar())}
               className="elastic-fai-sm d-lg-none me-3"
             />
-
             <Logo />
           </div>
           <Search className="max-lg-none" />
@@ -185,7 +191,6 @@ function Header() {
                   className="frame-hover"
                 >
                   <div className="account">
-                    {" "}
                     <span className="account__item">
                       <FontAwesomeIcon icon={faArrowRightToBracket} size="lg" />
                       <small>Đăng nhập</small>
@@ -328,7 +333,7 @@ function Header() {
         </div>
         <Search className="d-lg-none max-lg-display mx-3" />
       </div>
-      <NavbarDownDeskTop />
+      <AnimatePresence>{isOpen && <NavbarDownDeskTop />}</AnimatePresence>
     </AnimationPage>
   );
 }

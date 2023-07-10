@@ -7,6 +7,9 @@
   bottom: 0;
   left: 0;
   right: 0;
+  @include media-breakpoint-down(lg) {
+    display: block;
+  }
   .nav-bar {
     position: absolute;
     top: 0;
