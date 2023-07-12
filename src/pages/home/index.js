@@ -1,8 +1,8 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
-import { Image } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
+import { motion } from "framer-motion";
 import "swiper/css";
 import "swiper/css/navigation";
 
@@ -14,6 +14,10 @@ import promoBoxes from "../../assets/promoBox";
 import ListProductSlide from "../../components/ListProductSlide";
 import { IconFire } from "../../assets/icons";
 import "./home.scss";
+
+import LazyImage from "../../components/LazyImage";
+import { Image } from "react-bootstrap";
+
 function Home() {
   return (
     <AnimationPage>
@@ -26,7 +30,7 @@ function Home() {
         >
           {sliders1.map((slider, idx) => (
             <SwiperSlide key={idx}>
-              <Image src={slider} />
+              <Image src={slider}  />
             </SwiperSlide>
           ))}
         </Swiper>
@@ -41,7 +45,7 @@ function Home() {
                   }}
                 >
                   <div className="promo-box__item__left">
-                    <Image src={item.image} />
+                    <LazyImage src={item.image} />
                   </div>
                   <div className="promo-box__item__right">
                     <small>{item.textTop}</small>
@@ -55,12 +59,21 @@ function Home() {
         <div className="container my-4">
           <div className="section row">
             {sliders2.map((image, idx) => (
-              <div
+              <motion.div
+                animate={{
+                  y: [0, 14, 12, 15, 14, 12, 13, 10, 0],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  delay: 3 - 0.4 * idx,
+                  ease: "easeOut",
+                }}
                 key={idx}
                 className="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 mb-2"
               >
-                <Image className="section__item" src={image} />
-              </div>
+                <LazyImage className="section__item" src={image} />
+              </motion.div>
             ))}
           </div>
         </div>
@@ -101,7 +114,6 @@ function Home() {
           </div>
         </div>
       </div>
-    
     </AnimationPage>
   );
 }

@@ -6,7 +6,7 @@ import Form from "react-bootstrap/Form";
 // STYLES
 import "./search.scss";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
-const SearchSuggest = lazy(import("./searchSuggest"));
+const SearchSuggest = lazy(() => import("./searchSuggest"));
 // FAKE DATA SEARCH
 
 function Search({ className }) {

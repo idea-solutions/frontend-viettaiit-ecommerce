@@ -1,17 +1,20 @@
-import { Image } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion } from "framer-motion";
-import { faEye, faGear, faHeart, faRotate } from "@fortawesome/free-solid-svg-icons";
+import {
+  faEye,
+  faGear,
+  faHeart,
+  faRotate,
+} from "@fortawesome/free-solid-svg-icons";
 import "./product-item.scss";
 import { IconFire } from "../../assets/icons";
+import LazyImage from "../LazyImage";
 function ProductItem({ product }) {
   return (
-    <motion.div whileHover="hover" initial="initial" className="product-item">
+    <motion.div className="product-item">
       <div className="product-item__image">
-        <Image
-          rounded
-          src="https://bizweb.dktcdn.net/thumb/large/100/480/632/products/230225032836-12red-9e866195-9543-4592-af92-c3986c0e30d3.jpg?v=1681684380000"
-        />
+        <LazyImage src="https://bizweb.dktcdn.net/thumb/large/100/480/632/products/230225032836-12red-9e866195-9543-4592-af92-c3986c0e30d3.jpg?v=1681684380000" />
+
         <span className="discount">Giảm 19%</span>
         <span className="pay">Trả góp 0%</span>
         <span className="warranty">BH 24 tháng</span>
@@ -40,7 +43,11 @@ function ProductItem({ product }) {
         </div>
       </div>
 
-      <div className="product-item__action-button">
+      <motion.span
+        whileHover="hover"
+        initial="initial"
+        className="product-item__action-button"
+      >
         <motion.a variants={actionButton} title="Xem nhanh" href="" alt="">
           <FontAwesomeIcon icon={faEye} />
         </motion.a>
@@ -60,7 +67,7 @@ function ProductItem({ product }) {
         >
           <FontAwesomeIcon icon={faRotate} />
         </motion.a>
-      </div>
+      </motion.span>
     </motion.div>
   );
 }

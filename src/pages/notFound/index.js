@@ -3,13 +3,14 @@ import { Image } from "react-bootstrap";
 
 // MY IMPORTS
 import AnimationPage from "../../components/AnimationPage";
+import LazyImage from "../../components/LazyImage";
 function NotFound() {
   const navigate = useNavigate();
   return (
     <AnimationPage>
       <div className="container">
         <div className="d-flex pt-5 align-items-center vh-100 text-white flex-column">
-          <Image src="/not-found.png" className="w-50 h-75" rounded />
+        <LazyImage  src="/not-found.png"/>
           <p className=" w-50 text-center text-wrap fs-4 text-primary d-flex align-items-center flex-column gap-1">
             Xin lỗi, trang này không tồn tại, vui lòng quay lại trang chủ
           </p>

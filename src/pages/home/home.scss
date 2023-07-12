@@ -1,6 +1,7 @@
 @use "../../assets/scss/" as *;
 
 .home {
+  //========== SLIDER TOP =============
   &__slider {
     height: 420px;
     @include media-breakpoint-down(lg) {
@@ -45,7 +46,7 @@
       }
     }
   }
-
+  //========== PROMO BOXES =============
   .promo-box {
     margin-top: 25px;
     &__item {
@@ -97,6 +98,8 @@
       }
     }
   }
+
+  //========== SECTION =============
   .section {
     &__item {
       border-radius: 20px;
@@ -110,12 +113,17 @@
       }
     }
   }
+
+  //========== BLOCK SALES =============
   .block-sale {
     background: linear-gradient(180deg, #bf1e2e 0%, #cc0c09 50%, #fa2c29 100%);
-
+    border-radius: 20px;
     &__top {
       @include flex-between;
       padding: 20px;
+      @include media-breakpoint-down(md) {
+        @include flex-column($gap: 10px);
+      }
       &__left {
         @include flex-center();
         p {

@@ -18,7 +18,7 @@ function ListProductSlide({ products }) {
       breakpoints={{
         100: {
           slidesPerView: 1,
-          spaceBetween: 10,
+          spaceBetween: 50,
         },
         500: {
           slidesPerView: 2,
