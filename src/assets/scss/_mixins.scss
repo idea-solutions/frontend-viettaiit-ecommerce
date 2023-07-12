@@ -88,13 +88,13 @@
 
 // HOVER
 
-@mixin hover-primary-white() {
+@mixin hover-primary-white($radius: 6px) {
   transform: all 0.2s ease-in-out;
   &:hover {
     background-color: $black;
     opacity: 1;
     color: $white;
-    border-radius: 6px;
+    border-radius: $radius;
     cursor: pointer;
   }
 }
@@ -103,6 +103,15 @@
   transform: all 0.2s ease-in-out;
   &:hover {
     color: $red;
+    opacity: 1;
+    cursor: pointer;
+  }
+}
+
+@mixin hover-background-secondary {
+  transform: all 0.2s ease-in-out;
+  &:hover {
+    background: $red;
     opacity: 1;
     cursor: pointer;
   }
@@ -131,4 +140,14 @@
     top: $top;
     right: $right;
   }
+}
+
+// Text break line 2
+@mixin text-eclipse($line: 2) {
+  font-size: $px-16;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: $line;
+  -webkit-box-orient: vertical;
 }

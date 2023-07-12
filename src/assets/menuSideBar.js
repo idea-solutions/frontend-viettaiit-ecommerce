@@ -1,13 +1,13 @@
 import {
-  faTableColumns,
-  faCaretRight,
   faBookmark,
+  faCaretRight,
   faCartPlus,
   faSignal,
   faStarHalfStroke,
+  faTableColumns,
   faUserTie,
-} from "../../icons";
-import { privateRoutes } from "../../../routes";
+} from "@fortawesome/free-solid-svg-icons";
+import { privateRoutes } from "../../routes";
 
 const menuSideBar = [
   {
