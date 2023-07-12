@@ -1,17 +1,19 @@
-import AnimationPage from "../../components/AnimationPage";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
 import { Image } from "react-bootstrap";
-import Button from "../../components/Button";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import "swiper/css";
 import "swiper/css/navigation";
-import "./home.scss";
+
+// MY IMPORTS
+import AnimationPage from "../../components/AnimationPage";
+import Button from "../../components/Button";
 import { sliders1, sliders2 } from "../../assets/sliders";
 import promoBoxes from "../../assets/promoBox";
 import ListProductSlide from "../../components/ListProductSlide";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { IconFire } from "../../assets/icons";
+import "./home.scss";
 function Home() {
   return (
     <AnimationPage>
@@ -99,10 +101,9 @@ function Home() {
           </div>
         </div>
       </div>
-      ƒ{" "}
+    
     </AnimationPage>
   );
 }
 
 export default Home;
-
