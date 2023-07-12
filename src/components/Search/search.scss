@@ -17,7 +17,7 @@
     box-shadow: $box-shadow-lg;
     background-color: $white;
     border-radius: 0px 0px $border-radius-lg $border-radius-lg;
-    z-index: 3;
+    z-index: 10;
     padding: 10px;
     &__top {
       color: $gray-800;

@@ -5,10 +5,10 @@ import { useState } from "react";
 import Form from "react-bootstrap/Form";
 
 // ICONS
-import { faSearch, faFire } from "../../assets/icons";
 
 // STYLES
 import "./search.scss";
+import { faFire, faSearch } from "@fortawesome/free-solid-svg-icons";
 
 // ANIMATION SEARCH
 const search = {

@@ -1,4 +1,4 @@
-import AnimationPage from "../../../components/AnimationPage";
+import AnimationPage from "../../components/AnimationPage";
 
 function Register() {
   return (

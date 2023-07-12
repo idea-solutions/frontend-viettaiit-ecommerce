@@ -1,18 +1,9 @@
-import { privateRoutes, publicRoutes } from "./routes";
-import Order from "../pages/admin/order";
-import DashBoard from "../pages/admin/products/dashboard";
-import Management from "../pages/admin/products/management";
-import Home from "../pages/client/home";
-import Login from "../pages/client/login";
-import Register from "../pages/client/register";
+import { publicRoutes } from "./routes";
+import Home from "../pages/home";
+import Login from "../pages/login";
+import Register from "../pages/register";
 import NotFound from "../pages/notFound";
-// routes admin
-const adminPages = [
-  { com: <Management />, path: privateRoutes.productManagement },
-  { com: <DashBoard />, path: privateRoutes.dashboard },
-  { com: <Order />, path: privateRoutes.orders },
-  { com: <NotFound />, path: "*" },
-];
+// routes client
 
 const clientPages = [
   { com: <Home />, path: publicRoutes.home },
@@ -21,4 +12,4 @@ const clientPages = [
   { com: <NotFound />, path: "*" },
 ];
 
-export { adminPages, privateRoutes, publicRoutes, clientPages };
+export { publicRoutes, clientPages };

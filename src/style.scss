@@ -4,7 +4,6 @@
 body {
   box-sizing: border-box;
   font-family: "Nunito", sans-serif;
- 
 }
 
 img {
@@ -75,4 +74,8 @@ img {
   .max-xxl-display {
     display: flex !important;
   }
+}
+
+.container {
+  max-width: 1349px;
 }

@@ -1,13 +1,15 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Image } from "react-bootstrap";
-import AnimationPage from "../../components/admin/AnimationPage";
+
+// MY IMPORTS
+import AnimationPage from "../../components/AnimationPage";
 function NotFound() {
   const navigate = useNavigate();
   return (
     <AnimationPage>
-      <div className="container-fuild">
+      <div className="container">
         <div className="d-flex pt-5 align-items-center vh-100 text-white flex-column">
-          <Image src="/not-found.png" rounded />
+          <Image src="/not-found.png" className="w-50 h-75" rounded />
           <p className=" w-50 text-center text-wrap fs-4 text-primary d-flex align-items-center flex-column gap-1">
             Xin lỗi, trang này không tồn tại, vui lòng quay lại trang chủ
           </p>

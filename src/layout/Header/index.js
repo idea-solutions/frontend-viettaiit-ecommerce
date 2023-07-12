@@ -5,34 +5,22 @@ import { useState } from "react";
 import { Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
 // COMPONENTS
-import AnimationPage from "../../../components/AnimationPage";
-import Logo from "../../../components/Logo";
-import FrameHover from "../../../components/FrameHover";
-import ButtonQuantity from "../../../components/ButtonQuantity";
-import Button from "../../../components/Button";
-import Search from "../../../components/Search";
-import NavbarDownDeskTop from "../../../components/client/NavBarDownDeskTop";
-import {
-  faAngleDown,
-  faArrowRightToBracket,
-  faCartPlus,
-  faHeart,
-  faPhoneVolume,
-  faPlus,
-  faRotate,
-  faUser,
-  faClose,
-  faBars,
-  faAngleRight,
-  faAngleLeft,
-} from "../../../assets/icons";
+import AnimationPage from "../../components/AnimationPage";
+import Logo from "../../components/Logo";
+import FrameHover from "../../components/FrameHover";
+import ButtonQuantity from "../../components/ButtonQuantity";
+import Button from "../../components/Button";
+import Search from "../../components/Search";
+import NavbarDownDeskTop from "../../components/NavBarDownDeskTop";
+
 // ROUTES
-import { publicRoutes } from "../../../routes";
+import { publicRoutes } from "../../routes";
 // STYLES
 import "./header.scss";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
-import { toggleNavBar } from "../../../redux/client/features/navBarSlice";
+import { toggleNavBar } from "../../features/navBarSlice";
+import { faAngleDown, faAngleLeft, faAngleRight, faArrowRightToBracket, faBars, faCartPlus, faClose, faHeart, faPhoneVolume, faPlus, faRotate, faUser } from "@fortawesome/free-solid-svg-icons";
 
 const menuBottom = [
   { title: "Trang chủ", to: publicRoutes.home },
