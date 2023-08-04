@@ -33,6 +33,7 @@ import {
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { menuBottom } from "../../assets/menuBottomHeader";
+import { publicRoutes } from "../../routes";
 
 function Header() {
   const [isHoveredAccount, setIsHoveredAccount] = useState(false);
@@ -88,14 +89,14 @@ function Header() {
                   className="frame-hover"
                 >
                   <div className="account">
-                    <span className="account__item">
+                    <Link to={publicRoutes.login} className="account__item">
                       <FontAwesomeIcon icon={faArrowRightToBracket} size="lg" />
                       <small>Đăng nhập</small>
-                    </span>
-                    <span className="account__item">
+                    </Link>
+                    <Link to={publicRoutes.register} className="account__item">
                       <FontAwesomeIcon icon={faPlus} size="lg" />
                       <small>Đăng ký</small>
-                    </span>
+                    </Link>
                     <span className="account__item">
                       <FontAwesomeIcon icon={faHeart} size="lg" />
                       <small>Danh sách yêu thích (0)</small>
