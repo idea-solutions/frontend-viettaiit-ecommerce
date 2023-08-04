@@ -4,6 +4,8 @@ import { AnimatePresence } from "framer-motion";
 import Layout from "./layout";
 import NotFound from "./pages/notFound";
 import { Suspense } from "react";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function App() {
   return (
     <div className="App">
@@ -13,7 +15,7 @@ function App() {
             <Routes>
               {clientPages.map((route, idx) => {
                 let Comp;
-                Comp = <Layout>{route.com}</Layout>;
+                  Comp = <Layout>{route.com}</Layout>;
                 if (route.path === "*") {
                   Comp = <NotFound></NotFound>;
                 }
@@ -23,6 +25,7 @@ function App() {
           </Suspense>
         </AnimatePresence>
       </Router>
+      <ToastContainer position="top-center" />
     </div>
   );
 }
@@ -30,5 +33,4 @@ function App() {
 // chua login => Xem duoc client
 // login - admin => Xem duoc client , admin
 // login - client => Xem duoc client
-
 export default App;

@@ -3,11 +3,31 @@ import AnimationPage from "../../components/AnimationPage";
 import { publicRoutes } from "../../routes";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
-
+import { motion } from "framer-motion";
 import "./register.scss";
 import FormControl from "../../components/FormControl";
 import Form from "../../components/Form";
+import { useState } from "react";
+import { validateFormRegister } from "../../utils/validate";
+import { toast } from "react-toastify";
 function Register() {
+  const [inputs, setInputs] = useState({
+    email: "",
+    name: "",
+    password1: "",
+    password2: "",
+  });
+  const handleChange = (e) => {
+    setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const err = validateFormRegister(inputs);
+    if (err) {
+      toast.warning(err);
+      return;
+    }
+  };
   return (
     <div className="register">
       <div className="container-fuild register__breadcrumb">
@@ -29,24 +49,45 @@ function Register() {
       </div>
       <AnimationPage>
         <div className="container">
-          <div className="register__form">
+          <motion.div className="register__form">
             <Form>
               <h5 className="text-center py-2">ĐĂNG KÝ</h5>
               <p className="text-center ">
                 Đã có tải khoản đăng nhập
                 <Link className="text-secondary ms-1" to={publicRoutes.login}>
-                   tại đây
+                  tại đây
                 </Link>
               </p>
               <div className="form-group">
-                <FormControl type="text" placeholder="   Tên hiển thị" />
-                <FormControl type="email" placeholder="   Email" />
-                <FormControl type="password" placeholder="   Mật khẩu cấp 1" />
-                <FormControl type="password" placeholder="   Mật khẩu cấp 2" />
+                <FormControl
+                  type="text"
+                  placeholder="   Tên hiển thị"
+                  name="name"
+                  onChange={handleChange}
+                />
+                <FormControl
+                  type="email"
+                  placeholder="   Email"
+                  name="email"
+                  onChange={handleChange}
+                />
+                <FormControl
+                  type="password"
+                  placeholder="   Mật khẩu cấp 1"
+                  name="password1"
+                  onChange={handleChange}
+                />
+                <FormControl
+                  type="password"
+                  placeholder="   Mật khẩu cấp 2"
+                  name="password2"
+                  onChange={handleChange}
+                />
                 <div className="mb-3 ">
                   <button
                     type="submit"
                     className="btn btn-primary w-100 hover-bg-secondary"
+                    onClick={handleSubmit}
                   >
                     ĐĂNG KÝ
                   </button>
@@ -68,7 +109,7 @@ function Register() {
                 </div>
               </div>
             </Form>
-          </div>
+          </motion.div>
         </div>
       </AnimationPage>
     </div>

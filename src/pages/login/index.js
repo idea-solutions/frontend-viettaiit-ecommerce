@@ -8,8 +8,25 @@ import { publicRoutes } from "../../routes";
 import FormControl from "../../components/FormControl";
 import { useState } from "react";
 import Form from "../../components/Form";
+import { validateFormLogin } from "../../utils/validate";
+import { toast } from "react-toastify";
 function Login() {
   const [isForgotPwd, setIsForgotPwd] = useState(false);
+  const [inputs, setInputs] = useState({
+    email: "",
+    password1: "",
+  });
+  const handleChange = (e) => {
+    setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const err = validateFormLogin(inputs);
+    if (err) {
+      toast.warning(err);
+      return;
+    }
+  };
   return (
     <div className="login">
       <div className="container-fuild login__breadcrumb">
@@ -28,16 +45,28 @@ function Login() {
       </div>
       <AnimationPage>
         <div className="container">
+       
           <div className="login__form">
             <Form>
               <h5 className="text-center py-2">ĐĂNG NHẬP</h5>
               <div className="form-group">
-                <FormControl type="email" placeholder="   Email" />
-                <FormControl type="email" placeholder="   Mật khẩu" />
+                <FormControl
+                  type="email"
+                  placeholder="   Email"
+                  name="email"
+                  onChange={handleChange}
+                />
+                <FormControl
+                  type="password"
+                  placeholder="   Mật khẩu"
+                  name="password1"
+                  onChange={handleChange}
+                />
                 <div className="mb-3 ">
                   <button
                     type="submit"
                     className="btn btn-primary w-100 hover-bg-secondary"
+                    onClick={handleSubmit}
                   >
                     ĐĂNG NHẬP
                   </button>
