@@ -14,8 +14,9 @@ function Login() {
   const [isForgotPwd, setIsForgotPwd] = useState(false);
   const [inputs, setInputs] = useState({
     email: "",
-    password1: "",
+    password: "",
   });
+  let disabled = !inputs.email || !inputs.password;
   const handleChange = (e) => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
@@ -45,7 +46,6 @@ function Login() {
       </div>
       <AnimationPage>
         <div className="container">
-       
           <div className="login__form">
             <Form>
               <h5 className="text-center py-2">ĐĂNG NHẬP</h5>
@@ -59,7 +59,7 @@ function Login() {
                 <FormControl
                   type="password"
                   placeholder="   Mật khẩu"
-                  name="password1"
+                  name="password"
                   onChange={handleChange}
                 />
                 <div className="mb-3 ">
@@ -67,6 +67,7 @@ function Login() {
                     type="submit"
                     className="btn btn-primary w-100 hover-bg-secondary"
                     onClick={handleSubmit}
+                    disabled={disabled}
                   >
                     ĐĂNG NHẬP
                   </button>

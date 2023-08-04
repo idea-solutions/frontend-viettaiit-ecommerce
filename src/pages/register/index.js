@@ -10,23 +10,29 @@ import Form from "../../components/Form";
 import { useState } from "react";
 import { validateFormRegister } from "../../utils/validate";
 import { toast } from "react-toastify";
+import { registerUser } from "../../features/user/userSlice";
+import { useDispatch } from "react-redux";
 function Register() {
+  const dispatch = useDispatch();
   const [inputs, setInputs] = useState({
     email: "",
     name: "",
-    password1: "",
+    password: "",
     password2: "",
   });
+  let disabled =
+    !inputs.email || !inputs.name || !inputs.password || !inputs.password2;
   const handleChange = (e) => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const err = validateFormRegister(inputs);
     if (err) {
       toast.warning(err);
       return;
     }
+    dispatch(registerUser(inputs));
   };
   return (
     <div className="register">
@@ -74,7 +80,7 @@ function Register() {
                 <FormControl
                   type="password"
                   placeholder="   Mật khẩu cấp 1"
-                  name="password1"
+                  name="password"
                   onChange={handleChange}
                 />
                 <FormControl
@@ -88,6 +94,7 @@ function Register() {
                     type="submit"
                     className="btn btn-primary w-100 hover-bg-secondary"
                     onClick={handleSubmit}
+                    disabled={disabled}
                   >
                     ĐĂNG KÝ
                   </button>
