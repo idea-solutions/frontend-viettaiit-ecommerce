@@ -12,17 +12,15 @@ const SearchSuggest = lazy(() => import("./searchSuggest"));
 function Search({ className }) {
   const [isFocus, setIsFocus] = useState(false);
   return (
-    <motion.div
-      initial="initial"
+    <div
       onFocus={() => setIsFocus(true)}
       onBlur={() => setIsFocus(false)}
-      animate={isFocus ? "focus" : "blur"}
       className={`search ${className}`}
     >
       <Form.Control type="text" placeholder="Tìm kiếm..." />
       <FontAwesomeIcon className="search-icon" icon={faSearch} />
-      {isFocus && <SearchSuggest />}
-    </motion.div>
+      <SearchSuggest isFocus={isFocus} />
+    </div>
   );
 }
 

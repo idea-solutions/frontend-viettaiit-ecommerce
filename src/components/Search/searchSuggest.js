@@ -1,12 +1,7 @@
 import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFire } from "@fortawesome/free-solid-svg-icons";
-const search = {
-  initial: { height: 0, opacity: 0 },
-  focus: { height: "auto", opacity: 1 },
-  blur: { height: 0, opacity: 0 },
-  transition: { duration: 2, ease: "linear" },
-};
+
 const listSuggestSearch = [
   "IPhone 8",
   "IPhone 11",
@@ -15,10 +10,21 @@ const listSuggestSearch = [
   "Sạc nhanh",
   "Cáp Type C",
 ];
-
-function SearchSuggest() {
+const search = {
+  initial: { height: 0, opacity: 0, display: "none" },
+  focus: { height: "auto", opacity: 1, display: "block" },
+  blur: { height: 0, opacity: 0, display: "none" },
+  transition: { duration: 2, ease: "linear" },
+};
+function SearchSuggest({ isFocus }) {
   return (
-    <motion.div variants={search} className="suggest">
+    <motion.div
+      variants={search}
+      initial="initial"
+      animate={isFocus ? "focus" : "blur"}
+      transition="transition"
+      className="suggest"
+    >
       <div className="suggest__top">
         <FontAwesomeIcon icon={faFire} />
         <span>TÌM KIẾM NHIỀU NHẤT</span>
