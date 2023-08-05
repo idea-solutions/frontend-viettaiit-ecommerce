@@ -18,6 +18,7 @@ import { loginUser } from "../../features/user/userSlice";
 
 import { setLoadingClose, setLoadingShow } from "../../features/loadingSlice";
 import "./login.scss";
+import HelmetCustom from "../../components/HelmetCustom";
 function Login() {
   const [isForgotPwd, setIsForgotPwd] = useState(false);
   const dispatch = useDispatch();
@@ -46,6 +47,7 @@ function Login() {
   };
   return (
     <div className="login">
+       <HelmetCustom title="Đăng nhập" />
       <div className="container-fuild login__breadcrumb">
         <div className="container ">
           <Link

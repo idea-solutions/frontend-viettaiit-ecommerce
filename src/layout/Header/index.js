@@ -97,7 +97,7 @@ function Header() {
                   <div className="account">
                     {user ? (
                       <>
-                        <Link to={publicRoutes.login} className="account__item">
+                        <Link to={publicRoutes.account} className="account__item">
                           <FontAwesomeIcon icon={faUser} size="lg" />
                           <small>Tài khoản</small>
                         </Link>

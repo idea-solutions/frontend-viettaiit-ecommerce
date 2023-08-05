@@ -17,10 +17,12 @@ import "./home.scss";
 
 import LazyImage from "../../components/LazyImage";
 import { Image } from "react-bootstrap";
+import HelmetCustom from "../../components/HelmetCustom";
 
 function Home() {
   return (
     <AnimationPage>
+      <HelmetCustom title="Trang chủ" />
       <div className="home">
         <Swiper
           navigation={true}
@@ -30,7 +32,7 @@ function Home() {
         >
           {sliders1.map((slider, idx) => (
             <SwiperSlide key={idx}>
-              <Image src={slider}  />
+              <Image src={slider} />
             </SwiperSlide>
           ))}
         </Swiper>

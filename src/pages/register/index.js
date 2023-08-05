@@ -19,6 +19,7 @@ import { registerUser } from "../../features/user/userSlice";
 
 import { setLoadingClose, setLoadingShow } from "../../features/loadingSlice";
 import "./register.scss";
+import HelmetCustom from "../../components/HelmetCustom";
 function Register() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -53,6 +54,7 @@ function Register() {
   };
   return (
     <div className="register">
+      <HelmetCustom title="Đăng ký" />
       <div className="container-fuild register__breadcrumb">
         <div className="container ">
           <Link
