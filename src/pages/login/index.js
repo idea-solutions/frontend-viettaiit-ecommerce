@@ -2,16 +2,26 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import AnimationPage from "../../components/AnimationPage";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
-import "./login.scss";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+
+// MY IMPORTS
 import { publicRoutes } from "../../routes";
 import FormControl from "../../components/FormControl";
-import { useState } from "react";
 import Form from "../../components/Form";
 import { validateFormLogin } from "../../utils/validate";
-import { toast } from "react-toastify";
+
+// REDUX SLICE
+import { loginUser } from "../../features/user/userSlice";
+
+import { setLoadingClose, setLoadingShow } from "../../features/loadingSlice";
+import "./login.scss";
 function Login() {
   const [isForgotPwd, setIsForgotPwd] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
@@ -20,12 +30,18 @@ function Login() {
   const handleChange = (e) => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const err = validateFormLogin(inputs);
     if (err) {
       toast.warning(err);
       return;
+    }
+    dispatch(setLoadingShow());
+    const { payload } = await dispatch(loginUser(inputs));
+    dispatch(setLoadingClose());
+    if (payload.status === 200) {
+      navigate(publicRoutes.home);
     }
   };
   return (
@@ -47,7 +63,7 @@ function Login() {
       <AnimationPage>
         <div className="container">
           <div className="login__form">
-            <Form>
+            <Form className="form">
               <h5 className="text-center py-2">ĐĂNG NHẬP</h5>
               <div className="form-group">
                 <FormControl

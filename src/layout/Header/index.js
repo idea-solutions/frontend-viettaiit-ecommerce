@@ -22,6 +22,7 @@ import {
   faAngleDown,
   faAngleLeft,
   faAngleRight,
+  faArrowLeft,
   faArrowRightToBracket,
   faBars,
   faCartPlus,
@@ -35,9 +36,14 @@ import {
 import { menuBottom } from "../../assets/menuBottomHeader";
 import { publicRoutes } from "../../routes";
 
+// REDUX SLICE
+import { setLoadingClose, setLoadingShow } from "../../features/loadingSlice";
+import { logoutUser } from "../../features/user/userSlice";
+
 function Header() {
   const [isHoveredAccount, setIsHoveredAccount] = useState(false);
   const [isHoveredCart, setIsHoveredCart] = useState(false);
+  const { user } = useSelector((store) => store.user);
   const { isOpen } = useSelector((store) => store.navBar);
   const dispatch = useDispatch();
   return (
@@ -89,14 +95,43 @@ function Header() {
                   className="frame-hover"
                 >
                   <div className="account">
-                    <Link to={publicRoutes.login} className="account__item">
-                      <FontAwesomeIcon icon={faArrowRightToBracket} size="lg" />
-                      <small>Đăng nhập</small>
-                    </Link>
-                    <Link to={publicRoutes.register} className="account__item">
-                      <FontAwesomeIcon icon={faPlus} size="lg" />
-                      <small>Đăng ký</small>
-                    </Link>
+                    {user ? (
+                      <>
+                        <Link to={publicRoutes.login} className="account__item">
+                          <FontAwesomeIcon icon={faUser} size="lg" />
+                          <small>Tài khoản</small>
+                        </Link>
+                        <span
+                          className="account__item"
+                          onClick={async () => {
+                            dispatch(setLoadingShow());
+                            await dispatch(logoutUser());
+                            dispatch(setLoadingClose());
+                          }}
+                        >
+                          <FontAwesomeIcon icon={faArrowLeft} size="lg" />
+                          <small>Đăng xuất</small>
+                        </span>
+                      </>
+                    ) : (
+                      <>
+                        <Link to={publicRoutes.login} className="account__item">
+                          <FontAwesomeIcon
+                            icon={faArrowRightToBracket}
+                            size="lg"
+                          />
+                          <small>Đăng nhập</small>
+                        </Link>
+                        <Link
+                          to={publicRoutes.register}
+                          className="account__item"
+                        >
+                          <FontAwesomeIcon icon={faPlus} size="lg" />
+                          <small>Đăng ký</small>
+                        </Link>
+                      </>
+                    )}
+
                     <span className="account__item">
                       <FontAwesomeIcon icon={faHeart} size="lg" />
                       <small>Danh sách yêu thích (0)</small>

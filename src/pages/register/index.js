@@ -1,19 +1,28 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AnimationPage from "../../components/AnimationPage";
-import { publicRoutes } from "../../routes";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
-import "./register.scss";
+import { useState } from "react";
+import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+
+// MY IMPORTS
 import FormControl from "../../components/FormControl";
 import Form from "../../components/Form";
-import { useState } from "react";
+
+import { publicRoutes } from "../../routes";
 import { validateFormRegister } from "../../utils/validate";
-import { toast } from "react-toastify";
+
 import { registerUser } from "../../features/user/userSlice";
-import { useDispatch } from "react-redux";
+
+import { setLoadingClose, setLoadingShow } from "../../features/loadingSlice";
+import "./register.scss";
 function Register() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { isLoading } = useSelector((store) => store.user);
   const [inputs, setInputs] = useState({
     email: "",
     name: "",
@@ -27,12 +36,20 @@ function Register() {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (isLoading) return;
+    
     const err = validateFormRegister(inputs);
     if (err) {
       toast.warning(err);
       return;
     }
-    dispatch(registerUser(inputs));
+    dispatch(setLoadingShow())
+    const { payload } = await dispatch(registerUser(inputs));
+    dispatch(setLoadingClose())
+    if (payload.status === 201) {
+      navigate(publicRoutes.login);
+    }
+    
   };
   return (
     <div className="register">
@@ -56,7 +73,8 @@ function Register() {
       <AnimationPage>
         <div className="container">
           <motion.div className="register__form">
-            <Form>
+            <Form className="form position-relative">
+            
               <h5 className="text-center py-2">ĐĂNG KÝ</h5>
               <p className="text-center ">
                 Đã có tải khoản đăng nhập
@@ -89,7 +107,7 @@ function Register() {
                   name="password2"
                   onChange={handleChange}
                 />
-                <div className="mb-3 ">
+                <div className="mb-3  position-relative">
                   <button
                     type="submit"
                     className="btn btn-primary w-100 hover-bg-secondary"
