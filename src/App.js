@@ -4,9 +4,13 @@ import { AnimatePresence } from "framer-motion";
 import Layout from "./layout";
 import NotFound from "./pages/notFound";
 import { Suspense } from "react";
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import CircleLoaderCustom from "./components/CircleLoader";
+import { useSelector } from "react-redux";
 function App() {
+  const { isLoading } = useSelector((store) => store.loading);
+ 
   return (
     <div className="App">
       <Router>
@@ -15,7 +19,7 @@ function App() {
             <Routes>
               {clientPages.map((route, idx) => {
                 let Comp;
-                  Comp = <Layout>{route.com}</Layout>;
+                Comp = <Layout>{route.com}</Layout>;
                 if (route.path === "*") {
                   Comp = <NotFound></NotFound>;
                 }
@@ -26,6 +30,7 @@ function App() {
         </AnimatePresence>
       </Router>
       <ToastContainer position="top-center" />
+      <CircleLoaderCustom className={`${isLoading ? "" : "d-none"}`} />
     </div>
   );
 }
