@@ -1,3 +1,4 @@
+import VerifyEmail from "../pages/verifyEmail";
 import { publicRoutes } from "./routes";
 import { lazy } from "react";
 const Home = lazy(() => import("../pages/home"));
@@ -12,6 +13,7 @@ const NotFound = lazy(() => import("../pages/notFound"));
 
 const clientPages = [
   { com: <Home />, path: publicRoutes.home },
+  { com: <VerifyEmail />, path: publicRoutes.verifyEmail },
   { com: <Login />, path: publicRoutes.login },
   { com: <Register />, path: publicRoutes.register },
   { com: <NotFound />, path: "*" },
