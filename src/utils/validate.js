@@ -1,4 +1,4 @@
-const checkEmail = (email) => {
+export const checkEmail = (email) => {
   const re =
     /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
   return re.test(email);
@@ -31,5 +31,15 @@ const validateFormLogin = (inputs) => {
   }
   return "";
 };
+const validateFormResetPassword = (inputs) => {
+  const { password1, password2 } = inputs;
+  if (!password1 || !password2) {
+    return "Vui lòng điển đầy đủ thông tin";
+  }
+  if (password1 !== password2) {
+    return "Mật khẩu không trùng khớp nhau, vui lòng thử lại";
+  }
+  return "";
+};
 
-export { validateFormRegister, validateFormLogin };
+export { validateFormRegister, validateFormLogin, validateFormResetPassword };
