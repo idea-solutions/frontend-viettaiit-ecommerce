@@ -1,6 +1,4 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import AnimationPage from "../../components/AnimationPage";
-import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -11,16 +9,18 @@ import { toast } from "react-toastify";
 import { publicRoutes } from "../../routes";
 import FormControl from "../../components/FormControl";
 import Form from "../../components/Form";
-import { validateFormLogin } from "../../utils/validate";
+import { checkEmail, validateFormLogin } from "../../utils/validate";
 
 // REDUX SLICE
-import { loginUser } from "../../features/user/userSlice";
+import { forgotPasswordUser, loginUser } from "../../features/user/userSlice";
 
 import { setLoadingClose, setLoadingShow } from "../../features/loadingSlice";
 import "./login.scss";
 import HelmetCustom from "../../components/HelmetCustom";
+import Breadcrumb from "../../components/Breadcrumb";
 function Login() {
   const [isForgotPwd, setIsForgotPwd] = useState(false);
+  const [emailForgot, setEmailForgot] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [inputs, setInputs] = useState({
@@ -45,23 +45,21 @@ function Login() {
       navigate(publicRoutes.home);
     }
   };
+  const handleForgotPwd = async (e) => {
+    e.preventDefault();
+    const isCheck = checkEmail(emailForgot);
+    if (!isCheck) {
+      toast.warning("Email không đúng định dạng!");
+      return;
+    }
+    dispatch(setLoadingShow());
+    await dispatch(forgotPasswordUser({ email: emailForgot }));
+    dispatch(setLoadingClose());
+  };
   return (
     <div className="login">
-       <HelmetCustom title="Đăng nhập" />
-      <div className="container-fuild login__breadcrumb">
-        <div className="container ">
-          <Link
-            to={publicRoutes.home}
-            className="login__fs-13 hover-color-secondary text-decoration-none"
-          >
-            Trang chủ
-          </Link>
-          <FontAwesomeIcon className="px-3 login__fs-13" icon={faAngleRight} />
-          <span className="text-secondary login__fs-13">
-            Đăng nhập tài khoản
-          </span>
-        </div>
-      </div>
+      <HelmetCustom title="Đăng nhập" />
+      <Breadcrumb title="Đăng nhập tài khoản" />
       <AnimationPage>
         <div className="container">
           <div className="login__form">
@@ -112,10 +110,15 @@ function Login() {
                   initial="initial"
                   animate={isForgotPwd ? "open" : "exit"}
                 >
-                  <FormControl type="email" placeholder="   Email" />
+                  <FormControl
+                    type="email"
+                    placeholder="   Email"
+                    onChange={(e) => setEmailForgot(e.target.value)}
+                  />
                   <button
                     type="submit"
                     className="btn btn-primary w-100 hover-bg-secondary"
+                    onClick={handleForgotPwd}
                   >
                     Lấy lại mật khẩu
                   </button>
