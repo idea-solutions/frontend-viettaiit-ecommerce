@@ -1,9 +1,10 @@
 import "./button.scss";
-function Button({ children, type, classes }) {
+function Button({ children, type, className, onClick }) {
   return (
     <button
+      onClick={onClick}
       className={`btn-custom__${type} btn btn-${type} ${
-        classes ? classes : ""
+        className ? className : ""
       }`}
     >
       {children}
