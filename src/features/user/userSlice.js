@@ -5,6 +5,8 @@ import {
   loginUserThunk,
   verifyEmailUserThunk,
   logoutUserThunk,
+  resetPasswordUserThunk,
+  forgotPasswordUserThunk,
 } from "./userThunk";
 
 import {
@@ -38,6 +40,18 @@ export const verifyEmailUser = createAsyncThunk(
   "user/verifyEmailUser",
   async (inputs, thunkAPI) => {
     return verifyEmailUserThunk("/auth/verify-email", inputs, thunkAPI);
+  }
+);
+export const forgotPasswordUser = createAsyncThunk(
+  "user/forgotPasswordUser",
+  async (inputs, thunkAPI) => {
+    return forgotPasswordUserThunk("/auth/forgot-password", inputs, thunkAPI);
+  }
+);
+export const resetPasswordUser = createAsyncThunk(
+  "user/resetPasswordUser",
+  async (inputs, thunkAPI) => {
+    return resetPasswordUserThunk("/auth/reset-password", inputs, thunkAPI);
   }
 );
 
@@ -107,6 +121,38 @@ const userSlice = createSlice({
     });
     builder.addCase(verifyEmailUser.rejected, (state, action) => {
       const { message } = action.payload;
+      toast.error(message);
+      state.isLoading = false;
+      state.isError = true;
+    });
+
+    // forgot password
+    builder.addCase(forgotPasswordUser.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(forgotPasswordUser.fulfilled, (state, action) => {
+      const { message } = action.payload;
+      toast.success(message);
+      state.isLoading = false;
+    });
+    builder.addCase(forgotPasswordUser.rejected, (state, action) => {
+      const { message } = action.payload;
+      toast.error(message);
+      state.isLoading = false;
+      state.isError = true;
+    });
+    // reset password
+    builder.addCase(resetPasswordUser.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(resetPasswordUser.fulfilled, (state, action) => {
+      const { message } = action.payload;
+      toast.success(message);
+      state.isLoading = false;
+    });
+    builder.addCase(resetPasswordUser.rejected, (state, action) => {
+      const { message } = action.payload;
+      console.log(action.payload);
       toast.error(message);
       state.isLoading = false;
       state.isError = true;
