@@ -1,7 +1,7 @@
 // FRAMEWORKS
 import { AnimatePresence, easeInOut, motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+import { lazy, useState } from "react";
 import { Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
 // COMPONENTS
@@ -11,7 +11,6 @@ import FrameHover from "../../components/FrameHover";
 import ButtonQuantity from "../../components/ButtonQuantity";
 import Button from "../../components/Button";
 import Search from "../../components/Search";
-import NavbarDownDeskTop from "../../components/NavBarDownDeskTop";
 
 // STYLES
 import "./header.scss";
@@ -39,7 +38,10 @@ import { publicRoutes } from "../../routes";
 // REDUX SLICE
 import { setLoadingClose, setLoadingShow } from "../../features/loadingSlice";
 import { logoutUser } from "../../features/user/userSlice";
-
+const NavbarDownDeskTop = lazy(() =>
+  import("../../components/NavBarDownDeskTop")
+);
+const HeaderBottomItem = lazy(() => import("./HeaderBottomItem"));
 function Header() {
   const [isHoveredAccount, setIsHoveredAccount] = useState(false);
   const [isHoveredCart, setIsHoveredCart] = useState(false);
@@ -97,7 +99,10 @@ function Header() {
                   <div className="account">
                     {user ? (
                       <>
-                        <Link to={publicRoutes.account} className="account__item">
+                        <Link
+                          to={publicRoutes.account}
+                          className="account__item"
+                        >
                           <FontAwesomeIcon icon={faUser} size="lg" />
                           <small>Tài khoản</small>
                         </Link>
@@ -278,79 +283,4 @@ const account = {
   animate: { scale: 1, originX: 0, originY: 1, opacity: 1 },
   exit: { scale: 0.5, originX: 0, originY: 1, opacity: 0.5 },
   transition: { duration: 1, ease: easeInOut(2) },
-};
-
-const firstMenuItem1 = {
-  initial: { y: 100, opacity: 0, display: "none" },
-  hover: { y: 0, opacity: 1, display: "block" },
-  exit: { y: 100, opacity: 0 },
-  transition: { duration: 1, ease: easeInOut(2) },
-};
-const firstMenuItem2 = {
-  initial: { y: 100, opacity: 0, display: "none" },
-  hover: { y: 0, opacity: 1, display: "flex" },
-  exit: { y: 100, opacity: 0 },
-  transition: { duration: 1, ease: easeInOut(2) },
-};
-const subMenuIconRight = {
-  initial: { height: 0, opacity: 0 },
-  hover: { height: "auto", opacity: 1 },
-  exit: { height: 0, opacity: 0 },
-  transition: { duration: 1, ease: easeInOut(4) },
-};
-
-const HeaderBottomItem = ({ item }) => {
-  return (
-    <motion.li whileHover="hover" initial="initial" className="item">
-      <Link to={item.to} className="link">
-        {item.title}
-      </Link>
-      {item.iconDown && <FontAwesomeIcon icon={item.iconDown} />}
-      {item.subMenu &&
-        (item.title === "Iphone" ? (
-          <motion.ul variants={firstMenuItem2} className="iphone-submenu">
-            {item.subMenu.map((subItem, idx2) => (
-              <li className="iphone-sub-item" key={idx2 + 10}>
-                <Link className="iphone-sub-link">{subItem.title}</Link>
-                <div className="iphone-sub-item-2">
-                  {subItem.items.map((ipItem, ipIdx) => (
-                    <Link key={ipIdx}>{ipItem}</Link>
-                  ))}
-                </div>
-              </li>
-            ))}
-          </motion.ul>
-        ) : (
-          <motion.ul variants={firstMenuItem1} className="submenu-first">
-            {item.subMenu.map((subItem, idx2) => (
-              <motion.span
-                whileHover="hover"
-                initial="initial"
-                className="sub-item d-flex justify-content-between"
-                key={idx2 + 10}
-              >
-                <Link className="sub-link">{subItem.title}</Link>
-                {subItem.iconRight && (
-                  <span className="icon">
-                    <FontAwesomeIcon icon={subItem.iconRight} />
-                  </span>
-                )}
-                {subItem.iconRight && (
-                  <motion.div
-                    variants={subMenuIconRight}
-                    className="sub-menu-2 d-flex flex-column gap-2"
-                  >
-                    {subItem.items.map((item3, idx3) => (
-                      <Link className="link-2" key={idx3}>
-                        {item3}
-                      </Link>
-                    ))}
-                  </motion.div>
-                )}
-              </motion.span>
-            ))}
-          </motion.ul>
-        ))}
-    </motion.li>
-  );
 };
