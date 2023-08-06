@@ -4,6 +4,7 @@ const publicRoutes = {
   account: "/account",
   register: "/account/register",
   verifyEmail: "/account/verify-email",
+  resetPassword: "/account/reset-password",
 };
 
 export { publicRoutes };
