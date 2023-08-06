@@ -20,6 +20,7 @@ import { registerUser } from "../../features/user/userSlice";
 import { setLoadingClose, setLoadingShow } from "../../features/loadingSlice";
 import "./register.scss";
 import HelmetCustom from "../../components/HelmetCustom";
+import Breadcrumb from "../../components/Breadcrumb";
 function Register() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -38,45 +39,27 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (isLoading) return;
-    
+
     const err = validateFormRegister(inputs);
     if (err) {
       toast.warning(err);
       return;
     }
-    dispatch(setLoadingShow())
+    dispatch(setLoadingShow());
     const { payload } = await dispatch(registerUser(inputs));
-    dispatch(setLoadingClose())
+    dispatch(setLoadingClose());
     if (payload.status === 201) {
       navigate(publicRoutes.login);
     }
-    
   };
   return (
     <div className="register">
       <HelmetCustom title="Đăng ký" />
-      <div className="container-fuild register__breadcrumb">
-        <div className="container ">
-          <Link
-            to={publicRoutes.home}
-            className="register__fs-13 hover-color-secondary text-decoration-none"
-          >
-            Trang chủ
-          </Link>
-          <FontAwesomeIcon
-            className="px-3 register__fs-13"
-            icon={faAngleRight}
-          />
-          <span className="text-secondary register__fs-13">
-            Đăng ký tài khoản
-          </span>
-        </div>
-      </div>
+      <Breadcrumb title="Đăng ký tài khoản" />
       <AnimationPage>
         <div className="container">
           <motion.div className="register__form">
             <Form className="form position-relative">
-            
               <h5 className="text-center py-2">ĐĂNG KÝ</h5>
               <p className="text-center ">
                 Đã có tải khoản đăng nhập
