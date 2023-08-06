@@ -1,12 +1,12 @@
 import { faAngleDown, faAngleRight } from "@fortawesome/free-solid-svg-icons";
-import { publicRoutes } from "../routes";
+import { clientRoutes } from "../routes";
 
 export const menuBottom = [
-  { title: "Trang chủ", to: publicRoutes.home },
-  { title: "Giới thiệu", to: publicRoutes.home },
+  { title: "Trang chủ", to: clientRoutes.home },
+  { title: "Giới thiệu", to: clientRoutes.home },
   {
     title: "Iphone",
-    to: publicRoutes.home,
+    to: clientRoutes.home,
     iconDown: faAngleDown,
     subMenu: [
       {
@@ -44,7 +44,7 @@ export const menuBottom = [
   },
   {
     title: "Ipad",
-    to: publicRoutes.home,
+    to: clientRoutes.home,
     iconDown: faAngleDown,
     subMenu: [
       {
@@ -69,13 +69,13 @@ export const menuBottom = [
   },
   {
     title: "Macbook",
-    to: publicRoutes.home,
+    to: clientRoutes.home,
     iconDown: faAngleDown,
     subMenu: [{ title: "Macbook Pro" }, { title: "Macbook Air" }],
   },
   {
     title: "Apple Watch",
-    to: publicRoutes.home,
+    to: clientRoutes.home,
     iconDown: faAngleDown,
     subMenu: [
       { title: "Apple Watch Ultra" },
@@ -86,10 +86,10 @@ export const menuBottom = [
       { title: "Apple Watch S3" },
     ],
   },
-  { title: "Airpods", to: publicRoutes.home },
+  { title: "Airpods", to: clientRoutes.home },
   {
     title: "Phụ kiện",
-    to: publicRoutes.home,
+    to: clientRoutes.home,
     iconDown: faAngleDown,
     subMenu: [
       { title: "Phụ kiện Apple" },
@@ -99,7 +99,7 @@ export const menuBottom = [
       { title: "Sạc dự phòng" },
     ],
   },
-  { title: "Chính sách", to: publicRoutes.home },
-  { title: "Tin tức", to: publicRoutes.home },
-  { title: "Liên hệ", to: publicRoutes.home },
+  { title: "Chính sách", to: clientRoutes.home },
+  { title: "Tin tức", to: clientRoutes.home },
+  { title: "Liên hệ", to: clientRoutes.home },
 ];

@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import FormControl from "../../components/FormControl";
 import Form from "../../components/Form";
 
-import { publicRoutes } from "../../routes";
+import { clientRoutes } from "../../routes";
 import { validateFormRegister } from "../../utils/validate";
 
 import { registerUser } from "../../features/user/userSlice";
@@ -49,7 +49,7 @@ function Register() {
     const { payload } = await dispatch(registerUser(inputs));
     dispatch(setLoadingClose());
     if (payload.status === 201) {
-      navigate(publicRoutes.login);
+      navigate(clientRoutes.login);
     }
   };
   return (
@@ -63,7 +63,7 @@ function Register() {
               <h5 className="text-center py-2">ĐĂNG KÝ</h5>
               <p className="text-center ">
                 Đã có tải khoản đăng nhập
-                <Link className="text-secondary ms-1" to={publicRoutes.login}>
+                <Link className="text-secondary ms-1" to={clientRoutes.login}>
                   tại đây
                 </Link>
               </p>

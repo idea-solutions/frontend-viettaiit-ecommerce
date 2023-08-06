@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 // MY IMPORTS
-import { publicRoutes } from "../../routes";
+import { clientRoutes } from "../../routes";
 import FormControl from "../../components/FormControl";
 import Form from "../../components/Form";
 import { checkEmail, validateFormLogin } from "../../utils/validate";
@@ -42,7 +42,7 @@ function Login() {
     const { payload } = await dispatch(loginUser(inputs));
     dispatch(setLoadingClose());
     if (payload.status === 200) {
-      navigate(publicRoutes.home);
+      navigate(clientRoutes.home);
     }
   };
   const handleForgotPwd = async (e) => {
@@ -97,7 +97,7 @@ function Login() {
                       Quên mật khẩu?
                     </span>
                     <Link
-                      to={publicRoutes.register}
+                      to={clientRoutes.register}
                       className="hover-color-secondary "
                     >
                       Đăng ký tại đây

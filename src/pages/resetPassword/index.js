@@ -4,7 +4,7 @@ import { resetPasswordUser } from "../../features/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { setLoadingClose, setLoadingShow } from "../../features/loadingSlice";
-import { publicRoutes } from "../../routes";
+import { clientRoutes } from "../../routes";
 import HelmetCustom from "../../components/HelmetCustom";
 import Breadcrumb from "../../components/Breadcrumb";
 import Form from "../../components/Form";
@@ -53,7 +53,7 @@ function ResetPassword() {
     );
     dispatch(setLoadingClose());
     if (payload.status === 200) {
-      navigate(publicRoutes.login);
+      navigate(clientRoutes.login);
     }
   };
   return (
@@ -91,7 +91,7 @@ function ResetPassword() {
             <Button
               onClick={(e) => {
                 e.preventDefault();
-                navigate(publicRoutes.home);
+                navigate(clientRoutes.home);
               }}
               type="outline"
               className="text-decoration-underline"

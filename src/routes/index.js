@@ -1,4 +1,4 @@
-import { publicRoutes } from "./routes";
+import { clientRoutes } from "./routes";
 import { lazy } from "react";
 
 const ResetPassword = lazy(() => import("../pages/resetPassword"));
@@ -14,12 +14,12 @@ const NotFound = lazy(() => import("../pages/notFound"));
 // routes client
 
 const clientPages = [
-  { com: <Home />, path: publicRoutes.home },
-  { com: <VerifyEmail />, path: publicRoutes.verifyEmail },
-  { com: <ResetPassword />, path: publicRoutes.resetPassword },
-  { com: <Login />, path: publicRoutes.login },
-  { com: <Register />, path: publicRoutes.register },
+  { com: <Home />, path: clientRoutes.home },
+  { com: <VerifyEmail />, path: clientRoutes.verifyEmail },
+  { com: <ResetPassword />, path: clientRoutes.resetPassword },
+  { com: <Login />, path: clientRoutes.login },
+  { com: <Register />, path: clientRoutes.register },
   { com: <NotFound />, path: "*" },
 ];
 
-export { publicRoutes, clientPages };
+export { clientRoutes, clientPages };

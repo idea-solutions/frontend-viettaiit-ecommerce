@@ -33,7 +33,7 @@ import {
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { menuBottom } from "../../assets/menuBottomHeader";
-import { publicRoutes } from "../../routes";
+import { clientRoutes } from "../../routes";
 
 // REDUX SLICE
 import { setLoadingClose, setLoadingShow } from "../../features/loadingSlice";
@@ -100,7 +100,7 @@ function Header() {
                     {user ? (
                       <>
                         <Link
-                          to={publicRoutes.account}
+                          to={clientRoutes.account}
                           className="account__item"
                         >
                           <FontAwesomeIcon icon={faUser} size="lg" />
@@ -120,7 +120,7 @@ function Header() {
                       </>
                     ) : (
                       <>
-                        <Link to={publicRoutes.login} className="account__item">
+                        <Link to={clientRoutes.login} className="account__item">
                           <FontAwesomeIcon
                             icon={faArrowRightToBracket}
                             size="lg"
@@ -128,7 +128,7 @@ function Header() {
                           <small>Đăng nhập</small>
                         </Link>
                         <Link
-                          to={publicRoutes.register}
+                          to={clientRoutes.register}
                           className="account__item"
                         >
                           <FontAwesomeIcon icon={faPlus} size="lg" />

@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { verifyEmailUser } from "../../features/user/userSlice";
 import { useDispatch } from "react-redux";
 import { setLoadingClose, setLoadingShow } from "../../features/loadingSlice";
-import { publicRoutes } from "../../routes";
+import { clientRoutes } from "../../routes";
 import HelmetCustom from "../../components/HelmetCustom";
 import Breadcrumb from "../../components/Breadcrumb";
 
@@ -19,7 +19,7 @@ function VerifyEmail() {
       dispatch(setLoadingShow());
       await dispatch(verifyEmailUser({ verificationToken, email }));
       dispatch(setLoadingClose());
-      navigate(publicRoutes.login);
+      navigate(clientRoutes.login);
     };
     verifyEmailAsync();
   }, []);

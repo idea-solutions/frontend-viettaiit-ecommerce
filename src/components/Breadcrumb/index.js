@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { publicRoutes } from "../../routes";
+import { clientRoutes } from "../../routes";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 
@@ -9,7 +9,7 @@ function Breadcrumb({ title }) {
     <div className="container-fuild breadcrumb__breadcrumb">
       <div className="container ">
         <Link
-          to={publicRoutes.home}
+          to={clientRoutes.home}
           className="breadcrumb__fs-13 hover-color-secondary text-decoration-none"
         >
           Trang chủ

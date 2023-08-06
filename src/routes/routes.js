@@ -1,4 +1,4 @@
-const publicRoutes = {
+const clientRoutes = {
   home: "/",
   login: "/account/login",
   account: "/account",
@@ -7,4 +7,4 @@ const publicRoutes = {
   resetPassword: "/account/reset-password",
 };
 
-export { publicRoutes };
+export { clientRoutes };
