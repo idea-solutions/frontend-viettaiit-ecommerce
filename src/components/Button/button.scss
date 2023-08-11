@@ -1,29 +1,29 @@
 @use "../../assets/scss/" as *;
 
 .btn-custom {
-  &__primary {
-    &:hover {
-      background-color: $red !important;
-      border-color: $red !important;
-      color: $white!important;
-    }
-  }
-  &__secondary {
-    background-color: $secondary !important;
-    border-color: $red !important;
-    color: $white!important;
-    &:hover {
-      background-color: $primary !important;
-      border-color: $primary !important;
-    }
-  }
-  &__transparent {
-    background-color: transparent !important;
-    border-color: $red !important;
-    color: $white!important;
-    &:hover {
-      background-color: $primary !important;
-      border-color: $primary !important;
-    }
-  }
+  // &__primary {
+  //   &:hover {
+  //     background-color: $red !important;
+  //     border-color: $red !important;
+  //     color: $white!important;
+  //   }
+  // }
+  // &__secondary {
+  //   background-color: $secondary !important;
+  //   border-color: $red !important;
+  //   color: $white!important;
+  //   &:hover {
+  //     background-color: $primary !important;
+  //     border-color: $primary !important;
+  //   }
+  // }
+  // &__transparent {
+  //   background-color: transparent !important;
+  //   border-color: $red !important;
+  //   color: $white!important;
+  //   &:hover {
+  //     background-color: $primary !important;
+  //     border-color: $primary !important;
+  //   }
+  // }
 }

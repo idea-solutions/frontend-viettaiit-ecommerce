@@ -1,3 +1,8 @@
-@forward "./custom";
-@forward "./mixins";
+@forward "./reset";
+@forward "./mixins/mixins";
 @forward "./variables";
+@forward "./functions";
+@forward "./components/buttons";
+@forward "./backgrounds";
+@forward './components/toast'
+

@@ -1,0 +1,12 @@
+@use "../variables" as *;
+@use "../functions" as *;
+@use "../mixins/button" as *;
+
+@each $color, $value in $theme-gradient-colors {
+  .Toastify__toast-theme--#{$color} {
+    background: theme-gradient-color($color);
+  }
+  .Toastify__progress-bar--#{$color} {
+    background-color: $primary;
+  }
+}
