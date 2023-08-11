@@ -1,20 +1,23 @@
 import { faAngleDown, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { clientRoutes } from "../routes";
+import { slugify } from "../utils/slug";
 
+const suffixSearch = clientRoutes.homeCategory + "/";
 export const menuBottom = [
-  { title: "Trang chủ", to: clientRoutes.home },
-  { title: "Giới thiệu", to: clientRoutes.home },
+  { title: "Trang chủ", to: suffixSearch + slugify("Trang chủ") },
+  { title: "Giới thiệu", to: suffixSearch + slugify("Giới thiệu") },
   {
-    title: "Iphone",
-    to: clientRoutes.home,
+    title: "IPhone",
+    to: suffixSearch + slugify("IPhone"),
     iconDown: faAngleDown,
     subMenu: [
       {
-        title: "IPHONE 14 Series",
+        title: "IPhone 14 Series",
         items: [
           "Iphone 14",
           "Iphone 14 Plus",
           "Iphone 14 Pro",
+
           "Iphone 14 Pro Max",
         ],
       },
@@ -44,7 +47,7 @@ export const menuBottom = [
   },
   {
     title: "Ipad",
-    to: clientRoutes.home,
+    to: suffixSearch + slugify("Ipad"),
     iconDown: faAngleDown,
     subMenu: [
       {
@@ -69,13 +72,13 @@ export const menuBottom = [
   },
   {
     title: "Macbook",
-    to: clientRoutes.home,
+    to: suffixSearch + slugify("Macbook"),
     iconDown: faAngleDown,
     subMenu: [{ title: "Macbook Pro" }, { title: "Macbook Air" }],
   },
   {
     title: "Apple Watch",
-    to: clientRoutes.home,
+    to: suffixSearch + slugify("Apple Watch"),
     iconDown: faAngleDown,
     subMenu: [
       { title: "Apple Watch Ultra" },
@@ -86,10 +89,10 @@ export const menuBottom = [
       { title: "Apple Watch S3" },
     ],
   },
-  { title: "Airpods", to: clientRoutes.home },
+  { title: "Airpods", to: suffixSearch + slugify("Airpods") },
   {
     title: "Phụ kiện",
-    to: clientRoutes.home,
+    to: suffixSearch + slugify("Phụ kiện"),
     iconDown: faAngleDown,
     subMenu: [
       { title: "Phụ kiện Apple" },
@@ -99,7 +102,7 @@ export const menuBottom = [
       { title: "Sạc dự phòng" },
     ],
   },
-  { title: "Chính sách", to: clientRoutes.home },
-  { title: "Tin tức", to: clientRoutes.home },
-  { title: "Liên hệ", to: clientRoutes.home },
+  { title: "Chính sách", to: suffixSearch + slugify("Chính sách") },
+  { title: "Tin tức", to: suffixSearch + slugify("Tin tức") },
+  { title: "Liên hệ", to: suffixSearch + slugify("Liên hệ") },
 ];

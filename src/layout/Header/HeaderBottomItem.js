@@ -1,7 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { easeInOut, motion } from "framer-motion";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useNavigation } from "react-router-dom";
+import { clientRoutes } from "../../routes";
 
 const firstMenuItem1 = {
   initial: { y: 100, opacity: 0, display: "none" },
@@ -23,6 +24,13 @@ const subMenuIconRight = {
 };
 const HeaderBottomItem = ({ item }) => {
   const [isHoverItem1, setIsHoverItem1] = useState(false);
+  const navigate = useNavigate();
+
+  const navigateTo = (e) => {
+    const title = e.target.getAttribute("title");
+    const to = title.toLowerCase().split(" ").join("-");
+    navigate(clientRoutes.searchProducts + "/" + to);
+  };
   return (
     <motion.div
       onMouseEnter={() => setIsHoverItem1(true)}
@@ -34,7 +42,7 @@ const HeaderBottomItem = ({ item }) => {
       </Link>
       {item.iconDown && <FontAwesomeIcon icon={item.iconDown} />}
       {item.subMenu &&
-        (item.title === "Iphone" ? (
+        (item.title === "IPhone" ? (
           <motion.ul
             variants={firstMenuItem2}
             initial="initial"
@@ -43,10 +51,18 @@ const HeaderBottomItem = ({ item }) => {
           >
             {item.subMenu.map((subItem, idx2) => (
               <li className="iphone-sub-item" key={idx2 + 10}>
-                <Link className="iphone-sub-link">{subItem.title}</Link>
+                <span
+                  title={subItem.title}
+                  onClick={navigateTo}
+                  className="iphone-sub-link"
+                >
+                  {subItem.title}
+                </span>
                 <div className="iphone-sub-item-2">
-                  {subItem.items.map((ipItem, ipIdx) => (
-                    <Link key={ipIdx}>{ipItem}</Link>
+                  {subItem.items.map((name, ipIdx) => (
+                    <span onClick={navigateTo} title={name} key={ipIdx}>
+                      {name}
+                    </span>
                   ))}
                 </div>
               </li>
