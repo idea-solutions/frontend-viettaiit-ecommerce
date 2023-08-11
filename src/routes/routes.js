@@ -5,6 +5,7 @@ const clientRoutes = {
   register: "/account/register",
   verifyEmail: "/account/verify-email",
   resetPassword: "/account/reset-password",
+  homeCategory: "/home",
 };
 
 export { clientRoutes };

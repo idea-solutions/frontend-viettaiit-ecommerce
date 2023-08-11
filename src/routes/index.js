@@ -1,7 +1,9 @@
+
 import { clientRoutes } from "./routes";
 import { lazy } from "react";
 
 const ResetPassword = lazy(() => import("../pages/resetPassword"));
+const Category = lazy(() => import("../pages/category"));
 const VerifyEmail = lazy(() => import("../pages/verifyEmail"));
 const Home = lazy(() => import("../pages/home"));
 const Login = lazy(() => import("../pages/login"));
@@ -19,6 +21,7 @@ const clientPages = [
   { com: <ResetPassword />, path: clientRoutes.resetPassword },
   { com: <Login />, path: clientRoutes.login },
   { com: <Register />, path: clientRoutes.register },
+  { com: <Category />, path: clientRoutes.homeCategory + "/:name" },
   { com: <NotFound />, path: "*" },
 ];
 
