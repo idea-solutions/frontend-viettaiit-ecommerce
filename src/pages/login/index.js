@@ -18,6 +18,7 @@ import { setLoadingClose, setLoadingShow } from "../../features/loadingSlice";
 import "./login.scss";
 import HelmetCustom from "../../components/HelmetCustom";
 import Breadcrumb from "../../components/Breadcrumb";
+import { toastWarning } from "../../utils/toast";
 function Login() {
   const [isForgotPwd, setIsForgotPwd] = useState(false);
   const [emailForgot, setEmailForgot] = useState("");
@@ -35,7 +36,7 @@ function Login() {
     e.preventDefault();
     const err = validateFormLogin(inputs);
     if (err) {
-      toast.warning(err);
+      toastWarning(err);
       return;
     }
     dispatch(setLoadingShow());
@@ -49,7 +50,7 @@ function Login() {
     e.preventDefault();
     const isCheck = checkEmail(emailForgot);
     if (!isCheck) {
-      toast.warning("Email không đúng định dạng!");
+      toastWarning("Email không đúng định dạng!");
       return;
     }
     dispatch(setLoadingShow());
@@ -81,7 +82,7 @@ function Login() {
                 <div className="mb-3 ">
                   <button
                     type="submit"
-                    className="btn btn-primary w-100 hover-bg-secondary"
+                    className="btn btn-primary w-100 hover-bg-secondary btn-md"
                     onClick={handleSubmit}
                     disabled={disabled}
                   >

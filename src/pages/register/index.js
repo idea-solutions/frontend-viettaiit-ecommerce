@@ -21,6 +21,7 @@ import { setLoadingClose, setLoadingShow } from "../../features/loadingSlice";
 import "./register.scss";
 import HelmetCustom from "../../components/HelmetCustom";
 import Breadcrumb from "../../components/Breadcrumb";
+import { toastWarning } from "../../utils/toast";
 function Register() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -42,7 +43,7 @@ function Register() {
 
     const err = validateFormRegister(inputs);
     if (err) {
-      toast.warning(err);
+      toastWarning(err);
       return;
     }
     dispatch(setLoadingShow());
@@ -95,7 +96,7 @@ function Register() {
                 <div className="mb-3  position-relative">
                   <button
                     type="submit"
-                    className="btn btn-primary w-100 hover-bg-secondary"
+                    className="btn btn-primary w-100 hover-bg-secondary btn-md"
                     onClick={handleSubmit}
                     disabled={disabled}
                   >

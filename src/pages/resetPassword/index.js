@@ -11,6 +11,7 @@ import Form from "../../components/Form";
 import FormControl from "../../components/FormControl";
 import Button from "../../components/Button";
 import { validateFormResetPassword } from "../../utils/validate";
+import { toastWarning } from "../../utils/toast";
 
 function ResetPassword() {
   const location = useLocation();
@@ -39,7 +40,8 @@ function ResetPassword() {
     if (isLoading) return;
     const err = validateFormResetPassword(inputs);
     if (err) {
-      toast.warning(err);
+      toastWarning(err);
+
       return;
     }
     dispatch(setLoadingShow());

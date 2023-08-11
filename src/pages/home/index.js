@@ -108,9 +108,9 @@ function Home() {
             </div>
             <ListProductSlide />
             <div className="d-flex justify-content-center align-items-center pb-3">
-              <Button classes="px-5 py-2" type="transparent">
+              <Button className="hover-bg-secondary btn-md btn-icon-text btn-md" type="primary">
                 Xem tất cả
-                <FontAwesomeIcon className="ms-2" icon={faAngleRight} />
+                <FontAwesomeIcon className="btn-icon-append" icon={faAngleRight} />
               </Button>
             </div>
           </div>
