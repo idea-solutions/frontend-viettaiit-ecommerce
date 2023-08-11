@@ -13,6 +13,7 @@ import {
   attachUserToLocalStorage,
   getUserFromLocalStorage,
 } from "../../utils/localStorage";
+import { toastError, toastSuccess } from "../../utils/toast";
 const initialState = {
   user: getUserFromLocalStorage(),
   isLoading: false,
@@ -71,7 +72,7 @@ const userSlice = createSlice({
     });
     builder.addCase(registerUser.rejected, (state, action) => {
       const { message } = action.payload;
-      toast.error(message);
+      toastError(message);
       state.isLoading = false;
       state.isError = true;
     });
@@ -88,7 +89,7 @@ const userSlice = createSlice({
     });
     builder.addCase(loginUser.rejected, (state, action) => {
       const { message } = action.payload;
-      toast.error(message);
+      toastError(message);
       state.isLoading = false;
       state.isError = true;
     });
@@ -101,12 +102,12 @@ const userSlice = createSlice({
       const { message } = action.payload;
       state.user = null;
       attachUserToLocalStorage(null);
-      toast.success(message);
+      toastSuccess(message);
       state.isLoading = false;
     });
     builder.addCase(logoutUser.rejected, (state, action) => {
       const { message } = action.payload;
-      toast.error(message);
+      toastError(message);
       state.isLoading = false;
       state.isError = true;
     });
@@ -116,12 +117,13 @@ const userSlice = createSlice({
     });
     builder.addCase(verifyEmailUser.fulfilled, (state, action) => {
       const { message } = action.payload;
-      toast.success(message);
+      toastSuccess(message);
+
       state.isLoading = false;
     });
     builder.addCase(verifyEmailUser.rejected, (state, action) => {
       const { message } = action.payload;
-      toast.error(message);
+      toastError(message);
       state.isLoading = false;
       state.isError = true;
     });
@@ -132,12 +134,13 @@ const userSlice = createSlice({
     });
     builder.addCase(forgotPasswordUser.fulfilled, (state, action) => {
       const { message } = action.payload;
-      toast.success(message);
+      toastSuccess(message);
+
       state.isLoading = false;
     });
     builder.addCase(forgotPasswordUser.rejected, (state, action) => {
       const { message } = action.payload;
-      toast.error(message);
+      toastError(message);
       state.isLoading = false;
       state.isError = true;
     });
@@ -147,13 +150,14 @@ const userSlice = createSlice({
     });
     builder.addCase(resetPasswordUser.fulfilled, (state, action) => {
       const { message } = action.payload;
-      toast.success(message);
+      toastSuccess(message);
+
       state.isLoading = false;
     });
     builder.addCase(resetPasswordUser.rejected, (state, action) => {
       const { message } = action.payload;
       console.log(action.payload);
-      toast.error(message);
+      toastError(message);
       state.isLoading = false;
       state.isError = true;
     });
