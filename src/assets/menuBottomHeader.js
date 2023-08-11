@@ -4,8 +4,8 @@ import { slugify } from "../utils/slug";
 
 const suffixSearch = clientRoutes.homeCategory + "/";
 export const menuBottom = [
-  { title: "Trang chủ", to: suffixSearch + slugify("Trang chủ") },
-  { title: "Giới thiệu", to: suffixSearch + slugify("Giới thiệu") },
+  { title: "Trang chủ", to: clientRoutes.home },
+  { title: "Giới thiệu", to: clientRoutes.gioiThieu },
   {
     title: "IPhone",
     to: suffixSearch + slugify("IPhone"),
@@ -102,7 +102,7 @@ export const menuBottom = [
       { title: "Sạc dự phòng" },
     ],
   },
-  { title: "Chính sách", to: suffixSearch + slugify("Chính sách") },
-  { title: "Tin tức", to: suffixSearch + slugify("Tin tức") },
-  { title: "Liên hệ", to: suffixSearch + slugify("Liên hệ") },
+  { title: "Chính sách", to: clientRoutes.chinhSach },
+  { title: "Tin tức", to: clientRoutes.tinTuc  },
+  { title: "Liên hệ", to:  clientRoutes.lienHe  },
 ];

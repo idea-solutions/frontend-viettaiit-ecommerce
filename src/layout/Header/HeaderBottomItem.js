@@ -3,6 +3,7 @@ import { easeInOut, motion } from "framer-motion";
 import { useState } from "react";
 import { Link, useNavigate, useNavigation } from "react-router-dom";
 import { clientRoutes } from "../../routes";
+import { slugify } from "../../utils/slug";
 
 const firstMenuItem1 = {
   initial: { y: 100, opacity: 0, display: "none" },
@@ -28,8 +29,8 @@ const HeaderBottomItem = ({ item }) => {
 
   const navigateTo = (e) => {
     const title = e.target.getAttribute("title");
-    const to = title.toLowerCase().split(" ").join("-");
-    navigate(clientRoutes.searchProducts + "/" + to);
+    const name = slugify(title);
+    navigate(clientRoutes.homeCategory + "/" + name);
   };
   return (
     <motion.div
@@ -76,7 +77,11 @@ const HeaderBottomItem = ({ item }) => {
             className="submenu-first"
           >
             {item.subMenu.map((subItem, idx2) => (
-              <SubItem2 subItem={subItem} key={idx2 + 10} />
+              <SubItem2
+                navigateTo={navigateTo}
+                subItem={subItem}
+                key={idx2 + 10}
+              />
             ))}
           </motion.ul>
         ))}
@@ -86,7 +91,7 @@ const HeaderBottomItem = ({ item }) => {
 
 export default HeaderBottomItem;
 
-const SubItem2 = ({ subItem }) => {
+const SubItem2 = ({ subItem, navigateTo }) => {
   const [isHoverItem2, setIsHoverItem2] = useState(false);
   return (
     <motion.span
@@ -94,7 +99,9 @@ const SubItem2 = ({ subItem }) => {
       onMouseLeave={() => setIsHoverItem2(false)}
       className="sub-item d-flex justify-content-between"
     >
-      <Link className="sub-link">{subItem.title}</Link>
+      <span className="sub-link text-black" title={subItem.title} onClick={navigateTo}>
+        {subItem.title}
+      </span>
       {subItem.iconRight && (
         <span className="icon">
           <FontAwesomeIcon icon={subItem.iconRight} />
@@ -108,9 +115,14 @@ const SubItem2 = ({ subItem }) => {
           className="sub-menu-2 d-flex flex-column gap-2"
         >
           {subItem.items.map((item3, idx3) => (
-            <Link className="link-2" key={idx3}>
+            <span
+              title={item3}
+              onClick={navigateTo}
+              className="link-2"
+              key={idx3}
+            >
               {item3}
-            </Link>
+            </span>
           ))}
         </motion.div>
       )}
