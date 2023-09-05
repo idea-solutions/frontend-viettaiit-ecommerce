@@ -21,3 +21,7 @@
             2. Login /account/login
             3. Register /account/register
             4.
+
+
+## TASK
+    - Fix một số lỗi :

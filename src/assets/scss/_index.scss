@@ -1,8 +1,11 @@
-@forward "./reset";
-@forward "./mixins/mixins";
-@forward "./variables";
-@forward "./functions";
-@forward "./components/buttons";
-@forward "./backgrounds";
-@forward './components/toast'
+@import "./reset";
+@import "./variables";
+@import "./functions";
+@import "./backgrounds";
 
+// MIXIN
+@import "./mixins";
+
+// COMPONENTS
+@import "./components";
+@import "./components";

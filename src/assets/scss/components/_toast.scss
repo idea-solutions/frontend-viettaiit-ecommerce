@@ -1,6 +1,3 @@
-@use "../variables" as *;
-@use "../functions" as *;
-@use "../mixins/button" as *;
 
 @each $color, $value in $theme-gradient-colors {
   .Toastify__toast-theme--#{$color} {

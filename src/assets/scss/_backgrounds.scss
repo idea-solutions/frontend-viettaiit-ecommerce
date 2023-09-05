@@ -1,5 +1,4 @@
-@use "./variables" as *;
-@use "./functions" as *;
+
 @each $color, $value in $theme-gradient-colors {
   .btn-gradient-#{$color} {
     background: theme-gradient-color($color);
