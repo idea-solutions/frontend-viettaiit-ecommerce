@@ -8,9 +8,15 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { IconFire } from "../../assets/icons";
 import LazyImage from "../LazyImage";
+import { useState } from "react";
 function ProductItem({ product }) {
+  const [hovered, setHovered] = useState(false);
   return (
-    <motion.div className="product-item">
+    <motion.div
+      className="product-item"
+      onHoverStart={() => setHovered(true)}
+      onHoverEnd={() => setHovered(false)}
+    >
       <div className="product-item__image">
         <LazyImage src="https://bizweb.dktcdn.net/thumb/large/100/480/632/products/230225032836-12red-9e866195-9543-4592-af92-c3986c0e30d3.jpg?v=1681684380000" />
 
@@ -43,9 +49,10 @@ function ProductItem({ product }) {
       </div>
 
       <motion.span
-        whileHover="hover"
-        initial="initial"
         className="product-item__action-button"
+        variants={actionButton}
+        initial="initial"
+        animate={hovered ? "show" : "hidden"}
       >
         <motion.a variants={actionButton} title="Xem nhanh" href="" alt="">
           <FontAwesomeIcon icon={faEye} />
@@ -73,7 +80,8 @@ function ProductItem({ product }) {
 
 const actionButton = {
   initial: { x: 50, opacity: 0 },
-  hover: { x: 0, opacity: [0, 0, 0.4, 1] },
+  hidden: { x: 50, opacity: 0 },
+  show: { x: 0, opacity: [0, 0.8, 1] },
 };
 
 export default ProductItem;
