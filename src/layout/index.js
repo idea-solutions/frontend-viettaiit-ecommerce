@@ -2,7 +2,7 @@
 import Footer from "./Footer";
 import Header from "./Header";
 // STYLES
-function LayoutClient({ children }) {
+function Layout({ children }) {
   return (
     <div className="">
       <Header />
@@ -12,4 +12,4 @@ function LayoutClient({ children }) {
   );
 }
 
-export default LayoutClient;
+export default Layout;

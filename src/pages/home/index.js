@@ -7,7 +7,6 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 // MY IMPORTS
-import AnimationPage from "../../components/AnimationPage";
 import { sliders1, sliders2 } from "../../assets/sliders";
 import promoBoxes from "../../assets/promoBox";
 import ListProductSlide from "../../components/ListProductSlide";
@@ -19,7 +18,7 @@ import HelmetCustom from "../../components/HelmetCustom";
 
 function Home() {
   return (
-    <AnimationPage>
+    <>
       <HelmetCustom title="Trang chủ" />
       <div className="home">
         <Swiper
@@ -120,7 +119,7 @@ function Home() {
           </div>
         </div>
       </div>
-    </AnimationPage>
+    </>
   );
 }
 

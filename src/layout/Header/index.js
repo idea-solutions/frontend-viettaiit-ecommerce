@@ -5,7 +5,7 @@ import { lazy, useState } from "react";
 import { Button, Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
 // COMPONENTS
-import AnimationPage from "../../components/AnimationPage";
+import AnimationComp from "../../components/AnimationComp";
 import FrameHover from "../../components/FrameHover";
 import ButtonQuantity from "../../components/ButtonQuantity";
 import Search from "./Search";
@@ -46,7 +46,7 @@ function Header() {
   const { isOpen } = useSelector((store) => store.navBar);
   const dispatch = useDispatch();
   return (
-    <AnimationPage>
+    <>
       <div className="header">
         <div className="header-top container-xxl">
           <div className="left">
@@ -62,10 +62,7 @@ function Header() {
           <Search className="max-lg-none" />
           <div className="right">
             <div className="item max-lg-none">
-              <FontAwesomeIcon
-                icon={faPhoneVolume}
-                className="icon-size-2xs"
-              />
+              <FontAwesomeIcon icon={faPhoneVolume} className="icon-size-2xs" />
               <span>
                 <small className="title">Gọi mua hàng</small>
                 <small>1900 6750</small>
@@ -253,11 +250,9 @@ function Header() {
         </div>
         <div className="container-xl header-bottom">
           <ul className="items">
-            <AnimatePresence>
-              {menuBottom.map((item, idx) => (
-                <HeaderBottomItem key={idx} item={item} />
-              ))}
-            </AnimatePresence>
+            {menuBottom.map((item, idx) => (
+              <HeaderBottomItem key={idx} item={item} />
+            ))}
           </ul>
           <div className="text-white d-flex gap-1 justify-content-center align-items-center ms-5">
             <div className="px-1 py-1">
@@ -270,8 +265,8 @@ function Header() {
         </div>
         <Search className="d-lg-none max-lg-display mx-3" />
       </div>
-      <AnimatePresence>{isOpen && <NavbarDownDeskTop />}</AnimatePresence>
-    </AnimationPage>
+      {isOpen && <NavbarDownDeskTop />}
+    </>
   );
 }
 

@@ -1,5 +1,4 @@
-import AnimationPage from "../../components/AnimationPage";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -58,89 +57,93 @@ function Login() {
     <div className="login">
       <HelmetCustom title="Đăng nhập" />
       <Breadcrumb title="Đăng nhập tài khoản" />
-      <AnimationPage>
-        <div className="container">
-          <div className="login__form">
-            <Form className="form">
-              <h5 className="text-center py-2">ĐĂNG NHẬP</h5>
-              <div className="form-group">
+      <div className="container overflow-hidden">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0.5 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          className="login__form"
+        >
+          <Form className="form">
+            <h5 className="text-center py-2">ĐĂNG NHẬP</h5>
+            <div className="form-group">
+              <Form.Control
+                type="email"
+                placeholder="   Email"
+                name="email"
+                onChange={handleChange}
+              />
+              <Form.Control
+                type="password"
+                placeholder="   Mật khẩu"
+                name="password"
+                onChange={handleChange}
+              />
+              <div className="mb-3 ">
+                <button
+                  type="submit"
+                  className="btn btn-primary w-100 hover-bg-secondary btn-md"
+                  onClick={handleSubmit}
+                  disabled={disabled}
+                >
+                  ĐĂNG NHẬP
+                </button>
+              </div>
+              <div className="mb-3">
+                <p className="d-flex justify-content-between">
+                  <span
+                    onClick={() => setIsForgotPwd(!isForgotPwd)}
+                    className="hover-color-secondary "
+                  >
+                    Quên mật khẩu?
+                  </span>
+                  <Link
+                    to={clientRoutes.register}
+                    className="hover-color-secondary "
+                  >
+                    Đăng ký tại đây
+                  </Link>
+                </p>
+              </div>
+              <motion.div
+                className="mb-3"
+                variants={animateForgotPassword}
+                initial="initial"
+                animate={isForgotPwd ? "open" : "exit"}
+              >
                 <Form.Control
                   type="email"
                   placeholder="   Email"
-                  name="email"
-                  onChange={handleChange}
+                  onChange={(e) => setEmailForgot(e.target.value)}
                 />
-                <Form.Control
-                  type="password"
-                  placeholder="   Mật khẩu"
-                  name="password"
-                  onChange={handleChange}
-                />
-                <div className="mb-3 ">
-                  <button
-                    type="submit"
-                    className="btn btn-primary w-100 hover-bg-secondary btn-md"
-                    onClick={handleSubmit}
-                    disabled={disabled}
-                  >
-                    ĐĂNG NHẬP
-                  </button>
-                </div>
-                <div className="mb-3">
-                  <p className="d-flex justify-content-between">
-                    <span
-                      onClick={() => setIsForgotPwd(!isForgotPwd)}
-                      className="hover-color-secondary "
-                    >
-                      Quên mật khẩu?
-                    </span>
-                    <Link
-                      to={clientRoutes.register}
-                      className="hover-color-secondary "
-                    >
-                      Đăng ký tại đây
-                    </Link>
-                  </p>
-                </div>
-                <motion.div
-                  className="mb-3"
-                  variants={animateForgotPassword}
-                  initial="initial"
-                  animate={isForgotPwd ? "open" : "exit"}
+                <button
+                  type="submit"
+                  className="btn btn-primary w-100 hover-bg-secondary"
+                  onClick={handleForgotPwd}
                 >
-                  <Form.Control
-                    type="email"
-                    placeholder="   Email"
-                    onChange={(e) => setEmailForgot(e.target.value)}
-                  />
-                  <button
-                    type="submit"
-                    className="btn btn-primary w-100 hover-bg-secondary"
-                    onClick={handleForgotPwd}
-                  >
-                    Lấy lại mật khẩu
-                  </button>
-                </motion.div>
-                <div className="mb-3">
-                  <p className="d-flex justify-content-center">
-                    <span>hoặc đăng nhập qua</span>
-                  </p>
-                </div>
-                <div className="mb-3 d-flex justify-content-center gap-2">
-                  <button type="submit" className="btn btn-facebook">
-                    <span></span>
-                    Facebook
-                  </button>
-                  <button type="submit" className="btn btn-google">
-                    <span></span>
-                    Google
-                  </button>
-                </div>
+                  Lấy lại mật khẩu
+                </button>
+              </motion.div>
+              <div className="mb-3">
+                <p className="d-flex justify-content-center">
+                  <span>hoặc đăng nhập qua</span>
+                </p>
               </div>
-            </Form>
-          </div>
-        </div>
-      </AnimationPage>
+              <div className="mb-3 d-flex justify-content-center gap-2">
+                <button type="submit" className="btn btn-facebook">
+                  <span></span>
+                  Facebook
+                </button>
+                <button type="submit" className="btn btn-google">
+                  <span></span>
+                  Google
+                </button>
+              </div>
+            </div>
+          </Form>
+        </motion.div>
+      </div>
     </div>
   );
 }
@@ -148,6 +151,6 @@ function Login() {
 const animateForgotPassword = {
   initial: { height: 0, background: "#fff", overflow: "hidden" },
   open: { height: "auto" },
-  exit: { height: 0 },
+  exit: { height: 0, overflow: "hidden" },
 };
 export default Login;
