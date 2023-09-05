@@ -1,4 +1,3 @@
-
 .btn {
   font-size: $btn-font-size;
   line-height: 1;
@@ -89,5 +88,42 @@
 @each $color, $value in $theme-gradient-colors {
   .btn-gradient-#{$color} {
     @include button-gradient-variant($value);
+  }
+}
+
+// button quantity
+.button-quantity {
+  border: 1px solid $gray-700;
+  border-radius: $border-radius-sm;
+  @include flex-center;
+  button {
+    padding: 0px 8px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    transition: 0.2s all ease-in-out;
+    &:nth-child(1) {
+      border-right: 1px solid $gray-700;
+    }
+    &:nth-child(3) {
+      border-left: 1px solid $gray-700;
+    }
+
+    &:hover {
+      background-color: $gray-300;
+    }
+  }
+  span {
+    font-size: 12px;
+    padding: 0px 8px;
+    &:hover {
+      cursor: auto;
+    }
+  }
+
+  &:hover {
+    background-color: unset;
+    background: unset;
+    color: unset;
   }
 }

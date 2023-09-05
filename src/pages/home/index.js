@@ -8,15 +8,13 @@ import "swiper/css/navigation";
 
 // MY IMPORTS
 import AnimationPage from "../../components/AnimationPage";
-import Button from "../../components/Button";
 import { sliders1, sliders2 } from "../../assets/sliders";
 import promoBoxes from "../../assets/promoBox";
 import ListProductSlide from "../../components/ListProductSlide";
 import { IconFire } from "../../assets/icons";
-import "./home.scss";
 
 import LazyImage from "../../components/LazyImage";
-import { Image } from "react-bootstrap";
+import { Button, Image } from "react-bootstrap";
 import HelmetCustom from "../../components/HelmetCustom";
 
 function Home() {
@@ -72,7 +70,7 @@ function Home() {
                   ease: "easeOut",
                 }}
                 key={idx}
-                className="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 mb-2"
+                className="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 mb-2  d-flex justify-content-center"
               >
                 <LazyImage className="section__item" src={image} />
               </motion.div>
@@ -108,9 +106,15 @@ function Home() {
             </div>
             <ListProductSlide />
             <div className="d-flex justify-content-center align-items-center pb-3">
-              <Button className="hover-bg-secondary btn-md btn-icon-text btn-md" type="primary">
+              <Button
+                className="hover-bg-secondary btn-md btn-icon-text btn-md"
+                variant="primary"
+              >
                 Xem tất cả
-                <FontAwesomeIcon className="btn-icon-append" icon={faAngleRight} />
+                <FontAwesomeIcon
+                  className="btn-icon-append"
+                  icon={faAngleRight}
+                />
               </Button>
             </div>
           </div>

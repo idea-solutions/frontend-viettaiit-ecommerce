@@ -6,7 +6,6 @@ import {
   faHeart,
   faRotate,
 } from "@fortawesome/free-solid-svg-icons";
-import "./product-item.scss";
 import { IconFire } from "../../assets/icons";
 import LazyImage from "../LazyImage";
 function ProductItem({ product }) {

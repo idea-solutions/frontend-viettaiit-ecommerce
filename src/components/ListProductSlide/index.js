@@ -1,10 +1,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Scrollbar } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/scrollbar";
+
 // MY IMPORTS
-import "./list-product-slide.scss";
 import ProductItem from "../ProductItem";
 function ListProductSlide({ products }) {
   return (

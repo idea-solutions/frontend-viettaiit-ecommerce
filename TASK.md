@@ -25,3 +25,5 @@
 
 ## TASK
     - Fix một số lỗi :
+        1. Hover page[Home] HOT SALE product hover 
+        2. Fix logo

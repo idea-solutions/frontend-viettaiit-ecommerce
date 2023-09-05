@@ -1,4 +1,3 @@
-@use "../../assets/scss/" as *;
 
 .frame-hover {
   @include position-top-right($top: 140%, $right: -10%);

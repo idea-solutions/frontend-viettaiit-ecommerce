@@ -2,16 +2,13 @@ import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { resetPasswordUser } from "../../features/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
 import { setLoadingClose, setLoadingShow } from "../../features/loadingSlice";
 import { clientRoutes } from "../../routes";
 import HelmetCustom from "../../components/HelmetCustom";
 import Breadcrumb from "../../components/Breadcrumb";
-import Form from "../../components/Form";
-import FormControl from "../../components/FormControl";
-import Button from "../../components/Button";
 import { validateFormResetPassword } from "../../utils/validate";
 import { toastWarning } from "../../utils/toast";
+import { Button, Form } from "react-bootstrap";
 
 function ResetPassword() {
   const location = useLocation();
@@ -69,7 +66,7 @@ function ResetPassword() {
           <label className="">
             Mật khẩu<sup>*</sup>
           </label>
-          <FormControl
+          <Form.Control
             type="password"
             name="password1"
             onChange={handleChange}
@@ -77,14 +74,14 @@ function ResetPassword() {
           <label className="">
             Xác nhận mật khẩu<sup>*</sup>
           </label>
-          <FormControl
+          <Form.Control
             type="password"
             name="password2"
             onChange={handleChange}
           />
           <div className="mb-3">
             <Button
-              type="primary"
+              variant="primary"
               className="me-5"
               onClick={handleResetPassword}
             >
@@ -95,7 +92,7 @@ function ResetPassword() {
                 e.preventDefault();
                 navigate(clientRoutes.home);
               }}
-              type="outline"
+              variant="outline-primary"
               className="text-decoration-underline"
             >
               Hủy

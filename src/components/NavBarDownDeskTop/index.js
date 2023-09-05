@@ -7,7 +7,6 @@ import { faClose } from "@fortawesome/free-solid-svg-icons";
 // MY IMPORTS
 import { toggleNavBar } from "../../features/navBarSlice";
 import { menuBottom } from "../../assets/menuBottomHeader";
-import "./navbar-down-desktop.scss";
 
 function NavBarDownDeskTop() {
   const [numberShow, setNumberShow] = useState(100);
@@ -37,7 +36,7 @@ function NavBarDownDeskTop() {
           <span>DANH MỤC</span>
           <FontAwesomeIcon
             onClick={() => dispatch(toggleNavBar())}
-            className="elastic-fai-sm"
+            className="icon-size-sm"
             icon={faClose}
           />
         </div>

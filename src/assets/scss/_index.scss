@@ -3,9 +3,16 @@
 @import "./functions";
 @import "./backgrounds";
 
+// utilities
+@import "./utilities/";
+
 // MIXIN
 @import "./mixins";
 
 // COMPONENTS
 @import "./components";
-@import "./components";
+// LAYOUT
+@import "./layout";
+
+// PAGES
+@import "./pages/";

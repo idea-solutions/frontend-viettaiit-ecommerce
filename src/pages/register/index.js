@@ -1,16 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
 import AnimationPage from "../../components/AnimationPage";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { toast } from "react-toastify";
+
 import { useDispatch, useSelector } from "react-redux";
 
 // MY IMPORTS
-import FormControl from "../../components/FormControl";
-import Form from "../../components/Form";
 
 import { clientRoutes } from "../../routes";
 import { validateFormRegister } from "../../utils/validate";
@@ -18,10 +14,10 @@ import { validateFormRegister } from "../../utils/validate";
 import { registerUser } from "../../features/user/userSlice";
 
 import { setLoadingClose, setLoadingShow } from "../../features/loadingSlice";
-import "./register.scss";
 import HelmetCustom from "../../components/HelmetCustom";
 import Breadcrumb from "../../components/Breadcrumb";
 import { toastWarning } from "../../utils/toast";
+import { Form } from "react-bootstrap";
 function Register() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -63,31 +59,31 @@ function Register() {
             <Form className="form position-relative">
               <h5 className="text-center py-2">ĐĂNG KÝ</h5>
               <p className="text-center ">
-                Đã có tải khoản đăng nhập
+                Đã có tài khoản đăng nhập
                 <Link className="text-secondary ms-1" to={clientRoutes.login}>
                   tại đây
                 </Link>
               </p>
               <div className="form-group">
-                <FormControl
+                <Form.Control
                   type="text"
                   placeholder="   Tên hiển thị"
                   name="name"
                   onChange={handleChange}
                 />
-                <FormControl
+                <Form.Control
                   type="email"
                   placeholder="   Email"
                   name="email"
                   onChange={handleChange}
                 />
-                <FormControl
+                <Form.Control
                   type="password"
                   placeholder="   Mật khẩu cấp 1"
                   name="password"
                   onChange={handleChange}
                 />
-                <FormControl
+                <Form.Control
                   type="password"
                   placeholder="   Mật khẩu cấp 2"
                   name="password2"

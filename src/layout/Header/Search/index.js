@@ -1,10 +1,8 @@
 // FRAMEWORKS
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { motion } from "framer-motion";
 import { lazy, useState } from "react";
-import Form from "react-bootstrap/Form";
+import {Form} from "react-bootstrap";
 // STYLES
-import "./search.scss";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 const SearchSuggest = lazy(() => import("./searchSuggest"));
 // FAKE DATA SEARCH

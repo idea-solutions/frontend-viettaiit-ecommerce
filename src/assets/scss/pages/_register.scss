@@ -1,12 +1,7 @@
-@use "../../assets/scss/" as *;
-
 .register {
-  
-
   // login form
   &__form {
     @include flex-center;
     margin-top: 80px;
-    
   }
 }

@@ -2,18 +2,15 @@
 import { AnimatePresence, easeInOut, motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { lazy, useState } from "react";
-import { Image } from "react-bootstrap";
+import { Button, Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
 // COMPONENTS
 import AnimationPage from "../../components/AnimationPage";
-import Logo from "../../components/Logo";
 import FrameHover from "../../components/FrameHover";
 import ButtonQuantity from "../../components/ButtonQuantity";
-import Button from "../../components/Button";
-import Search from "../../components/Search";
+import Search from "./Search";
 
 // STYLES
-import "./header.scss";
 // REDUX
 import { useDispatch, useSelector } from "react-redux";
 import { toggleNavBar } from "../../features/navBarSlice";
@@ -56,16 +53,18 @@ function Header() {
             <FontAwesomeIcon
               icon={faBars}
               onClick={() => dispatch(toggleNavBar())}
-              className="elastic-fai-sm d-lg-none me-3"
+              className="icon-size-sm d-lg-none me-3"
             />
-            <Logo />
+            <Link to={"/"} className={`logo d-block fs-4 text-white rounded`}>
+              Sudes Phone
+            </Link>
           </div>
           <Search className="max-lg-none" />
           <div className="right">
             <div className="item max-lg-none">
               <FontAwesomeIcon
                 icon={faPhoneVolume}
-                className="elastic-fai-2xs"
+                className="icon-size-2xs"
               />
               <span>
                 <small className="title">Gọi mua hàng</small>
@@ -77,7 +76,7 @@ function Header() {
               onMouseLeave={() => setIsHoveredAccount(false)}
               className="item"
             >
-              <FontAwesomeIcon icon={faUser} className="elastic-fai-2xs" />
+              <FontAwesomeIcon icon={faUser} className="icon-size-2xs" />
               <FontAwesomeIcon
                 icon={faAngleDown}
                 className="d-none max-lg-display"
@@ -155,7 +154,7 @@ function Header() {
               className="item"
             >
               <FontAwesomeIcon
-                className="icon-cart elastic-fai-2xs"
+                className="icon-cart icon-size-2xs"
                 icon={faCartPlus}
               />
               <span>
@@ -244,7 +243,7 @@ function Header() {
                         <small>Tổng tiền</small>
                         <small>4.411.000 đ</small>
                       </div>
-                      <Button type="primary">THANH TOÁN</Button>
+                      <Button variant="primary">THANH TOÁN</Button>
                     </div>
                   </div>
                 </motion.div>

@@ -3,7 +3,6 @@ import { clientRoutes } from "../../routes";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 
-import "./breadcrumb.scss";
 function Breadcrumb({ title }) {
   return (
     <div className="container-fuild breadcrumb__breadcrumb">

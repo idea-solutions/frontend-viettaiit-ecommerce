@@ -3,22 +3,19 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 
 // MY IMPORTS
 import { clientRoutes } from "../../routes";
-import FormControl from "../../components/FormControl";
-import Form from "../../components/Form";
 import { checkEmail, validateFormLogin } from "../../utils/validate";
 
 // REDUX SLICE
 import { forgotPasswordUser, loginUser } from "../../features/user/userSlice";
 
 import { setLoadingClose, setLoadingShow } from "../../features/loadingSlice";
-import "./login.scss";
 import HelmetCustom from "../../components/HelmetCustom";
 import Breadcrumb from "../../components/Breadcrumb";
 import { toastWarning } from "../../utils/toast";
+import { Form } from "react-bootstrap";
 function Login() {
   const [isForgotPwd, setIsForgotPwd] = useState(false);
   const [emailForgot, setEmailForgot] = useState("");
@@ -67,13 +64,13 @@ function Login() {
             <Form className="form">
               <h5 className="text-center py-2">ĐĂNG NHẬP</h5>
               <div className="form-group">
-                <FormControl
+                <Form.Control
                   type="email"
                   placeholder="   Email"
                   name="email"
                   onChange={handleChange}
                 />
-                <FormControl
+                <Form.Control
                   type="password"
                   placeholder="   Mật khẩu"
                   name="password"
@@ -111,7 +108,7 @@ function Login() {
                   initial="initial"
                   animate={isForgotPwd ? "open" : "exit"}
                 >
-                  <FormControl
+                  <Form.Control
                     type="email"
                     placeholder="   Email"
                     onChange={(e) => setEmailForgot(e.target.value)}
