@@ -15,6 +15,14 @@ $black: #141414;
 $blue: #0d6efd;
 $red: #bf1e2e;
 
+$primary: $black;
+$secondary: $red;
+$success: #1bcfb4;
+$info: #198ae3;
+$warning: #fed713;
+$danger: #fe7c96;
+$light: #f8f9fa;
+$dark: #3e4b5b;
 // PX
 $px-1: 0.0625rem;
 $px-2: ($px-1 * 2);
@@ -86,8 +94,8 @@ $theme-colors: (
 );
 
 $theme-gradient-colors: (
-  primary: linear-gradient(to right, #14141485,#141414),
-  secondary: linear-gradient(to right,  #bf1e2e89, #bf1e2e),
+  primary: linear-gradient(to right, #14141485, #141414),
+  secondary: linear-gradient(to right, #bf1e2e89, #bf1e2e),
   success: linear-gradient(to right, #84d9d2, #07cdae),
   info: linear-gradient(to right, #90caf9, #047edf 99%),
   warning: linear-gradient(to right, #f6e384, #ffd500),
@@ -97,11 +105,26 @@ $theme-gradient-colors: (
 );
 
 // Buttons
-$button-fixed-width:        150px;
+$button-fixed-width: 150px;
 $btn-font-size: 0.875rem;
 $btn-font-size-xs: 0.625rem;
 $btn-font-size-sm: 0.875rem;
 $btn-font-size-md: 1rem;
 $btn-font-size-lg: 1.25rem;
+
+// THEME-COLORS
+$text-sizes: (
+  10: $px-10,
+  12: $px-12,
+  14: $px-14,
+  16: $px-16,
+  18: $px-18,
+  20: $px-20,
+  22: $px-22,
+  24: $px-24,
+  26: $px-26,
+  28: $px-28,
+  30: $px-30,
+);
 
 @import "../../../node_modules/bootstrap/scss/bootstrap.scss";

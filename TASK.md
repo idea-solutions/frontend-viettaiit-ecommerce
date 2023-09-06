@@ -24,6 +24,14 @@
 
 
 ## TASK
-    - Fix một số lỗi :
-        1. Hover page[Home] HOT SALE product hover 
-        2. Fix logo
+    - Home 
+        - danh mục
+        - list iphone
+        -  list ipad
+        - section info
+        - list macbook
+        - list apple watch
+        - section congnghe
+        - section khachhang sudos
+        - section dangkynhantintuc
+    - Footer

@@ -15,6 +15,8 @@ import { IconFire } from "../../assets/icons";
 import LazyImage from "../../components/LazyImage";
 import { Button, Image } from "react-bootstrap";
 import HelmetCustom from "../../components/HelmetCustom";
+import DanhMucNoiBat from "./danhMucNoiBat";
+import CategoryProduct from "./categoryProduct";
 
 function Home() {
   return (
@@ -118,6 +120,13 @@ function Home() {
             </div>
           </div>
         </div>
+
+        {/* DANH MỤC NỔI BẬT */}
+        <DanhMucNoiBat></DanhMucNoiBat>
+
+        {/* Category Product */}
+        {/*  IPHONE*/}
+        <CategoryProduct title={"IPhone"} />
       </div>
     </>
   );

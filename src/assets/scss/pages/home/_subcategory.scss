@@ -1,0 +1,56 @@
+.categoryProduct {
+  .listSubcategory {
+    @include media-breakpoint-down(sm) {
+      position: relative;
+      overflow: hidden;
+    }
+    .items {
+      @include media-breakpoint-down(sm) {
+        width: 535px;
+      }
+      .item {
+        @include transition;
+        position: relative;
+        cursor: pointer;
+        &:hover {
+          color: $secondary;
+        }
+        &::after {
+          @include transition;
+          position: absolute;
+          content: "";
+          width: 0%;
+          height: 2px;
+          background-color: $primary;
+          bottom: -6px;
+          left: 0;
+        }
+        &:hover::after {
+          width: 100%;
+        }
+
+        &.active::after {
+          width: 100%;
+        }
+      }
+    }
+    .icon {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      box-shadow: $box-shadow-sm;
+      padding: 4px 6px;
+      background-color: $white;
+      border-radius: 5px;
+      z-index: 1;
+      &:first-child {
+        left: 0;
+        background-color: $white;
+      }
+      &:last-child {
+        right: 0;
+      }
+    }
+  }
+}

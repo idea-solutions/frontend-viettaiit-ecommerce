@@ -1,67 +1,67 @@
 .product-item {
   position: relative;
-  background-color: $white;
+
   border-radius: 10px;
   padding: 10px;
   overflow: hidden;
+  @include box-shadow;
+  margin-top: 16px;
   &__image {
     max-width: 280px;
     max-height: 280px;
-    position: relative;
-    .discount {
-      position: absolute;
-      z-index: 1;
-      top: 10px;
-      left: -10px;
-      background: $secondary;
-      color: $white;
-      font-size: $px-13;
-      padding: 2px 5px;
-      border-radius: 0px 20px 20px 0px;
-      font-weight: bold;
-      &::before {
-        position: absolute;
-        content: "";
-        left: -6px;
-        top: 0px;
-        background: linear-gradient(180deg, #14141403, #bf1e2e, 50%, #14141475);
-        border-top-left-radius: 10px;
-        height: 100%;
-        width: 6px;
-      }
+    @include transition;
+    &:hover {
+      transform: scale(1.1);
     }
-    .pay {
+  }
+  .discount {
+    position: absolute;
+    z-index: 1;
+    top: 10px;
+    left: -10px;
+    background: $secondary;
+    color: $white;
+    font-size: $px-13;
+    padding: 2px 5px;
+    border-radius: 0px 20px 20px 0px;
+    font-weight: bold;
+    &::before {
       position: absolute;
-      z-index: 1;
-      color: $white;
-      left: -10px;
-      top: 82%;
-      font-size: $px-12;
-      padding: 2px 5px;
-      background: linear-gradient(
-        180deg,
-        $secondary 0%,
-        #da4d2e 50%,
-        #ba2604 100%
-      );
-      border-radius: 0px 4px 4px 0px;
+      content: "";
+      left: 6px;
+      top: 0px;
+      background: linear-gradient(180deg, #14141403, #bf1e2e, 50%, #14141475);
+      border-top-left-radius: 10px;
+      height: 100%;
+      width: 6px;
     }
-    .warranty {
-      position: absolute;
-      top: 92%;
-      color: $white;
-      left: -10px;
-      background: linear-gradient(
-        180deg,
-        #e8684a 0%,
-        #da4d2e 50%,
-        #ba2604 100%
-      );
-      z-index: 1;
-      font-size: $px-12;
-      padding: 2px 5px;
-      border-radius: 0px 4px 4px 0px;
-    }
+  }
+  .pay {
+    position: absolute;
+    z-index: 1;
+    color: $white;
+    left: 0px;
+    top: 51%;
+    font-size: $px-12;
+    padding: 2px 5px;
+    background: linear-gradient(
+      180deg,
+      $secondary 0%,
+      #da4d2e 50%,
+      #ba2604 100%
+    );
+    border-radius: 0px 4px 4px 0px;
+  }
+  .warranty {
+    position: absolute;
+    color: $white;
+    left: 0px;
+    top: 42%;
+    background: linear-gradient(180deg, #e8684a 0%, #da4d2e 50%, #ba2604 100%);
+    z-index: 1;
+    font-size: $px-12;
+    padding: 2px 5px;
+    border-radius: 0px 4px 4px 0px;
   }
   img {
     max-width: 280px;
