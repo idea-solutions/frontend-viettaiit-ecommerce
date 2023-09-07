@@ -27,7 +27,7 @@
     - Home 
         - danh mục
         - list iphone
-        -  list ipad
+        - list ipad
         - section info
         - list macbook
         - list apple watch

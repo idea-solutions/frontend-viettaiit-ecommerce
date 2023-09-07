@@ -73,12 +73,13 @@ img {
 }
 
 .hover-bg-secondary {
-  @include hover-background-secondary;
+  @include hover-bg-secondary;
 }
 
 a[href] {
   text-decoration: none;
   color: $black;
+  color: inherit;
 }
 
 // Custom styles toast

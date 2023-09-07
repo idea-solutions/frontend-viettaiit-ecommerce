@@ -3,37 +3,40 @@
 
   border-radius: 10px;
   padding: 10px;
-  overflow: hidden;
+
   @include box-shadow;
   margin-top: 16px;
   &__image {
     max-width: 280px;
     max-height: 280px;
-    @include transition;
-    &:hover {
-      transform: scale(1.1);
+    overflow: hidden;
+    img {
+      @include transition;
+      &:hover {
+        transform: scale(1.1);
+      }
     }
   }
   .discount {
     position: absolute;
     z-index: 1;
     top: 10px;
-    left: -10px;
+    left: -7px;
     background: $secondary;
     color: $white;
     font-size: $px-13;
     padding: 2px 5px;
-    border-radius: 0px 20px 20px 0px;
+    border-radius: 10px 20px 20px 0px;
     font-weight: bold;
     &::before {
       position: absolute;
       content: "";
-      left: 6px;
-      top: 0px;
-      background: linear-gradient(180deg, #14141403, #bf1e2e, 50%, #14141475);
-      border-top-left-radius: 10px;
-      height: 100%;
-      width: 6px;
+      left: 0px;
+      top: 22px;
+      border-style: solid;
+      border-width: 0px 5px 5px 5px;
+      border-color: transparent transparent #99101d transparent;
+      transform: rotate(45deg);
     }
   }
   .pay {
@@ -50,7 +53,7 @@
       #da4d2e 50%,
       #ba2604 100%
     );
-    border-radius: 0px 4px 4px 0px;
+    border-radius: 10px 4px 4px 0px;
   }
   .warranty {
     position: absolute;
@@ -98,7 +101,7 @@
     border-radius: 10px;
     padding: 8px 10px;
     cursor: pointer;
-    @include hover-background-secondary;
+    @include hover-bg-secondary;
   }
   &__desc {
     padding: 4px 6px;

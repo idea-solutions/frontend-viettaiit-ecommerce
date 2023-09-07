@@ -1,6 +1,7 @@
 import {
   faArrowLeftLong,
   faArrowRightLong,
+  faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -8,20 +9,14 @@ import { Autoplay, Navigation, Scrollbar } from "swiper/modules";
 import { Fragment } from "react";
 import ProductItem from "../../components/ProductItem";
 import { useMediaQuery } from "react-responsive";
-import { Col, Row } from "react-bootstrap";
-function CategoryProduct({
-  products,
-  listSubCategory = [
-    "Iphone 14 series",
-    "Iphone 14 series",
-    "Iphone 14 series",
-    "Iphone 14 series",
-  ],
-  title,
-}) {
+import { Button, Col, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
+function CategoryProduct({ products, listSubCategory, title }) {
   const isTabletOrMobile = useMediaQuery({
     query: "(max-width: 1024px)",
   });
+
+  // handle render responsive
   const createListProduct = () => {
     if (isTabletOrMobile) {
       return (
@@ -29,8 +24,7 @@ function CategoryProduct({
           spaceBetween={25}
           slidesPerView={4}
           navigation={true}
-          scrollbar={true}
-          modules={[Navigation, Autoplay, Scrollbar]}
+          modules={[Navigation, Autoplay]}
           autoplay={{ delay: 3000 }}
           breakpoints={{
             100: {
@@ -52,28 +46,28 @@ function CategoryProduct({
           }}
         >
           <SwiperSlide>
-            <ProductItem product hiddenSold/>
+            <ProductItem product hiddenSold />
           </SwiperSlide>
           <SwiperSlide>
-            <ProductItem product hiddenSold/>
+            <ProductItem product hiddenSold />
           </SwiperSlide>
           <SwiperSlide>
-            <ProductItem product hiddenSold/>
+            <ProductItem product hiddenSold />
           </SwiperSlide>
           <SwiperSlide>
-            <ProductItem product hiddenSold/>
+            <ProductItem product hiddenSold />
           </SwiperSlide>
           <SwiperSlide>
-            <ProductItem product hiddenSold/>
+            <ProductItem product hiddenSold />
           </SwiperSlide>
           <SwiperSlide>
-            <ProductItem product hiddenSold/>
+            <ProductItem product hiddenSold />
           </SwiperSlide>
           <SwiperSlide>
-            <ProductItem product hiddenSold/>
+            <ProductItem product hiddenSold />
           </SwiperSlide>
           <SwiperSlide>
-            <ProductItem product hiddenSold/>
+            <ProductItem product hiddenSold />
           </SwiperSlide>
         </Swiper>
       );
@@ -108,8 +102,8 @@ function CategoryProduct({
     );
   };
   return (
-    <div className="container mt-5 categoryProduct">
-      <h3 className=" text-uppercase mt-5 mt-3 text-center">{title}</h3>
+    <div className="container mt-3 categoryProduct">
+      <h3 className=" text-uppercase mt-5 mt-3 text-center fw-bold">{title}</h3>
       <div className="listSubcategory">
         <FontAwesomeIcon
           icon={faArrowLeftLong}
@@ -118,7 +112,9 @@ function CategoryProduct({
         <div className="d-flex justify-content-center align-items-center items">
           {listSubCategory.map((subCategory, index) => (
             <Fragment key={index}>
-              <span className="item">{subCategory}</span>
+              <span className={`item ${index == 0 ? "active" : ""}`}>
+                {subCategory}
+              </span>
               {index !== listSubCategory.length - 1 && (
                 <small className="mx-2">/</small>
               )}
@@ -131,6 +127,13 @@ function CategoryProduct({
         />
       </div>
       {createListProduct()}
+      <div className="text-center">
+        <Link className="btn btn-outline-primary my-4 btn-md" to="">
+          <span>Xem tất cả</span>
+
+          <FontAwesomeIcon icon={faChevronRight} shake className="ms-2" />
+        </Link>
+      </div>
     </div>
   );
 }
