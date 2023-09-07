@@ -9,8 +9,10 @@ import {
 import { IconFire } from "../../assets/icons";
 import LazyImage from "../LazyImage";
 import { useState } from "react";
+
 function ProductItem({ product, hiddenSold }) {
   const [hovered, setHovered] = useState(false);
+
   return (
     <motion.div
       className="product-item"
@@ -18,7 +20,12 @@ function ProductItem({ product, hiddenSold }) {
       onHoverEnd={() => setHovered(false)}
     >
       <div className="product-item__image">
-        <LazyImage src="https://bizweb.dktcdn.net/thumb/large/100/480/632/products/230225032836-12red-9e866195-9543-4592-af92-c3986c0e30d3.jpg?v=1681684380000" />
+        <LazyImage
+          src={
+            "https://bizweb.dktcdn.net/thumb/large/100/480/632/products/230225032836-12red-9e866195-9543-4592-af92-c3986c0e30d3.jpg?v=1681684380000"
+          }
+          alt=""
+        />
       </div>
       <span className="discount">Giảm 19%</span>
       <span className="pay">Trả góp 0%</span>
