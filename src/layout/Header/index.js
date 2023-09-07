@@ -35,6 +35,7 @@ import { clientRoutes } from "../../routes";
 // REDUX SLICE
 import { setLoadingClose, setLoadingShow } from "../../features/loadingSlice";
 import { logoutUser } from "../../features/user/userSlice";
+import LazyImage from "../../components/LazyImage";
 const NavbarDownDeskTop = lazy(() =>
   import("../../components/NavBarDownDeskTop")
 );
@@ -178,7 +179,7 @@ function Header() {
                     <div className="cart__display">
                       <div className="cart__item">
                         <div className="left">
-                          <Image
+                          <LazyImage
                             src="https://i.imgur.com/UYe7g8v.jpg"
                             rounded
                           />
@@ -207,7 +208,7 @@ function Header() {
                       </div>
                       <div className="cart__item">
                         <div className="left">
-                          <Image
+                          <LazyImage
                             src="https://i.imgur.com/UYe7g8v.jpg"
                             rounded
                           />

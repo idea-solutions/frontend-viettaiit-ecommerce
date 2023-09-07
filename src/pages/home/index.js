@@ -36,7 +36,7 @@ function Home() {
         >
           {sliders1.map((slider, idx) => (
             <SwiperSlide key={idx}>
-              <Image src={slider} />
+              <LazyImage src={slider} />
             </SwiperSlide>
           ))}
         </Swiper>
@@ -186,7 +186,7 @@ function Home() {
                     repeat: Infinity,
                   }}
                 >
-                  <Image src={bannerNewImage} alt="" />
+                  <LazyImage src={bannerNewImage} alt="" />
                 </motion.div>
               </Col>
             </Row>
@@ -222,7 +222,7 @@ function Home() {
               <div className="item">
                 {" "}
                 <div className="image">
-                  <Image
+                  <LazyImage
                     src={require("../../assets/images/tintuc/tintuc01.webp")}
                     alt=""
                   />
@@ -245,7 +245,7 @@ function Home() {
               <div className="item">
                 {" "}
                 <div className="image">
-                  <Image
+                  <LazyImage
                     src={require("../../assets/images/tintuc/tintuc02.webp")}
                     alt=""
                   />
@@ -268,7 +268,7 @@ function Home() {
               <div className="item">
                 {" "}
                 <div className="image">
-                  <Image
+                  <LazyImage
                     src={require("../../assets/images/tintuc/tintuc03.webp")}
                     alt=""
                   />
@@ -291,7 +291,7 @@ function Home() {
               <div className="item">
                 {" "}
                 <div className="image">
-                  <Image
+                  <LazyImage
                     src={require("../../assets/images/tintuc/tintuc04.webp")}
                     alt=""
                   />
@@ -324,7 +324,7 @@ function Home() {
             <div className="item">
               {" "}
               <div className="image">
-                <Image
+                <LazyImage
                   src={require("../../assets/images/tintuc/tintuc01.webp")}
                   alt=""
                 />
@@ -335,7 +335,7 @@ function Home() {
             <div className="item">
               {" "}
               <div className="image">
-                <Image
+                <LazyImage
                   src={require("../../assets/images/tintuc/tintuc02.webp")}
                   alt=""
                 />
@@ -346,7 +346,7 @@ function Home() {
             <div className="item">
               {" "}
               <div className="image">
-                <Image
+                <LazyImage
                   src={require("../../assets/images/tintuc/tintuc03.webp")}
                   alt=""
                 />
@@ -357,7 +357,7 @@ function Home() {
             <div className="item">
               {" "}
               <div className="image">
-                <Image
+                <LazyImage
                   src={require("../../assets/images/tintuc/tintuc04.webp")}
                   alt=""
                 />

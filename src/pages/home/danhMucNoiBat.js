@@ -1,6 +1,7 @@
-import { Col, Image} from "react-bootstrap";
+import { Col } from "react-bootstrap";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Scrollbar } from "swiper/modules";
+import LazyImage from "../../components/LazyImage";
 
 function DanhMucNoiBat() {
   return (
@@ -34,7 +35,7 @@ function DanhMucNoiBat() {
         <SwiperSlide>
           <Col className="item">
             <div className="border-1 d-flex flex-column gap-1 align-items-center">
-              <Image
+              <LazyImage
                 src="https://bizweb.dktcdn.net/100/480/632/themes/900313/assets/cate_1.png?1691030040351    "
                 alt=""
               />
@@ -45,7 +46,7 @@ function DanhMucNoiBat() {
         <SwiperSlide>
           <Col className="item">
             <div className="border-1 d-flex flex-column gap-1 align-items-center">
-              <Image
+              <LazyImage
                 src="https://bizweb.dktcdn.net/100/480/632/themes/900313/assets/cate_1.png?1691030040351    "
                 alt=""
               />
@@ -56,7 +57,7 @@ function DanhMucNoiBat() {
         <SwiperSlide>
           <Col className="item">
             <div className="border-1 d-flex flex-column gap-1 align-items-center">
-              <Image
+              <LazyImage
                 src="https://bizweb.dktcdn.net/100/480/632/themes/900313/assets/cate_1.png?1691030040351    "
                 alt=""
               />
@@ -67,7 +68,7 @@ function DanhMucNoiBat() {
         <SwiperSlide>
           <Col className="item">
             <div className="border-1 d-flex flex-column gap-1 align-items-center">
-              <Image
+              <LazyImage
                 src="https://bizweb.dktcdn.net/100/480/632/themes/900313/assets/cate_1.png?1691030040351    "
                 alt=""
               />
@@ -78,7 +79,7 @@ function DanhMucNoiBat() {
         <SwiperSlide>
           <Col className="item">
             <div className="border-1 d-flex flex-column gap-1 align-items-center">
-              <Image
+              <LazyImage
                 src="https://bizweb.dktcdn.net/100/480/632/themes/900313/assets/cate_1.png?1691030040351    "
                 alt=""
               />
@@ -89,7 +90,7 @@ function DanhMucNoiBat() {
         <SwiperSlide>
           <Col className="item">
             <div className="border-1 d-flex flex-column gap-1 align-items-center">
-              <Image
+              <LazyImage
                 src="https://bizweb.dktcdn.net/100/480/632/themes/900313/assets/cate_1.png?1691030040351    "
                 alt=""
               />
