@@ -25,13 +25,13 @@
 
 ## TASK
     - Home 
-        - danh mục
-        - list iphone
-        - list ipad
-        - section info
-        - list macbook
-        - list apple watch
-        - section congnghe
-        - section khachhang sudos
-        - section dangkynhantintuc
+        - danh mục => Ok
+        - list iphone => Ok
+        - list ipad => Ok
+        - section info => Ok
+        - list macbook => Ok
+        - list apple watch => Ok
+        - section congnghe => Ok
+        - section khachhang sudos => Ok
+        - section dangkynhantintuc  => Ok
     - Footer
