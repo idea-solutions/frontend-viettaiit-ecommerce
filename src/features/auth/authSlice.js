@@ -7,6 +7,7 @@ import {
   logoutAuthThunk,
   resetPasswordAuthThunk,
   forgotPasswordAuthThunk,
+  getUserThunk,
 } from "./authThunk";
 
 import {
@@ -56,6 +57,10 @@ export const resetPasswordAuth = createAsyncThunk(
   }
 );
 
+export const getUser = createAsyncThunk("user/getUser", async (_, thunkAPI) => {
+  return getUserThunk("/auth/login/success", thunkAPI);
+});
+
 const userSlice = createSlice({
   name: "user",
   initialState,
@@ -88,6 +93,23 @@ const userSlice = createSlice({
       state.isLoading = false;
     });
     builder.addCase(loginAuth.rejected, (state, action) => {
+      const { message } = action.payload;
+      toastError(message);
+      state.isLoading = false;
+      state.isError = true;
+    });
+    // Login google
+    builder.addCase(getUser.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getUser.fulfilled, (state, action) => {
+      const { data, message } = action.payload;
+      state.user = data;
+      toast(message);
+      attachAuthToLocalStorage(data);
+      state.isLoading = false;
+    });
+    builder.addCase(getUser.rejected, (state, action) => {
       const { message } = action.payload;
       toastError(message);
       state.isLoading = false;

@@ -1,4 +1,4 @@
-import {  motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -8,7 +8,11 @@ import { clientRoutes } from "../../routes";
 import { checkEmail, validateFormLogin } from "../../utils/validate";
 
 // REDUX SLICE
-import { forgotPasswordAuth, loginAuth } from "../../features/auth/authSlice";
+import {
+  forgotPasswordAuth,
+  loginAuth,
+  loginGoogle,
+} from "../../features/auth/authSlice";
 
 import { setLoadingClose, setLoadingShow } from "../../features/loadingSlice";
 import HelmetCustom from "../../components/HelmetCustom";
@@ -131,14 +135,34 @@ function Login() {
                 </p>
               </div>
               <div className="mb-3 d-flex justify-content-center gap-2">
-                <button type="submit" className="btn btn-facebook" >
+                <button
+                  className="btn btn-facebook"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    window.open(
+                      "http://localhost:8080/api/v1/auth/facebook",
+                      "_self"
+                    );
+                  }}
+                >
                   <span></span>
                   Facebook
                 </button>
-                <button type="submit" className="btn btn-google">
+                <button
+                  type="submit"
+                  className="btn btn-google"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    window.open(
+                      "http://localhost:8080/api/v1/auth/google",
+                      "_self"
+                    );
+                  }}
+                >
                   <span></span>
                   Google
                 </button>
+              
               </div>
             </div>
           </Form>

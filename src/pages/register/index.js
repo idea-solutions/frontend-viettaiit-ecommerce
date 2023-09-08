@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { clientRoutes } from "../../routes";
 import { validateFormRegister } from "../../utils/validate";
 
-import { registerAuth } from "../../features/auth/authSlice";
+import { getUser, registerAuth } from "../../features/auth/authSlice";
 
 import { setLoadingClose, setLoadingShow } from "../../features/loadingSlice";
 import HelmetCustom from "../../components/HelmetCustom";
@@ -109,12 +109,31 @@ function Register() {
                 </p>
               </div>
               <div className="mb-3 d-flex justify-content-center gap-2">
-                <button type="submit" className="btn btn-facebook">
-                  <span></span>
+                <button
+                  type="submit"
+                  className="btn btn-facebook"
+                  onClick={ (e) => {
+                    e.preventDefault();
+                    window.open(
+                      "http://localhost:8080/api/v1/auth/facebook",
+                      "_self"
+                    );
+                  }}
+                >
                   Facebook
                 </button>
-                <button type="submit" className="btn btn-google">
-                  <span></span>
+                <button
+                  type="submit"
+                  className="btn btn-google"
+                  onClick={(e) => {
+                    e.preventDefault();
+                     window.open(
+                      "http://localhost:8080/api/v1/auth/google",
+                      "_self"
+                    );
+                 
+                  }}
+                >
                   Google
                 </button>
               </div>
