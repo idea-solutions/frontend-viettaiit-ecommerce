@@ -2,17 +2,14 @@ import { Route, Routes } from "react-router-dom";
 import { clientPages } from "./routes";
 import Layout from "./layout";
 import NotFound from "./pages/notFound";
-import { Suspense, useEffect } from "react";
+import { Suspense } from "react";
 import { ToastContainer } from "react-toastify";
 import { AnimatePresence } from "framer-motion";
 import "react-toastify/dist/ReactToastify.css";
-import { getUser } from "./features/auth/authSlice";
-import { useDispatch } from "react-redux";
+
 function App() {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getUser());
-  }, []);
+ 
+
   return (
     <div className="App">
       <Suspense fallback={<div>Waiting...</div>}>

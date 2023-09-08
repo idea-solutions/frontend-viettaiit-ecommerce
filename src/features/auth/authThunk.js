@@ -48,7 +48,7 @@ export const resetPasswordAuthThunk = async (url, inputs, thunkAPI) => {
     return thunkAPI.rejectWithValue(error.response.data);
   }
 };
-export const getUserThunk = async (url, thunkAPI) => {
+export const getUserSuccessThunk = async (url, thunkAPI) => {
   try {
     const { data } = await httpRequest.get(url);
     return data;

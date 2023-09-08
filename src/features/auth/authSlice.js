@@ -7,16 +7,13 @@ import {
   logoutAuthThunk,
   resetPasswordAuthThunk,
   forgotPasswordAuthThunk,
-  getUserThunk,
+  getUserSuccessThunk,
 } from "./authThunk";
 
-import {
-  attachAuthToLocalStorage,
-  getAuthFromLocalStorage,
-} from "../../utils/localStorage";
+
 import { toastError, toastSuccess } from "../../utils/toast";
 const initialState = {
-  user: getAuthFromLocalStorage(),
+  user: null,
   isLoading: false,
   isError: false,
 };
@@ -57,8 +54,8 @@ export const resetPasswordAuth = createAsyncThunk(
   }
 );
 
-export const getUser = createAsyncThunk("user/getUser", async (_, thunkAPI) => {
-  return getUserThunk("/auth/login/success", thunkAPI);
+export const getUserSuccess = createAsyncThunk("user/getUserSuccess", async (_, thunkAPI) => {
+  return getUserSuccessThunk("/auth/login/success", thunkAPI);
 });
 
 const userSlice = createSlice({
@@ -89,7 +86,7 @@ const userSlice = createSlice({
     builder.addCase(loginAuth.fulfilled, (state, action) => {
       const { data } = action.payload;
       state.user = data;
-      attachAuthToLocalStorage(data);
+      
       state.isLoading = false;
     });
     builder.addCase(loginAuth.rejected, (state, action) => {
@@ -99,17 +96,15 @@ const userSlice = createSlice({
       state.isError = true;
     });
     // Login google
-    builder.addCase(getUser.pending, (state) => {
+    builder.addCase(getUserSuccess.pending, (state) => {
       state.isLoading = true;
     });
-    builder.addCase(getUser.fulfilled, (state, action) => {
-      const { data, message } = action.payload;
+    builder.addCase(getUserSuccess.fulfilled, (state, action) => {
+      const { data} = action.payload;
       state.user = data;
-      toast(message);
-      attachAuthToLocalStorage(data);
       state.isLoading = false;
     });
-    builder.addCase(getUser.rejected, (state, action) => {
+    builder.addCase(getUserSuccess.rejected, (state, action) => {
       const { message } = action.payload;
       toastError(message);
       state.isLoading = false;
@@ -123,7 +118,6 @@ const userSlice = createSlice({
     builder.addCase(logoutAuth.fulfilled, (state, action) => {
       const { message } = action.payload;
       state.user = null;
-      attachAuthToLocalStorage(null);
       toastSuccess(message);
       state.isLoading = false;
     });
@@ -140,7 +134,6 @@ const userSlice = createSlice({
     builder.addCase(verifyEmailAuth.fulfilled, (state, action) => {
       const { message } = action.payload;
       toastSuccess(message);
-
       state.isLoading = false;
     });
     builder.addCase(verifyEmailAuth.rejected, (state, action) => {
@@ -157,7 +150,6 @@ const userSlice = createSlice({
     builder.addCase(forgotPasswordAuth.fulfilled, (state, action) => {
       const { message } = action.payload;
       toastSuccess(message);
-
       state.isLoading = false;
     });
     builder.addCase(forgotPasswordAuth.rejected, (state, action) => {
@@ -173,7 +165,6 @@ const userSlice = createSlice({
     builder.addCase(resetPasswordAuth.fulfilled, (state, action) => {
       const { message } = action.payload;
       toastSuccess(message);
-
       state.isLoading = false;
     });
     builder.addCase(resetPasswordAuth.rejected, (state, action) => {

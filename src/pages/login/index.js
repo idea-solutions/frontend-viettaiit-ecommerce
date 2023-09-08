@@ -11,7 +11,6 @@ import { checkEmail, validateFormLogin } from "../../utils/validate";
 import {
   forgotPasswordAuth,
   loginAuth,
-  loginGoogle,
 } from "../../features/auth/authSlice";
 
 import { setLoadingClose, setLoadingShow } from "../../features/loadingSlice";
@@ -162,7 +161,6 @@ function Login() {
                   <span></span>
                   Google
                 </button>
-              
               </div>
             </div>
           </Form>

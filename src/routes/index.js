@@ -1,4 +1,4 @@
-
+import LoginSuccess from "../pages/login/loginSuccess";
 import { clientRoutes } from "./routes";
 import { lazy } from "react";
 
@@ -20,6 +20,7 @@ const clientPages = [
   { com: <VerifyEmail />, path: clientRoutes.verifyEmail },
   { com: <ResetPassword />, path: clientRoutes.resetPassword },
   { com: <Login />, path: clientRoutes.login },
+  { com: <LoginSuccess />, path: "/login/success" },
   { com: <Register />, path: clientRoutes.register },
   { com: <Category />, path: clientRoutes.homeCategory + "/:name" },
   { com: <NotFound />, path: "*" },

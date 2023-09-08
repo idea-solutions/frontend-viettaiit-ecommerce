@@ -18,12 +18,14 @@ import ListProductSlide from "../../components/ListProductSlide";
 import { IconFire } from "../../assets/icons";
 
 import LazyImage from "../../components/LazyImage";
-import { Button, Col, Form, Image, Row } from "react-bootstrap";
+import { Button, Col, Form,  Row } from "react-bootstrap";
 import HelmetCustom from "../../components/HelmetCustom";
 import DanhMucNoiBat from "./danhMucNoiBat";
 import CategoryProduct from "./categoryProduct";
 
+
 function Home() {
+  
   return (
     <>
       <HelmetCustom title="Trang chủ" />

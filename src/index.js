@@ -10,7 +10,6 @@ import { PersistGate } from "redux-persist/integration/react";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
     <Provider store={store}>
       <HelmetProvider>
         <BrowserRouter>
@@ -20,7 +19,6 @@ root.render(
         </BrowserRouter>
       </HelmetProvider>
     </Provider>
-  </React.StrictMode>
 );
 
 //
