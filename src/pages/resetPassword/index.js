@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { resetPasswordUser } from "../../features/user/userSlice";
+import { resetPasswordAuth } from "../../features/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoadingClose, setLoadingShow } from "../../features/loadingSlice";
 import { clientRoutes } from "../../routes";
@@ -43,7 +43,7 @@ function ResetPassword() {
     }
     dispatch(setLoadingShow());
     const { payload } = await dispatch(
-      resetPasswordUser({
+      resetPasswordAuth({
         passwordToken,
         email,
         password: inputs.password1,

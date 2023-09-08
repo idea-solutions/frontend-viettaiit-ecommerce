@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { clientRoutes } from "../../routes";
 import { validateFormRegister } from "../../utils/validate";
 
-import { registerUser } from "../../features/user/userSlice";
+import { registerAuth } from "../../features/auth/authSlice";
 
 import { setLoadingClose, setLoadingShow } from "../../features/loadingSlice";
 import HelmetCustom from "../../components/HelmetCustom";
@@ -42,7 +42,7 @@ function Register() {
       return;
     }
     dispatch(setLoadingShow());
-    const { payload } = await dispatch(registerUser(inputs));
+    const { payload } = await dispatch(registerAuth(inputs));
     dispatch(setLoadingClose());
     if (payload.status === 201) {
       navigate(clientRoutes.login);

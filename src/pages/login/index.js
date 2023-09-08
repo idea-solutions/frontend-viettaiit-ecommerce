@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from "framer-motion";
+import {  motion } from "framer-motion";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -8,7 +8,7 @@ import { clientRoutes } from "../../routes";
 import { checkEmail, validateFormLogin } from "../../utils/validate";
 
 // REDUX SLICE
-import { forgotPasswordUser, loginUser } from "../../features/user/userSlice";
+import { forgotPasswordAuth, loginAuth } from "../../features/auth/authSlice";
 
 import { setLoadingClose, setLoadingShow } from "../../features/loadingSlice";
 import HelmetCustom from "../../components/HelmetCustom";
@@ -36,7 +36,7 @@ function Login() {
       return;
     }
     dispatch(setLoadingShow());
-    const { payload } = await dispatch(loginUser(inputs));
+    const { payload } = await dispatch(loginAuth(inputs));
     dispatch(setLoadingClose());
     if (payload.status === 200) {
       navigate(clientRoutes.home);
@@ -50,7 +50,7 @@ function Login() {
       return;
     }
     dispatch(setLoadingShow());
-    await dispatch(forgotPasswordUser({ email: emailForgot }));
+    await dispatch(forgotPasswordAuth({ email: emailForgot }));
     dispatch(setLoadingClose());
   };
   return (
@@ -131,7 +131,7 @@ function Login() {
                 </p>
               </div>
               <div className="mb-3 d-flex justify-content-center gap-2">
-                <button type="submit" className="btn btn-facebook">
+                <button type="submit" className="btn btn-facebook" >
                   <span></span>
                   Facebook
                 </button>

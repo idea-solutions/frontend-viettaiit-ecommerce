@@ -34,7 +34,7 @@ import { clientRoutes } from "../../routes";
 
 // REDUX SLICE
 import { setLoadingClose, setLoadingShow } from "../../features/loadingSlice";
-import { logoutUser } from "../../features/user/userSlice";
+import { logoutAuth } from "../../features/auth/authSlice";
 import LazyImage from "../../components/LazyImage";
 const NavbarDownDeskTop = lazy(() =>
   import("../../components/NavBarDownDeskTop")
@@ -107,7 +107,7 @@ function Header() {
                           className="account__item"
                           onClick={async () => {
                             dispatch(setLoadingShow());
-                            await dispatch(logoutUser());
+                            await dispatch(logoutAuth());
                             dispatch(setLoadingClose());
                           }}
                         >

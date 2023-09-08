@@ -1,5 +1,5 @@
 import navBarSlice from "./navBarSlice";
-import userSlice from "./user/userSlice";
+import userSlice from "./auth/authSlice";
 import loadingSlice from "./loadingSlice";
 import { combineReducers } from "redux";
 const rootReducer = combineReducers({

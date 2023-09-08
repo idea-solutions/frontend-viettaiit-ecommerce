@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { verifyEmailUser } from "../../features/user/userSlice";
+import { verifyEmailAuth } from "../../features/auth/authSlice";
 import { useDispatch } from "react-redux";
 import { setLoadingClose, setLoadingShow } from "../../features/loadingSlice";
 import { clientRoutes } from "../../routes";
@@ -17,7 +17,7 @@ function VerifyEmail() {
   useEffect(() => {
     const verifyEmailAsync = async () => {
       dispatch(setLoadingShow());
-      await dispatch(verifyEmailUser({ verificationToken, email }));
+      await dispatch(verifyEmailAuth({ verificationToken, email }));
       dispatch(setLoadingClose());
       navigate(clientRoutes.login);
     };

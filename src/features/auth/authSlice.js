@@ -1,58 +1,58 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import {
-  registerUserThunk,
-  loginUserThunk,
-  verifyEmailUserThunk,
-  logoutUserThunk,
-  resetPasswordUserThunk,
-  forgotPasswordUserThunk,
-} from "./userThunk";
+  registerAuthThunk,
+  loginAuthThunk,
+  verifyEmailAuthThunk,
+  logoutAuthThunk,
+  resetPasswordAuthThunk,
+  forgotPasswordAuthThunk,
+} from "./authThunk";
 
 import {
-  attachUserToLocalStorage,
-  getUserFromLocalStorage,
+  attachAuthToLocalStorage,
+  getAuthFromLocalStorage,
 } from "../../utils/localStorage";
 import { toastError, toastSuccess } from "../../utils/toast";
 const initialState = {
-  user: getUserFromLocalStorage(),
+  user: getAuthFromLocalStorage(),
   isLoading: false,
   isError: false,
 };
-export const registerUser = createAsyncThunk(
-  "user/registerUser",
+export const registerAuth = createAsyncThunk(
+  "user/registerAuth",
   async (inputs, thunkAPI) => {
-    return registerUserThunk("/auth/register", inputs, thunkAPI);
+    return registerAuthThunk("/auth/register", inputs, thunkAPI);
   }
 );
-export const loginUser = createAsyncThunk(
-  "user/loginUser",
+export const loginAuth = createAsyncThunk(
+  "user/loginAuth",
   async (inputs, thunkAPI) => {
-    return loginUserThunk("/auth/login", inputs, thunkAPI);
+    return loginAuthThunk("/auth/login", inputs, thunkAPI);
   }
 );
-export const logoutUser = createAsyncThunk(
-  "user/logoutUser",
+export const logoutAuth = createAsyncThunk(
+  "user/logoutAuth",
   async (inputs, thunkAPI) => {
-    return logoutUserThunk("/auth/logout", thunkAPI);
+    return logoutAuthThunk("/auth/logout", thunkAPI);
   }
 );
-export const verifyEmailUser = createAsyncThunk(
-  "user/verifyEmailUser",
+export const verifyEmailAuth = createAsyncThunk(
+  "user/verifyEmailAuth",
   async (inputs, thunkAPI) => {
-    return verifyEmailUserThunk("/auth/verify-email", inputs, thunkAPI);
+    return verifyEmailAuthThunk("/auth/verify-email", inputs, thunkAPI);
   }
 );
-export const forgotPasswordUser = createAsyncThunk(
-  "user/forgotPasswordUser",
+export const forgotPasswordAuth = createAsyncThunk(
+  "user/forgotPasswordAuth",
   async (inputs, thunkAPI) => {
-    return forgotPasswordUserThunk("/auth/forgot-password", inputs, thunkAPI);
+    return forgotPasswordAuthThunk("/auth/forgot-password", inputs, thunkAPI);
   }
 );
-export const resetPasswordUser = createAsyncThunk(
-  "user/resetPasswordUser",
+export const resetPasswordAuth = createAsyncThunk(
+  "user/resetPasswordAuth",
   async (inputs, thunkAPI) => {
-    return resetPasswordUserThunk("/auth/reset-password", inputs, thunkAPI);
+    return resetPasswordAuthThunk("/auth/reset-password", inputs, thunkAPI);
   }
 );
 
@@ -62,15 +62,15 @@ const userSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     // Register
-    builder.addCase(registerUser.pending, (state) => {
+    builder.addCase(registerAuth.pending, (state) => {
       state.isLoading = true;
     });
-    builder.addCase(registerUser.fulfilled, (state, action) => {
+    builder.addCase(registerAuth.fulfilled, (state, action) => {
       const { message } = action.payload;
       toast(message);
       state.isLoading = false;
     });
-    builder.addCase(registerUser.rejected, (state, action) => {
+    builder.addCase(registerAuth.rejected, (state, action) => {
       const { message } = action.payload;
       toastError(message);
       state.isLoading = false;
@@ -78,16 +78,16 @@ const userSlice = createSlice({
     });
 
     // Login
-    builder.addCase(loginUser.pending, (state) => {
+    builder.addCase(loginAuth.pending, (state) => {
       state.isLoading = true;
     });
-    builder.addCase(loginUser.fulfilled, (state, action) => {
+    builder.addCase(loginAuth.fulfilled, (state, action) => {
       const { data } = action.payload;
       state.user = data;
-      attachUserToLocalStorage(data);
+      attachAuthToLocalStorage(data);
       state.isLoading = false;
     });
-    builder.addCase(loginUser.rejected, (state, action) => {
+    builder.addCase(loginAuth.rejected, (state, action) => {
       const { message } = action.payload;
       toastError(message);
       state.isLoading = false;
@@ -95,33 +95,33 @@ const userSlice = createSlice({
     });
 
     // logout
-    builder.addCase(logoutUser.pending, (state) => {
+    builder.addCase(logoutAuth.pending, (state) => {
       state.isLoading = true;
     });
-    builder.addCase(logoutUser.fulfilled, (state, action) => {
+    builder.addCase(logoutAuth.fulfilled, (state, action) => {
       const { message } = action.payload;
       state.user = null;
-      attachUserToLocalStorage(null);
+      attachAuthToLocalStorage(null);
       toastSuccess(message);
       state.isLoading = false;
     });
-    builder.addCase(logoutUser.rejected, (state, action) => {
+    builder.addCase(logoutAuth.rejected, (state, action) => {
       const { message } = action.payload;
       toastError(message);
       state.isLoading = false;
       state.isError = true;
     });
     // verify email
-    builder.addCase(verifyEmailUser.pending, (state) => {
+    builder.addCase(verifyEmailAuth.pending, (state) => {
       state.isLoading = true;
     });
-    builder.addCase(verifyEmailUser.fulfilled, (state, action) => {
+    builder.addCase(verifyEmailAuth.fulfilled, (state, action) => {
       const { message } = action.payload;
       toastSuccess(message);
 
       state.isLoading = false;
     });
-    builder.addCase(verifyEmailUser.rejected, (state, action) => {
+    builder.addCase(verifyEmailAuth.rejected, (state, action) => {
       const { message } = action.payload;
       toastError(message);
       state.isLoading = false;
@@ -129,32 +129,32 @@ const userSlice = createSlice({
     });
 
     // forgot password
-    builder.addCase(forgotPasswordUser.pending, (state) => {
+    builder.addCase(forgotPasswordAuth.pending, (state) => {
       state.isLoading = true;
     });
-    builder.addCase(forgotPasswordUser.fulfilled, (state, action) => {
+    builder.addCase(forgotPasswordAuth.fulfilled, (state, action) => {
       const { message } = action.payload;
       toastSuccess(message);
 
       state.isLoading = false;
     });
-    builder.addCase(forgotPasswordUser.rejected, (state, action) => {
+    builder.addCase(forgotPasswordAuth.rejected, (state, action) => {
       const { message } = action.payload;
       toastError(message);
       state.isLoading = false;
       state.isError = true;
     });
     // reset password
-    builder.addCase(resetPasswordUser.pending, (state) => {
+    builder.addCase(resetPasswordAuth.pending, (state) => {
       state.isLoading = true;
     });
-    builder.addCase(resetPasswordUser.fulfilled, (state, action) => {
+    builder.addCase(resetPasswordAuth.fulfilled, (state, action) => {
       const { message } = action.payload;
       toastSuccess(message);
 
       state.isLoading = false;
     });
-    builder.addCase(resetPasswordUser.rejected, (state, action) => {
+    builder.addCase(resetPasswordAuth.rejected, (state, action) => {
       const { message } = action.payload;
       console.log(action.payload);
       toastError(message);

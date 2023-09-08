@@ -1,6 +1,6 @@
 import httpRequest from "../../services/httpRequest";
 
-export const registerUserThunk = async (url, inputs, thunkAPI) => {
+export const registerAuthThunk = async (url, inputs, thunkAPI) => {
   try {
     const { data } = await httpRequest.post(url, inputs);
     return data;
@@ -8,7 +8,7 @@ export const registerUserThunk = async (url, inputs, thunkAPI) => {
     return thunkAPI.rejectWithValue(error.response.data);
   }
 };
-export const loginUserThunk = async (url, inputs, thunkAPI) => {
+export const loginAuthThunk = async (url, inputs, thunkAPI) => {
   try {
     const { data } = await httpRequest.post(url, inputs);
     return data;
@@ -16,7 +16,7 @@ export const loginUserThunk = async (url, inputs, thunkAPI) => {
     return thunkAPI.rejectWithValue(error.response.data);
   }
 };
-export const logoutUserThunk = async (url, thunkAPI) => {
+export const logoutAuthThunk = async (url, thunkAPI) => {
   try {
     const { data } = await httpRequest.post(url);
     return data;
@@ -24,7 +24,7 @@ export const logoutUserThunk = async (url, thunkAPI) => {
     return thunkAPI.rejectWithValue(error.response.data);
   }
 };
-export const verifyEmailUserThunk = async (url, inputs, thunkAPI) => {
+export const verifyEmailAuthThunk = async (url, inputs, thunkAPI) => {
   try {
     const { data } = await httpRequest.post(url, inputs);
     return data;
@@ -32,7 +32,7 @@ export const verifyEmailUserThunk = async (url, inputs, thunkAPI) => {
     return thunkAPI.rejectWithValue(error.response.data);
   }
 };
-export const forgotPasswordUserThunk = async (url, inputs, thunkAPI) => {
+export const forgotPasswordAuthThunk = async (url, inputs, thunkAPI) => {
   try {
     const { data } = await httpRequest.post(url, inputs);
     return data;
@@ -40,7 +40,7 @@ export const forgotPasswordUserThunk = async (url, inputs, thunkAPI) => {
     return thunkAPI.rejectWithValue(error.response.data);
   }
 };
-export const resetPasswordUserThunk = async (url, inputs, thunkAPI) => {
+export const resetPasswordAuthThunk = async (url, inputs, thunkAPI) => {
   try {
     const { data } = await httpRequest.post(url, inputs);
     return data;
