@@ -43,7 +43,7 @@ const HeaderBottomItem = lazy(() => import("./HeaderBottomItem"));
 function Header() {
   const [isHoveredAccount, setIsHoveredAccount] = useState(false);
   const [isHoveredCart, setIsHoveredCart] = useState(false);
-  const { user } = useSelector((store) => store.user);
+  const { user } = useSelector((store) => store.auth);
   const { isOpen } = useSelector((store) => store.navBar);
   const dispatch = useDispatch();
   return (

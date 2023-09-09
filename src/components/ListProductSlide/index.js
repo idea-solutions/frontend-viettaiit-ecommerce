@@ -32,21 +32,11 @@ function ListProductSlide({ products }) {
       }}
       className="list-product-slide"
     >
-      <SwiperSlide>
-        <ProductItem product />
-      </SwiperSlide>
-      <SwiperSlide>
-        <ProductItem product />
-      </SwiperSlide>
-      <SwiperSlide>
-        <ProductItem product />
-      </SwiperSlide>
-      <SwiperSlide>
-        <ProductItem product />
-      </SwiperSlide>
-      <SwiperSlide>
-        <ProductItem product />
-      </SwiperSlide>
+      {products.map((product, index) => (
+        <SwiperSlide key={index}>
+          <ProductItem product={product} />
+        </SwiperSlide>
+      ))}
     </Swiper>
   );
 }

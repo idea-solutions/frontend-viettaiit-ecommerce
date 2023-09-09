@@ -2,7 +2,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faAngleRight,
   faChevronRight,
   faClock,
 } from "@fortawesome/free-solid-svg-icons";
@@ -14,21 +13,24 @@ import bannerNewImage from "../../assets/images/section/section_banner_new_produ
 // MY IMPORTS
 import { sliders1, sliders2 } from "../../assets/sliders";
 import promoBoxes from "../../assets/promoBox";
-import ListProductSlide from "../../components/ListProductSlide";
-import { IconFire } from "../../assets/icons";
 
 import LazyImage from "../../components/LazyImage";
-import { Button, Col, Form,  Row } from "react-bootstrap";
+import { Button, Col, Form, Row } from "react-bootstrap";
 import HelmetCustom from "../../components/HelmetCustom";
 import DanhMucNoiBat from "./danhMucNoiBat";
 import CategoryProduct from "./categoryProduct";
+import {  useState } from "react";
 
+import HotSales from "./hotSales";
 
 function Home() {
-  
+  const [testRerender, setTestRerender] = useState(false);
   return (
     <>
       <HelmetCustom title="Trang chủ" />
+      <button onClick={() => setTestRerender(!testRerender)}>
+        Test re-render
+      </button>
       <div className="home">
         <Swiper
           navigation={true}
@@ -86,47 +88,8 @@ function Home() {
           </div>
         </div>
 
-        <div className="container">
-          <div className="block-sale">
-            <div className="block-sale__top">
-              <span className="block-sale__top__left">
-                <p>HOT SALE CUỐI TUẦN</p>
-                <IconFire />
-              </span>
-              <span className="block-sale__top__right">
-                <div className="block-sale__top__right__one">
-                  <strong>167</strong>
-                  <small>Ngày</small>
-                </div>
-                <div className="block-sale__top__right__one">
-                  <strong>167</strong>
-                  <small>Giờ</small>
-                </div>
-                <div className="block-sale__top__right__one">
-                  <strong>167</strong>
-                  <small>Phút</small>
-                </div>
-                <div className="block-sale__top__right__one">
-                  <strong>167</strong>
-                  <small>Giây</small>
-                </div>
-              </span>
-            </div>
-            <ListProductSlide />
-            <div className="d-flex justify-content-center align-items-center pb-3">
-              <Button
-                className="hover-bg-secondary btn-md btn-icon-text btn-md"
-                variant="primary"
-              >
-                Xem tất cả
-                <FontAwesomeIcon
-                  className="btn-icon-append"
-                  icon={faAngleRight}
-                />
-              </Button>
-            </div>
-          </div>
-        </div>
+        {/* HOT SALES */}
+        <HotSales />
 
         {/* DANH MỤC NỔI BẬT */}
         <DanhMucNoiBat></DanhMucNoiBat>

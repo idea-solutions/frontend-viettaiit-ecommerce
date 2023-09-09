@@ -8,11 +8,25 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { IconFire } from "../../assets/icons";
 import LazyImage from "../LazyImage";
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
+import { formatCurrency } from "../../utils/format";
 function ProductItem({ product, hiddenSold }) {
   const [hovered, setHovered] = useState(false);
+  const [soLuongDaBan, setSoLuongDaBan] = useState(0);
+  useEffect(() => {
+    setSoLuongDaBan(Math.floor(Math.random() * 300) + 1);
+  }, []);
+  // Tổng số sản phẩm
+  const tongSoSanPham = 1000;
 
+  // Width của element ban đầu (px)
+  const widthBanDau = 282;
+
+  // Tính tỷ lệ phần trăm đã bán
+  const tyLeDaBan = soLuongDaBan / tongSoSanPham;
+
+  // Tính width của countdown element còn lại
+  const widthCountdownConLai = widthBanDau * (1 - tyLeDaBan);
   return (
     <motion.div
       className="product-item"
@@ -22,34 +36,43 @@ function ProductItem({ product, hiddenSold }) {
       <div className="product-item__image">
         <LazyImage
           src={
-            "https://bizweb.dktcdn.net/thumb/large/100/480/632/products/230225032836-12red-9e866195-9543-4592-af92-c3986c0e30d3.jpg?v=1681684380000"
+            process.env.REACT_APP_BACKEND_URL +
+            "/static/uploads/" +
+            product.image
           }
           alt=""
         />
       </div>
-      <span className="discount">Giảm 19%</span>
-      <span className="pay">Trả góp 0%</span>
-      <span className="warranty">BH 24 tháng</span>
-      <span className="product-item__title my-2">
-        iPhone 12 64GB - Chính hãng VN/A - MGJ73VN/A
+      <span className="discount">Giảm {product.discount}%</span>
+      <span className="pay">Trả góp {Math.floor(Math.random() * 24) + 1}%</span>
+      <span className="warranty">
+        BH {Math.floor(Math.random() * 24) + 1} tháng
       </span>
+      <span className="product-item__title my-2">{product.name}</span>
       <div className="d-flex justify-content-between align-items-center my-2">
         <div className="product-item__price">
-          <span className="product-item__price-old">123.000.000đ</span>
-          <span className="product-item__price-new">123.000.000đ</span>
+          <span className="product-item__price-old">
+            {formatCurrency(product.price || 0)}
+          </span>
+          <span className="product-item__price-new">
+            {formatCurrency(
+              product.price - (product.price * product.discount) / 100
+            )}
+          </span>
         </div>
         <div className="product-item__icon-setting">
           <FontAwesomeIcon icon={faGear} />
         </div>
       </div>
-      <p className="product-item__desc">
-        Giảm trực tiếp 40%, tối đa 600.000VNĐ khi mở thẻ TP Bank EVO.
-      </p>
+      <p className="product-item__desc">{product.description}</p>
       <div className={`product-item__count ${hiddenSold ? "d-none" : ""}`}>
         <IconFire />
-        <div className="countdown"></div>
+        <motion.div
+          className="countdown"
+          animate={{ width: widthCountdownConLai }}
+        ></motion.div>
         <div className="sold">
-          đã bán <strong>126</strong>
+          đã bán <strong>{soLuongDaBan}</strong>
         </div>
       </div>
 
