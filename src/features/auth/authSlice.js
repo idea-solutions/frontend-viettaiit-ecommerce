@@ -18,48 +18,48 @@ const initialState = {
   isError: false,
 };
 export const registerAuth = createAsyncThunk(
-  "user/registerAuth",
+  "auth/registerAuth",
   async (inputs, thunkAPI) => {
     return registerAuthThunk("/auth/register", inputs, thunkAPI);
   }
 );
 export const loginAuth = createAsyncThunk(
-  "user/loginAuth",
+  "auth/loginAuth",
   async (inputs, thunkAPI) => {
     return loginAuthThunk("/auth/login", inputs, thunkAPI);
   }
 );
 export const logoutAuth = createAsyncThunk(
-  "user/logoutAuth",
+  "auth/logoutAuth",
   async (inputs, thunkAPI) => {
     return logoutAuthThunk("/auth/logout", thunkAPI);
   }
 );
 export const verifyEmailAuth = createAsyncThunk(
-  "user/verifyEmailAuth",
+  "auth/verifyEmailAuth",
   async (inputs, thunkAPI) => {
     return verifyEmailAuthThunk("/auth/verify-email", inputs, thunkAPI);
   }
 );
 export const forgotPasswordAuth = createAsyncThunk(
-  "user/forgotPasswordAuth",
+  "auth/forgotPasswordAuth",
   async (inputs, thunkAPI) => {
     return forgotPasswordAuthThunk("/auth/forgot-password", inputs, thunkAPI);
   }
 );
 export const resetPasswordAuth = createAsyncThunk(
-  "user/resetPasswordAuth",
+  "auth/resetPasswordAuth",
   async (inputs, thunkAPI) => {
     return resetPasswordAuthThunk("/auth/reset-password", inputs, thunkAPI);
   }
 );
 
-export const getUserSuccess = createAsyncThunk("user/getUserSuccess", async (_, thunkAPI) => {
+export const getUserSuccess = createAsyncThunk("auth/getUserSuccess", async (_, thunkAPI) => {
   return getUserSuccessThunk("/auth/login/success", thunkAPI);
 });
 
-const userSlice = createSlice({
-  name: "user",
+const authSlice = createSlice({
+  name: "auth",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -176,5 +176,5 @@ const userSlice = createSlice({
     });
   },
 });
-export const {} = userSlice.actions;
-export default userSlice.reducer;
+export const {} = authSlice.actions;
+export default authSlice.reducer;

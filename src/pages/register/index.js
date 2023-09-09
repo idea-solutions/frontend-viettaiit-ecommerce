@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { clientRoutes } from "../../routes";
 import { validateFormRegister } from "../../utils/validate";
 
-import { getUser, registerAuth } from "../../features/auth/authSlice";
+import { registerAuth } from "../../features/auth/authSlice";
 
 import { setLoadingClose, setLoadingShow } from "../../features/loadingSlice";
 import HelmetCustom from "../../components/HelmetCustom";
@@ -20,7 +20,7 @@ import { Form } from "react-bootstrap";
 function Register() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isLoading } = useSelector((store) => store.user);
+  const { isLoading } = useSelector((store) => store.auth);
   const [inputs, setInputs] = useState({
     email: "",
     name: "",

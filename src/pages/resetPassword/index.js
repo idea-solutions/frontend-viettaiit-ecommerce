@@ -20,7 +20,7 @@ function ResetPassword() {
   const params = new URLSearchParams(location.search);
   const passwordToken = params.get("token");
   const email = params.get("email");
-  const { isLoading } = useSelector((store) => store.user);
+  const { isLoading } = useSelector((store) => store.auth);
   const navigate = useNavigate();
   const handleChange = (e) => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
