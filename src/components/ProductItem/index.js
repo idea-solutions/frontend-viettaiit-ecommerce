@@ -13,8 +13,12 @@ import { formatCurrency } from "../../utils/format";
 function ProductItem({ product, hiddenSold }) {
   const [hovered, setHovered] = useState(false);
   const [soLuongDaBan, setSoLuongDaBan] = useState(0);
+  const [traGop, setTraGop] = useState(0);
+  const [baoHanh, setBaoHanh] = useState(0);
   useEffect(() => {
     setSoLuongDaBan(Math.floor(Math.random() * 300) + 1);
+    setTraGop(Math.floor(Math.random() * 5) + 1);
+    setBaoHanh(Math.floor(Math.random() *24) + 1);
   }, []);
   // Tổng số sản phẩm
   const tongSoSanPham = 1000;
@@ -44,9 +48,9 @@ function ProductItem({ product, hiddenSold }) {
         />
       </div>
       <span className="discount">Giảm {product.discount}%</span>
-      <span className="pay">Trả góp {Math.floor(Math.random() * 24) + 1}%</span>
+      <span className="pay">Trả góp {traGop}%</span>
       <span className="warranty">
-        BH {Math.floor(Math.random() * 24) + 1} tháng
+        BH {baoHanh} tháng
       </span>
       <span className="product-item__title my-2">{product.name}</span>
       <div className="d-flex justify-content-between align-items-center my-2">
