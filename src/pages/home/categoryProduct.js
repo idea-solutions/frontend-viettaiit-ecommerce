@@ -6,12 +6,14 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
-import { Fragment } from "react";
+import { Fragment,  } from "react";
 import ProductItem from "../../components/ProductItem";
 import { useMediaQuery } from "react-responsive";
 import { Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
+
 function CategoryProduct({ products, listSubCategory, title }) {
+
   const isTabletOrMobile = useMediaQuery({
     query: "(max-width: 1024px)",
   });
