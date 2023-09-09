@@ -2,8 +2,9 @@ import { Col } from "react-bootstrap";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Scrollbar } from "swiper/modules";
 import LazyImage from "../../components/LazyImage";
-
+import React from "react";
 function DanhMucNoiBat() {
+  console.log("[HOME] danhmucnoibat --- re-render");
   return (
     <div className="container mt-5 danhmucnoibat">
       <h3 className="text-uppercase text-center mb-4">DANH MỤC NỔI BẬT</h3>
@@ -103,4 +104,4 @@ function DanhMucNoiBat() {
   );
 }
 
-export default DanhMucNoiBat;
+export default React.memo(DanhMucNoiBat);

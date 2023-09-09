@@ -4,16 +4,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { IconFire } from "../../assets/icons";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, memo } from "react";
+import React, { useEffect } from "react";
 import { getProductsHotSales } from "../../features/product/productSlice";
 
 function HotSales() {
+  console.log("[HOME] hot sales - re-render");
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getProductsHotSales());
   }, [dispatch]);
   const { productsHotSales } = useSelector((store) => store.product);
-  console.log("hot sales - re-render");
   return (
     <div className="container">
       <div className="block-sale">
@@ -56,4 +56,4 @@ function HotSales() {
   );
 }
 
-export default memo(HotSales);
+export default React.memo(HotSales);
