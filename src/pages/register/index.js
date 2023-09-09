@@ -17,6 +17,7 @@ import HelmetCustom from "../../components/HelmetCustom";
 import Breadcrumb from "../../components/Breadcrumb";
 import { toastWarning } from "../../utils/toast";
 import { Form } from "react-bootstrap";
+import { FaFacebookF, FaGithub, FaGithubAlt, FaGoogle } from "react-icons/fa";
 function Register() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -112,7 +113,7 @@ function Register() {
                 <button
                   type="submit"
                   className="btn btn-facebook"
-                  onClick={ (e) => {
+                  onClick={(e) => {
                     e.preventDefault();
                     window.open(
                       "http://localhost:8080/api/v1/auth/facebook",
@@ -120,21 +121,42 @@ function Register() {
                     );
                   }}
                 >
-                  Facebook
+                  <span className="">
+                    <FaFacebookF />
+                  </span>
+                  <span> Google</span>
                 </button>
                 <button
                   type="submit"
                   className="btn btn-google"
                   onClick={(e) => {
                     e.preventDefault();
-                     window.open(
+                    window.open(
                       "http://localhost:8080/api/v1/auth/google",
                       "_self"
                     );
-                 
                   }}
                 >
-                  Google
+                  <span className="">
+                    <FaGoogle />
+                  </span>
+                  <span> Google</span>
+                </button>
+                <button
+                  type="submit"
+                  className="btn btn-github"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    window.open(
+                      "http://localhost:8080/api/v1/auth/github",
+                      "_self"
+                    );
+                  }}
+                >
+                  <span className="">
+                    <FaGithub />
+                  </span>
+                  <span> Github</span>
                 </button>
               </div>
             </div>

@@ -8,16 +8,14 @@ import { clientRoutes } from "../../routes";
 import { checkEmail, validateFormLogin } from "../../utils/validate";
 
 // REDUX SLICE
-import {
-  forgotPasswordAuth,
-  loginAuth,
-} from "../../features/auth/authSlice";
+import { forgotPasswordAuth, loginAuth } from "../../features/auth/authSlice";
 
 import { setLoadingClose, setLoadingShow } from "../../features/loadingSlice";
 import HelmetCustom from "../../components/HelmetCustom";
 import Breadcrumb from "../../components/Breadcrumb";
 import { toastWarning } from "../../utils/toast";
 import { Form } from "react-bootstrap";
+import { FaFacebookF, FaGithub, FaGoogle } from "react-icons/fa";
 function Login() {
   const [isForgotPwd, setIsForgotPwd] = useState(false);
   const [emailForgot, setEmailForgot] = useState("");
@@ -133,7 +131,7 @@ function Login() {
                   <span>hoặc đăng nhập qua</span>
                 </p>
               </div>
-              <div className="mb-3 d-flex justify-content-center gap-2">
+              <div className="mb-3 d-flex justify-content-center gap-2 align-items-center">
                 <button
                   className="btn btn-facebook"
                   onClick={(e) => {
@@ -144,8 +142,10 @@ function Login() {
                     );
                   }}
                 >
-                  <span></span>
-                  Facebook
+                  <span className="">
+                    <FaFacebookF />
+                  </span>
+                  <span> Facebook</span>
                 </button>
                 <button
                   type="submit"
@@ -158,8 +158,26 @@ function Login() {
                     );
                   }}
                 >
-                  <span></span>
-                  Google
+                  <span className="">
+                    <FaGoogle />
+                  </span>
+                  <span> Google</span>
+                </button>
+                <button
+                  type="submit"
+                  className="btn btn-github"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    window.open(
+                      "http://localhost:8080/api/v1/auth/github",
+                      "_self"
+                    );
+                  }}
+                >
+                  <span className="">
+                    <FaGithub />
+                  </span>
+                  <span> Github</span>
                 </button>
               </div>
             </div>

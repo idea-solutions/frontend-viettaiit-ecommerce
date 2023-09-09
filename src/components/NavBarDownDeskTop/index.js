@@ -9,6 +9,7 @@ import { toggleNavBar } from "../../features/navBarSlice";
 import { menuBottom } from "../../assets/menuBottomHeader";
 
 function NavBarDownDeskTop() {
+  console.log('[COMP] NavBarDownDeskTop re-render')
   const [numberShow, setNumberShow] = useState(100);
   const { isOpen } = useSelector((store) => store.navBar);
   const dispatch = useDispatch();
