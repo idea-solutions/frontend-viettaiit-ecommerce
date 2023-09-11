@@ -6,19 +6,65 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
-import { Fragment,  } from "react";
+import { Fragment, useEffect, useState } from "react";
 import ProductItem from "../../components/ProductItem";
 import { useMediaQuery } from "react-responsive";
-import { Col, Row } from "react-bootstrap";
+import { Col, Row, Spinner } from "react-bootstrap";
 import { Link } from "react-router-dom";
-
-function CategoryProduct({ products, listSubCategory, title }) {
-
+import {} from "react-redux";
+import React from "react";
+import httpRequest from "../../services/httpRequest";
+function CategoryProduct({ category: cate, listSubCategory, title }) {
+  console.log(`[HOME] CategoryProduct ${cate} - re-render`);
+  const [isLoading, setIsLoading] = useState(true);
+  const [category, setCategory] = useState(cate);
+  const [indexActive, setIndexActive] = useState(0);
+  const [products, setProducts] = useState();
   const isTabletOrMobile = useMediaQuery({
     query: "(max-width: 1024px)",
   });
+
+  useEffect(() => {
+    setIsLoading(true);
+    console.log("loading");
+    const getProductsAsync = async (category) => {
+      try {
+        const { data } = await httpRequest.get(
+          "/products/categories/" + category
+        );
+        setProducts(data.data);
+        setIsLoading(false);
+      } catch (error) {}
+    };
+    getProductsAsync(category);
+  }, [category]);
+
+  const handleQueryProductSubCategory = (index) => {
+    if (listSubCategory[index] === "All") {
+      setCategory(cate);
+    } else {
+      setCategory(listSubCategory[index]);
+    }
+    setIndexActive(index);
+  };
   // handle render responsive
   const createListProduct = () => {
+    if (isLoading) {
+      return (
+        <div className="container text-center py-5">
+          <Spinner animation="border" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </Spinner>
+        </div>
+      );
+    }
+    if (products && products.length <= 0) {
+      return (
+        <div className="text-success  text-bold text-center py-5 text-uppercase bg-body-secondary mt-2">
+          <h3 className="fw-bold">Không có sản phẩm !</h3>
+        </div>
+      );
+    }
     if (isTabletOrMobile) {
       return (
         <Swiper
@@ -46,62 +92,27 @@ function CategoryProduct({ products, listSubCategory, title }) {
             },
           }}
         >
-          <SwiperSlide>
-            <ProductItem product hiddenSold />
-          </SwiperSlide>
-          <SwiperSlide>
-            <ProductItem product hiddenSold />
-          </SwiperSlide>
-          <SwiperSlide>
-            <ProductItem product hiddenSold />
-          </SwiperSlide>
-          <SwiperSlide>
-            <ProductItem product hiddenSold />
-          </SwiperSlide>
-          <SwiperSlide>
-            <ProductItem product hiddenSold />
-          </SwiperSlide>
-          <SwiperSlide>
-            <ProductItem product hiddenSold />
-          </SwiperSlide>
-          <SwiperSlide>
-            <ProductItem product hiddenSold />
-          </SwiperSlide>
-          <SwiperSlide>
-            <ProductItem product hiddenSold />
-          </SwiperSlide>
+          {products &&
+            products.map((product, index) => (
+              <SwiperSlide key={index}>
+                <ProductItem product={product} hiddenSold />
+              </SwiperSlide>
+            ))}
         </Swiper>
       );
     }
     return (
       <Row>
-        <Col lg={3}>
-          <ProductItem product hiddenSold />
-        </Col>
-        <Col lg={3}>
-          <ProductItem product hiddenSold />
-        </Col>
-        <Col lg={3}>
-          <ProductItem product hiddenSold />
-        </Col>
-        <Col lg={3}>
-          <ProductItem product hiddenSold />
-        </Col>
-        <Col lg={3}>
-          <ProductItem product hiddenSold />
-        </Col>
-        <Col lg={3}>
-          <ProductItem product hiddenSold />
-        </Col>
-        <Col lg={3}>
-          <ProductItem product hiddenSold />
-        </Col>
-        <Col lg={3}>
-          <ProductItem product hiddenSold />
-        </Col>
+        {products &&
+          products.map((product, index) => (
+            <Col lg={3} key={index}>
+              <ProductItem product={product} hiddenSold />
+            </Col>
+          ))}
       </Row>
     );
   };
+
   return (
     <div className="container mt-3 categoryProduct">
       <h3 className=" text-uppercase mt-5 mt-3 text-center fw-bold">{title}</h3>
@@ -111,16 +122,21 @@ function CategoryProduct({ products, listSubCategory, title }) {
           className="me-2 d-none max-md-display icon "
         />
         <div className="d-flex justify-content-center align-items-center items">
-          {listSubCategory.map((subCategory, index) => (
-            <Fragment key={index}>
-              <span className={`item ${index == 0 ? "active" : ""}`}>
-                {subCategory}
-              </span>
-              {index !== listSubCategory.length - 1 && (
-                <small className="mx-2">/</small>
-              )}
-            </Fragment>
-          ))}
+          {listSubCategory.map((subCategory, index) => {
+            return (
+              <Fragment key={index}>
+                <span
+                  className={`item ${index === indexActive ? "active" : ""}`}
+                  onClick={() => handleQueryProductSubCategory(index)}
+                >
+                  {subCategory}
+                </span>
+                {index !== listSubCategory.length - 1 && (
+                  <small className="mx-2">/</small>
+                )}
+              </Fragment>
+            );
+          })}
         </div>
         <FontAwesomeIcon
           icon={faArrowRightLong}
@@ -139,4 +155,4 @@ function CategoryProduct({ products, listSubCategory, title }) {
   );
 }
 
-export default CategoryProduct;
+export default React.memo(CategoryProduct);

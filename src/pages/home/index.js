@@ -3,7 +3,7 @@
 import HelmetCustom from "../../components/HelmetCustom";
 import DanhMucNoiBat from "./danhMucNoiBat";
 import CategoryProduct from "./categoryProduct";
-import { useState } from "react";
+import React, { useState } from "react";
 
 import HotSales from "./hotSales";
 import TopSlide from "./topSlide";
@@ -16,6 +16,7 @@ import RegisterReceiveNewsletter from "./registerReceiveNewsletter";
 
 function Home() {
   const [testRerender, setTestRerender] = useState(false);
+
   return (
     <>
       <HelmetCustom title="Trang chủ" />
@@ -41,17 +42,28 @@ function Home() {
         {/* Category Product */}
         {/*  IPHONE*/}
         <CategoryProduct
+          category={"IPhone"}
+          // products={productsIphone}
           listSubCategory={[
-            "Iphone 14 series",
-            "Iphone 14 series",
-            "Iphone 14 series",
-            "Iphone 14 series",
+            "All",
+            "Iphone 14 ",
+            "Iphone 13 ",
+            "Iphone 12 ",
+            "Iphone 11 ",
           ]}
           title={"IPhone"}
         />
-        {/*  Ipad*/}
+
         <CategoryProduct
-          listSubCategory={["Ipad Pro", "Ipad Pro", "Ipad Pro", "Ipad Pro"]}
+          category={"Ipad"}
+          // products={productsIpad}
+          listSubCategory={[
+            "All",
+            "Ipad Pro",
+            "Ipad Air",
+            "Ipad 10.2",
+            "Ipad Mini",
+          ]}
           title={"Ipad"}
         />
 
@@ -61,17 +73,23 @@ function Home() {
 
         {/* Macbook */}
         <CategoryProduct
-          listSubCategory={["Mac Pro", "Mac Pro", "Mac Pro", "Mac Pro"]}
+          category={"Macbook"}
+          // products={productsMacbook}
+          listSubCategory={["All", "Mac Pro", "Mac Air"]}
           title={"Macbook"}
         />
 
         {/* Apple Watch */}
         <CategoryProduct
+          category={"Apple Watch"}
+          // products={productsAppleWatch}
           listSubCategory={[
-            "Apple Watch Pro",
-            "Apple Watch Pro",
-            "Apple Watch Pro",
-            "Apple Watch Pro",
+            "All",
+            "Apple Watch Ultra",
+            "Apple Watch S7",
+            "Apple Watch SE",
+            "Apple Watch S8",
+            "Apple Watch S3",
           ]}
           title={"Apple Watch"}
         />

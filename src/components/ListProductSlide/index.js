@@ -1,9 +1,10 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Scrollbar } from "swiper/modules";
-
+import React from "react";
 // MY IMPORTS
 import ProductItem from "../ProductItem";
 function ListProductSlide({ products }) {
+  console.log("[COMP] ListProductSlide - re-render");
   return (
     <Swiper
       spaceBetween={25}
@@ -41,4 +42,4 @@ function ListProductSlide({ products }) {
   );
 }
 
-export default ListProductSlide;
+export default React.memo(ListProductSlide);

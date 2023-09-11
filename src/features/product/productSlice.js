@@ -1,8 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getProductsAsync, getProductsHotSalesAsync } from "./productThunk";
+import {
+  getProductsAsync,
+  getProductsHotSalesAsync,
+} from "./productThunk";
 const initialState = {
   products: [],
-  productsHotSales: [],
   perPage: 6,
   totalPages: 1,
   total: 2,
@@ -30,6 +32,8 @@ export const getProductsHotSales = createAsyncThunk(
     return await getProductsHotSalesAsync("/products/hot-sales", thunkAPI);
   }
 );
+
+
 
 const productSlice = createSlice({
   name: "product",
@@ -72,7 +76,6 @@ const productSlice = createSlice({
       state.isLoading = true;
     });
     builder.addCase(getProductsHotSales.fulfilled, (state, action) => {
-    
       const { data } = action.payload;
       state.productsHotSales = data;
 
@@ -81,6 +84,8 @@ const productSlice = createSlice({
     builder.addCase(getProductsHotSales.rejected, (state, action) => {
       state.isLoading = state.isError = true;
     });
+
+    
   },
 });
 

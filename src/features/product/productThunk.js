@@ -16,3 +16,4 @@ export const getProductsHotSalesAsync = async (url, thunkAPI) => {
     thunkAPI.rejectWithValue(error.response.data);
   }
 };
+

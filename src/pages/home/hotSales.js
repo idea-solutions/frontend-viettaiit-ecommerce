@@ -4,16 +4,20 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { IconFire } from "../../assets/icons";
 import { useDispatch, useSelector } from "react-redux";
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { getProductsHotSales } from "../../features/product/productSlice";
 
 function HotSales() {
-  console.log("[HOME] hot sales - re-render");
   const dispatch = useDispatch();
+  console.log("[HOME] hot sales - re-render");
   useEffect(() => {
     dispatch(getProductsHotSales());
   }, [dispatch]);
   const { productsHotSales } = useSelector((store) => store.product);
+  const memoizedProductsHotSales = useMemo(
+    () => productsHotSales,
+    [productsHotSales]
+  );
   return (
     <div className="container">
       <div className="block-sale">
@@ -41,7 +45,7 @@ function HotSales() {
             </div>
           </span>
         </div>
-        <ListProductSlide products={productsHotSales} />
+        <ListProductSlide products={memoizedProductsHotSales} />
         <div className="d-flex justify-content-center align-items-center pb-3">
           <Button
             className="hover-bg-secondary btn-md btn-icon-text btn-md"
