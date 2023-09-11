@@ -23,7 +23,7 @@
             4.
 
 
-## TASK
+## TASK 1
     - Home 
         - danh mục => Ok
         - list iphone => Ok
@@ -35,3 +35,7 @@
         - section khachhang sudos => Ok
         - section dangkynhantintuc  => Ok
     - Footer
+
+## TASK TỐI ƯU PERFORMANCE
+    - ProductCategory -> Chưa thực hiện được caching query sub category product
+
