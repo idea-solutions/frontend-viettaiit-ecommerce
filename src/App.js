@@ -8,8 +8,6 @@ import { AnimatePresence } from "framer-motion";
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
- 
-
   return (
     <div className="App">
       <Suspense fallback={<div>Waiting...</div>}>
@@ -26,7 +24,7 @@ function App() {
             if (route.path === "*") {
               Comp = <NotFound></NotFound>;
             }
-            return <Route key={idx} element={Comp} path={route.path} />;
+            return <Route key={idx} exact element={Comp} path={route.path} />;
           })}
         </Routes>
       </Suspense>

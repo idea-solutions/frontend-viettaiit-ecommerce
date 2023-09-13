@@ -95,7 +95,7 @@
 .button-quantity {
   border: 1px solid $gray-700;
   border-radius: $border-radius-sm;
-  @include flex-center;
+  display: inline-block;
   button {
     padding: 0px 8px;
     border: none;
@@ -118,6 +118,27 @@
     padding: 0px 8px;
     &:hover {
       cursor: auto;
+    }
+  }
+
+  &.btn-md {
+    button {
+      padding: 4px 14px;
+    }
+    span {
+      font-size: 16px;
+      padding: 4px 14px;
+    }
+  }
+
+  &.btn-lg {
+    button {
+      padding: 6px 18px;
+    }
+
+    span {
+      font-size: 20px;
+      padding: 6px 18px;
     }
   }
 

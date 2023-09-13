@@ -22,5 +22,5 @@ export const formatDate = (time) => {
   );
 };
 
-export const formatCurrency = (x) =>
+export const formatCurrency = (x = 0) =>
   (x = x.toLocaleString("it-IT", { style: "currency", currency: "VND" }));

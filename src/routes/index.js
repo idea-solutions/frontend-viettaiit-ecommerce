@@ -1,4 +1,5 @@
 import LoginSuccess from "../pages/login/loginSuccess";
+import ProductDetail from "../pages/productDetail";
 import { clientRoutes } from "./routes";
 import { lazy } from "react";
 
@@ -23,6 +24,7 @@ const clientPages = [
   { com: <LoginSuccess />, path: "/login/success" },
   { com: <Register />, path: clientRoutes.register },
   { com: <Category />, path: clientRoutes.homeCategory + "/:name" },
+  { com: <ProductDetail />, path: clientRoutes.products + "/:slug" },
   { com: <NotFound />, path: "*" },
 ];
 

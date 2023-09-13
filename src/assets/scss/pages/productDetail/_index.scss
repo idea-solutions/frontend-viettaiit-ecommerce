@@ -1,0 +1,33 @@
+.product-detail {
+  .thumb-images {
+    .thumb-image {
+      @include box-shadow;
+      border: 1px solid rgba(128, 128, 128, 0.449);
+      border-radius: 10px;
+      overflow: hidden;
+      @include transition;
+      cursor: pointer;
+      &:hover {
+        border: 1px solid rgba(128, 128, 128, 1);
+      }
+
+      &.active {
+        border-color: $secondary;
+      }
+    }
+  }
+
+  .colors {
+    .color {
+      cursor: pointer;
+      border-radius: 50%;
+
+      overflow: hidden;
+
+      &.active {
+        border: 2px solid #f1f1f1;
+        @include box-shadow;
+      }
+    }
+  }
+}

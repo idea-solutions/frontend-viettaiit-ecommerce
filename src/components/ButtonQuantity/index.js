@@ -1,10 +1,10 @@
-function ButtonQuantity({ children }) {
+function ButtonQuantity({ children, className }) {
   return (
-    <div className="button-quantity">
+    <span className={`button-quantity ${className ? className : ""}`}>
       <button>-</button>
       <span>{children || 3}</span>
       <button>+</button>
-    </div>
+    </span>
   );
 }
 

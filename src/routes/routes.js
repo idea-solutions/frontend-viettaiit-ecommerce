@@ -10,6 +10,7 @@ const clientRoutes = {
   tinTuc: "/tin-tuc",
   chinhSach: "/chinh-sach",
   lienHe: "/lien-he",
+  products: "/products",
 };
 
 export { clientRoutes };

@@ -10,6 +10,8 @@ import { IconFire } from "../../assets/icons";
 import LazyImage from "../LazyImage";
 import { useEffect, useState } from "react";
 import { formatCurrency } from "../../utils/format";
+import { Link } from "react-router-dom";
+import { clientRoutes } from "../../routes";
 function ProductItem({ product, hiddenSold, isLoading }) {
   const [hovered, setHovered] = useState(false);
   const [soLuongDaBan, setSoLuongDaBan] = useState(0);
@@ -33,12 +35,12 @@ function ProductItem({ product, hiddenSold, isLoading }) {
   const widthCountdownConLai = widthBanDau * (1 - tyLeDaBan);
 
   return (
-    <motion.div
-      className="product-item"
-      onHoverStart={() => setHovered(true)}
-      onHoverEnd={() => setHovered(false)}
-    >
-    
+    <Link to={clientRoutes.products + "/" + product.slug}>
+      <motion.div
+        className="product-item"
+        onHoverStart={() => setHovered(true)}
+        onHoverEnd={() => setHovered(false)}
+      >
         <>
           <div className="product-item__image">
             <LazyImage
@@ -108,7 +110,8 @@ function ProductItem({ product, hiddenSold, isLoading }) {
             </motion.a>
           </motion.span>
         </>
-    </motion.div>
+      </motion.div>
+    </Link>
   );
 }
 
