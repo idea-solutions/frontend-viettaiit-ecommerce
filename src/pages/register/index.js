@@ -17,8 +17,10 @@ import HelmetCustom from "../../components/HelmetCustom";
 import Breadcrumb from "../../components/Breadcrumb";
 import { toastWarning } from "../../utils/toast";
 import { Form } from "react-bootstrap";
-import { FaFacebookF, FaGithub, FaGithubAlt, FaGoogle } from "react-icons/fa";
+import { FaFacebookF, FaGithub,  FaGoogle } from "react-icons/fa";
+import useScrollTop from "../../hooks/useScrollTop";
 function Register() {
+  useScrollTop();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { isLoading } = useSelector((store) => store.auth);

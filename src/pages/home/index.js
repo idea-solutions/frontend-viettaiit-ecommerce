@@ -12,8 +12,10 @@ import Banner from "./banner";
 import NewInfoProduct from "./newInfoProduct";
 import TinTucCongNghe from "./tinTucCongNghe";
 import CustomerOfViettai from "./customerOfViettai";
+import useScrollTop from "../../hooks/useScrollTop";
 
 function Home() {
+  useScrollTop();
   const [testRerender, setTestRerender] = useState(false);
 
   return (
@@ -99,8 +101,6 @@ function Home() {
 
       {/*   KHÁCH HÀNG CỦA SUDES */}
       <CustomerOfViettai />
-
-    
     </>
   );
 }

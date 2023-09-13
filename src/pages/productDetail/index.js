@@ -18,13 +18,16 @@ import {
 import promoBoxes from "../../assets/promoBox";
 import useDataDetail from "../../hooks/useDataDetail";
 import { formatCurrency } from "../../utils/format";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ListProductSlide from "../../components/ListProductSlide";
 import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
 
 function ProductDetail() {
   const { slug: name } = useParams();
+  useEffect(() => {
+    window.scrollTo(0, 0); 
+  }, [name]);
   const { data, isLoading, isError } = useDataDetail("/products/" + name);
   console.log("[PRODUCT-DETAIL - rerender");
   const thumbImages =
@@ -35,7 +38,6 @@ function ProductDetail() {
 
   // Fake phu kien tam thoi
   const { productsIphone } = useSelector((store) => store.product);
-  console.log(productsIphone);
   return (
     <div className="product-detail">
       <HelmetCustom title="Chi tiết sản phẩm" />
@@ -294,7 +296,7 @@ function ProductDetail() {
         {/* THONG TIN SAN PHAM */}
         <div className="container mt-4 ">
           <Row>
-            <Col xs={12} md={8}>
+            <Col sm={12} md={8}>
               <motion.div className="bg-gray-200 rounded-4 p-3">
                 <h6 className="fw-bold text-uppercase">THÔNG TIN SẢN PHẨM</h6>
                 <p className="lh-base">
@@ -338,8 +340,8 @@ function ProductDetail() {
                 </div>
               </motion.div>
             </Col>
-            <Col xs={12} md={4}>
-              <div className="specifications">
+            <Col sm={12} md={4}>
+              <div className="specifications mt-4">
                 <h6 className="fw-bold text-uppercase mb-4">
                   THÔNG SỐ KỸ THUẬT
                 </h6>
@@ -407,7 +409,7 @@ function ProductDetail() {
               <div className="container mt-4">
                 <h6 className="text-uppercase my-3  fw-bold">
                   TIN TỨC NỔI BẬT
-                </h6> 
+                </h6>
                 <Row>
                   <Col lg={12}>
                     <div className="item d-flex p-2">

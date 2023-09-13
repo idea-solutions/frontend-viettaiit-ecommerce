@@ -16,7 +16,9 @@ import Breadcrumb from "../../components/Breadcrumb";
 import { toastWarning } from "../../utils/toast";
 import { Form } from "react-bootstrap";
 import { FaFacebookF, FaGithub, FaGoogle } from "react-icons/fa";
+import useScrollTop from "../../hooks/useScrollTop";
 function Login() {
+  useScrollTop();
   const [isForgotPwd, setIsForgotPwd] = useState(false);
   const [emailForgot, setEmailForgot] = useState("");
   const dispatch = useDispatch();
