@@ -1,5 +1,3 @@
-import LoginSuccess from "../pages/login/loginSuccess";
-import ProductDetail from "../pages/productDetail";
 import { clientRoutes } from "./routes";
 import { lazy } from "react";
 
@@ -10,6 +8,8 @@ const Home = lazy(() => import("../pages/home"));
 const Login = lazy(() => import("../pages/login"));
 const Register = lazy(() => import("../pages/register"));
 const NotFound = lazy(() => import("../pages/notFound"));
+const ProductDetail = lazy(() => import("../pages/product/productDetail"));
+const LoginSuccess = lazy(() => import("../pages/login/loginSuccess"));
 // import Home from "../pages/home";
 // import Login from "../pages/login";
 // import Register from "../pages/register";

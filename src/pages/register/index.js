@@ -17,7 +17,7 @@ import HelmetCustom from "../../components/HelmetCustom";
 import Breadcrumb from "../../components/Breadcrumb";
 import { toastWarning } from "../../utils/toast";
 import { Form } from "react-bootstrap";
-import { FaFacebookF, FaGithub,  FaGoogle } from "react-icons/fa";
+import { FaFacebookF, FaGithub, FaGoogle } from "react-icons/fa";
 import useScrollTop from "../../hooks/useScrollTop";
 function Register() {
   useScrollTop();
@@ -118,7 +118,7 @@ function Register() {
                   onClick={(e) => {
                     e.preventDefault();
                     window.open(
-                      "http://localhost:8080/api/v1/auth/facebook",
+                      process.env.REACT_APP_BACKEND_URL + "/auth/facebook",
                       "_self"
                     );
                   }}
@@ -134,7 +134,7 @@ function Register() {
                   onClick={(e) => {
                     e.preventDefault();
                     window.open(
-                      "http://localhost:8080/api/v1/auth/google",
+                      process.env.REACT_APP_BACKEND_URL + "/auth/google",
                       "_self"
                     );
                   }}
@@ -150,7 +150,7 @@ function Register() {
                   onClick={(e) => {
                     e.preventDefault();
                     window.open(
-                      "http://localhost:8080/api/v1/auth/github",
+                      process.env.REACT_APP_BACKEND_URL + "/auth/github",
                       "_self"
                     );
                   }}
