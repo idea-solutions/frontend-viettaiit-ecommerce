@@ -48,6 +48,41 @@
     height: 50px;
     padding: 0;
   }
+
+  &.btn-love,
+  &.btn-compare {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    border-radius: 50%;
+    border: 1px solid $gray-200;
+    border-radius: 10px;
+    @include hover-primary-white($radius: 10px);
+    &.btn-icon {
+      width: 42px;
+      height: 42px;
+      padding: 0;
+    }
+    &.btn-fw {
+      min-width: $button-fixed-width;
+    }
+    &.btn-sm {
+      font-size: $btn-font-size-sm;
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+    &.btn-md {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      font-size: $btn-font-size-md;
+    }
+    &.btn-lg {
+      font-size: $btn-font-size-lg;
+      padding-top: 14px;
+      padding-bottom: 14px;
+    }
+  }
 }
 
 /*social buttons*/

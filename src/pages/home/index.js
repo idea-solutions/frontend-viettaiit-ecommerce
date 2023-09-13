@@ -12,7 +12,6 @@ import Banner from "./banner";
 import NewInfoProduct from "./newInfoProduct";
 import TinTucCongNghe from "./tinTucCongNghe";
 import CustomerOfViettai from "./customerOfViettai";
-import RegisterReceiveNewsletter from "./registerReceiveNewsletter";
 
 function Home() {
   const [testRerender, setTestRerender] = useState(false);
@@ -101,8 +100,7 @@ function Home() {
       {/*   KHÁCH HÀNG CỦA SUDES */}
       <CustomerOfViettai />
 
-      {/* DANG KY NHAN TIN */}
-      <RegisterReceiveNewsletter />
+    
     </>
   );
 }

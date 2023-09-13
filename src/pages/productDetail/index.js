@@ -1,18 +1,28 @@
 import { useParams } from "react-router-dom";
 import Breadcrumb from "../../components/Breadcrumb";
 import HelmetCustom from "../../components/HelmetCustom";
-import { Button, Col, Row } from "react-bootstrap";
+import { Button, Col, Row, Table } from "react-bootstrap";
 import LazyImage from "../../components/LazyImage";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Navigation } from "swiper/modules";
+import { Navigation } from "swiper/modules";
 import { IconFire } from "../../assets/icons";
 import ButtonQuantity from "../../components/ButtonQuantity";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCaretDown,
+  faCartShopping,
+  faClock,
+  faEye,
+  faHeart,
+} from "@fortawesome/free-solid-svg-icons";
 import promoBoxes from "../../assets/promoBox";
 import useDataDetail from "../../hooks/useDataDetail";
 import { formatCurrency } from "../../utils/format";
 import { useState } from "react";
+import ListProductSlide from "../../components/ListProductSlide";
+import { useSelector } from "react-redux";
+import { motion } from "framer-motion";
+
 function ProductDetail() {
   const { slug: name } = useParams();
   const { data, isLoading, isError } = useDataDetail("/products/" + name);
@@ -22,6 +32,10 @@ function ProductDetail() {
   const colors =
     data?.productItems.map((productItem) => productItem.color) || [];
   const [idxSelected, setIdxSelected] = useState(0);
+
+  // Fake phu kien tam thoi
+  const { productsIphone } = useSelector((store) => store.product);
+  console.log(productsIphone);
   return (
     <div className="product-detail">
       <HelmetCustom title="Chi tiết sản phẩm" />
@@ -40,7 +54,6 @@ function ProductDetail() {
                 alt={data?.name}
               />
             </div>
-
             <Swiper
               spaceBetween={10}
               slidesPerView={5}
@@ -252,8 +265,243 @@ function ProductDetail() {
                 ))}
               </div>
             </div>
+
+            <div className="bts mt-2">
+              <Button variant="btn btn-love mb-2 btn-md w-100">
+                {" "}
+                <FontAwesomeIcon icon={faEye} /> Thêm vào yêu thích
+              </Button>
+              <Button variant="btn btn-love btn-md w-100">
+                {" "}
+                <FontAwesomeIcon icon={faHeart} />
+                Thêm vào vào so sánh
+              </Button>
+            </div>
           </Col>
         </Row>
+
+        {/* LIST PHU KIEN */}
+        <div className="container mt-3">
+          <h5 className="ms-3 text-uppercase fw-bold">Phụ kiện đi kèm</h5>
+          <ListProductSlide
+            products={productsIphone}
+            hiddenSold
+            hiddenDesc
+            cart
+          />
+        </div>
+
+        {/* THONG TIN SAN PHAM */}
+        <div className="container mt-4 ">
+          <Row>
+            <Col xs={12} md={8}>
+              <motion.div className="bg-gray-200 rounded-4 p-3">
+                <h6 className="fw-bold text-uppercase">THÔNG TIN SẢN PHẨM</h6>
+                <p className="lh-base">
+                  Trong loạt siêu phẩm iPhone 2020, iPhone 12 được cho là mẫu
+                  máy đáng mua nhất nhờ có nhiều ưu điểm vượt trội so với iPhone
+                  11, đồng thời không quá thua thiệt các anh em “Pro”. Trong đó,
+                  phiên bản iPhone 12 256GB lại càng hấp dẫn hơn với khả năng
+                  lưu trữ không giới hạn.
+                </p>
+                <p className="fw-medium lh-base">
+                  Thiết kế vuông vức mang dáng dấp iPhone 5
+                </p>
+                <p className=" fw-medium lh-base">
+                  Trong loạt siêu phẩm iPhone 2020, iPhone 12 được cho là mẫu
+                  máy đáng mua nhất nhờ có nhiều ưu điểm vượt trội so với iPhone
+                  11, đồng thời không quá thua thiệt các anh em “Pro”. Trong đó,
+                  phiên bản iPhone 12 256GB lại càng hấp dẫn hơn với khả năng
+                  lưu trữ không giới hạn.
+                </p>
+                <div>
+                  <LazyImage
+                    src="https://bizweb.dktcdn.net/100/480/632/files/iphone-12-256-gb-6.jpg?v=1681681328174"
+                    alt=""
+                  />
+                </div>
+                <p className=" fw-medium lh-base mt-2">
+                  Trong loạt siêu phẩm iPhone 2020, iPhone 12 được cho là mẫu
+                  máy đáng mua nhất nhờ có nhiều ưu điểm vượt trội so với iPhone
+                  11, đồng thời không quá thua thiệt các anh em “Pro”. Trong đó,
+                  phiên bản iPhone 12 256GB lại càng hấp dẫn hơn với khả năng
+                  lưu trữ không giới hạn.
+                </p>
+                <div className="d-flex align-content-center justify-content-center mt-3">
+                  <Button
+                    variant="primary hover-bg-secondary"
+                    className="d-flex align-content-center justify-content-center gap-2"
+                  >
+                    <span className="">Xem thêm</span>
+                    <FontAwesomeIcon icon={faCaretDown} />
+                  </Button>
+                </div>
+              </motion.div>
+            </Col>
+            <Col xs={12} md={4}>
+              <div className="specifications">
+                <h6 className="fw-bold text-uppercase mb-4">
+                  THÔNG SỐ KỸ THUẬT
+                </h6>
+                <Table striped>
+                  <tbody>
+                    <tr className="text-size-14">
+                      <td>Hãng sản xuất </td>
+                      <td colSpan={2} className="fw-light">
+                        Apple
+                      </td>
+                    </tr>
+                    <tr className="text-size-14">
+                      <td>Kích thước màn hình </td>
+                      <td colSpan={2} className="fw-light">
+                        6.1 inches
+                      </td>
+                    </tr>
+                    <tr className="text-size-14">
+                      <td>Độ phân giải màn hình</td>
+                      <td colSpan={2} className="fw-light">
+                        {" "}
+                        1170 x 2532 pixels
+                      </td>
+                    </tr>
+                    <tr className="text-size-14">
+                      <td>Loại màn hình </td>
+                      <td colSpan={2} className="fw-light">
+                        Super Retina XDR OLED, HDR10, Dolby Vision, Wide color
+                        gamut, True-tone
+                      </td>
+                    </tr>
+                    <tr className="text-size-14">
+                      <td>Bộ nhớ trong </td>
+                      <td colSpan={2} className="fw-light">
+                        64/128/256 GB
+                      </td>
+                    </tr>
+                    <tr className="text-size-14">
+                      <td>Chipset</td>
+                      <td colSpan={2} className="fw-light">
+                        Chip A16 Bionic,CPU 6 nhân, GPU 5 lõi, 16-core Neural
+                        Engine
+                      </td>
+                    </tr>
+                    <tr className="text-size-14">
+                      <td>CPU </td>
+                      <td colSpan={2} className="fw-light">
+                        Hexa-core
+                      </td>
+                    </tr>
+                  </tbody>
+                </Table>{" "}
+                <div className="d-flex align-content-center justify-content-center mt-3">
+                  <Button
+                    variant="primary hover-bg-secondary"
+                    className="d-flex align-content-center justify-content-center gap-2"
+                  >
+                    <span className="">Xem cấu hình chi tiết</span>
+                    <FontAwesomeIcon icon={faCaretDown} />
+                  </Button>
+                </div>
+              </div>
+
+              {/* TIN TUc NOI BAT */}
+              <div className="container mt-4">
+                <h6 className="text-uppercase my-3  fw-bold">
+                  TIN TỨC NỔI BẬT
+                </h6> 
+                <Row>
+                  <Col lg={12}>
+                    <div className="item d-flex p-2">
+                      <div className="image w-100 h-100 me-2 ">
+                        <LazyImage
+                          src={require("../../assets/images/tintuc/tintuc01.webp")}
+                          alt=""
+                          className="rounded-2"
+                        />
+                      </div>
+                      <h6 className="fw-light text-size-14">
+                        iPhone đã đúng khi không đụng đến tính năng này suốt
+                        những năm qua - Đình đám một thời nay đã chết yểu"
+                        <p className="mt-1 lh-base">
+                          <FontAwesomeIcon icon={faClock} />
+                          <small className="ms-1 ">28/04/2023</small>
+                        </p>
+                      </h6>
+                    </div>
+                  </Col>
+                  <Col lg={12}>
+                    <div className="item d-flex p-2">
+                      <div className="image w-100 h-100 me-2 ">
+                        <LazyImage
+                          src={require("../../assets/images/tintuc/tintuc02.webp")}
+                          alt=""
+                          className="rounded-2"
+                        />
+                      </div>
+                      <h6 className="fw-light text-size-14">
+                        iPhone đã đúng khi không đụng đến tính năng này suốt
+                        những năm qua - Đình đám một thời nay đã chết yểu"
+                        <p className="mt-1 lh-base">
+                          <FontAwesomeIcon icon={faClock} />
+                          <small className="ms-1 ">28/04/2023</small>
+                        </p>
+                      </h6>
+                    </div>
+                  </Col>
+                  <Col lg={12}>
+                    <div className="item d-flex p-2">
+                      <div className="image w-100 h-100 me-2 ">
+                        <LazyImage
+                          src={require("../../assets/images/tintuc/tintuc03.webp")}
+                          alt=""
+                          className="rounded-2"
+                        />
+                      </div>
+                      <h6 className="fw-light text-size-14">
+                        iPhone đã đúng khi không đụng đến tính năng này suốt
+                        những năm qua - Đình đám một thời nay đã chết yểu"
+                        <p className="mt-1 lh-base">
+                          <FontAwesomeIcon icon={faClock} />
+                          <small className="ms-1 ">28/04/2023</small>
+                        </p>
+                      </h6>
+                    </div>
+                  </Col>
+                  <Col lg={12}>
+                    <div className="item d-flex p-2">
+                      <div className="image w-100 h-100 me-2 ">
+                        <LazyImage
+                          src={require("../../assets/images/tintuc/tintuc04.webp")}
+                          alt=""
+                          className="rounded-2"
+                        />
+                      </div>
+                      <h6 className="fw-light text-size-14">
+                        iPhone đã đúng khi không đụng đến tính năng này suốt
+                        những năm qua - Đình đám một thời nay đã chết yểu"
+                        <p className="mt-1 lh-base">
+                          <FontAwesomeIcon icon={faClock} />
+                          <small className="ms-1 ">28/04/2023</small>
+                        </p>
+                      </h6>
+                    </div>
+                  </Col>
+                </Row>
+              </div>
+            </Col>
+          </Row>
+        </div>
+
+        {/* SAN PHAM LIEN QUAN */}
+        <div className="container mt-3">
+          <h5 className="ms-3 text-uppercase fw-bold">SẢN PHẨM LIÊN QUAN</h5>
+          <ListProductSlide products={productsIphone} hiddenSold />
+        </div>
+
+        {/* SAN PHAM DA XEM*/}
+        <div className="container mt-3">
+          <h5 className="ms-3 text-uppercase fw-bold">BẠN ĐÃ XEM</h5>
+          <ListProductSlide products={productsIphone} hiddenSold />
+        </div>
       </div>
     </div>
   );

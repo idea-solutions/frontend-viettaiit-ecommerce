@@ -3,41 +3,41 @@ import { Autoplay, Navigation, Scrollbar } from "swiper/modules";
 import React from "react";
 // MY IMPORTS
 import ProductItem from "../ProductItem";
-function ListProductSlide({ products }) {
+function ListProductSlide({
+  products = [],
+  spaceBetween,
+  slidesPerView,
+  navigation,
+  scrollbar,
+  delay,
+  breakpoints,
+  hiddenSold = false,
+  hiddenDesc = false,
+  cart = false,
+}) {
   console.log("[COMP] ListProductSlide - re-render");
   return (
     <Swiper
-      spaceBetween={25}
-      slidesPerView={4}
-      navigation={true}
-      scrollbar={true}
+      spaceBetween={spaceBetween || 10}
+      slidesPerView={slidesPerView || 4}
+      navigation={navigation || true}
+      scrollbar={scrollbar || true}
       modules={[Navigation, Autoplay, Scrollbar]}
-      autoplay={{ delay: 3000 }}
-      breakpoints={{
-        100: {
-          slidesPerView: 1,
-          spaceBetween: 50,
-        },
-        500: {
-          slidesPerView: 2,
-          spaceBetween: 10,
-        },
-        768: {
-          slidesPerView: 4,
-          spaceBetween: 10,
-        },
-        1024: {
-          slidesPerView: 4,
-          spaceBetween: 25,
-        },
-      }}
+      autoplay={{ delay: delay || 1000 * 60 * 20 }}
+      breakpoints={breakpoints ? breakpoints : {}}
       className="list-product-slide"
     >
-      {products.map((product, index) => (
-        <SwiperSlide key={index}>
-          <ProductItem product={product} />
-        </SwiperSlide>
-      ))}
+      {products &&
+        products.map((product, index) => (
+          <SwiperSlide key={index}>
+            <ProductItem
+              product={product}
+              hiddenSold={hiddenSold}
+              hiddenDesc={hiddenDesc}
+              cart={cart}
+            />
+          </SwiperSlide>
+        ))}
     </Swiper>
   );
 }

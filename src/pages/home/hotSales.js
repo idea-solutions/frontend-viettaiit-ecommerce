@@ -45,7 +45,30 @@ function HotSales() {
             </div>
           </span>
         </div>
-        <ListProductSlide products={memoizedProductsHotSales} />
+        <ListProductSlide
+          spaceBetween={25}
+          slidesPerView={4}
+          delay={3000}
+          breakpoints={{
+            100: {
+              slidesPerView: 1,
+              spaceBetween: 50,
+            },
+            500: {
+              slidesPerView: 2,
+              spaceBetween: 10,
+            },
+            768: {
+              slidesPerView: 4,
+              spaceBetween: 10,
+            },
+            1024: {
+              slidesPerView: 4,
+              spaceBetween: 25,
+            },
+          }}
+          products={memoizedProductsHotSales}
+        />
         <div className="d-flex justify-content-center align-items-center pb-3">
           <Button
             className="hover-bg-secondary btn-md btn-icon-text btn-md"

@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion } from "framer-motion";
 import {
+  faCartShopping,
   faEye,
   faGear,
   faHeart,
@@ -12,7 +13,8 @@ import { useEffect, useState } from "react";
 import { formatCurrency } from "../../utils/format";
 import { Link } from "react-router-dom";
 import { clientRoutes } from "../../routes";
-function ProductItem({ product, hiddenSold, isLoading }) {
+import { OverlayTrigger, Tooltip } from "react-bootstrap";
+function ProductItem({ product, hiddenSold, isLoading, hiddenDesc, cart }) {
   const [hovered, setHovered] = useState(false);
   const [soLuongDaBan, setSoLuongDaBan] = useState(0);
   const [traGop, setTraGop] = useState(0);
@@ -67,11 +69,21 @@ function ProductItem({ product, hiddenSold, isLoading }) {
                 )}
               </span>
             </div>
-            <div className="product-item__icon-setting">
-              <FontAwesomeIcon icon={faGear} />
-            </div>
+            <OverlayTrigger
+              placement="left"
+              delay={{ show: 250, hide: 400 }}
+              overlay={
+                <Tooltip>{cart ? "Thêm vào giỏ hàng" : "Tùy chọn"}</Tooltip>
+              }
+            >
+              <div className="product-item__icon-setting">
+                <FontAwesomeIcon icon={cart ? faCartShopping : faGear} />
+              </div>
+            </OverlayTrigger>
           </div>
-          <p className="product-item__desc">{product.description}</p>
+          {!hiddenDesc && (
+            <p className="product-item__desc">{product.description}</p>
+          )}
           <div className={`product-item__count ${hiddenSold ? "d-none" : ""}`}>
             <IconFire />
             <motion.div

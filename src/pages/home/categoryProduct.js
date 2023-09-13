@@ -4,8 +4,7 @@ import {
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Navigation } from "swiper/modules";
+
 import { Fragment, useEffect, useState } from "react";
 import ProductItem from "../../components/ProductItem";
 import { useMediaQuery } from "react-responsive";
@@ -14,6 +13,7 @@ import { Link } from "react-router-dom";
 import {} from "react-redux";
 import React from "react";
 import httpRequest from "../../services/httpRequest";
+import ListProductSlide from "../../components/ListProductSlide";
 function CategoryProduct({ category: cate, listSubCategory, title }) {
   console.log(`[HOME] CategoryProduct ${cate} - re-render`);
   const [isLoading, setIsLoading] = useState(true);
@@ -67,12 +67,9 @@ function CategoryProduct({ category: cate, listSubCategory, title }) {
     }
     if (isTabletOrMobile) {
       return (
-        <Swiper
+        <ListProductSlide
           spaceBetween={25}
           slidesPerView={4}
-          navigation={true}
-          modules={[Navigation, Autoplay]}
-          autoplay={{ delay: 3000 }}
           breakpoints={{
             100: {
               slidesPerView: 1,
@@ -91,14 +88,8 @@ function CategoryProduct({ category: cate, listSubCategory, title }) {
               spaceBetween: 25,
             },
           }}
-        >
-          {products &&
-            products.map((product, index) => (
-              <SwiperSlide key={index}>
-                <ProductItem product={product} hiddenSold />
-              </SwiperSlide>
-            ))}
-        </Swiper>
+          products={products}
+        />
       );
     }
     return (

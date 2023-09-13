@@ -31,3 +31,22 @@
     }
   }
 }
+
+// specifications
+
+.specifications {
+  table {
+    tbody {
+      tr {
+        border: 1px solid transparent;
+        td:first-child {
+          width: 126px;
+        }
+
+        &:nth-child(odd) {
+          background-color: #f7f7f7;
+        }
+      }
+    }
+  }
+}
