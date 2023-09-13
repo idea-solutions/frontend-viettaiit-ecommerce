@@ -35,7 +35,8 @@
         - section khachhang sudos => Ok
         - section dangkynhantintuc  => Ok
 
-    - ProductDetail 
+    - ProductDetail  => OK
+    - ProductAll
     - Footer
 
 ## TASK TỐI ƯU PERFORMANCE

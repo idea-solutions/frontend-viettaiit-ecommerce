@@ -49,7 +49,7 @@ function ProductItem({ product, hiddenSold, isLoading, hiddenDesc, cart }) {
   const navigate = useNavigate();
   const handleNavigate = (e) => {
     if (actionButtionsRef.current.contains(e.target)) return;
-    navigate(clientRoutes.products + "/" + product.slug);
+    navigate(clientRoutes.products + "/chi-tiet/" + product.slug);
   };
 
   return (

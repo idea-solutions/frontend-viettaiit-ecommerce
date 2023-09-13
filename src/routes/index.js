@@ -23,8 +23,8 @@ const clientPages = [
   { com: <Login />, path: clientRoutes.login },
   { com: <LoginSuccess />, path: "/login/success" },
   { com: <Register />, path: clientRoutes.register },
-  { com: <Category />, path: clientRoutes.homeCategory + "/:name" },
-  { com: <ProductDetail />, path: clientRoutes.products + "/:slug" },
+  { com: <Category />, path: clientRoutes.products + "/loai/:name" },
+  { com: <ProductDetail />, path: clientRoutes.products + "/chi-tiet/:slug" },
   { com: <NotFound />, path: "*" },
 ];
 

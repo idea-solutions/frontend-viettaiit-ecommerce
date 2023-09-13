@@ -2,10 +2,10 @@ import { faAngleDown, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { clientRoutes } from "../routes";
 import { slugify } from "../utils/slug";
 
-const suffixSearch = clientRoutes.homeCategory + "/";
+const suffixSearch = clientRoutes.products + "/loai/";
 export const menuBottom = [
   { title: "Trang chủ", to: clientRoutes.home },
-  { title: "Giới thiệu", to: clientRoutes.gioiThieu },
+  { title: "Giới thiệu", to: clientRoutes.introduce },
   {
     title: "IPhone",
     to: suffixSearch + slugify("IPhone"),
@@ -102,7 +102,7 @@ export const menuBottom = [
       { title: "Sạc dự phòng" },
     ],
   },
-  { title: "Chính sách", to: clientRoutes.chinhSach },
-  { title: "Tin tức", to: clientRoutes.tinTuc  },
-  { title: "Liên hệ", to:  clientRoutes.lienHe  },
+  { title: "Chính sách", to: clientRoutes.policy },
+  { title: "Tin tức", to: clientRoutes.news  },
+  { title: "Liên hệ", to:  clientRoutes.contact  },
 ];
