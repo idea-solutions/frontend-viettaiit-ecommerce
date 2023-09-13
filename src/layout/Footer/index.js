@@ -1,6 +1,12 @@
+import RegisterReceiveNewsLetter from "./registerReceiveNewsLetter";
 
 function Footer() {
-  return <div>Footer</div>;
+  return (
+    <div>
+      <RegisterReceiveNewsLetter />
+      <div>Footer</div>
+    </div>
+  );
 }
 
 export default Footer;
