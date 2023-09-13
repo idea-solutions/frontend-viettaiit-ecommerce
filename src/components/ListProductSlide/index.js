@@ -14,8 +14,9 @@ function ListProductSlide({
   hiddenSold = false,
   hiddenDesc = false,
   cart = false,
+  title,
 }) {
-  console.log("[COMP] ListProductSlide - re-render");
+  console.log("[COMP] ListProductSlide - re-render" + title);
   return (
     <Swiper
       spaceBetween={spaceBetween || 10}

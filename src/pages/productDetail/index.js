@@ -18,18 +18,27 @@ import {
 import promoBoxes from "../../assets/promoBox";
 import useDataDetail from "../../hooks/useDataDetail";
 import { formatCurrency } from "../../utils/format";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import ListProductSlide from "../../components/ListProductSlide";
 import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
+import {
+  attachProductsHaveBeenSaw,
+  getProductsHaveBeenSaw,
+} from "../../utils/localStorage";
 
 function ProductDetail() {
   const { slug: name } = useParams();
-  useEffect(() => {
-    window.scrollTo(0, 0); 
-  }, [name]);
+
   const { data, isLoading, isError } = useDataDetail("/products/" + name);
-  console.log("[PRODUCT-DETAIL - rerender");
+  const [productsHaveBeenSaw, setProductsHaveBeenSaw] = useState(
+    getProductsHaveBeenSaw()
+  );
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    attachProductsHaveBeenSaw(data);
+  }, [name, data]);
+
   const thumbImages =
     data?.productItems.map((productItem) => productItem.image) || [];
   const colors =
@@ -496,13 +505,21 @@ function ProductDetail() {
         {/* SAN PHAM LIEN QUAN */}
         <div className="container mt-3">
           <h5 className="ms-3 text-uppercase fw-bold">SẢN PHẨM LIÊN QUAN</h5>
-          <ListProductSlide products={productsIphone} hiddenSold />
+          <ListProductSlide
+            products={productsIphone}
+            hiddenSold
+            title={"SẢN PHẨM LIÊN QUAN"}
+          />
         </div>
 
         {/* SAN PHAM DA XEM*/}
         <div className="container mt-3">
-          <h5 className="ms-3 text-uppercase fw-bold">BẠN ĐÃ XEM</h5>
-          <ListProductSlide products={productsIphone} hiddenSold />
+          <h5 className="ms-3 text-uppercase fw-bold">SẢN PHẨM BẠN ĐÃ XEM</h5>
+          <ListProductSlide
+            products={productsHaveBeenSaw || []}
+            hiddenSold
+            title={"SẢN PHẨM BẠN ĐÃ XEM"}
+          />
         </div>
       </div>
     </div>
