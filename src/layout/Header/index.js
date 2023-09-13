@@ -15,8 +15,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleNavBar } from "../../features/navBarSlice";
 import {
   faAngleDown,
-  faAngleLeft,
-  faAngleRight,
   faArrowLeft,
   faArrowRightToBracket,
   faBars,
@@ -28,17 +26,15 @@ import {
   faRotate,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
-import { menuBottom } from "../../assets/menuBottomHeader";
 import { clientRoutes } from "../../routes";
 
 // REDUX SLICE
 import { setLoadingClose, setLoadingShow } from "../../features/loadingSlice";
 import { logoutAuth } from "../../features/auth/authSlice";
 import LazyImage from "../../components/LazyImage";
-const NavbarDownDeskTop = lazy(() =>
-  import("../../components/NavBarDownDeskTop")
-);
-const HeaderBottomItem = lazy(() => import("./HeaderBottomItem"));
+import NavbarDeskTop from "../NavBar/NavbarDeskTop";
+import NavBarDownDeskTop from "../NavBar/NavBarDownDeskTop";
+
 function Header() {
   const [isHoveredAccount, setIsHoveredAccount] = useState(false);
   const [isHoveredCart, setIsHoveredCart] = useState(false);
@@ -248,24 +244,9 @@ function Header() {
             </motion.div>
           </div>
         </div>
-        <div className="container-xl header-bottom">
-          <ul className="items">
-            {menuBottom.map((item, idx) => (
-              <HeaderBottomItem key={idx} item={item} />
-            ))}
-          </ul>
-          <div className="text-white d-flex gap-1 justify-content-center align-items-center ms-5">
-            <div className="px-1 py-1">
-              <FontAwesomeIcon icon={faAngleLeft} />
-            </div>
-            <div className="px-1 py-1">
-              <FontAwesomeIcon icon={faAngleRight} />
-            </div>
-          </div>
-        </div>
+        {isOpen ? <NavBarDownDeskTop /> : <NavbarDeskTop />}
         <Search className="d-lg-none max-lg-display mx-3" />
       </div>
-      {isOpen && <NavbarDownDeskTop />}
     </>
   );
 }

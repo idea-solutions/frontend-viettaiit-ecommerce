@@ -13,7 +13,7 @@ import { forgotPasswordAuth, loginAuth } from "../../features/auth/authSlice";
 import { setLoadingClose, setLoadingShow } from "../../features/loadingSlice";
 import HelmetCustom from "../../components/HelmetCustom";
 import Breadcrumb from "../../components/Breadcrumb";
-import { toastWarning } from "../../utils/toast";
+import { toastSuccess, toastWarning } from "../../utils/toast";
 import { Form } from "react-bootstrap";
 import { FaFacebookF, FaGithub, FaGoogle } from "react-icons/fa";
 import useScrollTop from "../../hooks/useScrollTop";
@@ -44,6 +44,7 @@ function Login() {
     if (payload.status === 200) {
       navigate(clientRoutes.home);
     }
+    toastSuccess(payload.message);
   };
   const handleForgotPwd = async (e) => {
     e.preventDefault();
