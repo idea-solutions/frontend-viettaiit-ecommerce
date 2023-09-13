@@ -18,25 +18,20 @@ import {
 import promoBoxes from "../../assets/promoBox";
 import useDataDetail from "../../hooks/useDataDetail";
 import { formatCurrency } from "../../utils/format";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import ListProductSlide from "../../components/ListProductSlide";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
-import {
-  attachProductsHaveBeenSaw,
-  getProductsHaveBeenSaw,
-} from "../../utils/localStorage";
-
+import { setProductsHaveBeenSaw } from "../../features/productFutureLocal";
 function ProductDetail() {
   const { slug: name } = useParams();
 
   const { data, isLoading, isError } = useDataDetail("/products/" + name);
-  const [productsHaveBeenSaw, setProductsHaveBeenSaw] = useState(
-    getProductsHaveBeenSaw()
-  );
+
+  const dispatch = useDispatch();
   useEffect(() => {
     window.scrollTo(0, 0);
-    attachProductsHaveBeenSaw(data);
+    dispatch(setProductsHaveBeenSaw(data));
   }, [name, data]);
 
   const thumbImages =
@@ -47,6 +42,9 @@ function ProductDetail() {
 
   // Fake phu kien tam thoi
   const { productsIphone } = useSelector((store) => store.product);
+  const { productsHaveBeenSaw } = useSelector(
+    (store) => store.productFutureLocal
+  );
   return (
     <div className="product-detail">
       <HelmetCustom title="Chi tiết sản phẩm" />
@@ -506,7 +504,7 @@ function ProductDetail() {
         <div className="container mt-3">
           <h5 className="ms-3 text-uppercase fw-bold">SẢN PHẨM LIÊN QUAN</h5>
           <ListProductSlide
-            products={productsIphone}
+            products={productsIphone || []}
             hiddenSold
             title={"SẢN PHẨM LIÊN QUAN"}
           />

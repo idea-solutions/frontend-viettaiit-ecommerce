@@ -20,7 +20,7 @@ function DanhMucNoiBat() {
         navigation={true}
         scrollbar={true}
         modules={[Navigation, Autoplay, Scrollbar]}
-        autoplay={{ delay: 3000 }}
+      
         breakpoints={{
           100: {
             slidesPerView: 1,

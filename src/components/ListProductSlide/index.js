@@ -1,6 +1,8 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Scrollbar } from "swiper/modules";
 import React from "react";
+
+
 // MY IMPORTS
 import ProductItem from "../ProductItem";
 function ListProductSlide({
@@ -28,17 +30,16 @@ function ListProductSlide({
       breakpoints={breakpoints ? breakpoints : {}}
       className="list-product-slide"
     >
-      {products &&
-        products.map((product, index) => (
-          <SwiperSlide key={index}>
-            <ProductItem
-              product={product}
-              hiddenSold={hiddenSold}
-              hiddenDesc={hiddenDesc}
-              cart={cart}
-            />
-          </SwiperSlide>
-        ))}
+      {products.map((product, index) => (
+        <SwiperSlide>
+          <ProductItem
+            product={product}
+            hiddenSold={hiddenSold}
+            hiddenDesc={hiddenDesc}
+            cart={cart}
+          />
+        </SwiperSlide>
+      ))}
     </Swiper>
   );
 }

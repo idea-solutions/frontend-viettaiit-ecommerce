@@ -7,23 +7,31 @@ import {
   faHeart,
   faRotate,
 } from "@fortawesome/free-solid-svg-icons";
+import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { OverlayTrigger, Tooltip } from "react-bootstrap";
+
+// MY IMPORTS
 import { IconFire } from "../../assets/icons";
 import LazyImage from "../LazyImage";
-import { useEffect, useState } from "react";
 import { formatCurrency } from "../../utils/format";
-import { Link } from "react-router-dom";
 import { clientRoutes } from "../../routes";
-import { OverlayTrigger, Tooltip } from "react-bootstrap";
+import { toastDanger } from "../../utils/toast";
+import { setProductsLove } from "../../features/productFutureLocal";
 function ProductItem({ product, hiddenSold, isLoading, hiddenDesc, cart }) {
   const [hovered, setHovered] = useState(false);
   const [soLuongDaBan, setSoLuongDaBan] = useState(0);
   const [traGop, setTraGop] = useState(0);
   const [baoHanh, setBaoHanh] = useState(0);
+  const dispatch = useDispatch();
   useEffect(() => {
     setSoLuongDaBan(Math.floor(Math.random() * 300) + 1);
     setTraGop(Math.floor(Math.random() * 5) + 1);
     setBaoHanh(Math.floor(Math.random() * 24) + 1);
   }, []);
+  const { productsLove } = useSelector((store) => store.productFutureLocal);
+
   // Tổng số sản phẩm
   const tongSoSanPham = 1000;
 
@@ -35,9 +43,17 @@ function ProductItem({ product, hiddenSold, isLoading, hiddenDesc, cart }) {
 
   // Tính width của countdown element còn lại
   const widthCountdownConLai = widthBanDau * (1 - tyLeDaBan);
+  const actionButtionsRef = useRef();
+
+  // handle navigate
+  const navigate = useNavigate();
+  const handleNavigate = (e) => {
+    if (actionButtionsRef.current.contains(e.target)) return;
+    navigate(clientRoutes.products + "/" + product.slug);
+  };
 
   return (
-    <Link to={clientRoutes.products + "/" + product.slug}>
+    <div onClick={handleNavigate}>
       <motion.div
         className="product-item"
         onHoverStart={() => setHovered(true)}
@@ -97,6 +113,7 @@ function ProductItem({ product, hiddenSold, isLoading, hiddenDesc, cart }) {
 
           <motion.span
             className="product-item__action-button"
+            ref={actionButtionsRef}
             variants={actionButton}
             initial="initial"
             animate={hovered ? "show" : "hidden"}
@@ -109,21 +126,38 @@ function ProductItem({ product, hiddenSold, isLoading, hiddenDesc, cart }) {
               title="Thêm vào yêu thích"
               href=""
               alt=""
+              onClick={(e) => {
+                e.preventDefault();
+                dispatch(setProductsLove(product));
+              }}
             >
-              <FontAwesomeIcon icon={faHeart} />
+              <FontAwesomeIcon
+                style={{
+                  color: productsLove.find(
+                    (productLove) => productLove.id === product.id
+                  )
+                    ? "red"
+                    : "",
+                }}
+                icon={faHeart}
+              />
             </motion.a>
             <motion.a
               variants={actionButton}
               title="Thêm vào so sánh"
               href=""
               alt=""
+              onClick={(e) => {
+                e.preventDefault();
+                toastDanger("Sản phẩm không có nội dung để so sánh sản phẩm!");
+              }}
             >
               <FontAwesomeIcon icon={faRotate} />
             </motion.a>
           </motion.span>
         </>
       </motion.div>
-    </Link>
+    </div>
   );
 }
 
