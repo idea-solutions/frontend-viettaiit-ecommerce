@@ -36,6 +36,7 @@
         - section dangkynhantintuc  => Ok
 
     - ProductDetail  => OK
+    - 14/09/2023 => Xem lại những cái cần làm
     - ProductAll
     - Footer
 

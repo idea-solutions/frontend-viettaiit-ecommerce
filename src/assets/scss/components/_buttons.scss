@@ -143,12 +143,14 @@
     &:nth-child(3) {
       border-left: 1px solid $gray-700;
     }
-
+    @include transition;
     &:hover {
-      background-color: $gray-300;
+      background-color: $primary;
+      color: $white;
     }
   }
-  span {
+  span,
+  input {
     font-size: 12px;
     padding: 0px 8px;
     &:hover {

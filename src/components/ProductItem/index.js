@@ -7,8 +7,8 @@ import {
   faHeart,
   faRotate,
 } from "@fortawesome/free-solid-svg-icons";
-import { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { lazy, useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
@@ -19,7 +19,13 @@ import { formatCurrency } from "../../utils/format";
 import { clientRoutes } from "../../routes";
 import { toastDanger } from "../../utils/toast";
 import { setProductsLove } from "../../features/productFutureLocal";
+
+const QuickView = lazy(import("./quickView"));
 function ProductItem({ product, hiddenSold, isLoading, hiddenDesc, cart }) {
+  // modal show quick view product
+  const [quickView, setQuickView] = useState(false);
+  const [slugName, setSlugName] = useState("");
+
   const [hovered, setHovered] = useState(false);
   const [soLuongDaBan, setSoLuongDaBan] = useState(0);
   const [traGop, setTraGop] = useState(0);
@@ -46,21 +52,19 @@ function ProductItem({ product, hiddenSold, isLoading, hiddenDesc, cart }) {
   const actionButtionsRef = useRef();
 
   // handle navigate
-  const navigate = useNavigate();
-  const handleNavigate = (e) => {
-    if (actionButtionsRef.current.contains(e.target)) return;
-    navigate(clientRoutes.products + "/chi-tiet/" + product.slug);
-  };
 
   return (
-    <div onClick={handleNavigate}>
+    <div>
       <motion.div
         className="product-item"
         onHoverStart={() => setHovered(true)}
         onHoverEnd={() => setHovered(false)}
       >
         <>
-          <div className="product-item__image">
+          <Link
+            to={clientRoutes.products + "/chi-tiet/" + product.slug}
+            className="product-item__image"
+          >
             <LazyImage
               src={
                 process.env.REACT_APP_BACKEND_URL +
@@ -69,7 +73,7 @@ function ProductItem({ product, hiddenSold, isLoading, hiddenDesc, cart }) {
               }
               alt=""
             />
-          </div>
+          </Link>
           <span className="discount">Giảm {product.discount}%</span>
           <span className="pay">Trả góp {traGop}%</span>
           <span className="warranty">BH {baoHanh} tháng</span>
@@ -118,7 +122,17 @@ function ProductItem({ product, hiddenSold, isLoading, hiddenDesc, cart }) {
             initial="initial"
             animate={hovered ? "show" : "hidden"}
           >
-            <motion.a variants={actionButton} title="Xem nhanh" href="" alt="">
+            <motion.a
+              variants={actionButton}
+              title="Xem nhanh"
+              href=""
+              alt=""
+              onClick={(e) => {
+                e.preventDefault();
+                setSlugName(product.slug);
+                setQuickView(true);
+              }}
+            >
               <FontAwesomeIcon icon={faEye} />
             </motion.a>
             <motion.a
@@ -154,6 +168,13 @@ function ProductItem({ product, hiddenSold, isLoading, hiddenDesc, cart }) {
             >
               <FontAwesomeIcon icon={faRotate} />
             </motion.a>
+            {slugName && quickView && (
+              <QuickView
+                slugName={slugName}
+                show={quickView}
+                onHide={() => setQuickView(false)}
+              />
+            )}
           </motion.span>
         </>
       </motion.div>
@@ -168,3 +189,5 @@ const actionButton = {
 };
 
 export default ProductItem;
+
+// Quick view product

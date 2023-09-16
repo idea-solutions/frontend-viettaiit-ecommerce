@@ -22,7 +22,10 @@ import { useEffect, useState } from "react";
 import ListProductSlide from "../../components/ListProductSlide";
 import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
-import { setProductsHaveBeenSaw } from "../../features/productFutureLocal";
+import {
+  setProductsHaveBeenSaw,
+  setProductsLove,
+} from "../../features/productFutureLocal";
 function ProductDetail() {
   const { slug: name } = useParams();
 
@@ -42,9 +45,10 @@ function ProductDetail() {
 
   // Fake phu kien tam thoi
   const { productsIphone } = useSelector((store) => store.product);
-  const { productsHaveBeenSaw } = useSelector(
+  const { productsHaveBeenSaw, productsLove } = useSelector(
     (store) => store.productFutureLocal
   );
+
   return (
     <div className="product-detail">
       <HelmetCustom title="Chi tiết sản phẩm" />
@@ -276,13 +280,25 @@ function ProductDetail() {
             </div>
 
             <div className="bts mt-2">
-              <Button variant="btn btn-love mb-2 btn-md w-100">
-                {" "}
-                <FontAwesomeIcon icon={faEye} /> Thêm vào yêu thích
+              <Button
+                variant="btn btn-love mb-2 btn-md w-100 "
+                onClick={() => dispatch(setProductsLove(data))}
+              >
+                <FontAwesomeIcon
+                  icon={faHeart}
+                  style={{
+                    color: productsLove.find((prLove) => prLove.id === data?.id)
+                      ? "red"
+                      : "",
+                  }}
+                />{" "}
+                {productsLove.find((prLove) => prLove.id === data?.id)
+                  ? "Bỏ yêu thích"
+                  : " Thêm vào yêu thích"}
               </Button>
               <Button variant="btn btn-love btn-md w-100">
                 {" "}
-                <FontAwesomeIcon icon={faHeart} />
+                <FontAwesomeIcon icon={faEye} />
                 Thêm vào vào so sánh
               </Button>
             </div>
