@@ -20,14 +20,7 @@ import { clientRoutes } from "../../routes";
 import { toastDanger } from "../../utils/toast";
 import { setProductsLove } from "../../features/productFutureLocal";
 import QuickView from "./quickView";
-function ProductItem({
-  product,
-  hiddenSold,
-  isLoading,
-  hiddenDesc,
-  cart,
-
-}) {
+function ProductItem({ product, hiddenSold, isLoading, hiddenDesc, cart }) {
   // modal show quick view product
   const [quickView, setQuickView] = useState(false);
   const [slugName, setSlugName] = useState("");
@@ -91,7 +84,9 @@ function ProductItem({
           <div className="d-flex justify-content-between align-items-center my-2">
             <div className="product-item__price">
               <span className="product-item__price-old">
-                {formatCurrency(product.price || 0)}
+                {product.discount !== 0
+                  ? formatCurrency(product.price || 0)
+                  : "------------------------"}
               </span>
               <span className="product-item__price-new">
                 {formatCurrency(

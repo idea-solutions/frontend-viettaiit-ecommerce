@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 
 // MY IMPORTS
-import Breadcrumb from "../../../components/Breadcrumb";
+import Breadcrumb from "../../components/Breadcrumb";
 import HelmetCustom from "../../components/HelmetCustom";
 import ListProductSlide from "../../components/ListProductSlide";
 import ProductNone from "../../components/Product/productNone";

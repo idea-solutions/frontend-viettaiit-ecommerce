@@ -1,4 +1,3 @@
-import ProductQuery from "../pages/product/productQuery/productQuery";
 import { clientRoutes } from "./routes";
 import { lazy } from "react";
 
@@ -11,6 +10,8 @@ const Register = lazy(() => import("../pages/auth/register"));
 const NotFound = lazy(() => import("../pages/notFound"));
 const ProductDetail = lazy(() => import("../pages/product/productDetail"));
 const LoginSuccess = lazy(() => import("../pages/auth/login/loginSuccess"));
+const ProductLove = lazy(() => import("../pages/product/productLove"));
+const ProductQuery = lazy(() => import("../pages/product/productQuery/productQuery"));
 // import Home from "../pages/home";
 // import Login from "../pages/login";
 // import Register from "../pages/register";
@@ -29,6 +30,7 @@ const clientPages = [
   { com: <Category />, path: clientRoutes.products + "/loai/:name" },
   { com: <ProductDetail />, path: clientRoutes.products + "/chi-tiet/:slug" },
   { com: <ProductQuery />, path: clientRoutes.products + "/:name" },
+  { com: <ProductLove />, path: clientRoutes.products + "/tat-ca/san-pham-yeu-thich" },
   // page not found
   { com: <NotFound />, path: "*" },
 ];
