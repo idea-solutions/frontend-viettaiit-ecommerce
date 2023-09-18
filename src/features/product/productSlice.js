@@ -1,20 +1,18 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import {
-  getProductsAsync,
-  getProductsHotSalesAsync,
-} from "./productThunk";
+import { getProductsAsync, getProductsHotSalesAsync } from "./productThunk";
 const initialState = {
   products: [],
-  perPage: 6,
+  perPage: 8,
   totalPages: 1,
   total: 2,
   query: {
     name: "",
-    categoryName: "",
-    providerName: "",
+    categoryId: "",
+    providerId: "",
     sort: "",
+    page: 1,
   },
-  page: 1,
+
   isLoading: false,
   isError: false,
 };
@@ -22,7 +20,7 @@ const initialState = {
 export const getProducts = createAsyncThunk(
   "products/getProducts",
   async (_, thunkAPI) => {
-    return await getProductsAsync("/products",  thunkAPI);
+    return await getProductsAsync("/products", thunkAPI);
   }
 );
 
@@ -33,14 +31,12 @@ export const getProductsHotSales = createAsyncThunk(
   }
 );
 
-
-
-
 const productSlice = createSlice({
   name: "product",
   initialState,
   reducers: {
     setQueryProduct: (state, action) => {
+      if (action.payload.name === "categoryId") state.query.page = 1;
       const value =
         action.payload.value === "all" ? null : action.payload.value;
       state.query = {
@@ -49,7 +45,7 @@ const productSlice = createSlice({
       };
     },
     resetQueryProduct: (state) => {
-      state.query = { name: "", categoryName: "", providerName: "", sort: "" };
+      state.query = { name: "", categoryId: "", providerId: "", sort: "" };
     },
   },
 
@@ -84,8 +80,6 @@ const productSlice = createSlice({
     builder.addCase(getProductsHotSales.rejected, (state, action) => {
       state.isLoading = state.isError = true;
     });
-
-    
   },
 });
 

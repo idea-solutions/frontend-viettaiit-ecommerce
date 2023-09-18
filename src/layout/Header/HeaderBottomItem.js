@@ -1,9 +1,11 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { easeInOut, motion } from "framer-motion";
 import { useState } from "react";
-import { Link, useNavigate, useNavigation } from "react-router-dom";
+import {  useNavigate} from "react-router-dom";
 import { clientRoutes } from "../../routes";
 import { slugify } from "../../utils/slug";
+import { setQueryProduct } from "../../features/product/productSlice";
+import { useDispatch } from "react-redux";
 
 const firstMenuItem1 = {
   initial: { y: 100, opacity: 0, display: "none" },
@@ -26,7 +28,7 @@ const subMenuIconRight = {
 const HeaderBottomItem = ({ item }) => {
   const [isHoverItem1, setIsHoverItem1] = useState(false);
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const navigateTo = (e) => {
     const title = e.target.getAttribute("title");
     const name = slugify(title);
@@ -38,9 +40,16 @@ const HeaderBottomItem = ({ item }) => {
       onMouseLeave={() => setIsHoverItem1(false)}
       className="item"
     >
-      <Link to={item.to} className="link">
+      <div
+        o
+        onClick={() => {
+          dispatch(setQueryProduct({ name: "discount", value: "false" }));
+          navigate(clientRoutes.products + "/tat-ca");
+        }}
+        className="link"
+      >
         {item.title}
-      </Link>
+      </div>
       {item.iconDown && <FontAwesomeIcon icon={item.iconDown} />}
       {item.subMenu &&
         (item.title === "IPhone" ? (
@@ -99,7 +108,11 @@ const SubItem2 = ({ subItem, navigateTo }) => {
       onMouseLeave={() => setIsHoverItem2(false)}
       className="sub-item d-flex justify-content-between"
     >
-      <span className="sub-link text-black" title={subItem.title} onClick={navigateTo}>
+      <span
+        className="sub-link text-black"
+        title={subItem.title}
+        onClick={navigateTo}
+      >
         {subItem.title}
       </span>
       {subItem.iconRight && (

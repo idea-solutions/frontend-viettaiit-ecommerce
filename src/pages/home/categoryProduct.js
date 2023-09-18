@@ -9,14 +9,17 @@ import { Fragment, useEffect, useState } from "react";
 import ProductItem from "../../components/ProductItem";
 import { useMediaQuery } from "react-responsive";
 import { Col, Row, Spinner } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import {} from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import React from "react";
 import httpRequest from "../../services/httpRequest";
 import ListProductSlide from "../../components/ListProductSlide";
-import { clientPages, clientRoutes } from "../../routes";
+import {  clientRoutes } from "../../routes";
+import { setQueryProduct } from "../../features/product/productSlice";
 function CategoryProduct({ category: cate, listSubCategory, title }) {
   console.log(`[HOME] CategoryProduct ${cate} - re-render`);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
   const [category, setCategory] = useState(cate);
   const [indexActive, setIndexActive] = useState(0);
@@ -137,14 +140,17 @@ function CategoryProduct({ category: cate, listSubCategory, title }) {
       </div>
       {createListProduct()}
       <div className="text-center">
-        <Link
+        <div
           className="btn btn-outline-primary my-4 btn-md"
-          to={clientRoutes.products + "/" + category}
+          onClick={() => {
+            dispatch(setQueryProduct({ name: "discount", value: "false" }));
+            navigate(clientRoutes.products + "/tat-ca");
+          }}
         >
           <span>Xem tất cả</span>
 
           <FontAwesomeIcon icon={faChevronRight} shake className="ms-2" />
-        </Link>
+        </div>
       </div>
     </div>
   );

@@ -5,10 +5,12 @@ import LazyImage from "../../components/LazyImage";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategories } from "../../features/category/categorySlice";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { clientRoutes } from "../../routes";
+import { setQueryProduct } from "../../features/product/productSlice";
 function DanhMucNoiBat() {
   console.log("[HOME] danhmucnoibat --- re-render");
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getCategories());
@@ -44,7 +46,13 @@ function DanhMucNoiBat() {
         {categories.map((category, index) => (
           <SwiperSlide key={index}>
             <Col className="item">
-              <Link
+              <div
+                onClick={() => {
+                  dispatch(
+                    setQueryProduct({ name: "categoryId", value: category.id })
+                  );
+                  navigate(clientRoutes.products + "/tat-ca");
+                }}
                 to={clientRoutes.products + "/" + category.categoryName}
                 className="border-1 d-flex flex-column gap-1 align-items-center"
               >
@@ -59,7 +67,7 @@ function DanhMucNoiBat() {
                 <span className="mt-2 text-size-16">
                   {category.categoryName}
                 </span>
-              </Link>
+              </div>
             </Col>
           </SwiperSlide>
         ))}

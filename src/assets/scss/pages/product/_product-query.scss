@@ -57,6 +57,17 @@
             color: $secondary;
           }
         }
+
+        &.active {
+          transform: translateY(-5px);
+
+          span {
+            background-color: $primary;
+          }
+          small {
+            color: $secondary;
+          }
+        }
       }
     }
   }

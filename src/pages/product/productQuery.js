@@ -15,49 +15,36 @@ import ProductItem from "../../components/ProductItem";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Scrollbar } from "swiper/modules";
 import { useEffect } from "react";
-import { getProducts } from "../../features/product/productSlice";
+import {
+  getProducts,
+  setQueryProduct,
+} from "../../features/product/productSlice";
+import useScrollTop from "../../hooks/useScrollTop";
+import HelmetCustom from "../../components/HelmetCustom";
 
-const menuSubCategories = {
-  all: [
-    {
-      title: "Iphone",
-      icon: require("../../assets/icons/subCategories/iphone.webp"),
-    },
-    {
-      title: "Ipad",
-      icon: require("../../assets/icons/subCategories/ipad.webp"),
-    },
-    {
-      title: "Macbook",
-      icon: require("../../assets/icons/subCategories/macbook.webp"),
-    },
-    {
-      title: "Apple Watch",
-      icon: require("../../assets/icons/subCategories/apple-watch.webp"),
-    },
-    {
-      title: "Airports",
-      icon: require("../../assets/icons/subCategories/airports.webp"),
-    },
-    {
-      title: "Phụ kiện",
-      icon: require("../../assets/icons/subCategories/phu-kien.webp"),
-    },
-  ],
+const optionsName = {
+  "san-pham-khuyen-mai": "Sản phẩm khuyến mãi",
+  "tat-ca": "Tất cả sản phẩm",
+  
 };
 function ProductQuery() {
+  useScrollTop();
   const dispatch = useDispatch();
+  const { name } = useParams();
+  const { products, query, page, totalPages } = useSelector(
+    (store) => store.product
+  );
   useEffect(() => {
     dispatch(getProducts());
-  }, [dispatch]);
-  const { products } = useSelector((store) => store.product);
-  const { categories } = useSelector((store) => store.category);
+  }, [dispatch, query]);
+
   return (
     <div className="product-query">
-      <Breadcrumb title="Tất cả sản phẩm" />
+      <Breadcrumb title={optionsName[name]} />
+      <HelmetCustom title={optionsName[name]} />
       <div className="container">
         <h3 className="text-center fw-bold text-size-26 mb-2">
-          Tất cả sản phẩm
+          {optionsName[name]}
         </h3>
         <div
           style={{
@@ -69,35 +56,60 @@ function ProductQuery() {
 
         {/* sub categories */}
 
-        <SubCategories />
+        <SubCategories categoryId={query.categoryId} />
 
         {/* bar query */}
-        <BarQuery />
+        <BarQuery sortValue={query["sort"]} />
 
         {/* LIST PRODUCT */}
 
         <div>
           <Row>
-            {products &&
+            {products && products.length > 0 ? (
               products.map((product, index) => (
                 <Col xs={12} sm={6} md={4} lg={3} key={index}>
                   <ProductItem product={product} />
                 </Col>
-              ))}
+              ))
+            ) : (
+              <div className="text-success  text-bold text-center py-5 text-uppercase bg-body-secondary mt-2">
+                <h3 className="fw-bold">Không có sản phẩm !</h3>
+              </div>
+            )}
           </Row>
-
           <div className="my-4 d-flex align-items-center justify-content-center">
             <Pagination>
-              <Pagination.Prev />
-              <Pagination.Item>{1}</Pagination.Item>
-              <Pagination.Item>{10}</Pagination.Item>
-              <Pagination.Item>{11}</Pagination.Item>
-              <Pagination.Item active>{12}</Pagination.Item>
-              <Pagination.Item>{13}</Pagination.Item>
-
-              <Pagination.Ellipsis />
-              <Pagination.Item>{20}</Pagination.Item>
-              <Pagination.Next />
+              <Pagination.Prev
+                disabled={page === 1}
+                onClick={() => {
+                  var curPage;
+                  if (page <= 1) curPage = totalPages;
+                  else curPage = page - 1;
+                  dispatch(setQueryProduct({ name: "page", value: curPage }));
+                }}
+              />
+              {Array.from({ length: totalPages }, (_, index) => (
+                <Pagination.Item
+                  onClick={() =>
+                    dispatch(
+                      setQueryProduct({ name: "page", value: index + 1 })
+                    )
+                  }
+                  key={index + 1}
+                  active={page === index + 1}
+                >
+                  {index + 1}
+                </Pagination.Item>
+              ))}
+              <Pagination.Next
+                disabled={page === totalPages}
+                onClick={() => {
+                  var curPage;
+                  if (page >= totalPages) curPage = 1;
+                  else curPage = page + 1;
+                  dispatch(setQueryProduct({ name: "page", value: curPage }));
+                }}
+              />
             </Pagination>
           </div>
         </div>
@@ -108,8 +120,12 @@ function ProductQuery() {
 
 export default ProductQuery;
 
-function SubCategories({}) {
+function SubCategories({ categoryId }) {
   const { categories } = useSelector((store) => store.category);
+  const dispatch = useDispatch();
+  const handleQueryProduct = (name, value) => {
+    dispatch(setQueryProduct({ name, value }));
+  };
   return (
     <div className="sub-categories">
       <Swiper
@@ -131,34 +147,69 @@ function SubCategories({}) {
             spaceBetween: 10,
           },
           1024: {
-            slidesPerView: 6,
+            slidesPerView: 7,
             spaceBetween: 25,
           },
         }}
-        className="items"
+        className="list-product-slide items"
       >
-        {categories.map((category, index) => (
-          <SwiperSlide className="item" key={index}>
+        <>
+          <SwiperSlide
+            className={`item ${categoryId ? "" : "active"}`}
+            onClick={() => handleQueryProduct("categoryId", "all")}
+          >
             <span>
-              <LazyImage
-                src={
-                  process.env.REACT_APP_BACKEND_URL +
-                  "/static/assets/images/category/" +
-                  category.image
-                }
-                alt=""
-              />
+              <LazyImage className="w-100 h-100 rounded-circle" src={require('../../assets/no-image.webp')} alt="" />
             </span>
-            <small>{category.categoryName}</small>
+            <small>All</small>
           </SwiperSlide>
-        ))}
+          {categories.map((category, index) => (
+            <SwiperSlide
+              className={`item ${categoryId === category.id ? "active" : ""}`}
+              key={index}
+              onClick={() => handleQueryProduct("categoryId", category.id)}
+            >
+              <span>
+                <LazyImage
+                  src={
+                    process.env.REACT_APP_BACKEND_URL +
+                    "/static/assets/images/category/" +
+                    category.image
+                  }
+                  alt=""
+                />
+              </span>
+              <small>{category.categoryName}</small>
+            </SwiperSlide>
+          ))}
+        </>
       </Swiper>
     </div>
   );
 }
 
 // bar -query
-function BarQuery() {
+function BarQuery({ sortValue }) {
+  const dispatch = useDispatch();
+  const handleQueryProduct = (name, value) => {
+    dispatch(setQueryProduct({ name, value }));
+  };
+  const itemRight = [
+    {
+      title: "Mặc định",
+      value: "createdAt",
+    },
+    { title: "Tên A-Z", value: "name" },
+    {
+      title: "Tên A-Z",
+      value: "-name",
+    },
+    {
+      title: "Giá thấp đến cao",
+      value: "price",
+    },
+    { title: "Giá cao đến thấp", value: "-price" },
+  ];
   return (
     <div className="bar-query my-4">
       <div className="wrapper">
@@ -172,36 +223,30 @@ function BarQuery() {
             <FontAwesomeIcon icon={faArrowDownAZ} />
             <span>Xếp theo</span>
           </div>
-          <div className="item active">Mặc định</div>
-          <div className="item">Tên A-Z</div>
-          <div className="item">Tên Z-A</div>
-          <div className="item">Hàng mới</div>
-          <div className="item">Giá thấp đến cao</div>
-          <div className="item">Giá cao đến thấp</div>
+          {itemRight.map((item, index) => (
+            <div
+              key={index}
+              className={`item ${sortValue === item.value ? "active" : ""}`}
+              onClick={() => handleQueryProduct("sort", item.value)}
+            >
+              {item.title}
+            </div>
+          ))}
         </div>
         <DropdownButton
           id="dropdown-basic-button"
           className="max-lg-display d-none right"
           title="Tùy chọn"
         >
-          <Dropdown.Item href="#/action-1">
-            <div className="item active">Mặc định</div>
-          </Dropdown.Item>
-          <Dropdown.Item href="#/action-1">
-            <div className="item">Tên A-Z</div>
-          </Dropdown.Item>
-          <Dropdown.Item href="#/action-1">
-            <div className="item">Tên Z-A</div>
-          </Dropdown.Item>
-          <Dropdown.Item href="#/action-1">
-            <div className="item">Hàng mới</div>
-          </Dropdown.Item>
-          <Dropdown.Item href="#/action-1">
-            <div className="item">Giá thấp đến cao</div>
-          </Dropdown.Item>
-          <Dropdown.Item href="#/action-1">
-            <div className="item">Giá cao đến thấp</div>
-          </Dropdown.Item>
+          {itemRight.map((item, index) => (
+            <Dropdown.Item
+              key={index}
+              className={`item ${sortValue === item.value ? "active" : ""}`}
+              onClick={() => handleQueryProduct("sort", item.value)}
+            >
+              {item.title}
+            </Dropdown.Item>
+          ))}
         </DropdownButton>
       </div>
     </div>

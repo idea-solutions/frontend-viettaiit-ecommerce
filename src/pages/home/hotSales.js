@@ -5,10 +5,16 @@ import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { IconFire } from "../../assets/icons";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useMemo } from "react";
-import { getProductsHotSales } from "../../features/product/productSlice";
+import {
+  getProductsHotSales,
+  setQueryProduct,
+} from "../../features/product/productSlice";
+import { useNavigate } from "react-router-dom";
+import { clientRoutes } from "../../routes";
 
 function HotSales() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   console.log("[HOME] hot sales - re-render");
   useEffect(() => {
     dispatch(getProductsHotSales());
@@ -73,6 +79,10 @@ function HotSales() {
           <Button
             className="hover-bg-secondary btn-md btn-icon-text btn-md"
             variant="primary"
+            onClick={() => {
+              dispatch(setQueryProduct({ name: "discount", value: "true" }));
+              navigate(clientRoutes.products + "/san-pham-khuyen-mai");
+            }}
           >
             Xem tất cả
             <FontAwesomeIcon className="btn-icon-append" icon={faAngleRight} />

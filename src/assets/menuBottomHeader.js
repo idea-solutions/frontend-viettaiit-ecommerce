@@ -1,14 +1,11 @@
 import { faAngleDown, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { clientRoutes } from "../routes";
-import { slugify } from "../utils/slug";
 
-const suffixSearch = clientRoutes.products + "/loai/";
 export const menuBottom = [
   { title: "Trang chủ", to: clientRoutes.home },
   { title: "Giới thiệu", to: clientRoutes.introduce },
   {
     title: "IPhone",
-    to: suffixSearch + slugify("IPhone"),
     iconDown: faAngleDown,
     subMenu: [
       {
@@ -47,7 +44,6 @@ export const menuBottom = [
   },
   {
     title: "Ipad",
-    to: suffixSearch + slugify("Ipad"),
     iconDown: faAngleDown,
     subMenu: [
       {
@@ -72,13 +68,11 @@ export const menuBottom = [
   },
   {
     title: "Macbook",
-    to: suffixSearch + slugify("Macbook"),
     iconDown: faAngleDown,
     subMenu: [{ title: "Macbook Pro" }, { title: "Macbook Air" }],
   },
   {
     title: "Apple Watch",
-    to: suffixSearch + slugify("Apple Watch"),
     iconDown: faAngleDown,
     subMenu: [
       { title: "Apple Watch Ultra" },
@@ -89,10 +83,10 @@ export const menuBottom = [
       { title: "Apple Watch S3" },
     ],
   },
-  { title: "Airpods", to: suffixSearch + slugify("Airpods") },
+  { title: "Airpods" },
   {
     title: "Phụ kiện",
-    to: suffixSearch + slugify("Phụ kiện"),
+
     iconDown: faAngleDown,
     subMenu: [
       { title: "Phụ kiện Apple" },
@@ -103,6 +97,6 @@ export const menuBottom = [
     ],
   },
   { title: "Chính sách", to: clientRoutes.policy },
-  { title: "Tin tức", to: clientRoutes.news  },
-  { title: "Liên hệ", to:  clientRoutes.contact  },
+  { title: "Tin tức", to: clientRoutes.news },
+  { title: "Liên hệ", to: clientRoutes.contact },
 ];

@@ -7,7 +7,7 @@ import {
   faHeart,
   faRotate,
 } from "@fortawesome/free-solid-svg-icons";
-import { lazy, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
@@ -73,7 +73,11 @@ function ProductItem({ product, hiddenSold, isLoading, hiddenDesc, cart }) {
               alt=""
             />
           </Link>
-          <span className="discount">Giảm {product.discount}%</span>
+          <span
+            className={`discount ${product.discount !== 0 ? "" : "d-none"}`}
+          >
+            Giảm {product.discount}%
+          </span>
           <span className="pay">Trả góp {traGop}%</span>
           <span className="warranty">BH {baoHanh} tháng</span>
           <span className="product-item__title my-2">{product.name}</span>
