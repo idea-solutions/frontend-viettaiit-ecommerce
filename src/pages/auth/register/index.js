@@ -7,18 +7,18 @@ import { useDispatch, useSelector } from "react-redux";
 
 // MY IMPORTS
 
-import { clientRoutes } from "../../routes";
-import { validateFormRegister } from "../../utils/validate";
+import { clientRoutes } from "../../../routes";
+import { validateFormRegister } from "../../../utils/validate";
 
-import { registerAuth } from "../../features/auth/authSlice";
+import { registerAuth } from "../../../features/auth/authSlice";
 
-import { setLoadingClose, setLoadingShow } from "../../features/loadingSlice";
-import HelmetCustom from "../../components/HelmetCustom";
-import Breadcrumb from "../../components/Breadcrumb";
-import { toastWarning } from "../../utils/toast";
+import { setLoadingClose, setLoadingShow } from "../../../features/loadingSlice";
+import HelmetCustom from "../../../components/HelmetCustom";
+import Breadcrumb from "../../../components/Breadcrumb";
+import { toastWarning } from "../../../utils/toast";
 import { Form } from "react-bootstrap";
 import { FaFacebookF, FaGithub, FaGoogle } from "react-icons/fa";
-import useScrollTop from "../../hooks/useScrollTop";
+import useScrollTop from "../../../hooks/useScrollTop";
 function Register() {
   useScrollTop();
   const dispatch = useDispatch();

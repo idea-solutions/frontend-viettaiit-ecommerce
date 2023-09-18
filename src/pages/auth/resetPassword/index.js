@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { resetPasswordAuth } from "../../features/auth/authSlice";
+import { resetPasswordAuth } from "../../../features/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { setLoadingClose, setLoadingShow } from "../../features/loadingSlice";
-import { clientRoutes } from "../../routes";
-import HelmetCustom from "../../components/HelmetCustom";
-import Breadcrumb from "../../components/Breadcrumb";
-import { validateFormResetPassword } from "../../utils/validate";
-import { toastWarning } from "../../utils/toast";
+import { setLoadingClose, setLoadingShow } from "../../../features/loadingSlice";
+import { clientRoutes } from "../../../routes";
+import HelmetCustom from "../../../components/HelmetCustom";
+import Breadcrumb from "../../../components/Breadcrumb";
+import { validateFormResetPassword } from "../../../utils/validate";
+import { toastWarning } from "../../../utils/toast";
 import { Button, Form } from "react-bootstrap";
 
 function ResetPassword() {

@@ -4,19 +4,19 @@ import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 // MY IMPORTS
-import { clientRoutes } from "../../routes";
-import { checkEmail, validateFormLogin } from "../../utils/validate";
+import { clientRoutes } from "../../../routes";
+import { checkEmail, validateFormLogin } from "../../../utils/validate";
 
 // REDUX SLICE
-import { forgotPasswordAuth, loginAuth } from "../../features/auth/authSlice";
+import { forgotPasswordAuth, loginAuth } from "../../../features/auth/authSlice";
 
-import { setLoadingClose, setLoadingShow } from "../../features/loadingSlice";
-import HelmetCustom from "../../components/HelmetCustom";
-import Breadcrumb from "../../components/Breadcrumb";
-import { toastSuccess, toastWarning } from "../../utils/toast";
+import { setLoadingClose, setLoadingShow } from "../../../features/loadingSlice";
+import HelmetCustom from "../../../components/HelmetCustom";
+import Breadcrumb from "../../../components/Breadcrumb";
+import { toastSuccess, toastWarning } from "../../../utils/toast";
 import { Form } from "react-bootstrap";
 import { FaFacebookF, FaGithub, FaGoogle } from "react-icons/fa";
-import useScrollTop from "../../hooks/useScrollTop";
+import useScrollTop from "../../../hooks/useScrollTop";
 function Login() {
   useScrollTop();
   const [isForgotPwd, setIsForgotPwd] = useState(false);
