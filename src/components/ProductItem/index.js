@@ -19,8 +19,7 @@ import { formatCurrency } from "../../utils/format";
 import { clientRoutes } from "../../routes";
 import { toastDanger } from "../../utils/toast";
 import { setProductsLove } from "../../features/productFutureLocal";
-
-const QuickView = lazy(import("./quickView"));
+import QuickView from "./quickView";
 function ProductItem({ product, hiddenSold, isLoading, hiddenDesc, cart }) {
   // modal show quick view product
   const [quickView, setQuickView] = useState(false);
@@ -168,7 +167,7 @@ function ProductItem({ product, hiddenSold, isLoading, hiddenDesc, cart }) {
             >
               <FontAwesomeIcon icon={faRotate} />
             </motion.a>
-            {slugName && quickView && (
+            {quickView && (
               <QuickView
                 slugName={slugName}
                 show={quickView}

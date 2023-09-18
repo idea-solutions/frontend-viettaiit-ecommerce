@@ -22,6 +22,7 @@ function QuickView({ show, onHide, slugName }) {
   const colors =
     data?.productItems.map((productItem) => productItem.color) || [];
   const [idxSelected, setIdxSelected] = useState(0);
+  if (!data) return null;
   return (
     <Modal
       show={show}

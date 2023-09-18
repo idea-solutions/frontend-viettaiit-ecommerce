@@ -1,3 +1,4 @@
+import ProductQuery from "../pages/product/productQuery";
 import { clientRoutes } from "./routes";
 import { lazy } from "react";
 
@@ -23,8 +24,12 @@ const clientPages = [
   { com: <Login />, path: clientRoutes.login },
   { com: <LoginSuccess />, path: "/login/success" },
   { com: <Register />, path: clientRoutes.register },
+
+  /// PRODUCT
   { com: <Category />, path: clientRoutes.products + "/loai/:name" },
   { com: <ProductDetail />, path: clientRoutes.products + "/chi-tiet/:slug" },
+  { com: <ProductQuery />, path: clientRoutes.products + "/:name" },
+  // page not found
   { com: <NotFound />, path: "*" },
 ];
 
