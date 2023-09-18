@@ -2,9 +2,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Scrollbar } from "swiper/modules";
 import React from "react";
 
-
 // MY IMPORTS
-import ProductItem from "../ProductItem";
+import ProductItem from "../Product/productItem";
 function ListProductSlide({
   products = [],
   spaceBetween,
@@ -12,7 +11,24 @@ function ListProductSlide({
   navigation,
   scrollbar,
   delay,
-  breakpoints,
+  breakpoints = {
+    100: {
+      slidesPerView: 1,
+      spaceBetween: 50,
+    },
+    500: {
+      slidesPerView: 2,
+      spaceBetween: 10,
+    },
+    768: {
+      slidesPerView: 4,
+      spaceBetween: 10,
+    },
+    1024: {
+      slidesPerView: 4,
+      spaceBetween: 25,
+    },
+  },
   hiddenSold = false,
   hiddenDesc = false,
   cart = false,

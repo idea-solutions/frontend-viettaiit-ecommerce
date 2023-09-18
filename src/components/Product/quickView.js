@@ -16,7 +16,7 @@ import { formatCurrency } from "../../utils/format";
 import ButtonQuantity from "../ButtonQuantity";
 
 function QuickView({ show, onHide, slugName }) {
-  const { data, isLoading, isError } = useDataDetail("/products/" + slugName);
+  const { data } = useDataDetail("/products/" + slugName);
   const thumbImages =
     data?.productItems.map((productItem) => productItem.image) || [];
   const colors =

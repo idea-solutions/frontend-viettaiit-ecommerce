@@ -4,18 +4,24 @@ import {
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import { Fragment, useEffect, useState } from "react";
-import ProductItem from "../../components/ProductItem";
-import { useMediaQuery } from "react-responsive";
-import { Col, Row, Spinner } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import React from "react";
+import { useMediaQuery } from "react-responsive";
+import { Col, Row, Spinner } from "react-bootstrap";
+
+
+// MY IMPORTS
+import ProductItem from "../../components/Product/productItem";
+
+
+
 import httpRequest from "../../services/httpRequest";
 import ListProductSlide from "../../components/ListProductSlide";
-import {  clientRoutes } from "../../routes";
+import { clientRoutes } from "../../routes";
 import { setQueryProduct } from "../../features/product/productSlice";
+import ProductNone from "../../components/Product/productNone";
 function CategoryProduct({ category: cate, listSubCategory, title }) {
   console.log(`[HOME] CategoryProduct ${cate} - re-render`);
   const dispatch = useDispatch();
@@ -63,11 +69,7 @@ function CategoryProduct({ category: cate, listSubCategory, title }) {
       );
     }
     if (products && products.length <= 0) {
-      return (
-        <div className="text-success  text-bold text-center py-5 text-uppercase bg-body-secondary mt-2">
-          <h3 className="fw-bold">Không có sản phẩm !</h3>
-        </div>
-      );
+      return <ProductNone />;
     }
     if (isTabletOrMobile) {
       return (

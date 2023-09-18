@@ -20,7 +20,14 @@ import { clientRoutes } from "../../routes";
 import { toastDanger } from "../../utils/toast";
 import { setProductsLove } from "../../features/productFutureLocal";
 import QuickView from "./quickView";
-function ProductItem({ product, hiddenSold, isLoading, hiddenDesc, cart }) {
+function ProductItem({
+  product,
+  hiddenSold,
+  isLoading,
+  hiddenDesc,
+  cart,
+
+}) {
   // modal show quick view product
   const [quickView, setQuickView] = useState(false);
   const [slugName, setSlugName] = useState("");
@@ -99,9 +106,18 @@ function ProductItem({ product, hiddenSold, isLoading, hiddenDesc, cart }) {
                 <Tooltip>{cart ? "Thêm vào giỏ hàng" : "Tùy chọn"}</Tooltip>
               }
             >
-              <div className="product-item__icon-setting">
-                <FontAwesomeIcon icon={cart ? faCartShopping : faGear} />
-              </div>
+              {cart ? (
+                <div className="product-item__icon-setting">
+                  <FontAwesomeIcon icon={faCartShopping} />
+                </div>
+              ) : (
+                <Link
+                  to={clientRoutes.products + "/chi-tiet/" + product.slug}
+                  className="product-item__icon-setting"
+                >
+                  <FontAwesomeIcon icon={faGear} className="text-white" />
+                </Link>
+              )}
             </OverlayTrigger>
           </div>
           {!hiddenDesc && (

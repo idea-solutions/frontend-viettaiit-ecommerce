@@ -1,31 +1,31 @@
 import { useParams } from "react-router-dom";
-import Breadcrumb from "../../components/Breadcrumb";
 import {
   Col,
-  Dropdown,
-  DropdownButton,
   Pagination,
   Row,
 } from "react-bootstrap";
-import LazyImage from "../../components/LazyImage";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowDownAZ, faFilter } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
-import ProductItem from "../../components/ProductItem";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Scrollbar } from "swiper/modules";
 import { useEffect } from "react";
+
+
+// MY IMPORTS
+import useScrollTop from "../../../hooks/useScrollTop";
 import {
   getProducts,
   setQueryProduct,
-} from "../../features/product/productSlice";
-import useScrollTop from "../../hooks/useScrollTop";
-import HelmetCustom from "../../components/HelmetCustom";
+} from "../../../features/product/productSlice";
+import Breadcrumb from "../../../components/Breadcrumb";
+import HelmetCustom from "../../../components/HelmetCustom";
+import ProductItem from "../../../components/Product/productItem";
+import LazyImage from "../../../components/LazyImage";
+import BarQuery from "./barQuery";
+import ProductNone from "../../../components/Product/productNone";
 
 const optionsName = {
   "san-pham-khuyen-mai": "Sản phẩm khuyến mãi",
   "tat-ca": "Tất cả sản phẩm",
-  
 };
 function ProductQuery() {
   useScrollTop();
@@ -48,7 +48,7 @@ function ProductQuery() {
         </h3>
         <div
           style={{
-            backgroundImage: `url(${require("../../assets/sliders/slider_1/1.webp")})`,
+            backgroundImage: `url(${require("../../../assets/sliders/slider_1/1.webp")})`,
             paddingTop: "25%",
             border: "10px",
           }}
@@ -72,9 +72,7 @@ function ProductQuery() {
                 </Col>
               ))
             ) : (
-              <div className="text-success  text-bold text-center py-5 text-uppercase bg-body-secondary mt-2">
-                <h3 className="fw-bold">Không có sản phẩm !</h3>
-              </div>
+              <ProductNone />
             )}
           </Row>
           <div className="my-4 d-flex align-items-center justify-content-center">
@@ -159,7 +157,11 @@ function SubCategories({ categoryId }) {
             onClick={() => handleQueryProduct("categoryId", "all")}
           >
             <span>
-              <LazyImage className="w-100 h-100 rounded-circle" src={require('../../assets/no-image.webp')} alt="" />
+              <LazyImage
+                className="w-100 h-100 rounded-circle"
+                src={require("../../../assets/no-image.webp")}
+                alt=""
+              />
             </span>
             <small>All</small>
           </SwiperSlide>
@@ -184,71 +186,6 @@ function SubCategories({ categoryId }) {
           ))}
         </>
       </Swiper>
-    </div>
-  );
-}
-
-// bar -query
-function BarQuery({ sortValue }) {
-  const dispatch = useDispatch();
-  const handleQueryProduct = (name, value) => {
-    dispatch(setQueryProduct({ name, value }));
-  };
-  const itemRight = [
-    {
-      title: "Mặc định",
-      value: "createdAt",
-    },
-    { title: "Tên A-Z", value: "name" },
-    {
-      title: "Tên A-Z",
-      value: "-name",
-    },
-    {
-      title: "Giá thấp đến cao",
-      value: "price",
-    },
-    { title: "Giá cao đến thấp", value: "-price" },
-  ];
-  return (
-    <div className="bar-query my-4">
-      <div className="wrapper">
-        <div className="left">
-          <FontAwesomeIcon icon={faFilter} />
-          <span>Bộ lọc</span>
-          <small className=" ">0</small>
-        </div>
-        <div className="right max-lg-none">
-          <div className="d-flex gap-2 align-items-center">
-            <FontAwesomeIcon icon={faArrowDownAZ} />
-            <span>Xếp theo</span>
-          </div>
-          {itemRight.map((item, index) => (
-            <div
-              key={index}
-              className={`item ${sortValue === item.value ? "active" : ""}`}
-              onClick={() => handleQueryProduct("sort", item.value)}
-            >
-              {item.title}
-            </div>
-          ))}
-        </div>
-        <DropdownButton
-          id="dropdown-basic-button"
-          className="max-lg-display d-none right"
-          title="Tùy chọn"
-        >
-          {itemRight.map((item, index) => (
-            <Dropdown.Item
-              key={index}
-              className={`item ${sortValue === item.value ? "active" : ""}`}
-              onClick={() => handleQueryProduct("sort", item.value)}
-            >
-              {item.title}
-            </Dropdown.Item>
-          ))}
-        </DropdownButton>
-      </div>
     </div>
   );
 }

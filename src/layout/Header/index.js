@@ -40,6 +40,7 @@ function Header() {
   const [isHoveredCart, setIsHoveredCart] = useState(false);
   const { user } = useSelector((store) => store.auth);
   const { isOpen } = useSelector((store) => store.navBar);
+  const { productsLove } = useSelector((store) => store.productFutureLocal);
   const dispatch = useDispatch();
   return (
     <>
@@ -129,10 +130,13 @@ function Header() {
                       </>
                     )}
 
-                    <span className="account__item">
+                    <Link
+                      to={clientRoutes.products + "/tat-ca/san-pham-yeu-thich"}
+                      className="account__item"
+                    >
                       <FontAwesomeIcon icon={faHeart} size="lg" />
-                      <small>Danh sách yêu thích (0)</small>
-                    </span>
+                      <small>Danh sách yêu thích ({productsLove.length})</small>
+                    </Link>
                     <span className="account__item">
                       <FontAwesomeIcon icon={faRotate} size="lg" />
                       <small>So sánh sản phẩm (0)</small>

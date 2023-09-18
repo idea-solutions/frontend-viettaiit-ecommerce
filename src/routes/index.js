@@ -1,4 +1,4 @@
-import ProductQuery from "../pages/product/productQuery";
+import ProductQuery from "../pages/product/productQuery/productQuery";
 import { clientRoutes } from "./routes";
 import { lazy } from "react";
 
