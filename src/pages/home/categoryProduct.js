@@ -14,6 +14,7 @@ import {} from "react-redux";
 import React from "react";
 import httpRequest from "../../services/httpRequest";
 import ListProductSlide from "../../components/ListProductSlide";
+import { clientPages, clientRoutes } from "../../routes";
 function CategoryProduct({ category: cate, listSubCategory, title }) {
   console.log(`[HOME] CategoryProduct ${cate} - re-render`);
   const [isLoading, setIsLoading] = useState(true);
@@ -136,7 +137,10 @@ function CategoryProduct({ category: cate, listSubCategory, title }) {
       </div>
       {createListProduct()}
       <div className="text-center">
-        <Link className="btn btn-outline-primary my-4 btn-md" to="">
+        <Link
+          className="btn btn-outline-primary my-4 btn-md"
+          to={clientRoutes.products + "/" + category}
+        >
           <span>Xem tất cả</span>
 
           <FontAwesomeIcon icon={faChevronRight} shake className="ms-2" />

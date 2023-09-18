@@ -5,6 +5,8 @@ import LazyImage from "../../components/LazyImage";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategories } from "../../features/category/categorySlice";
+import { Link } from "react-router-dom";
+import { clientRoutes } from "../../routes";
 function DanhMucNoiBat() {
   console.log("[HOME] danhmucnoibat --- re-render");
   const dispatch = useDispatch();
@@ -20,7 +22,6 @@ function DanhMucNoiBat() {
         navigation={true}
         scrollbar={true}
         modules={[Navigation, Autoplay, Scrollbar]}
-      
         breakpoints={{
           100: {
             slidesPerView: 1,
@@ -43,7 +44,10 @@ function DanhMucNoiBat() {
         {categories.map((category, index) => (
           <SwiperSlide key={index}>
             <Col className="item">
-              <div className="border-1 d-flex flex-column gap-1 align-items-center">
+              <Link
+                to={clientRoutes.products + "/" + category.categoryName}
+                className="border-1 d-flex flex-column gap-1 align-items-center"
+              >
                 <LazyImage
                   src={
                     process.env.REACT_APP_BACKEND_URL +
@@ -55,12 +59,11 @@ function DanhMucNoiBat() {
                 <span className="mt-2 text-size-16">
                   {category.categoryName}
                 </span>
-              </div>
+              </Link>
             </Col>
           </SwiperSlide>
         ))}
       </Swiper>
-      
     </div>
   );
 }

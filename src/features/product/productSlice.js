@@ -21,8 +21,8 @@ const initialState = {
 
 export const getProducts = createAsyncThunk(
   "products/getProducts",
-  async (params, thunkAPI) => {
-    return await getProductsAsync("/products", { params }, thunkAPI);
+  async (_, thunkAPI) => {
+    return await getProductsAsync("/products",  thunkAPI);
   }
 );
 
@@ -65,7 +65,6 @@ const productSlice = createSlice({
       state.perPage = perPage;
       state.totalPages = totalPages;
       state.total = total;
-
       state.isLoading = state.isError = false;
     });
     builder.addCase(getProducts.rejected, (state, action) => {
