@@ -44,7 +44,7 @@ const HeaderBottomItem = ({ item }) => {
         o
         onClick={() => {
           dispatch(setQueryProduct({ name: "discount", value: "false" }));
-          navigate(clientRoutes.products + "/tat-ca");
+          navigate(clientRoutes.product.main + "/all");
         }}
         className="link"
       >

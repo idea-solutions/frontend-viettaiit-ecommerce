@@ -52,7 +52,7 @@ function ResetPassword() {
     );
     dispatch(setLoadingClose());
     if (payload.status === 200) {
-      navigate(clientRoutes.login);
+      navigate(clientRoutes.account.login);
     }
   };
   return (

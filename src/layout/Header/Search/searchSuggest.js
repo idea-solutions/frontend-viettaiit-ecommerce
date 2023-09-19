@@ -3,10 +3,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFire } from "@fortawesome/free-solid-svg-icons";
 import PropTypes from "prop-types";
 const listSuggestSearch = [
-  "IPhone 8",
   "IPhone 11",
-  "IPad Gen 9",
-  "Airspod",
+  "IPhone 12",
+  "Macbook Pro",
+  "Macbook Air",
   "Sạc nhanh",
   "Cáp Type C",
 ];
@@ -31,7 +31,9 @@ function SearchSuggest({ isFocus }) {
       </div>
       <div className="suggest__bottom">
         {listSuggestSearch.map((item, idx) => (
-          <span key={idx}>{item}</span>
+          <span key={idx} onClick={() => console.log("dsadas")}>
+            {item}
+          </span>
         ))}
       </div>
     </motion.div>

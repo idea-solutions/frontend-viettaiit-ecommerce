@@ -19,7 +19,7 @@ function VerifyEmail() {
       dispatch(setLoadingShow());
       await dispatch(verifyEmailAuth({ verificationToken, email }));
       dispatch(setLoadingClose());
-      navigate(clientRoutes.login);
+      navigate(clientRoutes.account.login);
     };
     verifyEmailAsync();
   }, []);

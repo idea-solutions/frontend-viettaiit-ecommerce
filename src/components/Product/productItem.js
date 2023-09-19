@@ -62,7 +62,7 @@ function ProductItem({ product, hiddenSold, isLoading, hiddenDesc, cart }) {
       >
         <>
           <Link
-            to={clientRoutes.products + "/chi-tiet/" + product.slug}
+            to={clientRoutes.product.detail + "/" + product.slug}
             className="product-item__image"
           >
             <LazyImage
@@ -108,7 +108,7 @@ function ProductItem({ product, hiddenSold, isLoading, hiddenDesc, cart }) {
                 </div>
               ) : (
                 <Link
-                  to={clientRoutes.products + "/chi-tiet/" + product.slug}
+                  to={clientRoutes.product.detail + "/" + product.slug}
                   className="product-item__icon-setting"
                 >
                   <FontAwesomeIcon icon={faGear} className="text-white" />

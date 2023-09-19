@@ -48,7 +48,7 @@ function Register() {
     const { payload } = await dispatch(registerAuth(inputs));
     dispatch(setLoadingClose());
     if (payload.status === 201) {
-      navigate(clientRoutes.login);
+      navigate(clientRoutes.account.login);
     }
   };
   return (
@@ -67,7 +67,7 @@ function Register() {
             <h5 className="text-center py-2">ĐĂNG KÝ</h5>
             <p className="text-center ">
               Đã có tài khoản đăng nhập
-              <Link className="text-secondary ms-1" to={clientRoutes.login}>
+              <Link className="text-secondary ms-1" to={clientRoutes.account.login}>
                 tại đây
               </Link>
             </p>

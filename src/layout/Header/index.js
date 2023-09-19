@@ -93,7 +93,7 @@ function Header() {
                     {user ? (
                       <>
                         <Link
-                          to={clientRoutes.account}
+                          to={clientRoutes.account.main}
                           className="account__item"
                         >
                           <FontAwesomeIcon icon={faUser} size="lg" />
@@ -113,7 +113,7 @@ function Header() {
                       </>
                     ) : (
                       <>
-                        <Link to={clientRoutes.login} className="account__item">
+                        <Link to={clientRoutes.account.login} className="account__item">
                           <FontAwesomeIcon
                             icon={faArrowRightToBracket}
                             size="lg"
@@ -121,7 +121,7 @@ function Header() {
                           <small>Đăng nhập</small>
                         </Link>
                         <Link
-                          to={clientRoutes.register}
+                          to={clientRoutes.account.register}
                           className="account__item"
                         >
                           <FontAwesomeIcon icon={faPlus} size="lg" />
@@ -131,7 +131,7 @@ function Header() {
                     )}
 
                     <Link
-                      to={clientRoutes.products + "/tat-ca/san-pham-yeu-thich"}
+                      to={clientRoutes.product.love}
                       className="account__item"
                     >
                       <FontAwesomeIcon icon={faHeart} size="lg" />

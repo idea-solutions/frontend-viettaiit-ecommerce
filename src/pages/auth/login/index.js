@@ -103,7 +103,7 @@ function Login() {
                     Quên mật khẩu?
                   </span>
                   <Link
-                    to={clientRoutes.register}
+                    to={clientRoutes.account.register}
                     className="hover-color-secondary "
                   >
                     Đăng ký tại đây

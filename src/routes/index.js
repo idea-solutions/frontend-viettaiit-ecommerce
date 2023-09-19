@@ -1,3 +1,4 @@
+import ProductSearch from "../pages/product/productSearch";
 import { clientRoutes } from "./routes";
 import { lazy } from "react";
 
@@ -21,19 +22,23 @@ const ProductQuery = lazy(() =>
 
 const clientPages = [
   { com: <Home />, path: clientRoutes.home },
-  { com: <VerifyEmail />, path: clientRoutes.verifyEmail },
-  { com: <ResetPassword />, path: clientRoutes.resetPassword },
-  { com: <Login />, path: clientRoutes.login },
+  { com: <VerifyEmail />, path: clientRoutes.account.verifyEmail },
+  { com: <ResetPassword />, path: clientRoutes.account.resetPassword },
+  { com: <Login />, path: clientRoutes.account.login },
   { com: <LoginSuccess />, path: "/login/success" },
-  { com: <Register />, path: clientRoutes.register },
+  { com: <Register />, path: clientRoutes.account.register },
 
   /// PRODUCT
-  { com: <ProductDetail />, path: clientRoutes.products + "/chi-tiet/:slug" },
-  { com: <ProductQuery />, path: clientRoutes.products + "/:name" },
+  { com: <ProductDetail />, path: clientRoutes.product.detail + "/:slug" },
   {
     com: <ProductLove />,
-    path: clientRoutes.products + "/tat-ca/san-pham-yeu-thich",
+    path: clientRoutes.product.love,
   },
+  {
+    com: <ProductSearch />,
+    path: clientRoutes.product.search,
+  },
+  { com: <ProductQuery />, path: clientRoutes.product.main + "/:name" },
 
   // page not found
   { com: <NotFound />, path: "*" },

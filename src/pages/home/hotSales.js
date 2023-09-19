@@ -81,7 +81,7 @@ function HotSales() {
             variant="primary"
             onClick={() => {
               dispatch(setQueryProduct({ name: "discount", value: "true" }));
-              navigate(clientRoutes.products + "/san-pham-khuyen-mai");
+              navigate(clientRoutes.product.sales);
             }}
           >
             Xem tất cả

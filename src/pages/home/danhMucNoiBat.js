@@ -51,9 +51,8 @@ function DanhMucNoiBat() {
                   dispatch(
                     setQueryProduct({ name: "categoryId", value: category.id })
                   );
-                  navigate(clientRoutes.products + "/tat-ca");
+                  navigate(clientRoutes.product.main + "/all");
                 }}
-                to={clientRoutes.products + "/" + category.categoryName}
                 className="border-1 d-flex flex-column gap-1 align-items-center"
               >
                 <LazyImage

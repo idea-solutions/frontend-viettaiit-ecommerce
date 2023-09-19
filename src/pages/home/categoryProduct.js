@@ -144,7 +144,7 @@ function CategoryProduct({ category: cate, listSubCategory, title }) {
           className="btn btn-outline-primary my-4 btn-md"
           onClick={() => {
             dispatch(setQueryProduct({ name: "discount", value: "false" }));
-            navigate(clientRoutes.products + "/tat-ca");
+            navigate(clientRoutes.product.main + "/all");
           }}
         >
           <span>Xem tất cả</span>
