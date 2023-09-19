@@ -1,14 +1,9 @@
 import { useParams } from "react-router-dom";
-import {
-  Col,
-  Pagination,
-  Row,
-} from "react-bootstrap";
+import { Col, Pagination, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Scrollbar } from "swiper/modules";
 import { useEffect } from "react";
-
 
 // MY IMPORTS
 import useScrollTop from "../../../hooks/useScrollTop";
@@ -22,6 +17,9 @@ import ProductItem from "../../../components/Product/productItem";
 import LazyImage from "../../../components/LazyImage";
 import BarQuery from "./barQuery";
 import ProductNone from "../../../components/Product/productNone";
+import NavSearch from "../../../components/Search/NavSearch";
+import { getColors } from "../../../features/color/colorSlice";
+import { getProviders } from "../../../features/provider/providerSlice";
 
 const optionsName = {
   "san-pham-khuyen-mai": "Sản phẩm khuyến mãi",
@@ -34,10 +32,14 @@ function ProductQuery() {
   const { products, query, page, totalPages } = useSelector(
     (store) => store.product
   );
+  const { optionChoose } = useSelector((store) => store.navSearch);
   useEffect(() => {
     dispatch(getProducts());
-  }, [dispatch, query]);
-
+  }, [dispatch, query,optionChoose]);
+  useEffect(() => {
+    dispatch(getColors());
+    dispatch(getProviders());
+  }, []);
   return (
     <div className="product-query">
       <Breadcrumb title={optionsName[name]} />
@@ -111,7 +113,8 @@ function ProductQuery() {
             </Pagination>
           </div>
         </div>
-      </div>
+      </div>{" "}
+      <NavSearch />
     </div>
   );
 }

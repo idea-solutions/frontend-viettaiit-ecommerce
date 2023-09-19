@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // MY IMPORTS
 import { setQueryProduct } from "../../../features/product/productSlice";
+import { setIsNavSearch } from "../../../features/navSearchSlice";
 
 function BarQuery({ sortValue }) {
   const dispatch = useDispatch();
@@ -30,7 +31,7 @@ function BarQuery({ sortValue }) {
   return (
     <div className="bar-query my-4">
       <div className="wrapper">
-        <div className="left">
+        <div className="left" onClick={() => dispatch(setIsNavSearch(true))}>
           <FontAwesomeIcon icon={faFilter} />
           <span>Bộ lọc</span>
           <small className=" ">0</small>
