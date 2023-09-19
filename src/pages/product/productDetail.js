@@ -6,7 +6,7 @@ import LazyImage from "../../components/LazyImage";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import { IconFire } from "../../assets/icons";
-import ButtonQuantity from "../../components/ButtonQuantity";
+import ButtonQuantity from "../../components/Button/ButtonQuantity";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCaretDown,

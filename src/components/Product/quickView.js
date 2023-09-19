@@ -13,7 +13,7 @@ import LazyImage from "../LazyImage";
 import useDataDetail from "../../hooks/useDataDetail";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { formatCurrency } from "../../utils/format";
-import ButtonQuantity from "../ButtonQuantity";
+import ButtonQuantity from "../Button/ButtonQuantity";
 
 function QuickView({ show, onHide, slugName }) {
   const { data } = useDataDetail("/products/" + slugName);

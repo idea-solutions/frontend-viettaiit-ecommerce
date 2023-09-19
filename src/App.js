@@ -6,6 +6,7 @@ import { Suspense } from "react";
 import { ToastContainer } from "react-toastify";
 import { AnimatePresence } from "framer-motion";
 import "react-toastify/dist/ReactToastify.css";
+import ButtonScrollTop from "./components/Button/ButtonScrollTop";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         </Routes>
       </Suspense>
       <ToastContainer position="top-center" />
+      <ButtonScrollTop/>
     </div>
   );
 }

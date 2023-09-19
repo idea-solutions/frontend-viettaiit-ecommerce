@@ -1,12 +1,12 @@
 // FRAMEWORKS
 import { easeInOut, motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { lazy, useState } from "react";
+import { useState } from "react";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 // COMPONENTS
 import FrameHover from "../../components/FrameHover";
-import ButtonQuantity from "../../components/ButtonQuantity";
+import ButtonQuantity from "../../components/Button/ButtonQuantity";
 import Search from "./Search";
 
 // STYLES

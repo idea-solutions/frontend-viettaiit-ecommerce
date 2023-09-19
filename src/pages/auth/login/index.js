@@ -140,7 +140,7 @@ function Login() {
                   onClick={(e) => {
                     e.preventDefault();
                     window.open(
-                      process.env.REACT_APP_BACKEND_URL + "/auth/facebook",
+                      process.env.REACT_APP_BACKEND_URL + "/api/v1/auth/facebook",
                       "_self"
                     );
                   }}
@@ -156,7 +156,7 @@ function Login() {
                   onClick={(e) => {
                     e.preventDefault();
                     window.open(
-                      process.env.REACT_APP_BACKEND_URL + "/auth/google",
+                      process.env.REACT_APP_BACKEND_URL + "/api/v1/auth/google",
                       "_self"
                     );
                   }}
@@ -172,7 +172,7 @@ function Login() {
                   onClick={(e) => {
                     e.preventDefault();
                     window.open(
-                      process.env.REACT_APP_BACKEND_URL + "/auth/github",
+                      process.env.REACT_APP_BACKEND_URL + "/api/v1/auth/github",
                       "_self"
                     );
                   }}

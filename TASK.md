@@ -36,8 +36,11 @@
         - section dangkynhantintuc  => Ok
 
     - ProductDetail  => OK
-    - 14/09/2023 => Xem lại những cái cần làm
-    - ProductAll
+    - button scrollTop => OK
+    - ProductQuery
+        - Cần hoàn thiện chức năng lọc
+
+    - Chức năng search
     - Footer
 
 ## TASK TỐI ƯU PERFORMANCE
