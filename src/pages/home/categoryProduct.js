@@ -11,17 +11,15 @@ import React from "react";
 import { useMediaQuery } from "react-responsive";
 import { Col, Row, Spinner } from "react-bootstrap";
 
-
 // MY IMPORTS
 import ProductItem from "../../components/Product/productItem";
-
-
 
 import httpRequest from "../../services/httpRequest";
 import ListProductSlide from "../../components/ListProductSlide";
 import { clientRoutes } from "../../routes";
 import { setQueryProduct } from "../../features/product/productSlice";
 import ProductNone from "../../components/Product/productNone";
+import PropTypes from "prop-types";
 function CategoryProduct({ category: cate, listSubCategory, title }) {
   console.log(`[HOME] CategoryProduct ${cate} - re-render`);
   const dispatch = useDispatch();
@@ -159,3 +157,9 @@ function CategoryProduct({ category: cate, listSubCategory, title }) {
 }
 
 export default React.memo(CategoryProduct);
+
+CategoryProduct.propTypes = {
+  category: PropTypes.string,
+  listSubCategory: PropTypes.array,
+  title: PropTypes.string,
+};

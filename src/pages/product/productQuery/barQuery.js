@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Dropdown, DropdownButton } from "react-bootstrap";
 import { faArrowDownAZ, faFilter } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // MY IMPORTS
 import { setQueryProduct } from "../../../features/product/productSlice";
 import { setIsNavSearch } from "../../../features/navSearchSlice";
-
+import PropTypes from "prop-types";
 function BarQuery({ sortValue }) {
   const dispatch = useDispatch();
   const handleQueryProduct = (name, value) => {
@@ -72,3 +72,7 @@ function BarQuery({ sortValue }) {
 }
 
 export default BarQuery;
+
+BarQuery.propTypes = {
+  sortValue: PropTypes.string,
+};
