@@ -1,7 +1,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Scrollbar } from "swiper/modules";
 import React from "react";
-
+import PropTypes from "prop-types";
 // MY IMPORTS
 import ProductItem from "../Product/productItem";
 function ListProductSlide({
@@ -61,3 +61,17 @@ function ListProductSlide({
 }
 
 export default React.memo(ListProductSlide);
+
+ListProductSlide.propTypes = {
+  products: PropTypes.array,
+  spaceBetween: PropTypes.number,
+  slidesPerView: PropTypes.number,
+  navigation: PropTypes.bool,
+  scrollbar: PropTypes.bool,
+  delay: PropTypes.number,
+  breakpoints: PropTypes.object,
+  hiddenSold: PropTypes.bool,
+  hiddenDesc: PropTypes.bool,
+  cart: PropTypes.bool,
+  title: PropTypes.string,
+};

@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import PropTypes from "prop-types"; 
 function AnimationComp({ children }) {
   return (
     <motion.div
@@ -20,4 +21,8 @@ const animations = {
   initial: { opacity: 0.5, x: 10 },
   animate: { opacity: 1, x: 0 },
   exit: { opacity: 0.5, y: 10 },
+};
+
+AnimationComp.propTypes = {
+  children: PropTypes.node,
 };

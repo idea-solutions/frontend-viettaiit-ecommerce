@@ -1,5 +1,6 @@
 import { useInView } from "react-intersection-observer";
 import { motion } from "framer-motion";
+import PropTypes from "prop-types";
 function LazyImage({ src, className }) {
   const [ref, inView] = useInView({
     triggerOnce: true,
@@ -18,3 +19,8 @@ function LazyImage({ src, className }) {
 }
 
 export default LazyImage;
+
+LazyImage.propTypes = {
+  src: PropTypes.string.isRequired,
+  className: PropTypes.string,
+};

@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFire } from "@fortawesome/free-solid-svg-icons";
-
+import PropTypes from "prop-types";
 const listSuggestSearch = [
   "IPhone 8",
   "IPhone 11",
@@ -39,3 +39,7 @@ function SearchSuggest({ isFocus }) {
 }
 
 export default SearchSuggest;
+
+SearchSuggest.propTypes = {
+  isFocus: PropTypes.bool,
+};

@@ -1,12 +1,12 @@
 // FRAMEWORKS
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { lazy, useState } from "react";
-import {Form} from "react-bootstrap";
+import { Form } from "react-bootstrap";
 // STYLES
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import PropTypes from "prop-types";
 const SearchSuggest = lazy(() => import("./searchSuggest"));
 // FAKE DATA SEARCH
-
 function Search({ className }) {
   const [isFocus, setIsFocus] = useState(false);
   return (
@@ -25,3 +25,7 @@ function Search({ className }) {
 // ANIMATION SEARCH
 
 export default Search;
+
+Search.propTypes = {
+  className: PropTypes.string,
+};

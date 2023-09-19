@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { clientRoutes } from "../../routes";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
-
+import PropTypes from "prop-types";
 function Breadcrumb({ title }) {
   return (
     <div className="container-fuild breadcrumb__breadcrumb">
@@ -24,3 +24,7 @@ function Breadcrumb({ title }) {
 }
 
 export default Breadcrumb;
+
+Breadcrumb.propTypes = {
+  title: PropTypes.string,
+};

@@ -1,12 +1,12 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { easeInOut, motion } from "framer-motion";
 import { useState } from "react";
-import {  useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { clientRoutes } from "../../routes";
 import { slugify } from "../../utils/slug";
 import { setQueryProduct } from "../../features/product/productSlice";
 import { useDispatch } from "react-redux";
-
+import PropTypes from "prop-types";
 const firstMenuItem1 = {
   initial: { y: 100, opacity: 0, display: "none" },
   hover: { y: 0, opacity: 1, display: "block" },
@@ -100,6 +100,10 @@ const HeaderBottomItem = ({ item }) => {
 
 export default HeaderBottomItem;
 
+HeaderBottomItem.propTypes = {
+  item: PropTypes.object,
+};
+
 const SubItem2 = ({ subItem, navigateTo }) => {
   const [isHoverItem2, setIsHoverItem2] = useState(false);
   return (
@@ -141,4 +145,8 @@ const SubItem2 = ({ subItem, navigateTo }) => {
       )}
     </motion.span>
   );
+};
+HeaderBottomItem.propTypes = {
+  subItem: PropTypes.object,
+  navigateTo: PropTypes.func,
 };

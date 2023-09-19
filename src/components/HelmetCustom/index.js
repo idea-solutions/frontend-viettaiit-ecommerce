@@ -1,5 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import logo from "../../assets/my-image.jpg";
+import PropTypes from "prop-types";
 function HelmetCustom({ title }) {
   return (
     <Helmet>
@@ -10,3 +11,7 @@ function HelmetCustom({ title }) {
 }
 
 export default HelmetCustom;
+
+HelmetCustom.propTypes = {
+  title: PropTypes.string,
+};

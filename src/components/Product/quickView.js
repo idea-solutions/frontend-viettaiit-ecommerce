@@ -14,7 +14,7 @@ import useDataDetail from "../../hooks/useDataDetail";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { formatCurrency } from "../../utils/format";
 import ButtonQuantity from "../Button/ButtonQuantity";
-
+import PropTypes from "prop-types";
 function QuickView({ show, onHide, slugName }) {
   const { data } = useDataDetail("/products/" + slugName);
   const thumbImages =
@@ -164,3 +164,9 @@ function QuickView({ show, onHide, slugName }) {
 }
 
 export default QuickView;
+
+QuickView.propTypes = {
+  show: PropTypes.bool,
+  onHide: PropTypes.bool,
+  slugName: PropTypes.string,
+};

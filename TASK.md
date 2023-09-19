@@ -38,7 +38,7 @@
     - ProductDetail  => OK
     - button scrollTop => OK
     - ProductQuery
-        - Cần hoàn thiện chức năng lọc
+        - Cần hoàn thiện chức năng lọc => OK
 
     - Chức năng search
     - Footer

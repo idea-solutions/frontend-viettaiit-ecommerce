@@ -20,6 +20,7 @@ import { clientRoutes } from "../../routes";
 import { toastDanger } from "../../utils/toast";
 import { setProductsLove } from "../../features/productFutureLocal";
 import QuickView from "./quickView";
+import PropTypes from "prop-types";
 function ProductItem({ product, hiddenSold, isLoading, hiddenDesc, cart }) {
   // modal show quick view product
   const [quickView, setQuickView] = useState(false);
@@ -205,3 +206,11 @@ const actionButton = {
 export default ProductItem;
 
 // Quick view product
+
+ProductItem.propTypes = {
+  product: PropTypes.object,
+  hiddenSold: PropTypes.bool,
+  isLoading: PropTypes.bool,
+  hiddenDesc: PropTypes.bool,
+  cart: PropTypes.bool,
+};
