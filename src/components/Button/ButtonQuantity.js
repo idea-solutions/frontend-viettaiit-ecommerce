@@ -3,7 +3,7 @@ function ButtonQuantity({ children, className }) {
   return (
     <span className={`button-quantity ${className ? className : ""}`}>
       <button>-</button>
-      <span>{children || 3}</span>
+      <input className="w-25" value={children || 3} />
       <button>+</button>
     </span>
   );

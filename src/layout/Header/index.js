@@ -113,7 +113,10 @@ function Header() {
                       </>
                     ) : (
                       <>
-                        <Link to={clientRoutes.account.login} className="account__item">
+                        <Link
+                          to={clientRoutes.account.login}
+                          className="account__item"
+                        >
                           <FontAwesomeIcon
                             icon={faArrowRightToBracket}
                             size="lg"
@@ -198,9 +201,7 @@ function Header() {
                             </motion.span>
                           </div>
                           <div>
-                            <span>
-                              <ButtonQuantity />
-                            </span>
+                            <ButtonQuantity className="btn-sm w-50 hover-bg-secondary" />
                             <small className="price">2.255.255 đ</small>
                           </div>
                         </div>
@@ -227,9 +228,7 @@ function Header() {
                             </motion.span>
                           </div>
                           <div>
-                            <span>
-                              <ButtonQuantity />
-                            </span>
+                            <ButtonQuantity className="btn-sm" />
                             <small className="price">2.255.255 đ</small>
                           </div>
                         </div>

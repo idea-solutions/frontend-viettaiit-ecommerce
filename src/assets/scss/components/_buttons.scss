@@ -130,13 +130,15 @@
 .button-quantity {
   border: 1px solid $gray-700;
   border-radius: $border-radius-sm;
-  display: inline-block;
+  display: flex;
   button {
     padding: 0px 8px;
+    height: 100%;
     border: none;
     outline: none;
     background-color: transparent;
     transition: 0.2s all ease-in-out;
+    flex: 1;
     &:nth-child(1) {
       border-right: 1px solid $gray-700;
     }
@@ -151,13 +153,26 @@
   }
   span,
   input {
+    display: block;
+    flex: 1;
+    height: 100%;
+    border-color: transparent;
+
     font-size: 12px;
     padding: 0px 8px;
     &:hover {
       cursor: auto;
     }
   }
-
+  &.btn-sm {
+    button {
+      padding: 2px 10px;
+    }
+    span {
+      font-size: 14px;
+      padding: 2px 10px;
+    }
+  }
   &.btn-md {
     button {
       padding: 4px 14px;

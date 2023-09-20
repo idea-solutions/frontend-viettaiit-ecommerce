@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Scrollbar } from "swiper/modules";
 import { useEffect } from "react";
-
+import PropTypes from "prop-types";
 // MY IMPORTS
 import useScrollTop from "../../../hooks/useScrollTop";
 import {
@@ -97,7 +97,11 @@ function ProductQuery() {
                     dispatch(
                       setQueryProduct({ name: "page", value: index + 1 })
                     );
-                    navigateAndAttachQuery(clientRoutes.product.search, navigate, query);
+                    navigateAndAttachQuery(
+                      clientRoutes.product.search,
+                      navigate,
+                      query
+                    );
                   }}
                   key={index + 1}
                   active={page === index + 1}
@@ -196,3 +200,7 @@ function SubCategories({ categoryId }) {
     </div>
   );
 }
+
+SubCategories.propTypes = {
+  categoryId: PropTypes.string,
+};
