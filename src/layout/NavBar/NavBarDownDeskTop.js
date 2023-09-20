@@ -1,15 +1,18 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRef, useState } from "react";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 // MY IMPORTS
 import { toggleNavBar } from "../../features/navBarSlice";
 import { menuBottom } from "../../assets/menuBottomHeader";
+import { navigateAndAttachQuery } from "../../utils/attachQueryToURL";
+import { clientRoutes } from "../../routes";
 
 function NavBarDownDeskTop() {
-  console.log('[COMP] NavBarDownDeskTop re-render')
+  console.log("[COMP] NavBarDownDeskTop re-render");
+  const navigate = useNavigate();
   const [numberShow, setNumberShow] = useState(100);
   const { isOpen } = useSelector((store) => store.navBar);
   const dispatch = useDispatch();
@@ -49,8 +52,34 @@ function NavBarDownDeskTop() {
               whileTap={{ scale: 0.97 }}
               className="nav-bar__menu__parent-item"
             >
-              <Link>
-                {item.title}
+              <div>
+                <span
+                  className="cursor"
+                  onClick={() => {
+                    if (
+                      [
+                        "Trang chủ",
+                        "Giới thiệu",
+                        "Chính sách",
+                        "Tin tức",
+                        "Liên hệ",
+                      ].includes(item.title)
+                    )
+                      return;
+                    dispatch(toggleNavBar());
+                    navigateAndAttachQuery(
+                      clientRoutes.product.search,
+                      navigate,
+                      {
+                        name: item.title,
+                      }
+                    );
+                  }}
+                >
+                  {" "}
+                  {item.title}
+                </span>
+
                 {item.iconDown && (
                   <motion.span
                     onClick={() => {
@@ -61,11 +90,12 @@ function NavBarDownDeskTop() {
                       setNumberShow(idx);
                     }}
                     variants={rotateIcon}
+                    className="cursor"
                   >
                     <FontAwesomeIcon icon={item.iconDown} />
                   </motion.span>
                 )}
-              </Link>
+              </div>
               <AnimatePresence>
                 {item.iconDown && numberShow === idx && (
                   <motion.ul
@@ -112,14 +142,34 @@ const rotateIcon = {
 export default NavBarDownDeskTop;
 
 const NavbarSecondMenu = ({ subItem }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   return (
-    <motion.li className="nav-bar__menu__parent-item__submenu__item">
-      <Link>{subItem.title}</Link>
+    <motion.li className="nav-bar__menu__parent-item__submenu__item cursor">
+      <div
+        onClick={() => {
+          dispatch(toggleNavBar());
+          navigateAndAttachQuery(clientRoutes.product.search, navigate, {
+            name: subItem.title,
+          });
+        }}
+      >
+        {subItem.title}
+      </div>
       <motion.ul className="">
         {subItem.items &&
           subItem.items.map((sItem, idx2) => (
-            <li key={idx2}>
-              <Link>{sItem}</Link>
+            <li
+              key={idx2}
+              className="cursor"
+              onClick={() => {
+                dispatch(toggleNavBar());
+                navigateAndAttachQuery(clientRoutes.product.search, navigate, {
+                  name: sItem,
+                });
+              }}
+            >
+              <div>{sItem}</div>
             </li>
           ))}
       </motion.ul>
