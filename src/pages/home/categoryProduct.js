@@ -34,7 +34,6 @@ function CategoryProduct({ category: cate, listSubCategory, title }) {
 
   useEffect(() => {
     setIsLoading(true);
-    console.log("loading");
     const getProductsAsync = async (category) => {
       try {
         const { data } = await httpRequest.get(

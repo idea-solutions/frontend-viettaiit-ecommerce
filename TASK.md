@@ -40,6 +40,8 @@
     - ProductQuery
         - Cần hoàn thiện chức năng lọc => OK
 
+
+    - Suppen loading when change page
     - Chức năng search
     - Footer
 

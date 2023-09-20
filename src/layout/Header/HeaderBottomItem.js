@@ -1,12 +1,11 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { easeInOut, motion } from "framer-motion";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { clientRoutes } from "../../routes";
-import { slugify } from "../../utils/slug";
-import { setQueryProduct } from "../../features/product/productSlice";
-import { useDispatch } from "react-redux";
+
 import PropTypes from "prop-types";
+import { navigateAndAttachQuery } from "../../utils/attachQueryToURL";
 const firstMenuItem1 = {
   initial: { y: 100, opacity: 0, display: "none" },
   hover: { y: 0, opacity: 1, display: "block" },
@@ -28,12 +27,7 @@ const subMenuIconRight = {
 const HeaderBottomItem = ({ item }) => {
   const [isHoverItem1, setIsHoverItem1] = useState(false);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const navigateTo = (e) => {
-    const title = e.target.getAttribute("title");
-    const name = slugify(title);
-    navigate(clientRoutes.homeCategory + "/" + name);
-  };
+
   return (
     <motion.div
       onMouseEnter={() => setIsHoverItem1(true)}
@@ -41,10 +35,18 @@ const HeaderBottomItem = ({ item }) => {
       className="item"
     >
       <div
-        o
         onClick={() => {
-          dispatch(setQueryProduct({ name: "discount", value: "false" }));
-          navigate(clientRoutes.product.main + "/all");
+          if (
+            [
+              "Trang chủ",
+              "Giới thiệu",
+              "Chính sách",
+              "Tin tức",
+              "Liên hệ",
+            ].includes(item.title)
+          )
+            return;
+          navigateAndAttachQuery(clientRoutes.product.search,navigate, { name: item.title });
         }}
         className="link"
       >
@@ -63,14 +65,22 @@ const HeaderBottomItem = ({ item }) => {
               <li className="iphone-sub-item" key={idx2 + 10}>
                 <span
                   title={subItem.title}
-                  onClick={navigateTo}
+                  onClick={() =>
+                    navigateAndAttachQuery(clientRoutes.product.search,navigate, { name: subItem.title })
+                  }
                   className="iphone-sub-link"
                 >
                   {subItem.title}
                 </span>
                 <div className="iphone-sub-item-2">
                   {subItem.items.map((name, ipIdx) => (
-                    <span onClick={navigateTo} title={name} key={ipIdx}>
+                    <span
+                      onClick={() =>
+                        navigateAndAttachQuery(clientRoutes.product.search,navigate, { name: name })
+                      }
+                      title={name}
+                      key={ipIdx}
+                    >
                       {name}
                     </span>
                   ))}
@@ -87,13 +97,17 @@ const HeaderBottomItem = ({ item }) => {
           >
             {item.subMenu.map((subItem, idx2) => (
               <SubItem2
-                navigateTo={navigateTo}
+                onClick={() =>
+                  navigateAndAttachQuery(clientRoutes.product.search, navigate, {
+                    name: subItem.title,
+                  })
+                }
                 subItem={subItem}
                 key={idx2 + 10}
               />
             ))}
           </motion.ul>
-        ))}
+        ))}{" "}
     </motion.div>
   );
 };
@@ -104,7 +118,7 @@ HeaderBottomItem.propTypes = {
   item: PropTypes.object,
 };
 
-const SubItem2 = ({ subItem, navigateTo }) => {
+const SubItem2 = ({ subItem, onClick }) => {
   const [isHoverItem2, setIsHoverItem2] = useState(false);
   return (
     <motion.span
@@ -115,7 +129,7 @@ const SubItem2 = ({ subItem, navigateTo }) => {
       <span
         className="sub-link text-black"
         title={subItem.title}
-        onClick={navigateTo}
+        onClick={onClick}
       >
         {subItem.title}
       </span>
@@ -132,12 +146,7 @@ const SubItem2 = ({ subItem, navigateTo }) => {
           className="sub-menu-2 d-flex flex-column gap-2"
         >
           {subItem.items.map((item3, idx3) => (
-            <span
-              title={item3}
-              onClick={navigateTo}
-              className="link-2"
-              key={idx3}
-            >
+            <span title={item3} onClick={onClick} className="link-2" key={idx3}>
               {item3}
             </span>
           ))}

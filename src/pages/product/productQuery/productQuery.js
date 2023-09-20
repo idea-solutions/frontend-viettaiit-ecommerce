@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Col, Pagination, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -20,6 +20,8 @@ import ProductNone from "../../../components/Product/productNone";
 import NavSearch from "../../../components/Search/NavSearch";
 import { getColors } from "../../../features/color/colorSlice";
 import { getProviders } from "../../../features/provider/providerSlice";
+import { navigateAndAttachQuery } from "../../../utils/attachQueryToURL";
+import { clientRoutes } from "../../../routes";
 
 const optionsName = {
   "san-pham-khuyen-mai": "Sản phẩm khuyến mãi",
@@ -27,6 +29,7 @@ const optionsName = {
 };
 function ProductQuery() {
   useScrollTop();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { name } = useParams();
   const { products, query, page, totalPages } = useSelector(
@@ -35,7 +38,7 @@ function ProductQuery() {
   const { optionChoose } = useSelector((store) => store.navSearch);
   useEffect(() => {
     dispatch(getProducts());
-  }, [dispatch, query,optionChoose]);
+  }, [dispatch, query, optionChoose]);
   useEffect(() => {
     dispatch(getColors());
     dispatch(getProviders());
@@ -90,11 +93,12 @@ function ProductQuery() {
               />
               {Array.from({ length: totalPages }, (_, index) => (
                 <Pagination.Item
-                  onClick={() =>
+                  onClick={() => {
                     dispatch(
                       setQueryProduct({ name: "page", value: index + 1 })
-                    )
-                  }
+                    );
+                    navigateAndAttachQuery(clientRoutes.product.search, navigate, query);
+                  }}
                   key={index + 1}
                   active={page === index + 1}
                 >

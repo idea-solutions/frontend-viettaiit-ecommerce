@@ -2,6 +2,9 @@ import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFire } from "@fortawesome/free-solid-svg-icons";
 import PropTypes from "prop-types";
+import {  useNavigate } from "react-router-dom";
+import { navigateAndAttachQuery } from "../../../utils/attachQueryToURL";
+import { clientRoutes } from "../../../routes";
 const listSuggestSearch = [
   "IPhone 11",
   "IPhone 12",
@@ -16,12 +19,13 @@ const search = {
   blur: { height: 0, opacity: 0, display: "none" },
   transition: { duration: 2, ease: "linear" },
 };
-function SearchSuggest({ isFocus }) {
+function SearchSuggest({ isVisible }) {
+  const navigate = useNavigate();
   return (
     <motion.div
       variants={search}
       initial="initial"
-      animate={isFocus ? "focus" : "blur"}
+      animate={isVisible ? "focus" : "blur"}
       transition="transition"
       className="suggest"
     >
@@ -29,13 +33,22 @@ function SearchSuggest({ isFocus }) {
         <FontAwesomeIcon icon={faFire} />
         <span>TÌM KIẾM NHIỀU NHẤT</span>
       </div>
+      {/* <Form action="/san-pham/search" method="GET" ref={formRef}> */}
       <div className="suggest__bottom">
         {listSuggestSearch.map((item, idx) => (
-          <span key={idx} onClick={() => console.log("dsadas")}>
+          <span
+            key={idx}
+            onClick={() =>
+              navigateAndAttachQuery(clientRoutes.product.search, navigate, {
+                name: item,
+              })
+            }
+          >
             {item}
           </span>
         ))}
       </div>
+      {/* </Form> */}
     </motion.div>
   );
 }
@@ -43,5 +56,5 @@ function SearchSuggest({ isFocus }) {
 export default SearchSuggest;
 
 SearchSuggest.propTypes = {
-  isFocus: PropTypes.bool,
+  isVisible: PropTypes.bool,
 };
