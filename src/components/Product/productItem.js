@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion } from "framer-motion";
 import {
-  faCartShopping,
+  faCartPlus,
   faEye,
   faGear,
   faHeart,
@@ -104,7 +104,7 @@ function ProductItem({ product, hiddenSold, isLoading, hiddenDesc, cart }) {
             >
               {cart ? (
                 <div className="product-item__icon-setting">
-                  <FontAwesomeIcon icon={faCartShopping} />
+                <FontAwesomeIcon icon={faCartPlus} bounce size="xs" />
                 </div>
               ) : (
                 <Link
