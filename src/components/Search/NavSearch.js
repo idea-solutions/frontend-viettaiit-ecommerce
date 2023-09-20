@@ -123,7 +123,14 @@ function NavSearch({}) {
           <div className="w-100 d-flex gap-1 flex-lg-wrap">
             {optionChoose && (
               <span className="px-2 py-1 bg-primary text-size-14 rounded-2 text-white">
-                <FontAwesomeIcon icon={faClose} className="px-1" />
+                <FontAwesomeIcon
+                  icon={faClose}
+                  className="px-1"
+                  onClick={() => {
+                    dispatch(setOptionChoose({ title: "Tất cả" }));
+                    setIsNavSearch(false);
+                  }}
+                />
                 {optionChoose?.title}
               </span>
             )}
