@@ -3,7 +3,7 @@ import { Col, Pagination, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Scrollbar } from "swiper/modules";
-import { useEffect } from "react";
+import { memo, useCallback, useEffect, useMemo } from "react";
 import PropTypes from "prop-types";
 // MY IMPORTS
 import useScrollTop from "../../../hooks/useScrollTop";
@@ -43,14 +43,15 @@ function ProductQuery() {
     dispatch(getColors());
     dispatch(getProviders());
   }, []);
+
+  const title = useMemo(() => optionsName[name], optionsName[name]);
   return (
     <div className="product-query">
-      <Breadcrumb title={optionsName[name]} />
-      <HelmetCustom title={optionsName[name]} />
+      {/*  TỐI ƯU */}
+      <Breadcrumb title={title} />
+      <HelmetCustom title={title} />
       <div className="container">
-        <h3 className="text-center fw-bold text-size-26 mb-2">
-          {optionsName[name]}
-        </h3>
+        <h3 className="text-center fw-bold text-size-26 mb-2">{title}</h3>
         <div
           style={{
             backgroundImage: `url(${require("../../../assets/sliders/slider_1/1.webp")})`,
@@ -97,11 +98,7 @@ function ProductQuery() {
                     dispatch(
                       setQueryProduct({ name: "page", value: index + 1 })
                     );
-                    navigateAndAttachQuery(
-                      clientRoutes.product.search,
-                      navigate,
-                      query
-                    );
+                 
                   }}
                   key={index + 1}
                   active={page === index + 1}
@@ -129,7 +126,8 @@ function ProductQuery() {
 
 export default ProductQuery;
 
-function SubCategories({ categoryId }) {
+const SubCategories = memo(function SubCategories({ categoryId }) {
+  console.log("SubCategories")
   const { categories } = useSelector((store) => store.category);
   const dispatch = useDispatch();
   const handleQueryProduct = (name, value) => {
@@ -199,7 +197,7 @@ function SubCategories({ categoryId }) {
       </Swiper>
     </div>
   );
-}
+});
 
 SubCategories.propTypes = {
   categoryId: PropTypes.string,

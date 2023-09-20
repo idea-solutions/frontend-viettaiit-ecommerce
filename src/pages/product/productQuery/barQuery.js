@@ -36,7 +36,7 @@ function BarQuery({ sortValue }) {
           <span>Bộ lọc</span>
           <small className=" ">0</small>
         </div>
-        <div className="right max-lg-none">
+        <div className="right  max-lg-none">
           <div className="d-flex gap-2 align-items-center">
             <FontAwesomeIcon icon={faArrowDownAZ} />
             <span>Xếp theo</span>
@@ -56,6 +56,11 @@ function BarQuery({ sortValue }) {
           className="max-lg-display d-none right"
           title="Tùy chọn"
         >
+          {" "}
+          <div className="d-flex gap-2 align-items-center">
+            <FontAwesomeIcon icon={faArrowDownAZ} />
+            <span>Xếp theo</span>
+          </div>
           {itemRight.map((item, index) => (
             <Dropdown.Item
               key={index}
