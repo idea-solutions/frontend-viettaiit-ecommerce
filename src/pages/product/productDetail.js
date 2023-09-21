@@ -198,7 +198,7 @@ function ProductDetail() {
               <div>
                 <span>
                   Số lượng :{" "}
-                  <ButtonQuantity className="btn-lg">{1}</ButtonQuantity>
+                  <ButtonQuantity className="btn-lg">{100}</ButtonQuantity>
                 </span>
               </div>
 

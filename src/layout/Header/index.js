@@ -201,7 +201,7 @@ function Header() {
                             </motion.span>
                           </div>
                           <div>
-                            <ButtonQuantity className="btn-sm w-50 hover-bg-secondary" />
+                            <ButtonQuantity className="btn-sm" />
                             <small className="price">2.255.255 đ</small>
                           </div>
                         </div>
