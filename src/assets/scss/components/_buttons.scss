@@ -145,6 +145,7 @@
       height: 100%;
       padding: 1px 5px;
       @include flex-center;
+      text-align: center;
       border-radius: 0px;
       &:focus {
         box-shadow: unset;
