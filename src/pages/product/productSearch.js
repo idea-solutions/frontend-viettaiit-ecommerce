@@ -5,37 +5,43 @@ import Breadcrumb from "../../components/Breadcrumb";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import httpRequest from "../../services/httpRequest";
+import { useDispatch } from "react-redux";
 
 function ProductSearch() {
   const location = useLocation();
+ 
   const [products, setProducts] = useState([]);
+  const dispatch = useDispatch();
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
     const name = queryParams.get("name");
+    // dispatch(setIsLoadingComp(true));
     const getProductsAsync = async () => {
       try {
         const { data } = await httpRequest.get("/products", {
           params: { name },
         });
         setProducts(data.data);
+        // dispatch(setIsLoadingComp(false));
       } catch (error) {}
     };
+
     getProductsAsync();
   }, [location.search]);
 
-  console.log(products);
   return (
     <div>
       <Breadcrumb title="Tìm kiếm" />
       <HelmetCustom title="Tìm kiếm" />
       <div className="container mt-2">
-        <h5 className="fw-bold ">SẢN PHẨM YÊU THÍCH</h5>
+        <h5 className="fw-bold ">TÌM KIẾM SẢN PHẨM</h5>
         {products && products.length <= 0 ? (
           <ProductNone />
         ) : (
           <ListProductSlide products={products} hiddenSold hiddenDesc cart />
         )}
       </div>
+    
     </div>
   );
 }

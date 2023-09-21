@@ -21,6 +21,7 @@ import { toastDanger } from "../../utils/toast";
 import { setProductsLove } from "../../features/productFutureLocal";
 import QuickView from "./quickView";
 import PropTypes from "prop-types";
+
 function ProductItem({ product, hiddenSold, isLoading, hiddenDesc, cart }) {
   // modal show quick view product
   const [quickView, setQuickView] = useState(false);
@@ -56,7 +57,7 @@ function ProductItem({ product, hiddenSold, isLoading, hiddenDesc, cart }) {
   return (
     <div>
       <motion.div
-        className="product-item"
+        className="product-item "
         onHoverStart={() => setHovered(true)}
         onHoverEnd={() => setHovered(false)}
       >
@@ -104,7 +105,7 @@ function ProductItem({ product, hiddenSold, isLoading, hiddenDesc, cart }) {
             >
               {cart ? (
                 <div className="product-item__icon-setting">
-                <FontAwesomeIcon icon={faCartPlus} bounce size="xs" />
+                  <FontAwesomeIcon icon={faCartPlus} bounce size="xs" />
                 </div>
               ) : (
                 <Link

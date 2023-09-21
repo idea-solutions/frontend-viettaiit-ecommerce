@@ -41,7 +41,7 @@
         - Cần hoàn thiện chức năng lọc => OK
     - search page => OK
 
-    - Suppen loading when change page
+    - loading when change page
     - Chức năng search
     - Footer
 

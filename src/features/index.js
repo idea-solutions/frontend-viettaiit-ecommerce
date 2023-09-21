@@ -8,6 +8,7 @@ import productFutureLocalSlice from "./productFutureLocal";
 import colorSlice from "./color/colorSlice";
 import providerSlice from "./provider/providerSlice";
 import navSearchSlice from "./navSearchSlice";
+import loadingCompSlice from "./loadingCompSlice";
 const rootReducer = combineReducers({
   navBar: navBarSlice,
   auth: authSlice,
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   provider: providerSlice,
   color: colorSlice,
   navSearch: navSearchSlice,
+  loadingComp: loadingCompSlice,
 });
 
 export default rootReducer;

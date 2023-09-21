@@ -2,7 +2,6 @@ import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
-
 function ButtonScrollTop() {
   const [show, setShow] = useState();
   const handleScroll = () => {

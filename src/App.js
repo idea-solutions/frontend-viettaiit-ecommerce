@@ -7,11 +7,12 @@ import { ToastContainer } from "react-toastify";
 import { AnimatePresence } from "framer-motion";
 import "react-toastify/dist/ReactToastify.css";
 import ButtonScrollTop from "./components/Button/ButtonScrollTop";
+import LoadingComp from "./components/Loading/loadingComp";
 
 function App() {
   return (
     <div className="App">
-      <Suspense fallback={<div>Waiting...</div>}>
+      <Suspense fallback={<div></div>}>
         <Routes>
           {clientPages.map((route, idx) => {
             let Comp;
@@ -29,8 +30,9 @@ function App() {
           })}
         </Routes>
       </Suspense>
+      {/* <LoadingComp /> */}
       <ToastContainer position="top-center" />
-      <ButtonScrollTop/>
+      <ButtonScrollTop />
     </div>
   );
 }
