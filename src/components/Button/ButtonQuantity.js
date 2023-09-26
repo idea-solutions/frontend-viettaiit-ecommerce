@@ -1,13 +1,13 @@
 import PropTypes from "prop-types";
-import { Button, ButtonGroup, Form } from "react-bootstrap";
-function ButtonQuantity({ children, className }) {
+import { Button, Form } from "react-bootstrap";
+function ButtonQuantity({ qty = 1, className, handleChangeQty, setQty }) {
   return (
     <span className={`button-quantity ${className ? className : ""}`}>
-      <Button>-</Button>
+      <Button onClick={() => setQty((prev) => prev - 1)}>-</Button>
       <span>
-        <Form.Control name="" value={children | 100} />
+        <Form.Control name="qty" onChange={handleChangeQty} value={qty} />
       </span>
-      <Button>+</Button>
+      <Button onClick={() => setQty((prev) => prev + 1)}>+</Button>
     </span>
   );
 }

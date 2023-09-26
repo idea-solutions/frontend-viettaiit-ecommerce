@@ -75,7 +75,7 @@
             @include position-top-right($top: -21%, $right: 60%);
             background-color: red;
             border-radius: 50%;
-            width: 15px;
+            min-width: 15px;
             height: 15px;
             font-size: $px-14;
             padding: 1px;

@@ -1,7 +1,7 @@
 // FRAMEWORKS
 import { easeInOut, motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 // COMPONENTS
@@ -34,6 +34,11 @@ import { logoutAuth } from "../../features/auth/authSlice";
 import LazyImage from "../../components/LazyImage";
 import NavbarDeskTop from "../NavBar/NavbarDeskTop";
 import NavBarDownDeskTop from "../NavBar/NavBarDownDeskTop";
+import {
+  calculateTotalAndCountCart,
+  getCartMe,
+  resetCart,
+} from "../../features/cart/cartSlice";
 
 function Header() {
   const [isHoveredAccount, setIsHoveredAccount] = useState(false);
@@ -41,7 +46,17 @@ function Header() {
   const { user } = useSelector((store) => store.auth);
   const { isOpen } = useSelector((store) => store.navBar);
   const { productsLove } = useSelector((store) => store.productFutureLocal);
+  const { countCartItem, cart } = useSelector((store) => store.cart);
   const dispatch = useDispatch();
+  useEffect(() => {
+    if (!user) dispatch(resetCart());
+    else {
+      dispatch(getCartMe());
+    }
+  }, [dispatch, user]);
+  useEffect(() => {
+    if (cart != null) dispatch(calculateTotalAndCountCart());
+  }, [cart]);
   return (
     <>
       <div className="header">
@@ -160,7 +175,7 @@ function Header() {
               <span>
                 <small>Giỏ hàng</small>
               </span>
-              <div className="circle">2</div>
+              <div className="circle">{countCartItem}</div>
               <FrameHover isHovered={isHoveredCart}>
                 <motion.div
                   variants={account}

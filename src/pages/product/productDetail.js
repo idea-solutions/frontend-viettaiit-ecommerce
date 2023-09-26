@@ -18,7 +18,7 @@ import {
 import promoBoxes from "../../assets/promoBox";
 import useDataDetail from "../../hooks/useDataDetail";
 import { formatCurrency } from "../../utils/format";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import ListProductSlide from "../../components/ListProductSlide";
 import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
@@ -26,10 +26,13 @@ import {
   setProductsHaveBeenSaw,
   setProductsLove,
 } from "../../features/productFutureLocal";
+import { addCartMe, getCartMe } from "../../features/cart/cartSlice";
+import { toastDanger, toastInfo } from "../../utils/toast";
 function ProductDetail() {
   const { slug: name } = useParams();
-
+  const [qty, setQty] = useState(1);
   const { data, isLoading, isError } = useDataDetail("/products/" + name);
+  const { user } = useSelector((store) => store.auth);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -37,10 +40,15 @@ function ProductDetail() {
     dispatch(setProductsHaveBeenSaw(data));
   }, [name, data]);
 
-  const thumbImages =
-    data?.productItems.map((productItem) => productItem.image) || [];
-  const colors =
-    data?.productItems.map((productItem) => productItem.color) || [];
+  const thumbImages = useMemo(
+    () => data?.productItems.map((productItem) => productItem.image) || [],
+    [data]
+  );
+
+  const colors = useMemo(
+    () => data?.productItems.map((productItem) => productItem.color) || [],
+    [data]
+  );
   const [idxSelected, setIdxSelected] = useState(0);
 
   // Fake phu kien tam thoi
@@ -49,6 +57,24 @@ function ProductDetail() {
     (store) => store.productFutureLocal
   );
 
+  // handle change qty
+  const handleChangeQty = (e) => {
+    setQty(parseInt(e.target.value));
+  };
+
+  const addItemToCart = async () => {
+    if (!user) {
+      toastInfo("Bạn cần phải đăng nhập!");
+      return;
+    }
+    const { payload } = await dispatch(
+      addCartMe({
+        qty,
+        productItemId: data.productItems[idxSelected].id,
+      })
+    );
+    if (payload.status === 200) dispatch(getCartMe());
+  };
   return (
     <div className="product-detail">
       <HelmetCustom title="Chi tiết sản phẩm" />
@@ -198,7 +224,12 @@ function ProductDetail() {
               <div>
                 <span>
                   Số lượng :{" "}
-                  <ButtonQuantity className="btn-lg">{100}</ButtonQuantity>
+                  <ButtonQuantity
+                    className="btn-lg"
+                    qty={qty}
+                    handleChangeQty={handleChangeQty}
+                    setQty={setQty}
+                  />
                 </span>
               </div>
 
@@ -210,7 +241,10 @@ function ProductDetail() {
                     Giao tận nơi hoặc nhận tại cửa hàng
                   </div>
                 </Button>
-                <Button variant="outline-secondary ms-4">
+                <Button
+                  variant="outline-secondary ms-4"
+                  onClick={() => addItemToCart()}
+                >
                   <div className="fw-bold text-size-20 mb-2 ">
                     <FontAwesomeIcon icon={faCartShopping} />
                   </div>
