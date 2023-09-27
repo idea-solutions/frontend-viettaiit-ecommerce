@@ -52,7 +52,8 @@ function ProductDetail() {
     [data]
   );
   const [idxSelected, setIdxSelected] = useState(0);
-
+  const isSpecial = data?.productItems[idxSelected].isSpecial;
+  const isInStock = data?.productItems[idxSelected].qtyInStock === 0;
   // Fake phu kien tam thoi
   const { productsIphone } = useSelector((store) => store.product);
   const { productsHaveBeenSaw, productsLove } = useSelector(
@@ -143,7 +144,8 @@ function ProductDetail() {
               </span>
               <span className="mx-2">|</span>
               <span>
-                Tình trạng : <small>Còn hàng</small>
+                Tình trạng :{" "}
+                <small>{isInStock ? "Hết hàng" : "Còn hàng"}</small>
               </span>
             </p>
             <hr />
@@ -160,15 +162,21 @@ function ProductDetail() {
             </div>
 
             {/* PRICE */}
-            <div className="my-2">
-              <span className="text-secondary fw-bold text-size-22">
-                {formatCurrency(
-                  data?.price - (data?.price * data?.discount) / 100
-                )}
-              </span>
-              <span className="text-gray-100 text-decoration-line-through opacity-25 ms-2">
-                {formatCurrency(data?.price)}
-              </span>
+            <div className="my-3">
+              {isSpecial ? (
+                <h5 className="text-danger text-size-22 fw-bold ">Liên hệ</h5>
+              ) : (
+                <>
+                  <span className="text-secondary fw-bold text-size-22">
+                    {formatCurrency(
+                      data?.price - (data?.price * data?.discount) / 100
+                    )}
+                  </span>
+                  <span className="text-gray-100 text-decoration-line-through opacity-25 ms-2">
+                    {formatCurrency(data?.price)}
+                  </span>
+                </>
+              )}
             </div>
             <div className="my-3">
               <p className="text-size-16">
@@ -211,36 +219,50 @@ function ProductDetail() {
               </div>
 
               {/* SO LUONG */}
-              <div>
-                <span>
-                  Số lượng :{" "}
-                  <ButtonQuantity
-                    className="btn-lg"
-                    qty={qty}
-                    handleChangeQty={handleChangeQty}
-                    setQty={setQty}
-                  />
-                </span>
-              </div>
 
-              {/* Mua NGAY */}
-              <div className="my-4">
-                <Button variant="primary hover-bg-secondary">
-                  <div className="fw-bold text-size-20 mb-2 ">MUA NGAY</div>
-                  <div className="fw-light text-size-16">
-                    Giao tận nơi hoặc nhận tại cửa hàng
-                  </div>
-                </Button>
-                <Button
-                  variant="outline-secondary ms-4"
-                  onClick={() => addItemToCart()}
-                >
-                  <div className="fw-bold text-size-20 mb-2 ">
-                    <FontAwesomeIcon icon={faCartShopping} />
-                  </div>
-                  <div className="fw-light text-size-16">Thêm vào giỏ</div>
-                </Button>
-              </div>
+              {!isSpecial &&
+                (isInStock ? (
+                  <Button variant="primary w-100 btn-lg" disabled>
+                    HẾT HÀNG
+                  </Button>
+                ) : (
+                  <>
+                    <div>
+                      <span>
+                        Số lượng :{" "}
+                        <ButtonQuantity
+                          className="btn-lg"
+                          qty={qty}
+                          handleChangeQty={handleChangeQty}
+                          setQty={setQty}
+                        />
+                      </span>
+                    </div>
+
+                    {/* Mua NGAY */}
+                    <div className="my-4">
+                      <Button variant="primary hover-bg-secondary">
+                        <div className="fw-bold text-size-20 mb-2 ">
+                          MUA NGAY
+                        </div>
+                        <div className="fw-light text-size-16">
+                          Giao tận nơi hoặc nhận tại cửa hàng
+                        </div>
+                      </Button>
+                      <Button
+                        variant="outline-secondary ms-4"
+                        onClick={() => addItemToCart()}
+                      >
+                        <div className="fw-bold text-size-20 mb-2 ">
+                          <FontAwesomeIcon icon={faCartShopping} />
+                        </div>
+                        <div className="fw-light text-size-16">
+                          Thêm vào giỏ
+                        </div>
+                      </Button>
+                    </div>
+                  </>
+                ))}
             </div>
           </Col>
           <Col lg={3} xs={12}>
