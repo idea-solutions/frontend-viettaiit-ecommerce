@@ -41,6 +41,10 @@
         - Cần hoàn thiện chức năng lọc => OK
     - search page => OK
 
+
+
+
+    - page cart
     - loading when change page
     - Chức năng search
     - Footer

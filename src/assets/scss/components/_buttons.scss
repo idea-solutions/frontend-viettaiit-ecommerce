@@ -13,6 +13,11 @@
   &.btn-fw {
     min-width: $button-fixed-width;
   }
+  &.btn-xs {
+    font-size: $btn-font-size-xs;
+    padding-top: 6px;
+    padding-bottom: 6px;
+  }
   &.btn-sm {
     font-size: $btn-font-size-sm;
     padding-top: 10px;

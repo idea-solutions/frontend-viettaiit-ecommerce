@@ -1,3 +1,4 @@
+import Cart from "../pages/cart";
 import ProductSearch from "../pages/product/productSearch";
 import { clientRoutes } from "./routes";
 import { lazy } from "react";
@@ -40,6 +41,9 @@ const clientPages = [
   },
   { com: <ProductQuery />, path: clientRoutes.product.main + "/:name" },
 
+  /// cart
+
+  { com: <Cart />, path: clientRoutes.cart },
   // page not found
   { com: <NotFound />, path: "*" },
 ];

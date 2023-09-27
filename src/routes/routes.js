@@ -19,6 +19,8 @@ const clientRoutes = {
     sales: "/san-pham/san-pham-khuyen-mai",
     search: "/san-pham/search",
   },
+
+  cart: "/cart",
 };
 
 export { clientRoutes };
