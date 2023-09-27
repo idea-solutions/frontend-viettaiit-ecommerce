@@ -36,7 +36,7 @@ function ProductSearch() {
         {products && products.length <= 0 ? (
           <ProductNone />
         ) : (
-          <ListProductSlide products={products} hiddenSold hiddenDesc cart />
+          <ListProductSlide products={products} hiddenSold hiddenDesc  />
         )}
       </div>
     
