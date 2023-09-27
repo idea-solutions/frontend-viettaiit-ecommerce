@@ -7,7 +7,7 @@ import { ToastContainer } from "react-toastify";
 import { AnimatePresence } from "framer-motion";
 import "react-toastify/dist/ReactToastify.css";
 import ButtonScrollTop from "./components/Button/ButtonScrollTop";
-import LoadingComp from "./components/Loading/loadingComp";
+import ModalCartView from "./components/Modal/ModalCartView";
 
 function App() {
   return (
@@ -32,6 +32,7 @@ function App() {
       </Suspense>
       {/* <LoadingComp /> */}
       <ToastContainer position="top-center" />
+      <ModalCartView />
       <ButtonScrollTop />
     </div>
   );

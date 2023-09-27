@@ -15,6 +15,13 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { formatCurrency } from "../../utils/format";
 import ButtonQuantity from "../Button/ButtonQuantity";
 import PropTypes from "prop-types";
+import { toastInfo } from "../../utils/toast";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addCartMe,
+  getCartMe,
+  setCartItemNewBuy,
+} from "../../features/cart/cartSlice";
 function QuickView({ show, onHide, slugName }) {
   const { data } = useDataDetail("/products/" + slugName);
   const thumbImages =
@@ -22,6 +29,40 @@ function QuickView({ show, onHide, slugName }) {
   const colors =
     data?.productItems.map((productItem) => productItem.color) || [];
   const [idxSelected, setIdxSelected] = useState(0);
+
+  const { user } = useSelector((store) => store.auth);
+  // handle change qty
+  const [qty, setQty] = useState(1);
+  const handleChangeQty = (e) => {
+    setQty(parseInt(e.target.value));
+  };
+  const dispatch = useDispatch();
+  const addItemToCart = async () => {
+    if (!user) {
+      toastInfo("Bạn cần phải đăng nhập!");
+      return;
+    }
+    const { payload } = await dispatch(
+      addCartMe({
+        qty,
+        productItemId: data.productItems[idxSelected].id,
+      })
+    );
+    if (payload.status === 200) {
+      await dispatch(getCartMe());
+      dispatch(
+        setCartItemNewBuy({
+          image: data?.image,
+          price: data?.price - (data?.price * data?.discount) / 100,
+          colorValue: colors[idxSelected]?.value,
+          name: data?.name,
+        })
+      );
+    }
+
+    // {}
+  };
+
   if (!data) return null;
   return (
     <Modal
@@ -140,9 +181,17 @@ function QuickView({ show, onHide, slugName }) {
               <div className="d-flex gap-2 align-items-center">
                 <div>
                   Số lượng :{" "}
-                  <ButtonQuantity className="btn-lg">{1}</ButtonQuantity>
+                  <ButtonQuantity
+                    className="btn-lg"
+                    qty={qty}
+                    handleChangeQty={handleChangeQty}
+                    setQty={setQty}
+                  />
                 </div>
-                <Button variant="outline-secondary ms-4 d-flex gap-2 py-3">
+                <Button
+                  variant="outline-secondary ms-4 d-flex gap-2 py-3"
+                  onClick={() => addItemToCart()}
+                >
                   <FontAwesomeIcon icon={faCartShopping} />
                   <div className="fw-light text-size-16">Thêm vào giỏ</div>
                 </Button>

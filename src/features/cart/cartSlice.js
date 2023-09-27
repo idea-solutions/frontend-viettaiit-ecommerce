@@ -1,9 +1,14 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getCartMeAsync, addCartMeAsync  ,deleteCartItemMeAsync} from "./cartThunk";
+import {
+  getCartMeAsync,
+  addCartMeAsync,
+  deleteCartItemMeAsync,
+} from "./cartThunk";
 const initialState = {
   cart: null,
   total: 0,
   countCartItem: 0,
+  cartItemNewBuy: null,
   isLoading: false,
   isError: false,
 };
@@ -53,6 +58,9 @@ const cartSlice = createSlice({
 
       state.countCartItem = count;
     },
+    setCartItemNewBuy: (state, action) => {
+      state.cartItemNewBuy = action.payload;
+    },
   },
 
   extraReducers: (builder) => {
@@ -91,5 +99,6 @@ const cartSlice = createSlice({
   },
 });
 
-export const { resetCart, calculateTotalAndCountCart } = cartSlice.actions;
+export const { resetCart, calculateTotalAndCountCart, setCartItemNewBuy } =
+  cartSlice.actions;
 export default cartSlice.reducer;

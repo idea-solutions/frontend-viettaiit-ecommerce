@@ -26,8 +26,12 @@ import {
   setProductsHaveBeenSaw,
   setProductsLove,
 } from "../../features/productFutureLocal";
-import { addCartMe, getCartMe } from "../../features/cart/cartSlice";
-import { toastDanger, toastInfo } from "../../utils/toast";
+import {
+  addCartMe,
+  getCartMe,
+  setCartItemNewBuy,
+} from "../../features/cart/cartSlice";
+import { toastInfo } from "../../utils/toast";
 function ProductDetail() {
   const { slug: name } = useParams();
   const [qty, setQty] = useState(1);
@@ -73,7 +77,17 @@ function ProductDetail() {
         productItemId: data.productItems[idxSelected].id,
       })
     );
-    if (payload.status === 200) dispatch(getCartMe());
+    if (payload.status === 200) {
+      await dispatch(getCartMe());
+      dispatch(
+        setCartItemNewBuy({
+          image: data?.image,
+          price: data?.price - (data?.price * data?.discount) / 100,
+          colorValue: colors[idxSelected]?.value,
+          name: data?.name,
+        })
+      );
+    }
   };
   return (
     <div className="product-detail">
