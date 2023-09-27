@@ -6,7 +6,6 @@ import { Button } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 // COMPONENTS
 import FrameHover from "../../components/FrameHover";
-import ButtonQuantity from "../../components/Button/ButtonQuantity";
 import Search from "./Search";
 
 // STYLES
@@ -20,6 +19,7 @@ import {
   faBars,
   faCartPlus,
   faClose,
+  faFaceSmile,
   faHeart,
   faPhoneVolume,
   faPlus,
@@ -39,14 +39,21 @@ import {
   getCartMe,
   resetCart,
 } from "../../features/cart/cartSlice";
+import { formatCurrency } from "../../utils/format";
+import { calculatePriceForDiscount } from "../../utils/calculatePrice";
+import ButtonQuantityUpdateQty from "../../components/Button/ButtonQuantityUpdateQty";
+import {
+  deleteCartItemService,
+  updateQtyService,
+} from "../../services/cartService";
 
 function Header() {
   const [isHoveredAccount, setIsHoveredAccount] = useState(false);
   const [isHoveredCart, setIsHoveredCart] = useState(false);
-  const { user  } = useSelector((store) => store.auth);
+  const { user } = useSelector((store) => store.auth);
   const { isOpen } = useSelector((store) => store.navBar);
   const { productsLove } = useSelector((store) => store.productFutureLocal);
-  const { countCartItem, cart } = useSelector((store) => store.cart);
+  const { countCartItem, cart, total } = useSelector((store) => store.cart);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   useEffect(() => {
@@ -58,6 +65,7 @@ function Header() {
   useEffect(() => {
     if (cart != null) dispatch(calculateTotalAndCountCart());
   }, [cart]);
+
   return (
     <>
       <div className="header">
@@ -167,12 +175,14 @@ function Header() {
             <motion.div
               onMouseEnter={() => setIsHoveredCart(true)}
               onMouseLeave={() => setIsHoveredCart(false)}
-              onClick={() => navigate(clientRoutes.cart)}
               className="item"
             >
               <FontAwesomeIcon
                 className="icon-cart icon-size-2xs"
                 icon={faCartPlus}
+                onClick={(e) => {
+                  navigate(clientRoutes.cart);
+                }}
               />
               <span>
                 <small>Giỏ hàng</small>
@@ -184,80 +194,133 @@ function Header() {
                   initial="initial"
                   animate="animate"
                   exit="exit"
-                  style={{ width: "300px" }}
+                  style={{ width: "350px" }}
                   className="frame-hover"
                 >
                   <div className="cart">
-                    {/* <div className="cart__none">
-                      <FontAwesomeIcon icon={faFaceSmile} beat size="4x" />
-                      <span className="text-center">
-                        Không có sản phẩm nào trong giỏ hàng của bạn
-                      </span>
-                    </div> */}
-                    <h6>GIỎ HÀNG</h6>
-                    <div className="cart__display">
-                      <div className="cart__item">
-                        <div className="left">
-                          <LazyImage
-                            src="https://i.imgur.com/UYe7g8v.jpg"
-                            rounded
-                          />
-                        </div>
-                        <div className="right">
-                          <div>
-                            <span className="name">
-                              iPhone 14 Plus 128GB - Chính hãng VN/A
-                            </span>
-                            <motion.span
-                              initial={{ rotate: 0 }}
-                              whileHover={{ rotate: -360, size: 10 }}
-                              transition={{ duration: 0.2 }}
-                              className=" align-items-start icon-close"
-                            >
-                              <FontAwesomeIcon icon={faClose} size="xl" />
-                            </motion.span>
-                          </div>
-                          <div>
-                            <ButtonQuantity className="btn-sm" />
-                            <small className="price">2.255.255 đ</small>
-                          </div>
-                        </div>
+                    {countCartItem === 0 ? (
+                      <div className="cart__none">
+                        <FontAwesomeIcon icon={faFaceSmile} beat size="4x" />
+                        <small className="text-center hover-none">
+                          Không có sản phẩm nào!
+                          <Link
+                            to={clientRoutes.product.main + "/all"}
+                            className="text-info d-block cursor"
+                          >
+                            Mua ngay!
+                          </Link>
+                        </small>
                       </div>
-                      <div className="cart__item">
-                        <div className="left">
-                          <LazyImage
-                            src="https://i.imgur.com/UYe7g8v.jpg"
-                            rounded
-                          />
+                    ) : (
+                      <>
+                        <h6>GIỎ HÀNG</h6>
+                        <div className="cart__display">
+                          {cart &&
+                            cart.cartItems.map((item, index) => (
+                              <div className="cart__item">
+                                <div className="left">
+                                  <Link
+                                    to={
+                                      clientRoutes.product.detail +
+                                      "/" +
+                                      item.productItem.product.slug
+                                    }
+                                  >
+                                    <LazyImage
+                                      className="cursor"
+                                      src={
+                                        process.env.REACT_APP_BACKEND_URL +
+                                        "/static/uploads/" +
+                                        item.productItem.image
+                                      }
+                                      rounded
+                                    />
+                                  </Link>
+                                </div>
+                                <div className="right">
+                                  <div>
+                                    <span className="name">
+                                      <Link
+                                        to={
+                                          clientRoutes.product.detail +
+                                          "/" +
+                                          item.productItem.product.slug
+                                        }
+                                      >
+                                        {item.productItem.product.name}
+                                      </Link>
+                                    </span>
+                                    <motion.span
+                                      initial={{ rotate: 0 }}
+                                      whileHover={{ rotate: -360, size: 10 }}
+                                      transition={{ duration: 0.2 }}
+                                      className=" align-items-start icon-close d-block"
+                                      onClick={() =>
+                                        deleteCartItemService(item.id, dispatch)
+                                      }
+                                    >
+                                      <FontAwesomeIcon
+                                        icon={faClose}
+                                        size="xl"
+                                      />
+                                    </motion.span>
+                                  </div>
+                                  <div>
+                                    <ButtonQuantityUpdateQty
+                                      as="small"
+                                      increaseQty={() => {
+                                        if (item.qty > 1000) return;
+                                        updateQtyService(
+                                          {
+                                            qty: 1,
+                                            productItemId: item.productItemId,
+                                          },
+                                          dispatch
+                                        );
+                                      }}
+                                      decreaseQty={async () => {
+                                        if (item.qty === 1) {
+                                          return deleteCartItemService(
+                                            item.id,
+                                            dispatch
+                                          );
+                                        }
+                                        updateQtyService(
+                                          {
+                                            qty: -1,
+                                            productItemId: item.productItemId,
+                                          },
+                                          dispatch
+                                        );
+                                      }}
+                                      qty={item.qty}
+                                      className="btn-sm"
+                                    />
+                                    <small className="price">
+                                      {" "}
+                                      {formatCurrency(
+                                        calculatePriceForDiscount(
+                                          item.productItem.product.price,
+                                          item.productItem.product.discount
+                                        )
+                                      )}
+                                    </small>
+                                  </div>
+                                </div>
+                              </div>
+                            ))}
                         </div>
-                        <div className="right">
-                          <div>
-                            <span className="name">
-                              iPhone 14 Plus 128GB - Chính hãng VN/A
-                            </span>
-                            <motion.span
-                              initial={{ rotate: 0 }}
-                              whileHover={{ rotate: -360, size: 10 }}
-                              transition={{ duration: 0.2 }}
-                              className=" align-items-start icon-close"
-                            >
-                              <FontAwesomeIcon icon={faClose} size="xl" />
-                            </motion.span>
+                        <div className="total">
+                          <div className="left">
+                            <small>Tổng tiền</small>
+                            <small> {formatCurrency(total)}</small>
                           </div>
-                          <div>
-                            <ButtonQuantity className="btn-sm" />
-                            <small className="price">2.255.255 đ</small>
-                          </div>
+                          <Button variant="primary hover-bg-secondary">
+                            THANH TOÁN
+                          </Button>
                         </div>
-                      </div>
-                    </div>
-                    <div className="total">
-                      <div className="left">
-                        <small>Tổng tiền</small>
-                        <small>4.411.000 đ</small>
-                      </div>
-                      <Button variant="primary">THANH TOÁN</Button>
-                    </div>
+                      </>
+                    )}
                   </div>
                 </motion.div>
               </FrameHover>

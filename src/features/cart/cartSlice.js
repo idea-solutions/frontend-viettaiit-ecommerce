@@ -61,6 +61,8 @@ const cartSlice = createSlice({
     setCartItemNewBuy: (state, action) => {
       state.cartItemNewBuy = action.payload;
     },
+
+   
   },
 
   extraReducers: (builder) => {

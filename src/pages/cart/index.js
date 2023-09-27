@@ -9,12 +9,12 @@ import { clientRoutes } from "../../routes";
 import { formatCurrency } from "../../utils/format";
 import { calculatePriceForDiscount } from "../../utils/calculatePrice";
 import { useState } from "react";
-import {
-  addCartMe,
-  deleteCartItemMe,
-  getCartMe,
-} from "../../features/cart/cartSlice";
+
 import ButtonQuantityUpdateQty from "../../components/Button/ButtonQuantityUpdateQty";
+import {
+  deleteCartItemService,
+  updateQtyService,
+} from "../../services/cartService";
 
 function Cart() {
   const { user } = useSelector((store) => store.auth);
@@ -26,37 +26,20 @@ function Cart() {
   const [isLoading, setIsLoading] = useState(false);
 
   const dispatch = useDispatch();
-  const handleQtyUpdate = async (inputs) => {
-    // if (isLoading) return;
-    setIsLoading(true);
-    const { payload } = await dispatch(addCartMe(inputs));
-
-    if (payload.status === 200) {
-      dispatch(getCartMe());
-    }
-    setIsLoading(false);
-  };
-
-  const deleteCartItem = async (id) => {
-    await dispatch(deleteCartItemMe(id));
-    return dispatch(getCartMe());
-  };
   const renderCartItems = (isTabletOrMobile) => {
     if (isTabletOrMobile)
       return (
         <CartItemsDownDesktop
           countCartItem={countCartItem}
           cart={cart}
-          handleQtyUpdate={handleQtyUpdate}
-          deleteCartItem={deleteCartItem}
+          dispatch={dispatch}
         />
       );
     return (
       <CartItemsUpDesktop
         countCartItem={countCartItem}
+        dispatch={dispatch}
         cart={cart}
-        handleQtyUpdate={handleQtyUpdate}
-        deleteCartItem={deleteCartItem}
       />
     );
   };
@@ -133,8 +116,8 @@ export default Cart;
 function CartItemsDownDesktop({
   countCartItem,
   cart,
-  handleQtyUpdate,
-  deleteCartItem,
+
+  dispatch,
 }) {
   console.log("CartItemsDownDesktop");
   return (
@@ -183,19 +166,25 @@ function CartItemsDownDesktop({
                     <ButtonQuantityUpdateQty
                       increaseQty={() => {
                         if (item.qty > 1000) return;
-                        handleQtyUpdate({
-                          qty: 1,
-                          productItemId: item.productItemId,
-                        });
+                        updateQtyService(
+                          {
+                            qty: 1,
+                            productItemId: item.productItemId,
+                          },
+                          dispatch
+                        );
                       }}
                       decreaseQty={async () => {
                         if (item.qty === 1) {
-                          deleteCartItem(item.id);
+                          return deleteCartItemService(item.id, dispatch);
                         }
-                        handleQtyUpdate({
-                          qty: -1,
-                          productItemId: item.productItemId,
-                        });
+                        updateQtyService(
+                          {
+                            qty: -1,
+                            productItemId: item.productItemId,
+                          },
+                          dispatch
+                        );
                       }}
                       qty={item.qty}
                       className="btn-sm d-flex"
@@ -212,7 +201,7 @@ function CartItemsDownDesktop({
                       </span>
                       <Button
                         variant="outline-danger btn-xs"
-                        onClick={() => deleteCartItem(item.id)}
+                        onClick={() => deleteCartItemService(item.id, dispatch)}
                       >
                         Xóa
                       </Button>
@@ -228,12 +217,7 @@ function CartItemsDownDesktop({
   );
 }
 
-function CartItemsUpDesktop({
-  countCartItem,
-  cart,
-  handleQtyUpdate,
-  deleteCartItem,
-}) {
+function CartItemsUpDesktop({ countCartItem, cart, dispatch }) {
   console.log("CartItemsUpDesktop");
   return (
     <>
@@ -284,7 +268,7 @@ function CartItemsUpDesktop({
                       </small>
                       <Button
                         variant="outline-danger btn-xs"
-                        onClick={() => deleteCartItem(item.id)}
+                        onClick={() => deleteCartItemService(item.id, dispatch)}
                       >
                         Xóa
                       </Button>
@@ -309,19 +293,25 @@ function CartItemsUpDesktop({
                   <ButtonQuantityUpdateQty
                     increaseQty={() => {
                       if (item.qty > 1000) return;
-                      handleQtyUpdate({
-                        qty: 1,
-                        productItemId: item.productItemId,
-                      });
+                      updateQtyService(
+                        {
+                          qty: 1,
+                          productItemId: item.productItemId,
+                        },
+                        dispatch
+                      );
                     }}
                     decreaseQty={async () => {
                       if (item.qty === 1) {
-                        deleteCartItem(item.id);
+                        return deleteCartItemService(item.id, dispatch);
                       }
-                      handleQtyUpdate({
-                        qty: -1,
-                        productItemId: item.productItemId,
-                      });
+                      updateQtyService(
+                        {
+                          qty: -1,
+                          productItemId: item.productItemId,
+                        },
+                        dispatch
+                      );
                     }}
                     qty={item.qty}
                     className="btn-sm"

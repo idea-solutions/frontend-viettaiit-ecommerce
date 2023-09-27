@@ -17,11 +17,8 @@ import ButtonQuantity from "../Button/ButtonQuantity";
 import PropTypes from "prop-types";
 import { toastInfo } from "../../utils/toast";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addCartMe,
-  getCartMe,
-  setCartItemNewBuy,
-} from "../../features/cart/cartSlice";
+
+import { addItemToCartService } from "../../services/cartService";
 function QuickView({ show, onHide, slugName }) {
   const { data } = useDataDetail("/products/" + slugName);
   const thumbImages =
@@ -42,25 +39,17 @@ function QuickView({ show, onHide, slugName }) {
       toastInfo("Bạn cần phải đăng nhập!");
       return;
     }
-    const { payload } = await dispatch(
-      addCartMe({
-        qty,
-        productItemId: data.productItems[idxSelected].id,
-      })
-    );
-    if (payload.status === 200) {
-      await dispatch(getCartMe());
-      dispatch(
-        setCartItemNewBuy({
-          image: data?.image,
-          price: data?.price - (data?.price * data?.discount) / 100,
-          colorValue: colors[idxSelected]?.value,
-          name: data?.name,
-        })
-      );
-    }
-
-    // {}
+    const inputs = {
+      qty,
+      productItemId: data.productItems[idxSelected].id,
+    };
+    const itemView = {
+      image: data?.image,
+      price: data?.price - (data?.price * data?.discount) / 100,
+      colorValue: colors[idxSelected]?.value,
+      name: data?.name,
+    };
+    addItemToCartService(inputs, itemView, dispatch);
   };
 
   if (!data) return null;

@@ -40,11 +40,15 @@
     - ProductQuery
         - Cần hoàn thiện chức năng lọc => OK
     - search page => OK
+    - page cart => OK
+    - handle view cart item when near by==> OK
+
+
+    - header cart
 
 
 
 
-    - page cart
     - loading when change page
     - Chức năng search
     - Footer

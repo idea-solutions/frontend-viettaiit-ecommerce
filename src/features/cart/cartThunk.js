@@ -1,4 +1,4 @@
-import httpRequest from "../../services/httpRequest";
+import httpRequest from "../../api/httpRequest";
 
 export const getCartMeAsync = async (url, thunkAPI) => {
   try {

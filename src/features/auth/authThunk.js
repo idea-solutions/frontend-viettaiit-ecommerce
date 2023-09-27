@@ -1,4 +1,4 @@
-import httpRequest from "../../services/httpRequest";
+import httpRequest from "../../api/httpRequest";
 
 export const registerAuthThunk = async (url, inputs, thunkAPI) => {
   try {

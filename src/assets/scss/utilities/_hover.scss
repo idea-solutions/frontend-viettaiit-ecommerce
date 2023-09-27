@@ -1,3 +1,10 @@
 .hover-bg-secondary {
   @include hover-bg-secondary;
 }
+
+.hover-none {
+  &:hover {
+    opacity: unset!important;
+    cursor: default!important;
+  }
+}

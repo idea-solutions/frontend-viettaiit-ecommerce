@@ -26,12 +26,9 @@ import {
   setProductsHaveBeenSaw,
   setProductsLove,
 } from "../../features/productFutureLocal";
-import {
-  addCartMe,
-  getCartMe,
-  setCartItemNewBuy,
-} from "../../features/cart/cartSlice";
+
 import { toastInfo } from "../../utils/toast";
+import { addItemToCartService } from "../../services/cartService";
 function ProductDetail() {
   const { slug: name } = useParams();
   const [qty, setQty] = useState(1);
@@ -71,24 +68,20 @@ function ProductDetail() {
       toastInfo("Bạn cần phải đăng nhập!");
       return;
     }
-    const { payload } = await dispatch(
-      addCartMe({
-        qty,
-        productItemId: data.productItems[idxSelected].id,
-      })
-    );
-    if (payload.status === 200) {
-      await dispatch(getCartMe());
-      dispatch(
-        setCartItemNewBuy({
-          image: data?.image,
-          price: data?.price - (data?.price * data?.discount) / 100,
-          colorValue: colors[idxSelected]?.value,
-          name: data?.name,
-        })
-      );
-    }
+    const inputs = {
+      qty,
+      productItemId: data.productItems[idxSelected].id,
+    };
+    const itemView = {
+      image: data?.image,
+      price: data?.price - (data?.price * data?.discount) / 100,
+      colorValue: colors[idxSelected]?.value,
+      name: data?.name,
+    };
+    addItemToCartService(inputs, itemView, dispatch);
   };
+
+  
   return (
     <div className="product-detail">
       <HelmetCustom title="Chi tiết sản phẩm" />

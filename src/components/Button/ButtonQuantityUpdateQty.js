@@ -6,15 +6,17 @@ function ButtonQuantityUpdateQty({
   handleChangeQty,
   increaseQty,
   decreaseQty,
+  as = "span",
 }) {
+  const Comp = as;
   return (
-    <span className={`button-quantity ${className ? className : ""}`}>
+    <Comp className={`button-quantity ${className ? className : ""}`}>
       <Button onClick={decreaseQty}>-</Button>
       <span>
         <Form.Control name="qty" onChange={handleChangeQty} value={qty} />
       </span>
       <Button onClick={increaseQty}>+</Button>
-    </span>
+    </Comp>
   );
 }
 

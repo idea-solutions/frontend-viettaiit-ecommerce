@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import httpRequest from "../services/httpRequest";
+import httpRequest from "../api/httpRequest";
 function useDataDetail(url) {
   const [data, setDataDetail] = useState(null);
   const [isLoading, setIsLoading] = useState(false);

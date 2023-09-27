@@ -3,7 +3,7 @@
 import HelmetCustom from "../../components/HelmetCustom";
 import DanhMucNoiBat from "./danhMucNoiBat";
 import CategoryProduct from "./categoryProduct";
-import React, { useState } from "react";
+import React from "react";
 
 import HotSales from "./hotSales";
 import TopSlide from "./topSlide";
@@ -16,14 +16,10 @@ import useScrollTop from "../../hooks/useScrollTop";
 
 function Home() {
   useScrollTop();
-  const [testRerender, setTestRerender] = useState(false);
-  
   return (
     <>
       <HelmetCustom title="Trang chủ" />
-      <button onClick={() => setTestRerender(!testRerender)}>
-        Test re-render
-      </button>
+
       <div className="home">
         {/* TOP SLIDE */}
         <TopSlide />

@@ -14,7 +14,7 @@ import { Col, Row, Spinner } from "react-bootstrap";
 // MY IMPORTS
 import ProductItem from "../../components/Product/productItem";
 
-import httpRequest from "../../services/httpRequest";
+import httpRequest from "../../api/httpRequest";
 import ListProductSlide from "../../components/ListProductSlide";
 import { clientRoutes } from "../../routes";
 import { setQueryProduct } from "../../features/product/productSlice";

@@ -4,14 +4,12 @@ import ListProductSlide from "../../components/ListProductSlide";
 import Breadcrumb from "../../components/Breadcrumb";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-import httpRequest from "../../services/httpRequest";
-import { useDispatch } from "react-redux";
+import httpRequest from "../../api/httpRequest";
 
 function ProductSearch() {
   const location = useLocation();
  
   const [products, setProducts] = useState([]);
-  const dispatch = useDispatch();
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
     const name = queryParams.get("name");
