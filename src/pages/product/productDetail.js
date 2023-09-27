@@ -29,6 +29,7 @@ import {
 
 import { toastInfo } from "../../utils/toast";
 import { addItemToCartService } from "../../services/cartService";
+import CountdownTimer from "../../components/CoutdownTimer";
 function ProductDetail() {
   const { slug: name } = useParams();
   const [qty, setQty] = useState(1);
@@ -81,7 +82,6 @@ function ProductDetail() {
     addItemToCartService(inputs, itemView, dispatch);
   };
 
-  
   return (
     <div className="product-detail">
       <HelmetCustom title="Chi tiết sản phẩm" />
@@ -155,24 +155,7 @@ function ProductDetail() {
                   <p className=" text-size-14">HOT SALE CUỐI TUẦN</p>
                   <IconFire />
                 </span>
-                <span className="block-sale__top__right">
-                  <div className="block-sale__top__right__one">
-                    <strong>167</strong>
-                    <small>Ngày</small>
-                  </div>
-                  <div className="block-sale__top__right__one">
-                    <strong>167</strong>
-                    <small>Giờ</small>
-                  </div>
-                  <div className="block-sale__top__right__one">
-                    <strong>167</strong>
-                    <small>Phút</small>
-                  </div>
-                  <div className="block-sale__top__right__one">
-                    <strong>167</strong>
-                    <small>Giây</small>
-                  </div>
-                </span>
+                <CountdownTimer />
               </div>
             </div>
 

@@ -42,10 +42,8 @@
     - search page => OK
     - page cart => OK
     - handle view cart item when near by==> OK
-
-
-    - header cart
-
+    - header cart => OK
+    - countdown Timer => OK
 
 
 

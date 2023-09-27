@@ -11,6 +11,7 @@ import {
 } from "../../features/product/productSlice";
 import { useNavigate } from "react-router-dom";
 import { clientRoutes } from "../../routes";
+import CountdownTimer from "../../components/CoutdownTimer";
 
 function HotSales() {
   const dispatch = useDispatch();
@@ -32,24 +33,7 @@ function HotSales() {
             <p>HOT SALE CUỐI TUẦN</p>
             <IconFire />
           </span>
-          <span className="block-sale__top__right">
-            <div className="block-sale__top__right__one">
-              <strong>167</strong>
-              <small>Ngày</small>
-            </div>
-            <div className="block-sale__top__right__one">
-              <strong>167</strong>
-              <small>Giờ</small>
-            </div>
-            <div className="block-sale__top__right__one">
-              <strong>167</strong>
-              <small>Phút</small>
-            </div>
-            <div className="block-sale__top__right__one">
-              <strong>167</strong>
-              <small>Giây</small>
-            </div>
-          </span>
+          <CountdownTimer />
         </div>
         <ListProductSlide
           spaceBetween={25}
