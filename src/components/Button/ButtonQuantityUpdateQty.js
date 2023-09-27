@@ -1,25 +1,28 @@
 import PropTypes from "prop-types";
 import { Button, Form } from "react-bootstrap";
-function ButtonQuantity({
+function ButtonQuantityUpdateQty({
   qty = 1,
   className,
   handleChangeQty,
-  setQty,
- 
+  increaseQty,
+  decreaseQty,
 }) {
   return (
     <span className={`button-quantity ${className ? className : ""}`}>
-      <Button onClick={() => setQty((prev) => prev - 1)}>-</Button>
+      <Button onClick={decreaseQty}>-</Button>
       <span>
         <Form.Control name="qty" onChange={handleChangeQty} value={qty} />
       </span>
-      <Button onClick={() => setQty((prev) => prev + 1)}>+</Button>
+      <Button onClick={increaseQty}>+</Button>
     </span>
   );
 }
 
-export default ButtonQuantity;
-ButtonQuantity.propTypes = {
-  children: PropTypes.node,
+export default ButtonQuantityUpdateQty;
+ButtonQuantityUpdateQty.propTypes = {
+  qty: PropTypes.number.isRequired,
   className: PropTypes.string,
+  handleChangeQty: PropTypes.func,
+  increaseQty: PropTypes.func,
+  decreaseQty: PropTypes.func,
 };

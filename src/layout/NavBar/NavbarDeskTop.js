@@ -24,4 +24,4 @@ function NavbarDeskTop() {
   );
 }
 
-export default NavbarDeskTop;
+export default React.memo(NavbarDeskTop);

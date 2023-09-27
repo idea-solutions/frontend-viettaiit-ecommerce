@@ -29,3 +29,13 @@
     cursor: pointer;
   }
 }
+
+@mixin hover-color-secondary {
+  transform: all 0.2s ease-in-out;
+  &:hover {
+    color: $red !important;
+    opacity: 1 !important;
+    cursor: pointer;
+  }
+}
+

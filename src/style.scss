@@ -76,6 +76,10 @@ img {
   @include hover-bg-secondary;
 }
 
+.hover-color-secondary {
+  @include hover-color-secondary ;
+}
+
 a[href] {
   text-decoration: none;
   color: $black;

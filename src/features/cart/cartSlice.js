@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getCartMeAsync, addCartMeAsync } from "./cartThunk";
+import { getCartMeAsync, addCartMeAsync  ,deleteCartItemMeAsync} from "./cartThunk";
 const initialState = {
   cart: null,
   total: 0,
@@ -19,6 +19,16 @@ export const addCartMe = createAsyncThunk(
   "cart/addCart",
   async (inputs, thunkAPI) => {
     return await addCartMeAsync("/shopping-cart", inputs, thunkAPI);
+  }
+);
+
+export const deleteCartItemMe = createAsyncThunk(
+  "cart/deleteCartItem",
+  async (id, thunkAPI) => {
+    return await deleteCartItemMeAsync(
+      "/shopping-cart/shopping-cart-item/" + id,
+      thunkAPI
+    );
   }
 );
 
@@ -66,6 +76,16 @@ const cartSlice = createSlice({
       state.isLoading = state.isError = false;
     });
     builder.addCase(addCartMe.rejected, (state, action) => {
+      state.isLoading = state.isError = true;
+    });
+    // delete cart item me
+    builder.addCase(deleteCartItemMe.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(deleteCartItemMe.fulfilled, (state, action) => {
+      state.isLoading = state.isError = false;
+    });
+    builder.addCase(deleteCartItemMe.rejected, (state, action) => {
       state.isLoading = state.isError = true;
     });
   },

@@ -3,7 +3,7 @@ import { easeInOut, motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // COMPONENTS
 import FrameHover from "../../components/FrameHover";
 import ButtonQuantity from "../../components/Button/ButtonQuantity";
@@ -43,11 +43,12 @@ import {
 function Header() {
   const [isHoveredAccount, setIsHoveredAccount] = useState(false);
   const [isHoveredCart, setIsHoveredCart] = useState(false);
-  const { user } = useSelector((store) => store.auth);
+  const { user  } = useSelector((store) => store.auth);
   const { isOpen } = useSelector((store) => store.navBar);
   const { productsLove } = useSelector((store) => store.productFutureLocal);
   const { countCartItem, cart } = useSelector((store) => store.cart);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   useEffect(() => {
     if (!user) dispatch(resetCart());
     else {
@@ -166,6 +167,7 @@ function Header() {
             <motion.div
               onMouseEnter={() => setIsHoveredCart(true)}
               onMouseLeave={() => setIsHoveredCart(false)}
+              onClick={() => navigate(clientRoutes.cart)}
               className="item"
             >
               <FontAwesomeIcon
