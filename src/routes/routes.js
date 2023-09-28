@@ -2,6 +2,7 @@ const clientRoutes = {
   home: "/",
   account: {
     main: "/tai-khoan",
+    orders: "/tai-khoan/don-hang",
     login: "/tai-khoan/dang-nhap",
     register: "/tai-khoan/dang-ky",
     verifyEmail: "/tai-khoan/xac-minh-tai-khoan",
@@ -13,7 +14,7 @@ const clientRoutes = {
   contact: "/lien-he",
   product: {
     main: "/san-pham",
-    productLove: "/san-pham-yeu-thich",
+    productLove: "/san-pham/san-pham-yeu-thich",
     detail: "/san-pham/chi-tiet",
     love: "/san-pham/san-pham-yeu-thich",
     sales: "/san-pham/san-pham-khuyen-mai",

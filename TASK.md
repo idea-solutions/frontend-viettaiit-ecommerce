@@ -46,7 +46,7 @@
     - countdown Timer => OK
 
 
-
+    - page account
     - loading when change page
     - Chức năng search
     - Footer

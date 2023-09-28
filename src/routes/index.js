@@ -1,3 +1,5 @@
+import Account from "../pages/auth/account";
+import Orders from "../pages/auth/account/orders";
 import Cart from "../pages/cart";
 import ProductSearch from "../pages/product/productSearch";
 import { clientRoutes } from "./routes";
@@ -23,6 +25,8 @@ const ProductQuery = lazy(() =>
 
 const clientPages = [
   { com: <Home />, path: clientRoutes.home },
+  { com: <Account />, path: clientRoutes.account.main },
+  { com: <Orders />, path: clientRoutes.account.orders },
   { com: <VerifyEmail />, path: clientRoutes.account.verifyEmail },
   { com: <ResetPassword />, path: clientRoutes.account.resetPassword },
   { com: <Login />, path: clientRoutes.account.login },
