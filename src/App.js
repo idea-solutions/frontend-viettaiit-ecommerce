@@ -1,15 +1,31 @@
 import { Route, Routes } from "react-router-dom";
 import { clientPages } from "./routes";
 import Layout from "./layout";
-import NotFound from "./pages/notFound";
 import { Suspense } from "react";
 import { ToastContainer } from "react-toastify";
 import { AnimatePresence } from "framer-motion";
 import "react-toastify/dist/ReactToastify.css";
 import ButtonScrollTop from "./components/Button/ButtonScrollTop";
 import ModalCartView from "./components/Modal/ModalCartView";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
+  const createChildrenRoute = (route, Comp) => {
+    return (
+      <Route exact element={Comp} path={route.path}>
+        {route.children.map((childRoute, childIdx) => {
+          let element = childRoute.com;
+          if (childRoute.protected) {
+            element = <ProtectedRoute>{childRoute.com}</ProtectedRoute>;
+          }
+          return (
+            <Route key={childIdx} element={element} path={childRoute.path} />
+          );
+        })}
+      </Route>
+    );
+  };
+
   return (
     <div className="App">
       <Suspense fallback={<div></div>}>
@@ -17,16 +33,17 @@ function App() {
           {clientPages.map((route, idx) => {
             let Comp;
             Comp = (
-              <Layout>
+              <Layout key={idx}>
                 <AnimatePresence initial={false} mode="wait">
                   {route.com}
                 </AnimatePresence>
               </Layout>
             );
-            if (route.path === "*") {
-              Comp = <NotFound></NotFound>;
-            }
-            return <Route key={idx} exact element={Comp} path={route.path} />;
+
+            /* ---- */
+
+            if (route.children) return createChildrenRoute(route, Comp);
+            return <Route exact element={Comp} path={route.path} />;
           })}
         </Routes>
       </Suspense>

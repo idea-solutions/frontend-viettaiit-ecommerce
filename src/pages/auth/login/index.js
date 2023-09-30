@@ -1,16 +1,22 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 // MY IMPORTS
 import { clientRoutes } from "../../../routes";
 import { checkEmail, validateFormLogin } from "../../../utils/validate";
 
 // REDUX SLICE
-import { forgotPasswordAuth, loginAuth } from "../../../features/auth/authSlice";
+import {
+  forgotPasswordAuth,
+  loginAuth,
+} from "../../../features/auth/authSlice";
 
-import { setLoadingClose, setLoadingShow } from "../../../features/loadingSlice";
+import {
+  setLoadingClose,
+  setLoadingShow,
+} from "../../../features/loadingSlice";
 import HelmetCustom from "../../../components/HelmetCustom";
 import Breadcrumb from "../../../components/Breadcrumb";
 import { toastSuccess, toastWarning } from "../../../utils/toast";
@@ -57,6 +63,9 @@ function Login() {
     await dispatch(forgotPasswordAuth({ email: emailForgot }));
     dispatch(setLoadingClose());
   };
+
+  const { user } = useSelector((store) => store.auth);
+  if (user) return <Navigate to={clientRoutes.home}/>;
   return (
     <div className="login">
       <HelmetCustom title="Đăng nhập" />
@@ -140,7 +149,8 @@ function Login() {
                   onClick={(e) => {
                     e.preventDefault();
                     window.open(
-                      process.env.REACT_APP_BACKEND_URL + "/api/v1/auth/facebook",
+                      process.env.REACT_APP_BACKEND_URL +
+                        "/api/v1/auth/facebook",
                       "_self"
                     );
                   }}

@@ -7,6 +7,7 @@ const clientRoutes = {
     register: "/tai-khoan/dang-ky",
     verifyEmail: "/tai-khoan/xac-minh-tai-khoan",
     resetPassword: "/tai-khoan/dat-lai-mat-khau",
+    changePassword:"/tao-khoan/thay-doi-mat-khau"
   },
   introduce: "/gioi-thieu",
   news: "/tin-tuc",
@@ -14,14 +15,14 @@ const clientRoutes = {
   contact: "/lien-he",
   product: {
     main: "/san-pham",
-    productLove: "/san-pham/san-pham-yeu-thich",
+    productLove: "/san-pham/yeu-thich",
     detail: "/san-pham/chi-tiet",
-    love: "/san-pham/san-pham-yeu-thich",
-    sales: "/san-pham/san-pham-khuyen-mai",
-    search: "/san-pham/search",
+    love: "/san-pham/yeu-thich",
+    sales: "/san-pham/khuyen-mai",
+    search: "/san-pham/tim-kiem",
   },
 
-  cart: "/cart",
+  cart: "/gio-hang",
 };
 
 export { clientRoutes };

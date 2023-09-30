@@ -1,10 +1,15 @@
-import Account from "../pages/auth/account";
-import Orders from "../pages/auth/account/orders";
-import Cart from "../pages/cart";
-import ProductSearch from "../pages/product/productSearch";
+import { Outlet } from "react-router-dom";
 import { clientRoutes } from "./routes";
 import { lazy } from "react";
 
+const Account = lazy(() => import("../pages/auth/account"));
+const Orders = lazy(() => import("../pages/auth/account/orders"));
+const Cart = lazy(() => import("../pages/cart"));
+const ProductSearch = lazy(() => import("../pages/product/productSearch"));
+const ChangePassword = lazy(() =>
+  import("../pages/auth/account/changePassword")
+);
+const AuthRequired = lazy(() => import("../pages/AuthRequired"));
 const ResetPassword = lazy(() => import("../pages/auth/resetPassword"));
 const VerifyEmail = lazy(() => import("../pages/auth/verifyEmail"));
 const Home = lazy(() => import("../pages/home"));
@@ -17,38 +22,45 @@ const ProductLove = lazy(() => import("../pages/product/productLove"));
 const ProductQuery = lazy(() =>
   import("../pages/product/productQuery/productQuery")
 );
-// import Home from "../pages/home";
-// import Login from "../pages/login";
-// import Register from "../pages/register";
-// import NotFound from "../pages/notFound";
-// routes client
 
 const clientPages = [
   { com: <Home />, path: clientRoutes.home },
-  { com: <Account />, path: clientRoutes.account.main },
-  { com: <Orders />, path: clientRoutes.account.orders },
-  { com: <VerifyEmail />, path: clientRoutes.account.verifyEmail },
-  { com: <ResetPassword />, path: clientRoutes.account.resetPassword },
-  { com: <Login />, path: clientRoutes.account.login },
-  { com: <LoginSuccess />, path: "/login/success" },
-  { com: <Register />, path: clientRoutes.account.register },
-
-  /// PRODUCT
-  { com: <ProductDetail />, path: clientRoutes.product.detail + "/:slug" },
   {
-    com: <ProductLove />,
-    path: clientRoutes.product.love,
+    com: <Outlet />,
+    path: clientRoutes.account.main,
+    children: [
+      { com: <Account />, path: "", protected: true },
+      { com: <Orders />, path: "don-hang", protected: true },
+      { com: <VerifyEmail />, path: "xac-minh-tai-khoan", protected: true },
+      { com: <ResetPassword />, path: "dat-lai-mat-khau", protected: true },
+      { com: <Login />, path: "dang-nhap" },
+      { com: <Register />, path: "dang-ky" },
+      { com: <ChangePassword />, path: "thay-doi-mat-khau", protected: true },
+      { com: <AuthRequired />, path: "yeu-cau-dang-nhap" },
+    ],
   },
   {
-    com: <ProductSearch />,
-    path: clientRoutes.product.search,
+    com: <Outlet />,
+    path: clientRoutes.product.main,
+    children: [
+      { com: <ProductQuery />, path: "" },
+      {
+        com: <ProductDetail />,
+        path: "chi-tiet/:slug",
+      },
+      {
+        com: <ProductLove />,
+        path: "yeu-thich",
+      },
+      {
+        com: <ProductSearch />,
+        path: "search",
+      },
+    ],
   },
-  { com: <ProductQuery />, path: clientRoutes.product.main + "/:name" },
-
-  /// cart
 
   { com: <Cart />, path: clientRoutes.cart },
-  // page not found
+  { com: <LoginSuccess />, path: "/login/success" },
   { com: <NotFound />, path: "*" },
 ];
 

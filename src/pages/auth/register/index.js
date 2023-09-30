@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 import { motion } from "framer-motion";
 import { useState } from "react";
@@ -12,7 +12,10 @@ import { validateFormRegister } from "../../../utils/validate";
 
 import { registerAuth } from "../../../features/auth/authSlice";
 
-import { setLoadingClose, setLoadingShow } from "../../../features/loadingSlice";
+import {
+  setLoadingClose,
+  setLoadingShow,
+} from "../../../features/loadingSlice";
 import HelmetCustom from "../../../components/HelmetCustom";
 import Breadcrumb from "../../../components/Breadcrumb";
 import { toastWarning } from "../../../utils/toast";
@@ -51,6 +54,8 @@ function Register() {
       navigate(clientRoutes.account.login);
     }
   };
+  const { user } = useSelector((store) => store.auth);
+  if (user) return <Navigate to={clientRoutes.home} />;
   return (
     <div className="register">
       <HelmetCustom title="Đăng ký" />
@@ -67,7 +72,10 @@ function Register() {
             <h5 className="text-center py-2">ĐĂNG KÝ</h5>
             <p className="text-center ">
               Đã có tài khoản đăng nhập
-              <Link className="text-secondary ms-1" to={clientRoutes.account.login}>
+              <Link
+                className="text-secondary ms-1"
+                to={clientRoutes.account.login}
+              >
                 tại đây
               </Link>
             </p>
@@ -118,7 +126,8 @@ function Register() {
                   onClick={(e) => {
                     e.preventDefault();
                     window.open(
-                      process.env.REACT_APP_BACKEND_URL + "/api/v1/auth/facebook",
+                      process.env.REACT_APP_BACKEND_URL +
+                        "/api/v1/auth/facebook",
                       "_self"
                     );
                   }}
