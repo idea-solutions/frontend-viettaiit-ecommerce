@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import { clientRoutes } from "./routes";
 import { lazy } from "react";
+import Products from "../pages/product";
 
 const Account = lazy(() => import("../pages/auth/account"));
 const Orders = lazy(() => import("../pages/auth/account/orders"));
@@ -19,9 +20,6 @@ const NotFound = lazy(() => import("../pages/notFound"));
 const ProductDetail = lazy(() => import("../pages/product/productDetail"));
 const LoginSuccess = lazy(() => import("../pages/auth/login/loginSuccess"));
 const ProductLove = lazy(() => import("../pages/product/productLove"));
-const ProductQuery = lazy(() =>
-  import("../pages/product/productQuery/productQuery")
-);
 
 const clientPages = [
   { com: <Home />, path: clientRoutes.home },
@@ -43,7 +41,7 @@ const clientPages = [
     com: <Outlet />,
     path: clientRoutes.product.main,
     children: [
-      { com: <ProductQuery />, path: "" },
+      { com: <Products />, path: ":name" },
       {
         com: <ProductDetail />,
         path: "chi-tiet/:slug",
@@ -54,7 +52,7 @@ const clientPages = [
       },
       {
         com: <ProductSearch />,
-        path: "search",
+        path: "tim-kiem",
       },
     ],
   },

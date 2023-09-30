@@ -7,7 +7,7 @@ const clientRoutes = {
     register: "/tai-khoan/dang-ky",
     verifyEmail: "/tai-khoan/xac-minh-tai-khoan",
     resetPassword: "/tai-khoan/dat-lai-mat-khau",
-    changePassword:"/tao-khoan/thay-doi-mat-khau"
+    changePassword:"/tai-khoan/thay-doi-mat-khau"
   },
   introduce: "/gioi-thieu",
   news: "/tin-tuc",

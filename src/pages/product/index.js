@@ -6,30 +6,28 @@ import { Autoplay, Navigation, Scrollbar } from "swiper/modules";
 import { memo, useCallback, useEffect, useMemo } from "react";
 import PropTypes from "prop-types";
 // MY IMPORTS
-import useScrollTop from "../../../hooks/useScrollTop";
+import useScrollTop from "../../hooks/useScrollTop";
 import {
   getProducts,
   setQueryProduct,
-} from "../../../features/product/productSlice";
-import Breadcrumb from "../../../components/Breadcrumb";
-import HelmetCustom from "../../../components/HelmetCustom";
-import ProductItem from "../../../components/Product/productItem";
-import LazyImage from "../../../components/LazyImage";
+} from "../../features/product/productSlice";
+import Breadcrumb from "../../components/Breadcrumb";
+import HelmetCustom from "../../components/HelmetCustom";
+import ProductItem from "../../components/Product/productItem";
+import LazyImage from "../../components/LazyImage";
 import BarQuery from "./barQuery";
-import ProductNone from "../../../components/Product/productNone";
-import NavSearch from "../../../components/Search/NavSearch";
-import { getColors } from "../../../features/color/colorSlice";
-import { getProviders } from "../../../features/provider/providerSlice";
-import { navigateAndAttachQuery } from "../../../utils/attachQueryToURL";
-import { clientRoutes } from "../../../routes";
+import ProductNone from "../../components/Product/productNone";
+import NavSearch from "../../components/Search/NavSearch";
+import { getColors } from "../../features/color/colorSlice";
+import { getProviders } from "../../features/provider/providerSlice";
+
 
 const optionsName = {
   "san-pham-khuyen-mai": "Sản phẩm khuyến mãi",
   "tat-ca": "Tất cả sản phẩm",
 };
-function ProductQuery() {
+function Products() {
   useScrollTop();
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { name } = useParams();
   const { products, query, page, totalPages } = useSelector(
@@ -54,7 +52,7 @@ function ProductQuery() {
         <h3 className="text-center fw-bold text-size-26 mb-2">{title}</h3>
         <div
           style={{
-            backgroundImage: `url(${require("../../../assets/sliders/slider_1/1.webp")})`,
+            backgroundImage: `url(${require("../../assets/sliders/slider_1/1.webp")})`,
             paddingTop: "25%",
             border: "10px",
           }}
@@ -124,7 +122,7 @@ function ProductQuery() {
   );
 }
 
-export default ProductQuery;
+export default Products;
 
 const SubCategories = memo(function SubCategories({ categoryId }) {
   console.log("SubCategories")
@@ -168,7 +166,7 @@ const SubCategories = memo(function SubCategories({ categoryId }) {
             <span>
               <LazyImage
                 className="w-100 h-100 rounded-circle"
-                src={require("../../../assets/no-image.webp")}
+                src={require("../../assets/no-image.webp")}
                 alt=""
               />
             </span>

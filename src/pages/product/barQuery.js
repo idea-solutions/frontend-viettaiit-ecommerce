@@ -4,8 +4,8 @@ import { faArrowDownAZ, faFilter } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // MY IMPORTS
-import { setQueryProduct } from "../../../features/product/productSlice";
-import { setIsNavSearch } from "../../../features/navSearchSlice";
+import { setQueryProduct } from "../../features/product/productSlice";
+import { setIsNavSearch } from "../../features/navSearchSlice";
 import PropTypes from "prop-types";
 function BarQuery({ sortValue }) {
   const dispatch = useDispatch();
