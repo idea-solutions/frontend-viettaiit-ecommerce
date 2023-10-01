@@ -17,10 +17,11 @@ export const deleteCartItemService = async (id, dispatch) => {
   return dispatch(getCartMe());
 };
 
-export const addItemToCartService = async (inputs, itemView, dispatch) => {
+export const addItemToCartService = async (inputs,  dispatch) => {
   const { payload } = await dispatch(addCartMe(inputs));
   if (payload.status === 200) {
     await dispatch(getCartMe());
-    dispatch(setCartItemNewBuy(itemView));
+   
   }
 };
+// 

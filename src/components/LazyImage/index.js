@@ -1,7 +1,7 @@
 import { useInView } from "react-intersection-observer";
 import { motion } from "framer-motion";
 import PropTypes from "prop-types";
-function LazyImage({ src, className }) {
+function LazyImage({ src, className, ...props }) {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.2,
@@ -9,6 +9,7 @@ function LazyImage({ src, className }) {
   return (
     <motion.img
       ref={ref}
+      {...props}
       className={className ? className : ""}
       src={inView ? src : ""}
       alt=""

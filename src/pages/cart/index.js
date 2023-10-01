@@ -86,11 +86,16 @@ function Cart() {
                       {formatCurrency(total)}
                     </span>
                   </div>{" "}
-                  <Link to={clientRoutes.checkout}>
-                    <Button variant="primary w-100 mt-2 hover-bg-secondary btn-md">
-                      THANH TOÁN
-                    </Button>
-                  </Link>
+                  <Button
+                    disabled={!countCartItem}
+                    onClick={() => {
+                      if (countCartItem === 0) return;
+                      navigate(clientRoutes.checkout);
+                    }}
+                    variant="primary w-100 mt-2 hover-bg-secondary btn-md"
+                  >
+                    THANH TOÁN
+                  </Button>
                 </Col>
               </Row>
             </div>

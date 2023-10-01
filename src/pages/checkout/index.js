@@ -5,8 +5,18 @@ import { Link } from "react-router-dom";
 import { clientRoutes } from "../../routes";
 import { faMoneyBill, faUser } from "@fortawesome/free-solid-svg-icons";
 import LazyImage from "../../components/LazyImage";
+import { useDispatch, useSelector } from "react-redux";
+import { formatCurrency } from "../../utils/format";
+import { calculatePriceForDiscount } from "../../utils/calculatePrice";
+import { useEffect } from "react";
+import { calculateTotalAndCountCart } from "../../features/cart/cartSlice";
 
 function CheckOut() {
+  const { cart, countCartItem, total } = useSelector((store) => store.cart);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (cart != null) dispatch(calculateTotalAndCountCart());
+  }, [cart]);
   return (
     <div className="vh-100 ">
       <HelmetCustom title="Thanh toán" />
@@ -15,7 +25,7 @@ function CheckOut() {
           <Col md={12} xl={8} className="">
             <FontAwesomeIcon className="icon-size-sm  me-3  " />
             <Link
-              to={"/"}
+              to={clientRoutes.home}
               className={`logo d-block fs-4 fw-bold text-center text-size-30 rounded mb-3`}
             >
               Sudes Phone
@@ -26,12 +36,12 @@ function CheckOut() {
                   <span className="fw-bold text-size-18 mb-3">
                     Thông tin nhận hàng
                   </span>
-                  <Link
+                  {/* <Link
                     to={clientRoutes.login}
                     className="text-info fw-bold text-size-14"
                   >
                     <FontAwesomeIcon icon={faUser} className="ms-2" /> Đăng nhập
-                  </Link>
+                  </Link> */}
                 </div>
                 <Form className="">
                   <FloatingLabel
@@ -144,7 +154,7 @@ function CheckOut() {
                   </FloatingLabel>
                 </Form>
               </Col>
-              <Col md={12}  xl={6} className="">
+              <Col md={12} xl={6} className="">
                 <div className=" mt-sm-5 ">
                   <span className="fw-bold text-size-18 mb-3 d-block">
                     Vận chuyển
@@ -179,45 +189,49 @@ function CheckOut() {
           </Col>
           <Col md={12} xl={4} className="px-0">
             <h6 className=" border-bottom text-size-20 fw-bold py-3 px-4 mb-0">
-              Đơn hàng (1 sản phẩm)
+              Đơn hàng ({countCartItem} sản phẩm)
             </h6>
 
             <Row>
               <Col md={12} className="ps-5">
                 <div>
                   {/* ITEM */}
-                  <div className="d-flex justify-content-between align-items-center border-bottom py-2">
-                    <div className="d-flex gap-1 align-items-center">
-                      <div className="w-50 h-50">
-                        <LazyImage
-                          src="https://bizweb.dktcdn.net/thumb/thumb/100/480/632/products/pin-sac-du-phong-apple-magsafe-b.jpg?v=1681917535150"
-                          alt=""
-                          className="w-70 h-70 border border-info rounded-5"
-                        />
+                  {cart.cartItems.map((item, index) => (
+                    <div
+                      className="d-flex justify-content-between align-items-center border-bottom py-2"
+                      key={index}
+                    >
+                      <div className="d-flex gap-1 align-items-center">
+                        <div className=" position-relative">
+                          <LazyImage
+                            src={
+                              process.env.REACT_APP_BACKEND_URL +
+                              "/static/uploads/" +
+                              item.productItem.image
+                            }
+                            alt=""
+                            style={{ width: "45px" }}
+                            className="border border-info rounded-5"
+                          />
+                          <div className="px-1 text-size-12 rounded-circle w-5 h-5 d-inline-block position-absolute top--10 right-1 bg-info text-white">
+                            4
+                          </div>
+                        </div>
+                        <span className="fw-light text-size-14">
+                          {item.productItem.product.name}
+                        </span>
                       </div>
-                      <span className="fw-light text-size-14">
-                        Pin sạc dự phòng Apple Magsafe Battery Pack Chính Hãng
-                        MJWY3VN
-                      </span>
-                    </div>
-                    <div className="fw-light text-size-14">2.590.000₫</div>
-                  </div>
-                  <div className="d-flex justify-content-between align-items-center border-bottom py-2">
-                    <div className="d-flex gap-1 align-items-center">
-                      <div className="w-50 h-50">
-                        <LazyImage
-                          src="https://bizweb.dktcdn.net/thumb/thumb/100/480/632/products/pin-sac-du-phong-apple-magsafe-b.jpg?v=1681917535150"
-                          alt=""
-                          className="w-70 h-70 border border-info rounded-5"
-                        />
+                      <div className="fw-light text-size-14">
+                        {" "}
+                        {formatCurrency(
+                          calculatePriceForDiscount(
+                            item.productItem.product.price,
+                            item.productItem.product.discount
+                          )
+                        )}
                       </div>
-                      <span className="fw-light text-size-14">
-                        Pin sạc dự phòng Apple Magsafe Battery Pack Chính Hãng
-                        MJWY3VN
-                      </span>
                     </div>
-                    <div className="fw-light text-size-14">2.590.000₫</div>
-                  </div>
+                  ))}
                 </div>
               </Col>
               <Col md={12} className="ps-5">
@@ -228,14 +242,16 @@ function CheckOut() {
                   >
                     <Form.Control type="text" placeholder="name@example.com" />
                   </FloatingLabel>
-                  <Button variant="info btn-md">Áp dụng</Button>
+                  <Button disabled variant="info btn-md">
+                    Áp dụng
+                  </Button>
                 </div>
               </Col>
               <Col md={12} className="ps-5">
                 <div className="py-3 border-bottom">
                   <div className="d-flex justify-content-between align-items-center">
                     <span>Tạm tính</span>
-                    <span>2.590.000₫</span>
+                    <span>{formatCurrency(total)}</span>
                   </div>
 
                   <div className="d-flex justify-content-between align-items-center">
@@ -249,7 +265,7 @@ function CheckOut() {
                   <div className="d-flex justify-content-between align-items-center py-3">
                     <span className="text-size-14">Tổng cộng</span>
                     <span className="text-size-16 fw-bold text-info">
-                      2.630.000₫
+                      {formatCurrency(total + 40000)}
                     </span>
                   </div>
                   <div className="d-flex justify-content-between align-items-center mt-2">
@@ -259,7 +275,10 @@ function CheckOut() {
                     >
                       ❮ Quay về giỏ hàng
                     </Link>
-                    <Button variant="info" className="text-size-16 fw-bold btn-md">
+                    <Button
+                      variant="info"
+                      className="text-size-16 fw-bold btn-md"
+                    >
                       ĐẶT HÀNG
                     </Button>
                   </div>

@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Breadcrumb from "../../components/Breadcrumb";
 import HelmetCustom from "../../components/HelmetCustom";
 import { Button, Col, Row, Table } from "react-bootstrap";
@@ -31,8 +31,10 @@ import { toastInfo } from "../../utils/toast";
 import { addItemToCartService } from "../../services/cartService";
 import CountdownTimer from "../../components/CoutdownTimer";
 import { clientRoutes } from "../../routes";
+import { setCartItemNewBuy } from "../../features/cart/cartSlice";
 function ProductDetail() {
   const { slug: name } = useParams();
+  const navigate = useNavigate();
   const [qty, setQty] = useState(1);
   const { data, isLoading, isError } = useDataDetail("/products/" + name);
   const { user } = useSelector((store) => store.auth);
@@ -65,7 +67,12 @@ function ProductDetail() {
   const handleChangeQty = (e) => {
     setQty(parseInt(e.target.value));
   };
-
+  const itemView = {
+    image: data?.image,
+    price: data?.price - (data?.price * data?.discount) / 100,
+    colorValue: colors[idxSelected]?.value,
+    name: data?.name,
+  };
   const addItemToCart = async () => {
     if (!user) {
       toastInfo("Bạn cần phải đăng nhập!");
@@ -75,13 +82,8 @@ function ProductDetail() {
       qty,
       productItemId: data.productItems[idxSelected].id,
     };
-    const itemView = {
-      image: data?.image,
-      price: data?.price - (data?.price * data?.discount) / 100,
-      colorValue: colors[idxSelected]?.value,
-      name: data?.name,
-    };
-    addItemToCartService(inputs, itemView, dispatch);
+
+    addItemToCartService(inputs, dispatch);
   };
 
   return (
@@ -242,20 +244,27 @@ function ProductDetail() {
 
                     {/* Mua NGAY */}
                     <div className="my-4">
-                      <Button variant="primary hover-bg-secondary">
-                        <Link to={clientRoutes.checkout}>
-                          {" "}
-                          <div className="fw-bold text-size-20 mb-2 ">
-                            MUA NGAY
-                          </div>
-                          <div className="fw-light text-size-16">
-                            Giao tận nơi hoặc nhận tại cửa hàng
-                          </div>{" "}
-                        </Link>
+                      <Button
+                        variant="primary hover-bg-secondary"
+                        onClick={async () => {
+                          addItemToCart();
+                          navigate(clientRoutes.checkout);
+                        }}
+                      >
+                        {" "}
+                        <div className="fw-bold text-size-20 mb-2 ">
+                          MUA NGAY
+                        </div>
+                        <div className="fw-light text-size-16">
+                          Giao tận nơi hoặc nhận tại cửa hàng
+                        </div>{" "}
                       </Button>
                       <Button
                         variant="outline-secondary ms-4"
-                        onClick={() => addItemToCart()}
+                        onClick={() => {
+                          addItemToCart();
+                          dispatch(setCartItemNewBuy(itemView));
+                        }}
                       >
                         <div className="fw-bold text-size-20 mb-2 ">
                           <FontAwesomeIcon icon={faCartShopping} />

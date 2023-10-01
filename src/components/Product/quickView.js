@@ -19,6 +19,7 @@ import { toastInfo } from "../../utils/toast";
 import { useDispatch, useSelector } from "react-redux";
 
 import { addItemToCartService } from "../../services/cartService";
+import { setCartItemNewBuy } from "../../features/cart/cartSlice";
 function QuickView({ show, onHide, slugName }) {
   const { data } = useDataDetail("/products/" + slugName);
   const thumbImages =
@@ -34,6 +35,12 @@ function QuickView({ show, onHide, slugName }) {
     setQty(parseInt(e.target.value));
   };
   const dispatch = useDispatch();
+  const itemView = {
+    image: data?.image,
+    price: data?.price - (data?.price * data?.discount) / 100,
+    colorValue: colors[idxSelected]?.value,
+    name: data?.name,
+  };
   const addItemToCart = async () => {
     if (!user) {
       toastInfo("Bạn cần phải đăng nhập!");
@@ -43,13 +50,8 @@ function QuickView({ show, onHide, slugName }) {
       qty,
       productItemId: data.productItems[idxSelected].id,
     };
-    const itemView = {
-      image: data?.image,
-      price: data?.price - (data?.price * data?.discount) / 100,
-      colorValue: colors[idxSelected]?.value,
-      name: data?.name,
-    };
-    addItemToCartService(inputs, itemView, dispatch);
+
+    addItemToCartService(inputs, dispatch);
   };
 
   if (!data) return null;
@@ -179,7 +181,10 @@ function QuickView({ show, onHide, slugName }) {
                 </div>
                 <Button
                   variant="outline-secondary ms-4 d-flex gap-2 py-3"
-                  onClick={() => addItemToCart()}
+                  onClick={() => {
+                    addItemToCart();
+                    dispatch(setCartItemNewBuy(itemView));
+                  }}
                 >
                   <FontAwesomeIcon icon={faCartShopping} />
                   <div className="fw-light text-size-16">Thêm vào giỏ</div>
