@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Breadcrumb from "../../components/Breadcrumb";
 import HelmetCustom from "../../components/HelmetCustom";
 import { Button, Col, Row, Table } from "react-bootstrap";
@@ -30,6 +30,7 @@ import {
 import { toastInfo } from "../../utils/toast";
 import { addItemToCartService } from "../../services/cartService";
 import CountdownTimer from "../../components/CoutdownTimer";
+import { clientRoutes } from "../../routes";
 function ProductDetail() {
   const { slug: name } = useParams();
   const [qty, setQty] = useState(1);
@@ -242,12 +243,15 @@ function ProductDetail() {
                     {/* Mua NGAY */}
                     <div className="my-4">
                       <Button variant="primary hover-bg-secondary">
-                        <div className="fw-bold text-size-20 mb-2 ">
-                          MUA NGAY
-                        </div>
-                        <div className="fw-light text-size-16">
-                          Giao tận nơi hoặc nhận tại cửa hàng
-                        </div>
+                        <Link to={clientRoutes.checkout}>
+                          {" "}
+                          <div className="fw-bold text-size-20 mb-2 ">
+                            MUA NGAY
+                          </div>
+                          <div className="fw-light text-size-16">
+                            Giao tận nơi hoặc nhận tại cửa hàng
+                          </div>{" "}
+                        </Link>
                       </Button>
                       <Button
                         variant="outline-secondary ms-4"

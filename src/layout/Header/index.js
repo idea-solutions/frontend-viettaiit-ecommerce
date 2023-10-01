@@ -316,7 +316,7 @@ function Header() {
                             <small> {formatCurrency(total)}</small>
                           </div>
                           <Button variant="primary hover-bg-secondary">
-                            THANH TOÁN
+                            <Link to={clientRoutes.checkout}> THANH TOÁN</Link>
                           </Button>
                         </div>
                       </>

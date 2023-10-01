@@ -85,10 +85,12 @@ function Cart() {
                     <span className="text-size-18 text-danger fw-bold">
                       {formatCurrency(total)}
                     </span>
-                  </div>
-                  <Button variant="primary w-100 mt-2 hover-bg-secondary btn-md">
-                    THANH TOÁN
-                  </Button>
+                  </div>{" "}
+                  <Link to={clientRoutes.checkout}>
+                    <Button variant="primary w-100 mt-2 hover-bg-secondary btn-md">
+                      THANH TOÁN
+                    </Button>
+                  </Link>
                 </Col>
               </Row>
             </div>

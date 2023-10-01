@@ -8,6 +8,8 @@ import LazyImage from "../LazyImage";
 import { useDispatch, useSelector } from "react-redux";
 import { setCartItemNewBuy } from "../../features/cart/cartSlice";
 import { formatCurrency } from "../../utils/format";
+import { Link } from "react-router-dom";
+import { clientRoutes } from "../../routes";
 
 function ModalCartView({}) {
   const { countCartItem, cartItemNewBuy } = useSelector((store) => store.cart);
@@ -69,7 +71,7 @@ function ModalCartView({}) {
             Tiếp tục mua hàng
           </Button>
           <Button variant="primary hover-bg-secondary btn-md w-100">
-            Thanh toán ngay
+            <Link to={clientRoutes.checkout}>Thanh toán ngay</Link>
           </Button>
         </div>
       </Modal.Footer>
