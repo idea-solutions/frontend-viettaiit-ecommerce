@@ -23,6 +23,7 @@ const clientRoutes = {
   },
 
   cart: "/gio-hang",
+  checkout: "/thanh-toan",
 };
 
 export { clientRoutes };

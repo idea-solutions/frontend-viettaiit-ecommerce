@@ -31,14 +31,15 @@ function App() {
       <Suspense fallback={<div></div>}>
         <Routes>
           {clientPages.map((route, idx) => {
-            let Comp;
-            Comp = (
-              <Layout key={idx}>
-                <AnimatePresence initial={false} mode="wait">
-                  {route.com}
-                </AnimatePresence>
-              </Layout>
-            );
+            let Comp = route.com;
+            if (!route.only)
+              Comp = (
+                <Layout key={idx}>
+                  <AnimatePresence initial={false} mode="wait">
+                    {route.com}
+                  </AnimatePresence>
+                </Layout>
+              );
 
             /* ---- */
 

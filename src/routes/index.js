@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 import { clientRoutes } from "./routes";
 import { lazy } from "react";
 import Products from "../pages/product";
+import CheckOut from "../pages/checkout";
 
 const Account = lazy(() => import("../pages/auth/account"));
 const Orders = lazy(() => import("../pages/auth/account/orders"));
@@ -58,6 +59,7 @@ const clientPages = [
   },
 
   { com: <Cart />, path: clientRoutes.cart },
+  { com: <CheckOut />, path: clientRoutes.checkout, only: true },
   { com: <LoginSuccess />, path: "/login/success" },
   { com: <NotFound />, path: "*" },
 ];

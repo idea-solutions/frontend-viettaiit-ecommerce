@@ -45,8 +45,11 @@
     - header cart => OK
     - countdown Timer => OK
 
+    - page account 
+        - TAO PAGE => OK
+        - Handle logic => CHƯA
 
-    - page account
+    - TẠO PAGE THANH TOÁN => OK
     - loading when change page
     - Chức năng search
     - Footer
