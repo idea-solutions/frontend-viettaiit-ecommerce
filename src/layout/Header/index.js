@@ -214,7 +214,7 @@ function Header() {
                     ) : (
                       <>
                         <h6>GIỎ HÀNG</h6>
-                        <div className="cart__display">
+                        <div className="cart__display scrollbar-primary">
                           {cart &&
                             cart.cartItems.map((item, index) => (
                               <div className="cart__item">
