@@ -42,4 +42,9 @@ const validateFormResetPassword = (inputs) => {
   return "";
 };
 
+const regexPhoneNumber = /(0[3|5|7|8|9])+([0-9]{8})\b/g;
+
+export const checkPhoneNumber = (phone) => {
+  return phone.match(regexPhoneNumber);
+};
 export { validateFormRegister, validateFormLogin, validateFormResetPassword };

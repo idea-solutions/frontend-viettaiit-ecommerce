@@ -31,18 +31,11 @@ function App() {
       <Suspense fallback={<div></div>}>
         <Routes>
           {clientPages.map((route, idx) => {
-            let Comp = route.com;
+            let Comp = <AnimatePresence>{route.com}</AnimatePresence>;
             if (route.protected) {
               Comp = <ProtectedRoute>{Comp}</ProtectedRoute>;
             }
-            if (!route.only)
-              Comp = (
-                <Layout key={idx}>
-                  <AnimatePresence initial={false} mode="wait">
-                    {route.com}
-                  </AnimatePresence>
-                </Layout>
-              );
+            if (!route.only) Comp = <Layout key={idx}>{Comp}</Layout>;
 
             /* ---- */
 

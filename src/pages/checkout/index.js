@@ -3,22 +3,94 @@ import HelmetCustom from "../../components/HelmetCustom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import { clientRoutes } from "../../routes";
-import { faMoneyBill, } from "@fortawesome/free-solid-svg-icons";
+import { faCaretDown, faMoneyBill } from "@fortawesome/free-solid-svg-icons";
 import LazyImage from "../../components/LazyImage";
 import { useSelector } from "react-redux";
 import { formatCurrency } from "../../utils/format";
 import { calculatePriceForDiscount } from "../../utils/calculatePrice";
 
+import { useEffect, useRef, useState } from "react";
+import useHideOnClickOutside from "../../hooks/useHideOnClickOutSide";
+import { toastInfo } from "../../utils/toast";
+import axios from "axios";
+import { checkPhoneNumber } from "../../utils/validate";
 function CheckOut() {
   const { cart, countCartItem, total } = useSelector((store) => store.cart);
- 
+  const { user } = useSelector((store) => store.auth);
+  const [addresses, setAddresses] = useState(null);
+  const cityRef = useRef();
+  const districtRef = useRef();
+  const wardRef = useRef();
+  const [isShowSelectOptionCity, setIsShowSelectOptionCity] =
+    useHideOnClickOutside(cityRef);
+  const [isShowSelectOptionDistrict, setIsShowSelectOptionDistrict] =
+    useHideOnClickOutside(districtRef);
+  const [isShowSelectOptionWard, setIsShowSelectOptionWard] =
+    useHideOnClickOutside(wardRef);
+  const [city, setCity] = useState();
+  const [district, setDistrict] = useState(null);
+  const [ward, setWard] = useState(null);
+  const [info, setInfo] = useState({
+    phoneNumber: "",
+    province: "",
+    name: "",
+    address: "",
+    district: "",
+    wards: "",
+    country: "VN",
+    note: "",
+  });
+
+  const handleChange = (e) => {
+    setInfo((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+  useEffect(() => {
+    const getAddressesAsync = async () => {
+      try {
+        const { data } = await axios.get(
+          "https://provinces.open-api.vn/api/?depth=3"
+        );
+        setAddresses(data);
+        localStorage.setItem("addresses", JSON.stringify(data));
+      } catch (error) {}
+    };
+    const data = JSON.parse(localStorage.getItem("addresses"));
+    if (data) setAddresses(data);
+    else getAddressesAsync();
+  }, []);
+  const handleSelectCity = (city) => {
+    setCity(city);
+    setDistrict(null);
+    setWard(null);
+  };
+  const handleSelectDistrict = (district) => {
+    setDistrict(district);
+    setWard(null);
+  };
+
+  const handleSelectWard = (ward) => {
+    setWard(ward);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const { name, phoneNumber } = info;
+    if (name.length < 3) return toastInfo("Họ và tên yêu cầu!");
+    if (!checkPhoneNumber(phoneNumber))
+      return toastInfo("Định dạng số điện thoại không hợp lệ!");
+    info.province = city.name;
+    info.district = district.name;
+    info.wards = ward.name;
+    console.log(info)
+  };
+
   return (
     <div className="vh-100 ">
       <HelmetCustom title="Thanh toán" />
       <div className="container w-70 ">
         <Row>
           <Col md={12} xl={8} className="">
-            <FontAwesomeIcon className="icon-size-sm  me-3  " />
+            {/* <FontAwesomeIcon className="icon-size-sm  me-3  " /> */}
             <Link
               to={clientRoutes.home}
               className={`logo d-block fs-4 fw-bold text-center text-size-30 rounded mb-3`}
@@ -43,10 +115,13 @@ function CheckOut() {
                     controlId="floatingInputGrid"
                     label="Email"
                     className="mb-2"
+                    disabled
                   >
                     <Form.Control
                       size="sm"
                       type="email"
+                      value={user.email}
+                      disabled
                       placeholder="name@example.com"
                     />
                   </FloatingLabel>
@@ -55,7 +130,13 @@ function CheckOut() {
                     label="Họ và tên"
                     className="mb-2"
                   >
-                    <Form.Control type="email" placeholder="Nguyen Viet Tai" />
+                    <Form.Control
+                      type="text"
+                      placeholder="Nguyen Viet Tai"
+                      value={info?.name}
+                      name="name"
+                      onChange={handleChange}
+                    />
                   </FloatingLabel>
 
                   <div className="d-flex mb-2">
@@ -64,7 +145,16 @@ function CheckOut() {
                       label="Số điện thoại (tùy chọn)"
                       className="w-100"
                     >
-                      <Form.Control type="email" placeholder="329638260" />
+                      <Form.Control
+                        type="text"
+                        placeholder="329638260"
+                        value={info?.phoneNumber}
+                        name="phoneNumber"
+                        onChange={(e) => {
+                          // if (info.phoneNumber.length >= 10) return;
+                          handleChange(e);
+                        }}
+                      />
                     </FloatingLabel>
                   </div>
                   <FloatingLabel
@@ -73,69 +163,112 @@ function CheckOut() {
                     className="mb-2"
                   >
                     <Form.Control
-                      type="email"
+                      type="text"
                       placeholder="124 Nguyen Tat Thanh"
+                      value={info?.address}
+                      name="address"
+                      onChange={handleChange}
                     />
                   </FloatingLabel>
-                  <div className="d-flex mb-2">
+                  <div className="d-flex mb-2 position-relative" ref={cityRef}>
                     <FloatingLabel
                       controlId="floatingInputGrid"
                       label="Tỉnh thành"
-                      className="w-90"
+                      className="w-100 d-flex"
                     >
                       <Form.Control
-                        type="email"
+                        type="text"
                         placeholder="name@example.com"
-                      />
+                        value={city?.name ? city.name : ""}
+                        onFocus={() => setIsShowSelectOptionCity(true)}
+                      ></Form.Control>{" "}
+                      <div
+                        className="border rounded-2 px-3 flex-center cursor"
+                        onClick={() => setIsShowSelectOptionCity(true)}
+                      >
+                        <FontAwesomeIcon icon={faCaretDown} />
+                      </div>
                     </FloatingLabel>
-                    <FloatingLabel>
-                      <Form.Select>
-                        <option></option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                      </Form.Select>
-                    </FloatingLabel>
+                    {isShowSelectOptionCity && (
+                      <SelectOptions
+                        setIsShow={setIsShowSelectOptionCity}
+                        addresses={addresses}
+                        handleSelect={handleSelectCity}
+                      ></SelectOptions>
+                    )}
                   </div>
-                  <div className="d-flex mb-2">
+                  <div
+                    className="d-flex mb-2 position-relative"
+                    ref={districtRef}
+                  >
                     <FloatingLabel
                       controlId="floatingInputGrid"
-                      label="Quận huyện (Tùy chọn)"
-                      className="w-90"
+                      label="Quận huyện"
+                      className="w-100 d-flex"
                     >
                       <Form.Control
-                        type="email"
+                        type="text"
                         placeholder="name@example.com"
-                      />
+                        value={district?.name ? district.name : ""}
+                        onFocus={() => {
+                          if (!city)
+                            return toastInfo("Vui lòng chọn tỉnh/thành");
+                          setIsShowSelectOptionDistrict(true);
+                        }}
+                      ></Form.Control>{" "}
+                      <div
+                        className="border rounded-2 px-3 flex-center cursor"
+                        onClick={() => {
+                          if (!city)
+                            return toastInfo("Vui lòng chọn tỉnh/thành");
+                          setIsShowSelectOptionDistrict(true);
+                        }}
+                      >
+                        <FontAwesomeIcon icon={faCaretDown} />
+                      </div>
                     </FloatingLabel>
-                    <FloatingLabel>
-                      <Form.Select>
-                        <option></option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                      </Form.Select>
-                    </FloatingLabel>
+                    {isShowSelectOptionDistrict && (
+                      <SelectOptions
+                        setIsShow={setIsShowSelectOptionDistrict}
+                        addresses={city?.districts}
+                        handleSelect={handleSelectDistrict}
+                      ></SelectOptions>
+                    )}
                   </div>
-                  <div className="d-flex mb-2">
+                  <div className="d-flex mb-2 position-relative" ref={wardRef}>
                     <FloatingLabel
                       controlId="floatingInputGrid"
-                      label="Phường xã (Tùy chọn)"
-                      className="w-90"
+                      label="Phường xã"
+                      className="w-100 d-flex"
                     >
                       <Form.Control
-                        type="email"
+                        type="text"
                         placeholder="name@example.com"
-                      />
+                        value={ward?.name ? ward.name : ""}
+                        onFocus={() => {
+                          if (!district)
+                            return toastInfo("Vui lòng chọn huyện");
+                          setIsShowSelectOptionWard(true);
+                        }}
+                      ></Form.Control>{" "}
+                      <div
+                        className="border rounded-2 px-3 flex-center cursor"
+                        onClick={() => {
+                          if (!district)
+                            return toastInfo("Vui lòng chọn huyện");
+                          setIsShowSelectOptionWard(true);
+                        }}
+                      >
+                        <FontAwesomeIcon icon={faCaretDown} />
+                      </div>
                     </FloatingLabel>
-                    <FloatingLabel>
-                      <Form.Select>
-                        <option></option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                      </Form.Select>
-                    </FloatingLabel>
+                    {isShowSelectOptionWard && (
+                      <SelectOptions
+                        setIsShow={setIsShowSelectOptionWard}
+                        addresses={district?.wards}
+                        handleSelect={handleSelectWard}
+                      ></SelectOptions>
+                    )}
                   </div>
                   <FloatingLabel
                     controlId="floatingTextarea2"
@@ -145,6 +278,9 @@ function CheckOut() {
                       as="textarea"
                       placeholder="Ghi chú"
                       style={{ height: "70px" }}
+                      value={info?.note}
+                      name="note"
+                      onChange={handleChange}
                     />
                   </FloatingLabel>
                 </Form>
@@ -273,6 +409,7 @@ function CheckOut() {
                     <Button
                       variant="info"
                       className="text-size-16 fw-bold btn-md"
+                      onClick={handleSubmit}
                     >
                       ĐẶT HÀNG
                     </Button>
@@ -288,3 +425,23 @@ function CheckOut() {
 }
 
 export default CheckOut;
+
+function SelectOptions({ addresses, handleSelect, setIsShow }) {
+  if (!addresses) return null;
+  return (
+    <div className="select_options scrollbar-primary">
+      <span>---</span>
+      {addresses.map((address, index) => (
+        <span
+          key={index}
+          onClick={() => {
+            handleSelect(address);
+            setIsShow(false);
+          }}
+        >
+          {address?.name}
+        </span>
+      ))}
+    </div>
+  );
+}
