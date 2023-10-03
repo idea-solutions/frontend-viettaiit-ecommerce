@@ -108,7 +108,7 @@
               }
               &__display {
                 @include flex-column($gap: 0px);
-                height: 183px;
+                max-height: 183px;
                 overflow-y: scroll;
                 .cart__item {
                   border-top: 1px solid $gray-700;

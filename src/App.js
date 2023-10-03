@@ -32,6 +32,9 @@ function App() {
         <Routes>
           {clientPages.map((route, idx) => {
             let Comp = route.com;
+            if (route.protected) {
+              Comp = <ProtectedRoute>{Comp}</ProtectedRoute>;
+            }
             if (!route.only)
               Comp = (
                 <Layout key={idx}>

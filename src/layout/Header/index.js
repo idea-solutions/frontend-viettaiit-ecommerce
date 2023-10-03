@@ -35,7 +35,6 @@ import LazyImage from "../../components/LazyImage";
 import NavbarDeskTop from "../NavBar/NavbarDeskTop";
 import NavBarDownDeskTop from "../NavBar/NavBarDownDeskTop";
 import {
-  calculateTotalAndCountCart,
   getCartMe,
   resetCart,
 } from "../../features/cart/cartSlice";
@@ -62,9 +61,7 @@ function Header() {
       dispatch(getCartMe());
     }
   }, [dispatch, user]);
-  useEffect(() => {
-    if (cart != null) dispatch(calculateTotalAndCountCart());
-  }, [cart]);
+
 
   return (
     <>

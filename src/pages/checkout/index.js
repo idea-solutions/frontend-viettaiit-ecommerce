@@ -3,20 +3,15 @@ import HelmetCustom from "../../components/HelmetCustom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import { clientRoutes } from "../../routes";
-import { faMoneyBill, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faMoneyBill, } from "@fortawesome/free-solid-svg-icons";
 import LazyImage from "../../components/LazyImage";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { formatCurrency } from "../../utils/format";
 import { calculatePriceForDiscount } from "../../utils/calculatePrice";
-import { useEffect } from "react";
-import { calculateTotalAndCountCart } from "../../features/cart/cartSlice";
 
 function CheckOut() {
   const { cart, countCartItem, total } = useSelector((store) => store.cart);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    if (cart != null) dispatch(calculateTotalAndCountCart());
-  }, [cart]);
+ 
   return (
     <div className="vh-100 ">
       <HelmetCustom title="Thanh toán" />

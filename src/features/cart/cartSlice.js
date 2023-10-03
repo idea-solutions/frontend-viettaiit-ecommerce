@@ -45,24 +45,10 @@ const cartSlice = createSlice({
       state.cart = null;
       state.countCartItem = 0;
     },
-    calculateTotalAndCountCart: (state) => {
-      var count = 0;
-      state.total = state.cart.cartItems.reduce((acc, cur) => {
-        // count += cur.qty;
-        let qty = cur.qty;
-        let price = cur.productItem.product.price;
-        let discount = cur.productItem.product.discount;
-        count += qty;
-        return acc + (price - (price * discount) / 100) * qty;
-      }, 0);
 
-      state.countCartItem = count;
-    },
     setCartItemNewBuy: (state, action) => {
       state.cartItemNewBuy = action.payload;
     },
-
-   
   },
 
   extraReducers: (builder) => {
@@ -71,8 +57,10 @@ const cartSlice = createSlice({
       state.isLoading = true;
     });
     builder.addCase(getCartMe.fulfilled, (state, action) => {
-      const { data } = action.payload;
+      const { data  ,total ,count} = action.payload;
       state.cart = data;
+      state.total = total;
+      state.countCartItem = count;
       state.isLoading = state.isError = false;
     });
     builder.addCase(getCartMe.rejected, (state, action) => {
@@ -101,6 +89,5 @@ const cartSlice = createSlice({
   },
 });
 
-export const { resetCart, calculateTotalAndCountCart, setCartItemNewBuy } =
-  cartSlice.actions;
+export const { resetCart, setCartItemNewBuy } = cartSlice.actions;
 export default cartSlice.reducer;

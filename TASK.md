@@ -23,7 +23,7 @@
             4.
 
 
-## TASK 1
+## VẤN ĐỀ LÀM ĐƯỢC
     - Home 
         - danh mục => Ok
         - list iphone => Ok
@@ -50,9 +50,21 @@
         - Handle logic => CHƯA
 
     - TẠO PAGE THANH TOÁN => OK
+
+
+## VẤN ĐỀ CHƯA LÀM
+
     - loading when change page
+    - Loading khi mà gọi API
     - Chức năng search
     - Footer
+    - Do futures on page account ( orders, change password, )
+    - pay on page checkout ( Thanh toán trên page thanh toan)
+    - Handle get address on page checkout ( Xử lí get địa chỉ trên page checkout)
+
+## VẤN ĐỀ SẼ LÀM    
+## VẤN ĐỀ CHƯA LÀM ĐƯỢC
+    
 
 ## TASK TỐI ƯU PERFORMANCE
     - ProductCategory -> Chưa thực hiện được caching query sub category product

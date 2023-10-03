@@ -59,7 +59,12 @@ const clientPages = [
   },
 
   { com: <Cart />, path: clientRoutes.cart },
-  { com: <CheckOut />, path: clientRoutes.checkout, only: true },
+  {
+    com: <CheckOut />,
+    path: clientRoutes.checkout,
+    only: true,
+    protected: true,
+  },
   { com: <LoginSuccess />, path: "/login/success" },
   { com: <NotFound />, path: "*" },
 ];

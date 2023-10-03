@@ -4,8 +4,11 @@ import HelmetCustom from "../../../components/HelmetCustom";
 import { useLocation, Link } from "react-router-dom";
 import { clientRoutes } from "../../../routes/index";
 import { useEffect } from "react";
+import { logoutAuth } from "../../../features/auth/authSlice";
+import { useDispatch } from "react-redux";
 
 function Account({ children }) {
+  const dispatch = useDispatch();
   const objectTitles = {
     [clientRoutes?.account.main]: [
       { to: clientRoutes.account.main, title: "Tài khoản" },
@@ -67,7 +70,12 @@ function Account({ children }) {
               <span className="hover-color-secondary fw-light">
                 Sổ địa chỉ (1)
               </span>
-              <span className="hover-color-secondary fw-light">Đăng xuất</span>
+              <span
+                className="hover-color-secondary fw-light"
+                onClick={() => dispatch(logoutAuth())}
+              >
+                Đăng xuất
+              </span>
             </div>
           </Col>
           <Col xs={12} lg={9}>
