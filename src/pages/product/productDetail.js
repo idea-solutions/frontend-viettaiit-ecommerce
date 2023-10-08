@@ -203,8 +203,8 @@ function ProductDetail() {
                       className={`p-3 d-inline-block border-2 overflow-auto mx-1 color ${
                         idxSelected === index ? "active" : ""
                       } `}
-                      key={color.id}
-                      style={{ background: `${color.value}` }}
+                      key={color?.id}
+                      style={{ background: `${color?.value}` }}
                     ></span>
                   ))}
               </div>

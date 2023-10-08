@@ -5,17 +5,19 @@ import { Link } from "react-router-dom";
 import { clientRoutes } from "../../routes";
 import { faCaretDown, faMoneyBill } from "@fortawesome/free-solid-svg-icons";
 import LazyImage from "../../components/LazyImage";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { formatCurrency } from "../../utils/format";
 import { calculatePriceForDiscount } from "../../utils/calculatePrice";
-
+import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import useHideOnClickOutside from "../../hooks/useHideOnClickOutSide";
-import { toastInfo } from "../../utils/toast";
+import { toastInfo, toastSuccess } from "../../utils/toast";
 import axios from "axios";
 import { checkPhoneNumber } from "../../utils/validate";
+import { addOrderMe } from "../../features/order/orderSlice";
 function CheckOut() {
   const { cart, countCartItem, total } = useSelector((store) => store.cart);
+
   const { user } = useSelector((store) => store.auth);
   const [addresses, setAddresses] = useState(null);
   const cityRef = useRef();
@@ -33,10 +35,10 @@ function CheckOut() {
   const [info, setInfo] = useState({
     phoneNumber: "",
     province: "",
-    name: "",
+    fullName: "",
     address: "",
     district: "",
-    wards: "",
+    ward: "",
     country: "VN",
     note: "",
   });
@@ -71,17 +73,53 @@ function CheckOut() {
   const handleSelectWard = (ward) => {
     setWard(ward);
   };
-
-  const handleSubmit = (e) => {
+  const dispatch = useDispatch();
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const { name, phoneNumber } = info;
-    if (name.length < 3) return toastInfo("Họ và tên yêu cầu!");
+    const { fullName, phoneNumber } = info;
+    if (fullName.length < 3) return toastInfo("Họ và tên yêu cầu!");
     if (!checkPhoneNumber(phoneNumber))
       return toastInfo("Định dạng số điện thoại không hợp lệ!");
     info.province = city.name;
     info.district = district.name;
-    info.wards = ward.name;
-    console.log(info)
+    info.ward = ward.name;
+    const productItems = [];
+    const ordersLine = [];
+    cart.cartItems.forEach((item) => {
+      const orderLine = {
+        qty: item.qty,
+        productItemId: item.productItemId,
+        price: calculatePriceForDiscount(
+          item.productItem.product.price,
+          item.productItem.product.discount
+        ),
+      };
+      const productItem = {
+        image:
+          process.env.REACT_APP_BACKEND_URL +
+          "/static/uploads/" +
+          item.productItem.image,
+        qty: item.qty,
+        price: calculatePriceForDiscount(
+          item.productItem.product.price,
+          item.productItem.product.discount
+        ),
+        colorValue: item.productItem.color.value,
+        name: item.productItem.product.name,
+        slug: item.productItem.product.slug,
+      };
+      ordersLine.push(orderLine);
+      productItems.push(productItem);
+    });
+    const inputs = {
+      productItems,
+      ordersLine,
+      ...info,
+    };
+    const { payload } = await dispatch(addOrderMe(inputs));
+    if (payload.status === 200) {
+      toastSuccess(payload.message);
+    }
   };
 
   return (
@@ -91,12 +129,15 @@ function CheckOut() {
         <Row>
           <Col md={12} xl={8} className="">
             {/* <FontAwesomeIcon className="icon-size-sm  me-3  " /> */}
-            <Link
-              to={clientRoutes.home}
-              className={`logo d-block fs-4 fw-bold text-center text-size-30 rounded mb-3`}
-            >
-              Sudes Phone
-            </Link>
+
+            <div className="w-100 flex-center">
+              <Link
+                to={clientRoutes.home}
+                className={`logo d-block fs-4 text-white rounded w-15`}
+              >
+                <LazyImage src="./logo.png" alt="" />
+              </Link>
+            </div>
             <Row className="">
               <Col md={12} xl={6}>
                 <div className="d-flex justify-content-between">
@@ -133,8 +174,8 @@ function CheckOut() {
                     <Form.Control
                       type="text"
                       placeholder="Nguyen Viet Tai"
-                      value={info?.name}
-                      name="name"
+                      value={info?.fullName}
+                      name="fullName"
                       onChange={handleChange}
                     />
                   </FloatingLabel>

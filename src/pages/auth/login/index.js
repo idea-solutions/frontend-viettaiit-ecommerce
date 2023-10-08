@@ -44,13 +44,13 @@ function Login() {
       toastWarning(err);
       return;
     }
-    dispatch(setLoadingShow());
+    // dispatch(setLoadingShow());
     const { payload } = await dispatch(loginAuth(inputs));
-    dispatch(setLoadingClose());
     if (payload.status === 200) {
       navigate(clientRoutes.home);
+      toastSuccess(payload.message);
     }
-    toastSuccess(payload.message);
+    // dispatch(setLoadingClose());
   };
   const handleForgotPwd = async (e) => {
     e.preventDefault();
@@ -59,13 +59,13 @@ function Login() {
       toastWarning("Email không đúng định dạng!");
       return;
     }
-    dispatch(setLoadingShow());
+    // dispatch(setLoadingShow());
     await dispatch(forgotPasswordAuth({ email: emailForgot }));
-    dispatch(setLoadingClose());
+    // dispatch(setLoadingClose());
   };
 
   const { user } = useSelector((store) => store.auth);
-  if (user) return <Navigate to={clientRoutes.home}/>;
+  if (user) return <Navigate to={clientRoutes.home} />;
   return (
     <div className="login">
       <HelmetCustom title="Đăng nhập" />

@@ -53,3 +53,30 @@
     }
   }
 }
+
+.table-order-detail {
+  padding: 0 20px;
+  border: 1px solid #e0e0e0;
+  margin-top: 24px;
+  border-radius: 5px;
+  table {
+    thead {
+      tr {
+        border-bottom: 1px solid #80808063;
+        th {
+          padding: 25px 0;
+          border: 0;
+          border-bottom: 1px solid #e0e0e0;
+          font-size: 16px;
+          line-height: 19px;
+          font-weight: 400;
+        }
+      }
+    }
+    tbody {
+      tr {
+        border-bottom: 1px solid #80808063;
+      }
+    }
+  }
+}

@@ -13,8 +13,10 @@ function App() {
   const createChildrenRoute = (route, Comp) => {
     return (
       <Route exact element={Comp} path={route.path}>
-        {route.children.map((childRoute, childIdx) => {
+        {route?.children.map((childRoute, childIdx) => {
           let element = childRoute.com;
+          if (childRoute.children)
+            return createChildrenRoute(childRoute, element);
           if (childRoute.protected) {
             element = <ProtectedRoute>{childRoute.com}</ProtectedRoute>;
           }

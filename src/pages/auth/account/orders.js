@@ -1,16 +1,32 @@
-import {Table } from "react-bootstrap";
+import { Table } from "react-bootstrap";
 import Account from ".";
 import { useMediaQuery } from "react-responsive";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getOrdersMe } from "../../../features/order/orderSlice";
+import { formatCurrency, formatDate } from "../../../utils/format";
+import { clientRoutes } from "../../../routes";
+import { useNavigate } from "react-router-dom";
 
 function Orders() {
   const isTabletOrMobile = useMediaQuery({
     query: "(max-width: 1024px)",
   });
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { orders } = useSelector((store) => store.order);
+  useEffect(() => {
+    dispatch(getOrdersMe());
+  }, []);
   return (
     <Account>
       <h5 className=" mt-sm-4 fw-light">ĐƠN HÀNG CỦA BẠN</h5>
       <div className="mt-4">
-        {isTabletOrMobile ? <OrdersDownDeskTop /> : <OrdersUpDeskTop />}
+        {isTabletOrMobile ? (
+          <OrdersDownDeskTop navigate={navigate} orders={orders} />
+        ) : (
+          <OrdersUpDeskTop navigate={navigate} orders={orders} />
+        )}
       </div>
     </Account>
   );
@@ -18,7 +34,7 @@ function Orders() {
 
 export default Orders;
 
-function OrdersUpDeskTop() {
+function OrdersUpDeskTop({ orders, navigate }) {
   return (
     <Table bordered size="sm" className="m-0">
       <thead>
@@ -36,73 +52,88 @@ function OrdersUpDeskTop() {
             Không có đơn hàng nào.
           </div>
         ) : (
-          <tr className="text-center">
-            <td className="align-middle text-info cursor p-2">#1025</td>
-            <td className="align-middle p-2">28/09/2023</td>
-            <td className="align-middle p-2">124 Nguyen Tat Thanh, Quận 3, TP Hồ Chí Minh, Vietnam</td>
-            <td className="align-middle p-2">835.000₫</td>
-            <td className="align-middle p-2">Chưa thu tiền</td>
-          </tr>
+          orders.map((order, index) => (
+            <tr className="text-center" key={index}>
+              <td
+                className="align-middle text-info cursor p-2"
+                onClick={() => navigate(clientRoutes.account.orders + "/" + order.id)}
+              >
+                <span className="text-nowrap">#{index + 1}</span>
+              </td>
+              <td className="align-middle p-2">
+                {formatDate(order.createdAt)}
+              </td>
+              <td className="align-middle p-2">
+                {order.address +
+                  ", " +
+                  order.province +
+                  ", " +
+                  order.district +
+                  ", " +
+                  order.ward +
+                  ", "}
+              </td>
+              <td className="align-middle p-2">
+                {formatCurrency(order.orderTotal)}
+              </td>
+              <td className="align-middle p-2">{order.status}</td>
+            </tr>
+          ))
         )}
       </tbody>
     </Table>
   );
 }
 
-function OrdersDownDeskTop() {
+function OrdersDownDeskTop({ orders, navigate }) {
   return (
-    <Table >
-      <tbody>
-        <tr className="text-size-14">
-          <td className="w-10 border border-white">Đơn hàng</td>
-          <td className="fw-light border border-white text-info cursor">#1025</td>
-        </tr>
-        <tr className="text-size-14">
-          <td className="w-10 border border-white">Ngày</td>
-          <td className="fw-light border border-white">28/09/2023</td>
-        </tr>
-        <tr className="text-size-14">
-          <td className="w-10 border border-white">Địa chỉ</td>
-          <td className="fw-light border border-white">
-            124 Nguyen Tat Thanh, Quận 3, TP Hồ Chí Minh, Vietnam
-          </td>
-        </tr>
-        <tr className="text-size-14">
-          <td className="w-15 border border-white">Giá trị đơn hàng</td>
-          <td className="fw-light border border-white">835.000₫</td>
-        </tr>
-        <tr className="text-size-14">
-          <td className="w-10 border border-white">TT thanh toán</td>
-          <td className="fw-light border border-white">Chưa thu tiền</td>
-        </tr>
-      </tbody>
-
-      <hr className="w-100 text-danger" />
-
-      <tbody>
-        <tr className="text-size-14">
-          <td className="w-10 border border-white">Đơn hàng</td>
-          <td className="fw-light border border-white text-info cursor">#1025</td>
-        </tr>
-        <tr className="text-size-14">
-          <td className="w-10 border border-white">Ngày</td>
-          <td className="fw-light border border-white">28/09/2023</td>
-        </tr>
-        <tr className="text-size-14">
-          <td className="w-10 border border-white">Địa chỉ</td>
-          <td className="fw-light border border-white">
-            124 Nguyen Tat Thanh, Quận 3, TP Hồ Chí Minh, Vietnam
-          </td>
-        </tr>
-        <tr className="text-size-14">
-          <td className="w-15 border border-white">Giá trị đơn hàng</td>
-          <td className="fw-light border border-white">835.000₫</td>
-        </tr>
-        <tr className="text-size-14">
-          <td className="w-10 border border-white">TT thanh toán</td>
-          <td className="fw-light border border-white">Chưa thu tiền</td>
-        </tr>
-      </tbody>
+    <Table>
+      {orders.map((order, index) => (
+        <>
+          <tbody key={index}>
+            <tr className="text-size-14">
+              <td className="w-10 border border-white">Đơn hàng</td>
+              <td
+                className="fw-light border border-white text-info cursor text-nowrap"
+                onClick={() => navigate(clientRoutes.account.orders + "/" + order.id)}
+              >
+                #{index + 1}
+              </td>
+            </tr>
+            <tr className="text-size-14">
+              <td className="w-10 border border-white">Ngày</td>
+              <td className="fw-light border border-white">
+                {formatDate(order.createdAt)}
+              </td>
+            </tr>
+            <tr className="text-size-14">
+              <td className="w-10 border border-white">Địa chỉ</td>
+              <td className="fw-light border border-white">
+                {order.address +
+                  ", " +
+                  order.province +
+                  ", " +
+                  order.district +
+                  ", " +
+                  order.ward +
+                  ", "}
+              </td>
+            </tr>
+            <tr className="text-size-14">
+              <td className="w-15 border border-white">Giá trị đơn hàng</td>
+              <td className="fw-light border border-white">
+                {" "}
+                {formatCurrency(order.orderTotal)}
+              </td>
+            </tr>
+            <tr className="text-size-14">
+              <td className="w-10 border border-white">TT thanh toán</td>
+              <td className="fw-light border border-white">{order.status}</td>
+            </tr>
+          </tbody>{" "}
+          <hr className="w-100 text-danger" />
+        </>
+      ))}
     </Table>
   );
 }

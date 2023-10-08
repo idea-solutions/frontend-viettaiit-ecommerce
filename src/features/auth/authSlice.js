@@ -137,8 +137,6 @@ const authSlice = createSlice({
       state.isLoading = false;
     });
     builder.addCase(verifyEmailAuth.rejected, (state, action) => {
-      const { message } = action.payload;
-      toastError(message);
       state.isLoading = false;
       state.isError = true;
     });

@@ -3,6 +3,7 @@ import { clientRoutes } from "./routes";
 import { lazy } from "react";
 import Products from "../pages/product";
 import CheckOut from "../pages/checkout";
+import OrderDetail from "../pages/auth/account/orderDetail";
 
 const Account = lazy(() => import("../pages/auth/account"));
 const Orders = lazy(() => import("../pages/auth/account/orders"));
@@ -29,9 +30,18 @@ const clientPages = [
     path: clientRoutes.account.main,
     children: [
       { com: <Account />, path: "", protected: true },
-      { com: <Orders />, path: "don-hang", protected: true },
-      { com: <VerifyEmail />, path: "xac-minh-tai-khoan", protected: true },
-      { com: <ResetPassword />, path: "dat-lai-mat-khau", protected: true },
+      {
+        com: <Outlet />,
+        path: "don-hang",
+        protected: true,
+        children: [
+          { com: <Orders />, path: "", protected: true },
+          { com: <OrderDetail />, path: ":id", protected: true },
+        ],
+      },
+
+      { com: <VerifyEmail />, path: "xac-minh-tai-khoan" },
+      { com: <ResetPassword />, path: "dat-lai-mat-khau" },
       { com: <Login />, path: "dang-nhap" },
       { com: <Register />, path: "dang-ky" },
       { com: <ChangePassword />, path: "thay-doi-mat-khau", protected: true },

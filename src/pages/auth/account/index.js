@@ -47,7 +47,7 @@ function Account({ children }) {
               </span>
               <span
                 className={`hover-color-secondary fw-light ${
-                  pathname === clientRoutes.account.orders ? "active" : ""
+                  pathname.includes(clientRoutes.account.orders) ? "active" : ""
                 }`}
               >
                 <Link to={clientRoutes.account.orders}> Đơn hàng của bạn</Link>

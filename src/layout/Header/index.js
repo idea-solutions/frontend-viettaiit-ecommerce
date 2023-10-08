@@ -34,10 +34,7 @@ import { logoutAuth } from "../../features/auth/authSlice";
 import LazyImage from "../../components/LazyImage";
 import NavbarDeskTop from "../NavBar/NavbarDeskTop";
 import NavBarDownDeskTop from "../NavBar/NavBarDownDeskTop";
-import {
-  getCartMe,
-  resetCart,
-} from "../../features/cart/cartSlice";
+import { getCartMe, resetCart } from "../../features/cart/cartSlice";
 import { formatCurrency } from "../../utils/format";
 import { calculatePriceForDiscount } from "../../utils/calculatePrice";
 import ButtonQuantityUpdateQty from "../../components/Button/ButtonQuantityUpdateQty";
@@ -62,19 +59,25 @@ function Header() {
     }
   }, [dispatch, user]);
 
-
   return (
     <>
       <div className="header">
         <div className="header-top container-xxl">
-          <div className="left">
+          <div className="left w-15">
             <FontAwesomeIcon
               icon={faBars}
               onClick={() => dispatch(toggleNavBar())}
               className="icon-size-sm d-lg-none me-3"
             />
-            <Link to={"/"} className={`logo d-block fs-4 text-white rounded`}>
-              Sudes Phone
+
+            <Link
+              to={"/"}
+              className={`logo d-block fs-4 text-white rounded w-100`}
+              style={{
+                width: "120px",
+              }}
+            >
+              <LazyImage src="/logo.png" alt="" />
             </Link>
           </div>
           <Search className="max-lg-none" />
