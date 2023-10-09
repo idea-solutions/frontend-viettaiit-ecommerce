@@ -1,20 +1,19 @@
 import { Button, Col, FloatingLabel, Form, Row } from "react-bootstrap";
 import HelmetCustom from "../../components/HelmetCustom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { clientRoutes } from "../../routes";
 import { faCaretDown, faMoneyBill } from "@fortawesome/free-solid-svg-icons";
 import LazyImage from "../../components/LazyImage";
 import { useDispatch, useSelector } from "react-redux";
 import { formatCurrency } from "../../utils/format";
 import { calculatePriceForDiscount } from "../../utils/calculatePrice";
-import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import useHideOnClickOutside from "../../hooks/useHideOnClickOutSide";
 import { toastInfo, toastSuccess } from "../../utils/toast";
 import axios from "axios";
 import { checkPhoneNumber } from "../../utils/validate";
-import { addOrderMe } from "../../features/order/orderSlice";
+import { addOrderMe, getOrdersMe } from "../../features/order/orderSlice";
 function CheckOut() {
   const { cart, countCartItem, total } = useSelector((store) => store.cart);
 
@@ -73,6 +72,7 @@ function CheckOut() {
   const handleSelectWard = (ward) => {
     setWard(ward);
   };
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -119,6 +119,8 @@ function CheckOut() {
     const { payload } = await dispatch(addOrderMe(inputs));
     if (payload.status === 200) {
       toastSuccess(payload.message);
+      dispatch(getOrdersMe());
+      navigate(clientRoutes.checkout + "/cam-on/" + payload.data.id);
     }
   };
 
@@ -335,6 +337,7 @@ function CheckOut() {
                     <Form.Check
                       type="radio"
                       label={`Giao hàng tận nơi`}
+                      checked={true}
                       className="text-size-14 "
                     />
                     <span className="fw-bold text-size-14">40.000đ</span>
@@ -346,6 +349,7 @@ function CheckOut() {
                     <Form.Check
                       type="radio"
                       label={"Thanh toán khi giao hàng (COD)"}
+                      checked={true}
                       className="text-size-14 "
                     />
                     <span className="fw-bold text-size-14">

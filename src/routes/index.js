@@ -4,6 +4,7 @@ import { lazy } from "react";
 import Products from "../pages/product";
 import CheckOut from "../pages/checkout";
 import OrderDetail from "../pages/auth/account/orderDetail";
+import ThankYouOrder from "../pages/checkout/thankYou";
 
 const Account = lazy(() => import("../pages/auth/account"));
 const Orders = lazy(() => import("../pages/auth/account/orders"));
@@ -70,10 +71,13 @@ const clientPages = [
 
   { com: <Cart />, path: clientRoutes.cart },
   {
-    com: <CheckOut />,
+    com: <Outlet />,
     path: clientRoutes.checkout,
     only: true,
-    protected: true,
+    children: [
+      { com: <CheckOut />, path: "", protected: true },
+      { com: <ThankYouOrder />, path: "cam-on/:id", protected: true },
+    ],
   },
   { com: <LoginSuccess />, path: "/login/success" },
   { com: <NotFound />, path: "*" },
