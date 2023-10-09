@@ -101,7 +101,7 @@ function Cart() {
             </div>
           </>
         ) : (
-          <div className="py-4 px-2 text-center">
+          <div className="py-4 px-2 text-center mb-11">
             <p className="">
               <Link
                 to={clientRoutes.account.login}

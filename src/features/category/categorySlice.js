@@ -13,6 +13,7 @@ export const getCategories = createAsyncThunk(
     return await getCategoriesAsync("/categories", thunkAPI);
   }
 );
+
 const categorySlice = createSlice({
   name: "category",
   initialState,

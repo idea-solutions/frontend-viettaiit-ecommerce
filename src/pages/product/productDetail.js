@@ -32,6 +32,7 @@ import { addItemToCartService } from "../../services/cartService";
 import CountdownTimer from "../../components/CoutdownTimer";
 import { clientRoutes } from "../../routes";
 import { setCartItemNewBuy } from "../../features/cart/cartSlice";
+import { getProductsPhuKien } from "../../features/product/productSlice";
 function ProductDetail() {
   const { slug: name } = useParams();
   const navigate = useNavigate();
@@ -58,10 +59,14 @@ function ProductDetail() {
   const isSpecial = data?.productItems[idxSelected].isSpecial;
   const isInStock = data?.productItems[idxSelected].qtyInStock === 0;
   // Fake phu kien tam thoi
-  const { productsIphone } = useSelector((store) => store.product);
+  const { productsPhukien } = useSelector((store) => store.product);
   const { productsHaveBeenSaw, productsLove } = useSelector(
     (store) => store.productFutureLocal
   );
+
+  useEffect(() => {
+    dispatch(getProductsPhuKien());
+  }, []);
 
   // handle change qty
   const handleChangeQty = (e) => {
@@ -368,7 +373,7 @@ function ProductDetail() {
         <div className="container mt-3">
           <h5 className="ms-3 text-uppercase fw-bold">Phụ kiện đi kèm</h5>
           <ListProductSlide
-            products={productsIphone}
+            products={productsPhukien}
             hiddenSold
             hiddenDesc
             cart
@@ -579,7 +584,7 @@ function ProductDetail() {
         <div className="container mt-3">
           <h5 className="ms-3 text-uppercase fw-bold">SẢN PHẨM LIÊN QUAN</h5>
           <ListProductSlide
-            products={productsIphone || []}
+            products={productsPhukien || []}
             hiddenSold
             title={"SẢN PHẨM LIÊN QUAN"}
           />

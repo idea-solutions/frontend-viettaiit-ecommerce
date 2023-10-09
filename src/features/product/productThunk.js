@@ -26,3 +26,11 @@ export const getProductsHotSalesAsync = async (url, thunkAPI) => {
     thunkAPI.rejectWithValue(error.response.data);
   }
 };
+export const getProductsPhuKienAsync = async (url, thunkAPI) => {
+  try {
+    const { data } = await httpRequest.get(url);
+    return data;
+  } catch (error) {
+    thunkAPI.rejectWithValue(error.response.data);
+  }
+};

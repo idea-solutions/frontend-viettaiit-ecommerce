@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getProductsAsync, getProductsHotSalesAsync } from "./productThunk";
+import { getProductsAsync, getProductsHotSalesAsync ,getProductsPhuKienAsync } from "./productThunk";
 const initialState = {
   products: [],
   perPage: 8,
@@ -30,6 +30,14 @@ export const getProductsHotSales = createAsyncThunk(
     return await getProductsHotSalesAsync("/products/hot-sales", thunkAPI);
   }
 );
+export const getProductsPhuKien = createAsyncThunk(
+  "products/getProductsPhuKien",
+  async (_, thunkAPI) => {
+    return await getProductsPhuKienAsync("/products/phu-kien", thunkAPI);
+  }
+);
+
+
 
 const productSlice = createSlice({
   name: "product",
@@ -80,6 +88,21 @@ const productSlice = createSlice({
     builder.addCase(getProductsHotSales.rejected, (state, action) => {
       state.isLoading = state.isError = true;
     });
+    // get product hot sales
+    builder.addCase(getProductsPhuKien.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getProductsPhuKien.fulfilled, (state, action) => {
+      const { data } = action.payload;
+      state.productsPhukien = data;
+
+      state.isLoading = state.isError = false;
+    });
+    builder.addCase(getProductsPhuKien.rejected, (state, action) => {
+      state.isLoading = state.isError = true;
+    });
+
+  
   },
 });
 

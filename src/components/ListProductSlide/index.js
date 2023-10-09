@@ -4,6 +4,7 @@ import React from "react";
 import PropTypes from "prop-types";
 // MY IMPORTS
 import ProductItem from "../Product/productItem";
+import ProductNone from "../Product/productNone";
 function ListProductSlide({
   products = [],
   spaceBetween,
@@ -35,6 +36,7 @@ function ListProductSlide({
   title,
 }) {
   console.log("[COMP] ListProductSlide - re-render" + title);
+  if (products && products.length < 0) return <ProductNone />;
   return (
     <Swiper
       spaceBetween={spaceBetween || 10}
