@@ -30,6 +30,15 @@
   }
 }
 
+@mixin hover-bg-gray-25 {
+  transform: all 0.2s ease-in-out;
+  &:hover {
+    background: $gray-100;
+    opacity: 1 !important;
+    cursor: pointer;
+  }
+}
+
 @mixin hover-color-secondary {
   transform: all 0.2s ease-in-out;
   &:hover {

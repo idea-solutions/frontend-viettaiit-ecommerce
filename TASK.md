@@ -50,17 +50,16 @@
         - Handle logic => CHƯA
 
     - TẠO PAGE THANH TOÁN => OK
-
+    - pay on page checkout ( Thanh toán trên page thanh toan) => OK
+    - Handle get address on page checkout ( Xử lí get địa chỉ trên page checkout) => OK
+    - Chức năng search => OK
 
 ## VẤN ĐỀ CHƯA LÀM
 
     - loading when change page
     - Loading khi mà gọi API
-    - Chức năng search
     - Footer
-    - Do futures on page account ( orders, change password, )
-    - pay on page checkout ( Thanh toán trên page thanh toan)
-    - Handle get address on page checkout ( Xử lí get địa chỉ trên page checkout)
+    - Do futures on page account ( orders -> OK, change password, )
     - Handle refresh token
 ## VẤN ĐỀ SẼ LÀM    
 ## VẤN ĐỀ CHƯA LÀM ĐƯỢC
