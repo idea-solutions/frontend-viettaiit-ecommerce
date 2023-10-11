@@ -252,8 +252,7 @@ function ProductDetail() {
                       <Button
                         variant="primary hover-bg-secondary"
                         onClick={async () => {
-                          addItemToCart();
-                          navigate(clientRoutes.checkout);
+                          if (addItemToCart()) navigate(clientRoutes.checkout);
                         }}
                       >
                         {" "}
@@ -268,7 +267,7 @@ function ProductDetail() {
                         variant="outline-secondary ms-4"
                         onClick={() => {
                           addItemToCart();
-                          dispatch(setCartItemNewBuy(itemView));
+                          if (user) dispatch(setCartItemNewBuy(itemView));
                         }}
                       >
                         <div className="fw-bold text-size-20 mb-2 ">

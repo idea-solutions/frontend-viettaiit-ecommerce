@@ -47,8 +47,8 @@ function OrdersUpDeskTop({ orders, navigate }) {
         </tr>
       </thead>
       <tbody className=" position-relative">
-        {false ? (
-          <div colSpan={5} className=" position-absolute p-center-x">
+        {orders && orders.length <= 0 ? (
+          <div colSpan={5} className=" position-absolute p-center-x mt-3">
             Không có đơn hàng nào.
           </div>
         ) : (
@@ -56,7 +56,9 @@ function OrdersUpDeskTop({ orders, navigate }) {
             <tr className="text-center" key={index}>
               <td
                 className="align-middle text-info cursor p-2"
-                onClick={() => navigate(clientRoutes.account.orders + "/" + order.id)}
+                onClick={() =>
+                  navigate(clientRoutes.account.orders + "/" + order.id)
+                }
               >
                 <span className="text-nowrap">#{index + 1}</span>
               </td>
@@ -95,7 +97,9 @@ function OrdersDownDeskTop({ orders, navigate }) {
               <td className="w-10 border border-white">Đơn hàng</td>
               <td
                 className="fw-light border border-white text-info cursor text-nowrap"
-                onClick={() => navigate(clientRoutes.account.orders + "/" + order.id)}
+                onClick={() =>
+                  navigate(clientRoutes.account.orders + "/" + order.id)
+                }
               >
                 #{index + 1}
               </td>
