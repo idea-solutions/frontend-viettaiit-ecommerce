@@ -14,12 +14,12 @@ import TinTucCongNghe from "./tinTucCongNghe";
 import CustomerOfViettai from "./customerOfViettai";
 import useScrollTop from "../../hooks/useScrollTop";
 
+
 function Home() {
   useScrollTop();
   return (
     <>
       <HelmetCustom title="Trang chủ" />
-
       <div className="home">
         {/* TOP SLIDE */}
         <TopSlide />

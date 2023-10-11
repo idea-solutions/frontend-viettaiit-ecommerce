@@ -1,4 +1,5 @@
 // LAYOUT
+import AnimationComp from "../components/AnimationComp";
 import Footer from "./Footer";
 import Header from "./Header";
 import PropTypes from "prop-types";
@@ -7,9 +8,11 @@ import PropTypes from "prop-types";
 function Layout({ children }) {
   return (
     <div className="">
-      <Header />
-      {children}
-      <Footer />
+      <AnimationComp>
+        <Header />
+        {children}
+        <Footer />
+      </AnimationComp>
     </div>
   );
 }

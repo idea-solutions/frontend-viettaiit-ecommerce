@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { Button, Form } from "react-bootstrap";
+import SpinnerButton from "../Loading/SpinnerButton";
 function ButtonQuantityUpdateQty({
   qty = 1,
   className,
@@ -7,15 +8,36 @@ function ButtonQuantityUpdateQty({
   increaseQty,
   decreaseQty,
   as = "span",
+  disabled,
 }) {
   const Comp = as;
   return (
     <Comp className={`button-quantity ${className ? className : ""}`}>
-      <Button onClick={decreaseQty}>-</Button>
+      <Button
+        disabled={disabled}
+        onClick={async () => {
+          if (disabled) return;
+        await  decreaseQty();
+        }}
+        className=" position-relative"
+      >
+        -
+        <SpinnerButton show={disabled} />
+      </Button>
       <span>
         <Form.Control name="qty" onChange={handleChangeQty} value={qty} />
       </span>
-      <Button onClick={increaseQty}>+</Button>
+      <Button
+        disabled={disabled}
+        className=" position-relative"
+        onClick={async () => {
+          if (disabled) return;
+         await increaseQty();
+        }}
+      >
+        +
+        <SpinnerButton show={disabled} />
+      </Button>
     </Comp>
   );
 }

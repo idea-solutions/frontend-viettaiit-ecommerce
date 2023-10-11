@@ -2,13 +2,14 @@ import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { resetPasswordAuth } from "../../../features/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { setLoadingClose, setLoadingShow } from "../../../features/loadingSlice";
+
 import { clientRoutes } from "../../../routes";
 import HelmetCustom from "../../../components/HelmetCustom";
 import Breadcrumb from "../../../components/Breadcrumb";
 import { validateFormResetPassword } from "../../../utils/validate";
 import { toastWarning } from "../../../utils/toast";
 import { Button, Form } from "react-bootstrap";
+import { setIsLoadingComp } from "../../../features/loadingCompSlice";
 
 function ResetPassword() {
   const location = useLocation();
@@ -41,7 +42,7 @@ function ResetPassword() {
 
       return;
     }
-    dispatch(setLoadingShow());
+    dispatch(setIsLoadingComp(true));
     const { payload } = await dispatch(
       resetPasswordAuth({
         passwordToken,
@@ -50,10 +51,11 @@ function ResetPassword() {
         confirmPassword: inputs.password2,
       })
     );
-    dispatch(setLoadingClose());
+
     if (payload.status === 200) {
       navigate(clientRoutes.account.login);
     }
+    dispatch(setIsLoadingComp(false));
   };
   return (
     <>

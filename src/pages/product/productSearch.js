@@ -5,10 +5,11 @@ import Breadcrumb from "../../components/Breadcrumb";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import httpRequest from "../../api/httpRequest";
+import AnimationComp from "../../components/AnimationComp";
 
 function ProductSearch() {
   const location = useLocation();
- 
+
   const [products, setProducts] = useState([]);
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
@@ -36,10 +37,11 @@ function ProductSearch() {
         {products && products.length <= 0 ? (
           <ProductNone />
         ) : (
-          <ListProductSlide products={products} hiddenSold hiddenDesc  />
+          <AnimationComp>
+            <ListProductSlide products={products} hiddenSold hiddenDesc />
+          </AnimationComp>
         )}
       </div>
-    
     </div>
   );
 }

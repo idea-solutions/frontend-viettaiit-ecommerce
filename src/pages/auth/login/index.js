@@ -13,16 +13,14 @@ import {
   loginAuth,
 } from "../../../features/auth/authSlice";
 
-import {
-  setLoadingClose,
-  setLoadingShow,
-} from "../../../features/loadingSlice";
 import HelmetCustom from "../../../components/HelmetCustom";
 import Breadcrumb from "../../../components/Breadcrumb";
 import { toastSuccess, toastWarning } from "../../../utils/toast";
 import { Form } from "react-bootstrap";
 import { FaFacebookF, FaGithub, FaGoogle } from "react-icons/fa";
 import useScrollTop from "../../../hooks/useScrollTop";
+import AnimationComp from "../../../components/AnimationComp";
+import { setIsLoadingComp } from "../../../features/loadingCompSlice";
 function Login() {
   useScrollTop();
   const [isForgotPwd, setIsForgotPwd] = useState(false);
@@ -44,13 +42,13 @@ function Login() {
       toastWarning(err);
       return;
     }
-    // dispatch(setLoadingShow());
+    dispatch(setIsLoadingComp(true));
     const { payload } = await dispatch(loginAuth(inputs));
     if (payload.status === 200) {
       navigate(clientRoutes.home);
       toastSuccess(payload.message);
     }
-    // dispatch(setLoadingClose());
+    dispatch(setIsLoadingComp(false));
   };
   const handleForgotPwd = async (e) => {
     e.preventDefault();
@@ -59,10 +57,9 @@ function Login() {
       toastWarning("Email không đúng định dạng!");
       return;
     }
-    // dispatch(setLoadingShow());
     await dispatch(forgotPasswordAuth({ email: emailForgot }));
-    // dispatch(setLoadingClose());
   };
+
 
   const { user } = useSelector((store) => store.auth);
   if (user) return <Navigate to={clientRoutes.home} />;
@@ -71,131 +68,129 @@ function Login() {
       <HelmetCustom title="Đăng nhập" />
       <Breadcrumb title="Đăng nhập tài khoản" />
       <div className="container overflow-hidden">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0.5 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-          className="login__form"
-        >
-          <Form className="form">
-            <h5 className="text-center py-2">ĐĂNG NHẬP</h5>
-            <div className="form-group">
-              <Form.Control
-                type="email"
-                placeholder="   Email"
-                name="email"
-                onChange={handleChange}
-              />
-              <Form.Control
-                type="password"
-                placeholder="   Mật khẩu"
-                name="password"
-                onChange={handleChange}
-              />
-              <div className="mb-3 ">
-                <button
-                  type="submit"
-                  className="btn btn-primary w-100 hover-bg-secondary btn-md"
-                  onClick={handleSubmit}
-                  disabled={disabled}
-                >
-                  ĐĂNG NHẬP
-                </button>
-              </div>
-              <div className="mb-3">
-                <p className="d-flex justify-content-between">
-                  <span
-                    onClick={() => setIsForgotPwd(!isForgotPwd)}
-                    className="hover-color-secondary "
-                  >
-                    Quên mật khẩu?
-                  </span>
-                  <Link
-                    to={clientRoutes.account.register}
-                    className="hover-color-secondary "
-                  >
-                    Đăng ký tại đây
-                  </Link>
-                </p>
-              </div>
-              <motion.div
-                className="mb-3"
-                variants={animateForgotPassword}
-                initial="initial"
-                animate={isForgotPwd ? "open" : "exit"}
-              >
+        <AnimationComp>
+          <div className="login__form">
+            <Form className="form">
+              <h5 className="text-center py-2">ĐĂNG NHẬP</h5>
+              <div className="form-group">
                 <Form.Control
                   type="email"
                   placeholder="   Email"
-                  onChange={(e) => setEmailForgot(e.target.value)}
+                  name="email"
+                  onChange={handleChange}
                 />
-                <button
-                  type="submit"
-                  className="btn btn-primary w-100 hover-bg-secondary"
-                  onClick={handleForgotPwd}
+                <Form.Control
+                  type="password"
+                  placeholder="   Mật khẩu"
+                  name="password"
+                  onChange={handleChange}
+                />
+                <div className="mb-3 ">
+                  <button
+                    type="submit"
+                    className="btn btn-primary w-100 hover-bg-secondary btn-md"
+                    onClick={handleSubmit}
+                    disabled={disabled}
+                  >
+                    ĐĂNG NHẬP
+                  </button>
+                </div>
+                <div className="mb-3">
+                  <p className="d-flex justify-content-between">
+                    <span
+                      onClick={() => setIsForgotPwd(!isForgotPwd)}
+                      className="hover-color-secondary "
+                    >
+                      Quên mật khẩu?
+                    </span>
+                    <Link
+                      to={clientRoutes.account.register}
+                      className="hover-color-secondary "
+                    >
+                      Đăng ký tại đây
+                    </Link>
+                  </p>
+                </div>
+                <motion.div
+                  className="mb-3"
+                  variants={animateForgotPassword}
+                  initial="initial"
+                  animate={isForgotPwd ? "open" : "exit"}
                 >
-                  Lấy lại mật khẩu
-                </button>
-              </motion.div>
-              <div className="mb-3">
-                <p className="d-flex justify-content-center">
-                  <span>hoặc đăng nhập qua</span>
-                </p>
+                  <Form.Control
+                    type="email"
+                    placeholder="   Email"
+                    onChange={(e) => setEmailForgot(e.target.value)}
+                  />
+                  <button
+                    type="submit"
+                    className="btn btn-primary w-100 hover-bg-secondary"
+                    onClick={handleForgotPwd}
+                  >
+                    Lấy lại mật khẩu
+                  </button>
+                </motion.div>
+                <div className="mb-3">
+                  <p className="d-flex justify-content-center">
+                    <span>hoặc đăng nhập qua</span>
+                  </p>
+                </div>
+                <div className="mb-3 d-flex justify-content-center gap-2 align-items-center">
+                  <button
+                    className="btn btn-facebook"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      window.open(
+                        process.env.REACT_APP_BACKEND_URL +
+                          "/api/v1/auth/facebook",
+                        "_self"
+                      );
+                    }}
+                  >
+                    <span className="">
+                      <FaFacebookF />
+                    </span>
+                    <span> Facebook</span>
+                  </button>
+                  <button
+                    type="submit"
+                    className="btn btn-google"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      window.open(
+                        process.env.REACT_APP_BACKEND_URL +
+                          "/api/v1/auth/google",
+                        "_self"
+                      );
+                    }}
+                  >
+                    <span className="">
+                      <FaGoogle />
+                    </span>
+                    <span> Google</span>
+                  </button>
+                  <button
+                    type="submit"
+                    className="btn btn-github"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      window.open(
+                        process.env.REACT_APP_BACKEND_URL +
+                          "/api/v1/auth/github",
+                        "_self"
+                      );
+                    }}
+                  >
+                    <span className="">
+                      <FaGithub />
+                    </span>
+                    <span> Github</span>
+                  </button>
+                </div>
               </div>
-              <div className="mb-3 d-flex justify-content-center gap-2 align-items-center">
-                <button
-                  className="btn btn-facebook"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    window.open(
-                      process.env.REACT_APP_BACKEND_URL +
-                        "/api/v1/auth/facebook",
-                      "_self"
-                    );
-                  }}
-                >
-                  <span className="">
-                    <FaFacebookF />
-                  </span>
-                  <span> Facebook</span>
-                </button>
-                <button
-                  type="submit"
-                  className="btn btn-google"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    window.open(
-                      process.env.REACT_APP_BACKEND_URL + "/api/v1/auth/google",
-                      "_self"
-                    );
-                  }}
-                >
-                  <span className="">
-                    <FaGoogle />
-                  </span>
-                  <span> Google</span>
-                </button>
-                <button
-                  type="submit"
-                  className="btn btn-github"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    window.open(
-                      process.env.REACT_APP_BACKEND_URL + "/api/v1/auth/github",
-                      "_self"
-                    );
-                  }}
-                >
-                  <span className="">
-                    <FaGithub />
-                  </span>
-                  <span> Github</span>
-                </button>
-              </div>
-            </div>
-          </Form>
-        </motion.div>
+            </Form>
+          </div>
+        </AnimationComp>
       </div>
     </div>
   );

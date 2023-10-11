@@ -14,6 +14,7 @@ import { toastInfo, toastSuccess } from "../../utils/toast";
 import axios from "axios";
 import { checkPhoneNumber } from "../../utils/validate";
 import { addOrderMe, getOrdersMe } from "../../features/order/orderSlice";
+import { setIsLoadingComp } from "../../features/loadingCompSlice";
 function CheckOut() {
   const { cart, countCartItem, total } = useSelector((store) => store.cart);
 
@@ -116,12 +117,14 @@ function CheckOut() {
       ordersLine,
       ...info,
     };
+    dispatch(setIsLoadingComp(true));
     const { payload } = await dispatch(addOrderMe(inputs));
     if (payload.status === 200) {
       toastSuccess(payload.message);
       dispatch(getOrdersMe());
       navigate(clientRoutes.checkout + "/cam-on/" + payload.data.id);
     }
+    dispatch(setIsLoadingComp(false));
   };
 
   return (

@@ -53,14 +53,18 @@
     - pay on page checkout ( Thanh toán trên page thanh toan) => OK
     - Handle get address on page checkout ( Xử lí get địa chỉ trên page checkout) => OK
     - Chức năng search => OK
-
+    - Handle refresh token => OK
+    - Footer => OK
+    - loading when change page => OK
+    - Loading khi mà gọi API => OK
 ## VẤN ĐỀ CHƯA LÀM
 
-    - loading when change page
-    - Loading khi mà gọi API
-    - Footer
+
+    - Lien hệ (message facebook)
     - Do futures on page account ( orders -> OK, change password, )
-    - Handle refresh token
+    - 1 user has many addresses;
+    - toast has only one
+    - payment
 ## VẤN ĐỀ SẼ LÀM    
 ## VẤN ĐỀ CHƯA LÀM ĐƯỢC
     

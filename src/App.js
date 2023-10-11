@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import ButtonScrollTop from "./components/Button/ButtonScrollTop";
 import ModalCartView from "./components/Modal/ModalCartView";
 import ProtectedRoute from "./components/ProtectedRoute";
+import LoadingComp from "./components/Loading/loadingComp";
 
 function App() {
   const createChildrenRoute = (route, Comp) => {
@@ -46,7 +47,7 @@ function App() {
           })}
         </Routes>
       </Suspense>
-      {/* <LoadingComp /> */}
+      <LoadingComp />
       <ToastContainer position="top-center" />
       <ModalCartView />
       <ButtonScrollTop />

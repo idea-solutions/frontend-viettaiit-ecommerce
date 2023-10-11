@@ -1,4 +1,4 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Breadcrumb from "../../components/Breadcrumb";
 import HelmetCustom from "../../components/HelmetCustom";
 import { Button, Col, Row, Table } from "react-bootstrap";
@@ -33,11 +33,13 @@ import CountdownTimer from "../../components/CoutdownTimer";
 import { clientRoutes } from "../../routes";
 import { setCartItemNewBuy } from "../../features/cart/cartSlice";
 import { getProductsPhuKien } from "../../features/product/productSlice";
+import SpinnerButton from "../../components/Loading/SpinnerButton";
 function ProductDetail() {
   const { slug: name } = useParams();
+  const [isLoadingAdd, setIsLoadingAdd] = useState(false);
   const navigate = useNavigate();
   const [qty, setQty] = useState(1);
-  const { data, isLoading, isError } = useDataDetail("/products/" + name);
+  const { data, _, __ } = useDataDetail("/products/" + name);
   const { user } = useSelector((store) => store.auth);
 
   const dispatch = useDispatch();
@@ -87,8 +89,9 @@ function ProductDetail() {
       qty,
       productItemId: data.productItems[idxSelected].id,
     };
-
-    addItemToCartService(inputs, dispatch);
+    setIsLoadingAdd(true);
+    await addItemToCartService(inputs, dispatch);
+    setIsLoadingAdd(false);
   };
 
   return (
@@ -265,7 +268,10 @@ function ProductDetail() {
                       </Button>
                       <Button
                         variant="outline-secondary ms-4"
+                        className=" position-relative"
+                        disabled={isLoadingAdd}
                         onClick={() => {
+                          if (isLoadingAdd) return;
                           addItemToCart();
                           if (user) dispatch(setCartItemNewBuy(itemView));
                         }}
@@ -276,6 +282,7 @@ function ProductDetail() {
                         <div className="fw-light text-size-16">
                           Thêm vào giỏ
                         </div>
+                        <SpinnerButton show={isLoadingAdd} />
                       </Button>
                     </div>
                   </>

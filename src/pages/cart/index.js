@@ -15,6 +15,7 @@ import {
   deleteCartItemService,
   updateQtyService,
 } from "../../services/cartService";
+import SpinnerButton from "../../components/Loading/SpinnerButton";
 
 function Cart() {
   const { user } = useSelector((store) => store.auth);
@@ -23,7 +24,7 @@ function Cart() {
   const isTabletOrMobile = useMediaQuery({
     query: "(max-width: 1024px)",
   });
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingChangeQty, setIsLoadingChangeQty] = useState(false);
 
   const dispatch = useDispatch();
   const renderCartItems = (isTabletOrMobile) => {
@@ -33,10 +34,14 @@ function Cart() {
           countCartItem={countCartItem}
           cart={cart}
           dispatch={dispatch}
+          isLoadingChangeQty={isLoadingChangeQty}
+          setIsLoadingChangeQty={setIsLoadingChangeQty}
         />
       );
     return (
       <CartItemsUpDesktop
+        isLoadingChangeQty={isLoadingChangeQty}
+        setIsLoadingChangeQty={setIsLoadingChangeQty}
         countCartItem={countCartItem}
         dispatch={dispatch}
         cart={cart}
@@ -87,14 +92,16 @@ function Cart() {
                     </span>
                   </div>{" "}
                   <Button
-                    disabled={!countCartItem}
+                    disabled={!countCartItem || isLoadingChangeQty}
                     onClick={() => {
                       if (countCartItem === 0) return;
                       navigate(clientRoutes.checkout);
                     }}
                     variant="primary w-100 mt-2 hover-bg-secondary btn-md"
+                    className=" position-relative"
                   >
                     THANH TOÁN
+                    <SpinnerButton show={isLoadingChangeQty} />
                   </Button>
                 </Col>
               </Row>
@@ -123,8 +130,9 @@ export default Cart;
 function CartItemsDownDesktop({
   countCartItem,
   cart,
-
   dispatch,
+  isLoadingChangeQty,
+  setIsLoadingChangeQty,
 }) {
   console.log("CartItemsDownDesktop");
   return (
@@ -139,7 +147,7 @@ function CartItemsDownDesktop({
       ) : (
         <div className="items">
           {cart.cartItems.map((item, index) => (
-            <div className="mt-2 border-bottom">
+            <div className="mt-2 border-bottom" key={index}>
               <div className="left">
                 <Link
                   to={
@@ -171,27 +179,32 @@ function CartItemsDownDesktop({
                   <small className="mb-2">{item.productItem.color.value}</small>
                   <div className="d-flex justify-content-between">
                     <ButtonQuantityUpdateQty
-                      increaseQty={() => {
+                      increaseQty={async () => {
                         if (item.qty > 1000) return;
-                        updateQtyService(
+                        setIsLoadingChangeQty(true);
+                        await updateQtyService(
                           {
                             qty: 1,
                             productItemId: item.productItemId,
                           },
                           dispatch
                         );
+                        setIsLoadingChangeQty(false);
                       }}
                       decreaseQty={async () => {
+                        setIsLoadingChangeQty(true);
                         if (item.qty === 1) {
-                          return deleteCartItemService(item.id, dispatch);
+                          await deleteCartItemService(item.id, dispatch);
+                        } else {
+                          await updateQtyService(
+                            {
+                              qty: -1,
+                              productItemId: item.productItemId,
+                            },
+                            dispatch
+                          );
                         }
-                        updateQtyService(
-                          {
-                            qty: -1,
-                            productItemId: item.productItemId,
-                          },
-                          dispatch
-                        );
+                        setIsLoadingChangeQty(false);
                       }}
                       qty={item.qty}
                       className="btn-sm d-flex"
@@ -208,9 +221,16 @@ function CartItemsDownDesktop({
                       </span>
                       <Button
                         variant="outline-danger btn-xs"
-                        onClick={() => deleteCartItemService(item.id, dispatch)}
+                        className=" position-relative"
+                        disabled={isLoadingChangeQty}
+                        onClick={async () => {
+                          setIsLoadingChangeQty(true);
+                          await deleteCartItemService(item.id, dispatch);
+                          setIsLoadingChangeQty(false);
+                        }}
                       >
                         Xóa
+                        <SpinnerButton show={isLoadingChangeQty} />
                       </Button>
                     </div>
                   </div>
@@ -224,7 +244,13 @@ function CartItemsDownDesktop({
   );
 }
 
-function CartItemsUpDesktop({ countCartItem, cart, dispatch }) {
+function CartItemsUpDesktop({
+  countCartItem,
+  cart,
+  dispatch,
+  isLoadingChangeQty,
+  setIsLoadingChangeQty,
+}) {
   console.log("CartItemsUpDesktop");
   return (
     <>
@@ -275,9 +301,17 @@ function CartItemsUpDesktop({ countCartItem, cart, dispatch }) {
                       </small>
                       <Button
                         variant="outline-danger btn-xs"
-                        onClick={() => deleteCartItemService(item.id, dispatch)}
+                        className=" position-relative"
+                        disabled={isLoadingChangeQty}
+                        onClick={async () => {
+                          setIsLoadingChangeQty(true);
+
+                          await deleteCartItemService(item.id, dispatch);
+                          setIsLoadingChangeQty(false);
+                        }}
                       >
                         Xóa
+                        <SpinnerButton show={isLoadingChangeQty} />
                       </Button>
                     </div>
                   </div>
@@ -298,27 +332,33 @@ function CartItemsUpDesktop({ countCartItem, cart, dispatch }) {
                   className="d-flex align-items-center justify-content-center"
                 >
                   <ButtonQuantityUpdateQty
-                    increaseQty={() => {
+                    disabled={isLoadingChangeQty}
+                    increaseQty={async () => {
                       if (item.qty > 1000) return;
-                      updateQtyService(
+                      setIsLoadingChangeQty(true);
+                      await updateQtyService(
                         {
                           qty: 1,
                           productItemId: item.productItemId,
                         },
                         dispatch
                       );
+                      setIsLoadingChangeQty(false);
                     }}
                     decreaseQty={async () => {
+                      setIsLoadingChangeQty(true);
                       if (item.qty === 1) {
-                        return deleteCartItemService(item.id, dispatch);
+                        await deleteCartItemService(item.id, dispatch);
+                      } else {
+                        await updateQtyService(
+                          {
+                            qty: -1,
+                            productItemId: item.productItemId,
+                          },
+                          dispatch
+                        );
                       }
-                      updateQtyService(
-                        {
-                          qty: -1,
-                          productItemId: item.productItemId,
-                        },
-                        dispatch
-                      );
+                      setIsLoadingChangeQty(false);
                     }}
                     qty={item.qty}
                     className="btn-sm"
