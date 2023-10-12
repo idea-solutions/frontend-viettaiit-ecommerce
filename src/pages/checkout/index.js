@@ -14,10 +14,20 @@ import { checkPhoneNumber } from "../../utils/validate";
 import { addOrderMe, getOrdersMe } from "../../features/order/orderSlice";
 import { setIsLoadingComp } from "../../features/loadingCompSlice";
 import FormAddress from "../../components/Form/FormAddress";
-import { resetFormAddress } from "../../features/formAddressSlice";
+import {
+  resetFormAddress,
+  setFromAddress,
+} from "../../features/formAddressSlice";
+import { useRef, useState } from "react";
+import useHideOnClickOutside from "../../hooks/useHideOnClickOutSide";
 function CheckOut() {
   const { cart, countCartItem, total } = useSelector((store) => store.cart);
   const { address } = useSelector((store) => store.formAddress);
+  const { addresses } = useSelector((store) => store.address);
+  const optionAddressesRef = useRef();
+  const [isSelected, setIsSelected] = useState(false);
+  const [isShowOptionAddresses, setIsShowOptionAddresses] =
+    useHideOnClickOutside(optionAddressesRef);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleSubmit = async (e) => {
@@ -99,7 +109,58 @@ function CheckOut() {
                     <FontAwesomeIcon icon={faUser} className="ms-2" /> Đăng nhập
                   </Link> */}
                 </div>
-                <FormAddress />
+                <div
+                  className="d-flex mb-2 position-relative"
+                  ref={optionAddressesRef}
+                >
+                  <FloatingLabel
+                    controlId="floatingInputGrid"
+                    label="Số địa chỉ"
+                    className="w-100 d-flex"
+                    onFocus={() => {
+                      setIsShowOptionAddresses(true);
+                    }}
+                  >
+                    <Form.Control
+                      type="text"
+                      value={
+                        isSelected
+                          ? ` ${address.fullName}, ${address.residence}, ${address.ward}...
+                          `
+                          : "Địa chỉ khác..."
+                      }
+                      placeholder="name@example.com"
+                    ></Form.Control>{" "}
+                  </FloatingLabel>
+                  {isShowOptionAddresses && (
+                    <div className="select_options scrollbar-primary">
+                      <span
+                        onClick={() => {
+                          dispatch(resetFormAddress());
+                          setIsShowOptionAddresses(false);
+                          setIsSelected(false);
+                        }}
+                      >
+                        Địa chỉ khác...
+                      </span>
+
+                      {addresses.map((item, i) => (
+                        <span
+                          key={i}
+                          onClick={async () => {
+                            await dispatch(setFromAddress(item));
+                            setIsSelected(true);
+                            setIsShowOptionAddresses(false);
+                          }}
+                        >
+                          {item.fullName}, {item.residence}, {item.ward},
+                          {item.district}, {item.province}, {item.country}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+                <FormAddress isSelected={isSelected}/>
               </Col>
               <Col md={12} xl={6} className="">
                 <div className=" mt-sm-5 ">

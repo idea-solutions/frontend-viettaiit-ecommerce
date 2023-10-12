@@ -1,4 +1,3 @@
-
 import { FloatingLabel, Form } from "react-bootstrap";
 import { toastInfo } from "../../utils/toast";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import useHideOnClickOutside from "../../hooks/useHideOnClickOutSide";
 import axios from "axios";
 
-function FormAddress() {
+function FormAddress({ isSelected }) {
   const { user } = useSelector((store) => store.auth);
   const { address } = useSelector((store) => store.formAddress);
   const dispatch = useDispatch();
@@ -81,6 +80,7 @@ function FormAddress() {
         <Form.Control
           type="text"
           placeholder="Nguyen Viet Tai"
+          disabled={isSelected}
           value={address?.fullName}
           name="fullName"
           onChange={handleChange}
@@ -96,6 +96,7 @@ function FormAddress() {
           <Form.Control
             type="text"
             placeholder="329638260"
+            disabled={isSelected}
             value={address?.phoneNumber}
             name="phoneNumber"
             onChange={(e) => {
@@ -113,6 +114,7 @@ function FormAddress() {
         <Form.Control
           type="text"
           placeholder="124 Nguyen Tat Thanh"
+          disabled={isSelected}
           value={address?.residence}
           name="residence"
           onChange={handleChange}
@@ -127,6 +129,7 @@ function FormAddress() {
           <Form.Control
             type="text"
             placeholder="name@example.com"
+            disabled={isSelected}
             value={address?.province || (city?.name ? city.name : "")}
             onFocus={() => setIsShowSelectOptionCity(true)}
           ></Form.Control>{" "}
@@ -148,7 +151,7 @@ function FormAddress() {
           <Form.Control
             type="text"
             placeholder="name@example.com"
-            disabled={!address?.district && !city?.name}
+            disabled={isSelected || (!address?.district && !city?.name)}
             value={address?.district || (district?.name ? district.name : "")}
             onFocus={() => {
               if (!address.province && !city)
@@ -156,7 +159,6 @@ function FormAddress() {
               setIsShowSelectOptionDistrict(true);
             }}
           ></Form.Control>{" "}
-        
         </FloatingLabel>
         {isShowSelectOptionDistrict && (
           <SelectOptions
@@ -175,7 +177,7 @@ function FormAddress() {
           <Form.Control
             type="text"
             placeholder="name@example.com"
-            disabled={!address?.ward && !district?.name}
+            disabled={isSelected || (!address?.ward && !district?.name)}
             value={address?.ward || (ward?.name ? ward.name : "")}
             onFocus={() => {
               if (!address.district && !district)
@@ -206,6 +208,7 @@ function FormAddress() {
           as="textarea"
           placeholder="Ghi chú"
           style={{ height: "70px" }}
+          disabled={isSelected}
           value={address?.note}
           name="note"
           onChange={handleChange}
