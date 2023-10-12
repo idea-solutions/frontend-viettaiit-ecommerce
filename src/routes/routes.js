@@ -3,6 +3,7 @@ const clientRoutes = {
   account: {
     main: "/tai-khoan",
     orders: "/tai-khoan/don-hang",
+    address: "/tai-khoan/dia-chi",
     login: "/tai-khoan/dang-nhap",
     register: "/tai-khoan/dang-ky",
     verifyEmail: "/tai-khoan/xac-minh-tai-khoan",

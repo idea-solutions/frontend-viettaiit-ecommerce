@@ -5,6 +5,7 @@ import Products from "../pages/product";
 import CheckOut from "../pages/checkout";
 import OrderDetail from "../pages/auth/account/orderDetail";
 import ThankYouOrder from "../pages/checkout/thankYou";
+import Address from "../pages/auth/account/address";
 
 const Account = lazy(() => import("../pages/auth/account"));
 const Orders = lazy(() => import("../pages/auth/account/orders"));
@@ -42,6 +43,7 @@ const clientPages = [
       },
 
       { com: <VerifyEmail />, path: "xac-minh-tai-khoan" },
+      { com: <Address />, path: "dia-chi" },
       { com: <ResetPassword />, path: "dat-lai-mat-khau" },
       { com: <Login />, path: "dang-nhap" },
       { com: <Register />, path: "dang-ky" },

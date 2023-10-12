@@ -11,6 +11,7 @@ import navSearchSlice from "./navSearchSlice";
 import loadingCompSlice from "./loadingCompSlice";
 import cartSlice from "./cart/cartSlice";
 import orderSlice from "./order/orderSlice";
+import addressSlice from "./address/addressSlice";
 const rootReducer = combineReducers({
   navBar: navBarSlice,
   auth: authSlice,
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
   loadingComp: loadingCompSlice,
   cart: cartSlice,
   order: orderSlice,
+  address: addressSlice,
 });
 
 export default rootReducer;

@@ -5,10 +5,11 @@ import { useLocation, Link } from "react-router-dom";
 import { clientRoutes } from "../../../routes/index";
 import { useEffect } from "react";
 import { logoutAuth } from "../../../features/auth/authSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 function Account({ children }) {
   const dispatch = useDispatch();
+  const { totalAddress } = useSelector((store) => store.address);
   const objectTitles = {
     [clientRoutes?.account.main]: [
       { to: clientRoutes.account.main, title: "Tài khoản" },
@@ -67,8 +68,14 @@ function Account({ children }) {
                   Đổi mật khẩu
                 </Link>
               </span>
-              <span className="hover-color-secondary fw-light">
-                Sổ địa chỉ (1)
+              <span
+                className={`hover-color-secondary fw-light ${
+                  pathname.includes(clientRoutes.account.address)
+                    ? "active"
+                    : ""
+                }`}
+              >
+                <Link to={clientRoutes.account.address}>Sổ địa chỉ ({totalAddress})</Link>
               </span>
               <span
                 className="hover-color-secondary fw-light"
