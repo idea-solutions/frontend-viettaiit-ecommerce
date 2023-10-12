@@ -6,10 +6,12 @@ import { clientRoutes } from "../../../routes/index";
 import { useEffect } from "react";
 import { logoutAuth } from "../../../features/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { getAddressesMe } from "../../../features/address/addressSlice";
 
 function Account({ children }) {
   const dispatch = useDispatch();
   const { totalAddress } = useSelector((store) => store.address);
+  const { user } = useSelector((store) => store.auth);
   const objectTitles = {
     [clientRoutes?.account.main]: [
       { to: clientRoutes.account.main, title: "Tài khoản" },
@@ -22,8 +24,9 @@ function Account({ children }) {
   const location = useLocation();
   const pathname = location.pathname;
   // console.log(pathname)
-
-  useEffect(() => {}, [pathname]);
+  useEffect(() => {
+    dispatch(getAddressesMe());
+  }, []);
   return (
     <div className="account">
       <HelmetCustom title="Trang khách hàng" />
@@ -75,7 +78,9 @@ function Account({ children }) {
                     : ""
                 }`}
               >
-                <Link to={clientRoutes.account.address}>Sổ địa chỉ ({totalAddress})</Link>
+                <Link to={clientRoutes.account.address}>
+                  Sổ địa chỉ ({totalAddress})
+                </Link>
               </span>
               <span
                 className="hover-color-secondary fw-light"
@@ -92,11 +97,8 @@ function Account({ children }) {
               <div>
                 <h5> THÔNG TIN TÀI KHOẢN</h5>
                 <div className="d-flex flex-column gap-4">
-                  <span>Họ tên: Viết Tài</span>
-                  <span>Email: viettaixca123@gmail.com</span>
-                  <span>Điện thoại: 3213212313</span>
-                  <span>Công ty: dsa</span>
-                  <span>Địa chỉ : 124 Nguyen Tat Thanh, Quận 3, Vietnam</span>
+                  <span>Họ tên: {user.name}</span>
+                  <span>Email: {user.email}</span>
                 </div>
               </div>
             )}

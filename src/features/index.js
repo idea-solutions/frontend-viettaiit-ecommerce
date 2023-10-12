@@ -12,6 +12,7 @@ import loadingCompSlice from "./loadingCompSlice";
 import cartSlice from "./cart/cartSlice";
 import orderSlice from "./order/orderSlice";
 import addressSlice from "./address/addressSlice";
+import formAddressSlice from "./formAddressSlice";
 const rootReducer = combineReducers({
   navBar: navBarSlice,
   auth: authSlice,
@@ -26,6 +27,7 @@ const rootReducer = combineReducers({
   cart: cartSlice,
   order: orderSlice,
   address: addressSlice,
+  formAddress: formAddressSlice,
 });
 
 export default rootReducer;
