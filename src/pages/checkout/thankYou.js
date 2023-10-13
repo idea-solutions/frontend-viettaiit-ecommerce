@@ -45,9 +45,9 @@ function ThankYouOrder() {
             <div className="border p-3 d-flex justify-content-between ">
               <div className="text-start d-flex flex-column gap-1">
                 <span className="text-size-21 fw-bold">Thông tin mua hàng</span>
-                <span className="text-size-14 ">{data?.fullName}</span>
+                <span className="text-size-14 ">{data?.address.fullName}</span>
                 <span className="text-size-14 ">{user.email}</span>
-                <span className="text-size-14 ">{data?.phoneNumber}</span>
+                <span className="text-size-14 ">{data?.address.phoneNumber}</span>
 
                 <span className="text-size-21 fw-bold mt-2">
                   Phương thức thanh toán
@@ -58,10 +58,10 @@ function ThankYouOrder() {
               </div>
               <div className="text-start d-flex flex-column gap-1">
                 <span className="text-size-21 fw-bold">Địa chỉ nhận hàng</span>
-                <span className="text-size-14 ">{data?.fullName}</span>
-                <span className="text-size-14 ">{data?.address}</span>
+                <span className="text-size-14 ">{data?.address.fullName}</span>
+                <span className="text-size-14 ">{data?.address.address}</span>
                 <span className="text-size-14 ">
-                  {data?.ward}, {data?.district}, {data?.province}
+                  {data?.address.ward}, {data?.address.district}, {data?.address.province}
                 </span>
 
                 <span className="text-size-21 fw-bold mt-2">
@@ -79,7 +79,7 @@ function ThankYouOrder() {
 
               <Row className="mt-2 py-2">
                 {data?.ordersLine.map((orderLine, index) => (
-                  <Col xs={12} className="">
+                  <Col xs={12} className="" key={index}>
                     <div className="border-bottom ">
                       <Row className="px-2 py-1 ">
                         <Col xs={2}>

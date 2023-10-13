@@ -4,14 +4,12 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, Col, Modal, Row } from "react-bootstrap";
-import { useDispatch } from "react-redux";
-import { setCartItemNewBuy } from "../../features/cart/cartSlice";
+
 
 function ModalConfirmation({ onSave, onReject, show, title, children }) {
-  const dispatch = useDispatch();
   return (
     <Modal
-      onHide={() => dispatch(setCartItemNewBuy(null))}
+      onHide={() => onReject()}
       size="md"
       show={show}
       aria-labelledby="contained-modal-title-vcenter"

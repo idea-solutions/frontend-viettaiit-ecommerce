@@ -66,13 +66,13 @@ function OrdersUpDeskTop({ orders, navigate }) {
                 {formatDate(order.createdAt)}
               </td>
               <td className="align-middle p-2">
-                {order.address +
+                {order.address.residence +
                   ", " +
-                  order.province +
+                  order.address.province +
                   ", " +
-                  order.district +
+                  order.address.district +
                   ", " +
-                  order.ward +
+                  order.address.ward +
                   ", "}
               </td>
               <td className="align-middle p-2">

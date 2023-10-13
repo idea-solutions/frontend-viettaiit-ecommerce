@@ -1,7 +1,7 @@
 import { Button } from "react-bootstrap";
 import Account from ".";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   deleteAddressMe,
   getAddressesMe,
@@ -10,7 +10,10 @@ import {
 import ModalConfirmation from "../../../components/Modal/ModalConfirmation";
 import { setIsLoadingComp } from "../../../features/loadingCompSlice";
 import FormAddress from "../../../components/Form/FormAddress";
-import { resetFormAddress, setFromAddress } from "../../../features/formAddressSlice";
+import {
+  resetFormAddress,
+  setFromAddress,
+} from "../../../features/formAddressSlice";
 import { toastDanger } from "../../../utils/toast";
 
 function Address() {
@@ -41,6 +44,7 @@ function Address() {
       setIsAddNew(false);
     }
   };
+  console.log(isAddNew);
   return (
     <Account>
       <h5 className=" mt-sm-4 fw-light">ĐỊA CHỈ CỦA BẠN</h5>
@@ -112,25 +116,27 @@ function Address() {
               </span>
             </div>
           ))}
-          <ModalConfirmation
-            onSave={() => deleteAddress(addressId)}
-            onReject={() => setAddressId(null)}
-            show={addressId}
-            title={"Xác nhận xóa địa chỉ ?"}
-          />
+        </div>
+      )}
+      <ModalConfirmation
+        onSave={() => deleteAddress(addressId)}
+        onReject={() => setAddressId(null)}
+        show={addressId}
+        title={"Xác nhận xóa địa chỉ ?"}
+      />
 
-          <ModalConfirmation
-            onSave={() => handleAddNewAddress()}
-            onReject={() => {
-              dispatch(resetFormAddress());
-              setIsAddNew(false);
-            }}
-            show={isAddNew}
-            title={"THÊM ĐỊA CHỈ MỚI ?"}
-          >
-            <FormAddress />
-          </ModalConfirmation>
-          {/* <ModalConfirmation
+      <ModalConfirmation
+        onSave={() => handleAddNewAddress()}
+        onReject={() => {
+          dispatch(resetFormAddress());
+          setIsAddNew(false);
+        }}
+        show={isAddNew}
+        title={"THÊM ĐỊA CHỈ MỚI ?"}
+      >
+        <FormAddress />
+      </ModalConfirmation>
+      {/* <ModalConfirmation
             onSave={() => handleAddNewAddress()}
             onReject={() => {
               dispatch(resetFormAddress());
@@ -141,8 +147,6 @@ function Address() {
           >
             <FormAddress />
           </ModalConfirmation> */}
-        </div>
-      )}
     </Account>
   );
 }

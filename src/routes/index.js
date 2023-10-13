@@ -43,7 +43,7 @@ const clientPages = [
       },
 
       { com: <VerifyEmail />, path: "xac-minh-tai-khoan" },
-      { com: <Address />, path: "dia-chi" },
+      { com: <Address />, path: "dia-chi" ,protected: true },
       { com: <ResetPassword />, path: "dat-lai-mat-khau" },
       { com: <Login />, path: "dang-nhap" },
       { com: <Register />, path: "dang-ky" },

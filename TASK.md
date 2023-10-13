@@ -57,12 +57,10 @@
     - Footer => OK
     - loading when change page => OK
     - Loading khi mà gọi API => OK
+    - 1 user has many addresses => OK
+    - messenger plugin messenger
 ## VẤN ĐỀ CHƯA LÀM
-
-
-    - Lien hệ (message facebook)
     - Do futures on page account ( orders -> OK, change password, )
-    - 1 user has many addresses;
     - toast has only one
     - payment
 ## VẤN ĐỀ SẼ LÀM    

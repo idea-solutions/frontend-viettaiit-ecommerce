@@ -42,10 +42,10 @@ function OrderDetail() {
             <div className="border px-2 py-2 h-75 d-flex flex-column gap-1 pb-3 fw-light text-size-16">
               <span>VIẾT TÀI </span>
               <span>
-                Địa chỉ: {data?.address}, {data?.ward}, {data?.district},{" "}
-                {data?.province}
+                Địa chỉ: {data?.address.residence}, {data?.address.ward}, {data?.address.district},{" "}
+                {data?.address.province}
               </span>
-              <span>Số điện thoại: {data?.phoneNumber}</span>
+              <span>Số điện thoại: {data?.address.phoneNumber}</span>
             </div>
           </Col>
           <Col xs={12} lg={3}>

@@ -147,8 +147,8 @@ function CheckOut() {
                       {addresses.map((item, i) => (
                         <span
                           key={i}
-                          onClick={async () => {
-                            await dispatch(setFromAddress(item));
+                          onClick={() => {
+                            dispatch(setFromAddress(item));
                             setIsSelected(true);
                             setIsShowOptionAddresses(false);
                           }}
@@ -160,7 +160,7 @@ function CheckOut() {
                     </div>
                   )}
                 </div>
-                <FormAddress isSelected={isSelected}/>
+                <FormAddress isSelected={isSelected} />
               </Col>
               <Col md={12} xl={6} className="">
                 <div className=" mt-sm-5 ">
