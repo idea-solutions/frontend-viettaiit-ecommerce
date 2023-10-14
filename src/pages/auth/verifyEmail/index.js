@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { clientRoutes } from "../../../routes";
 import HelmetCustom from "../../../components/HelmetCustom";
 import Breadcrumb from "../../../components/Breadcrumb";
-import { setIsLoadingApi } from "../../../features/loadingCompSlice";
+import { setIsLoadingComp } from "../../../features/loadingCompSlice";
 
 function VerifyEmail() {
   const location = useLocation();
@@ -20,9 +20,9 @@ function VerifyEmail() {
       await dispatch(verifyEmailAuth({ verificationToken, email }));
       navigate(clientRoutes.account.login);
     };
-    dispatch(setIsLoadingApi(true));
+    dispatch(setIsLoadingComp(true));
     verifyEmailAsync();
-    dispatch(setIsLoadingApi(false));
+    dispatch(setIsLoadingComp(false));
   }, []);
   return (
     <div className="container d-flex align-content-center justify-content-center">

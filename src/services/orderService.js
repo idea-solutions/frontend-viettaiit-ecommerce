@@ -1,5 +1,5 @@
 import { resetFormAddress } from "../features/formAddressSlice";
-import { setIsLoadingApi } from "../features/loadingCompSlice";
+import { setIsLoadingComp } from "../features/loadingCompSlice";
 import { addOrderMe, getOrdersMe } from "../features/order/orderSlice";
 import { clientRoutes } from "../routes";
 import { calculatePriceForDiscount } from "../utils/calculatePrice";
@@ -44,14 +44,14 @@ export const handlePaymentService = async (
     address,
     status,
   };
-  dispatch(setIsLoadingApi(true));
+  dispatch(setIsLoadingComp(true));
   const { payload } = await dispatch(addOrderMe(inputs));
   if (payload.status === 200) {
     toastSuccess(payload.message);
     dispatch(getOrdersMe());
     navigate(clientRoutes.checkout + "/cam-on/" + payload.data.id);
   }
-  dispatch(setIsLoadingApi(false));
+  dispatch(setIsLoadingComp(false));
   dispatch(resetFormAddress());
 };
 

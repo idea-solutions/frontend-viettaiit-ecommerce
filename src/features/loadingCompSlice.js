@@ -8,10 +8,10 @@ const loadingCompSlice = createSlice({
   name: "loadingComp",
   initialState,
   reducers: {
-    setIsLoadingApi: (state, action) => {
+    setIsLoadingComp: (state, action) => {
       state.isLoadingComp = action.payload;
     },
   },
 });
-export const { setIsLoadingApi } = loadingCompSlice.actions;
+export const { setIsLoadingComp } = loadingCompSlice.actions;
 export default loadingCompSlice.reducer;

@@ -12,7 +12,7 @@ import { calculatePriceForDiscount } from "../../utils/calculatePrice";
 import { toastInfo } from "../../utils/toast";
 import { checkPhoneNumber } from "../../utils/validate";
 
-import { setIsLoadingApi } from "../../features/loadingCompSlice";
+import { setIsLoadingComp } from "../../features/loadingCompSlice";
 import FormAddress from "../../components/Form/FormAddress";
 import {
   resetFormAddress,
@@ -40,7 +40,7 @@ function CheckOut() {
     if (!checkPhoneNumber(phoneNumber))
       return toastInfo("Định dạng số điện thoại không hợp lệ!");
     try {
-      dispatch(setIsLoadingApi(true));
+      dispatch(setIsLoadingComp(true));
       if (payOption === 0)
         await handlePaymentService(
           {
@@ -53,7 +53,7 @@ function CheckOut() {
         );
       else {
         const { data } = await httpRequest.post("/payment", { total });
-        dispatch(setIsLoadingApi(false));
+        dispatch(setIsLoadingComp(false));
         window.open(data.redirect_url, "_self");
       }
     } catch (error) {

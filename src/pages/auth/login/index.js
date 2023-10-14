@@ -20,7 +20,7 @@ import { Form } from "react-bootstrap";
 import { FaFacebookF, FaGithub, FaGoogle } from "react-icons/fa";
 import useScrollTop from "../../../hooks/useScrollTop";
 import AnimationComp from "../../../components/AnimationComp";
-import { setIsLoadingApi } from "../../../features/loadingCompSlice";
+import { setIsLoadingComp } from "../../../features/loadingCompSlice";
 function Login() {
   useScrollTop();
   const [isForgotPwd, setIsForgotPwd] = useState(false);
@@ -42,13 +42,13 @@ function Login() {
       toastWarning(err);
       return;
     }
-    dispatch(setIsLoadingApi(true));
+    dispatch(setIsLoadingComp(true));
     const { payload } = await dispatch(loginAuth(inputs));
     if (payload.status === 200) {
       navigate(clientRoutes.home);
       // toastSuccess(payload.message);
     }
-    dispatch(setIsLoadingApi(false));
+    dispatch(setIsLoadingComp(false));
   };
   const handleForgotPwd = async (e) => {
     e.preventDefault();
@@ -57,9 +57,9 @@ function Login() {
       toastWarning("Email không đúng định dạng!");
       return;
     }
-    dispatch(setIsLoadingApi(true));
+    dispatch(setIsLoadingComp(true));
     await dispatch(forgotPasswordAuth({ email: emailForgot }));
-    dispatch(setIsLoadingApi(true));
+    dispatch(setIsLoadingComp(true));
   };
 
   const { user } = useSelector((store) => store.auth);

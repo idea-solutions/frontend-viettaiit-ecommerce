@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import { logoutAuth } from "../../../features/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { getAddressesMe } from "../../../features/address/addressSlice";
-import { setIsLoadingApi } from "../../../features/loadingCompSlice";
+import { setIsLoadingComp } from "../../../features/loadingCompSlice";
 
 function Account({ children }) {
   const dispatch = useDispatch();
@@ -86,9 +86,9 @@ function Account({ children }) {
               <span
                 className="hover-color-secondary fw-light"
                 onClick={async () => {
-                  dispatch(setIsLoadingApi(true));
+                  dispatch(setIsLoadingComp(true));
                   await dispatch(logoutAuth());
-                  dispatch(setIsLoadingApi(false));
+                  dispatch(setIsLoadingComp(false));
                 }}
               >
                 Đăng xuất

@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { handlePaymentService } from "../../services/orderService";
-import { setIsLoadingApi } from "../../features/loadingCompSlice";
+import { setIsLoadingComp } from "../../features/loadingCompSlice";
 
 function PaymentSuccess() {
   const { cart } = useSelector((store) => store.cart);
@@ -10,7 +10,7 @@ function PaymentSuccess() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   useEffect(() => {
-    dispatch(setIsLoadingApi(true));
+    dispatch(setIsLoadingComp(true));
     handlePaymentService(
       {
         cart,
@@ -20,7 +20,7 @@ function PaymentSuccess() {
       dispatch,
       navigate
     );
-    dispatch(setIsLoadingApi(false));
+    dispatch(setIsLoadingComp(false));
   }, []);
   return (
     <div className="">

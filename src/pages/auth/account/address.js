@@ -8,7 +8,7 @@ import {
   addAddressMe,
 } from "../../../features/address/addressSlice";
 import ModalConfirmation from "../../../components/Modal/ModalConfirmation";
-import { setIsLoadingApi } from "../../../features/loadingCompSlice";
+import { setIsLoadingComp } from "../../../features/loadingCompSlice";
 import FormAddress from "../../../components/Form/FormAddress";
 import { resetFormAddress } from "../../../features/formAddressSlice";
 import { toastDanger } from "../../../utils/toast";
@@ -21,10 +21,10 @@ function Address() {
   const [isAddNew, setIsAddNew] = useState(false);
   const [addressEdit, setAddressEdit] = useState(null);
   const deleteAddress = async (id) => {
-    dispatch(setIsLoadingApi(true));
+    dispatch(setIsLoadingComp(true));
     const { payload } = await dispatch(deleteAddressMe(id));
     if (payload.status === 200) await dispatch(getAddressesMe());
-    dispatch(setIsLoadingApi(false));
+    dispatch(setIsLoadingComp(false));
     setAddressId(null);
   };
 
@@ -33,10 +33,10 @@ function Address() {
     if (!phoneNumber || !province || !district || !ward || !fullName) {
       return toastDanger("Vui lòng điển thông tin!");
     } else {
-      dispatch(setIsLoadingApi(true));
+      dispatch(setIsLoadingComp(true));
       const { payload } = await dispatch(addAddressMe(address));
       if (payload.status === 201) await dispatch(getAddressesMe());
-      dispatch(setIsLoadingApi(false));
+      dispatch(setIsLoadingComp(false));
       dispatch(resetFormAddress());
       setIsAddNew(false);
     }
