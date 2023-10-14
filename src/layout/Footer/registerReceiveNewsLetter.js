@@ -12,9 +12,13 @@ function RegisterReceiveNewsletter() {
           Nhận thông tin sản phẩm mới nhất và các chương trình khuyến mãi.
         </p>
         <Form className="w-50 ">
-          <Form.Group className="d-flex flex-sm-column gap-sm-2 gap-md-0 flex-md-row">
-            <Form.Control placeholder="Nhập địa chỉ email..." name="email" />
-            <Button variant="outline-danger btn-sm">Gửi</Button>
+          <Form.Group className="d-lg-flex flex-column gap-sm-2 gap-md-0 flex-md-row">
+            <Form.Control
+              placeholder="Nhập địa chỉ email..."
+              name="email"
+              className=""
+            />
+            <Button variant="outline-danger btn-sm" className="flex-center">Gửi</Button>
           </Form.Group>
         </Form>
       </div>

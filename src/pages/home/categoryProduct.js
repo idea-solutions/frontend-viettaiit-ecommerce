@@ -20,6 +20,7 @@ import { clientRoutes } from "../../routes";
 import { setQueryProduct } from "../../features/product/productSlice";
 import ProductNone from "../../components/Product/productNone";
 import PropTypes from "prop-types";
+import { useDebounce } from "@uidotdev/usehooks";
 function CategoryProduct({ category: cate, listSubCategory, title }) {
   console.log(`[HOME] CategoryProduct ${cate} - re-render`);
   const dispatch = useDispatch();
@@ -31,9 +32,8 @@ function CategoryProduct({ category: cate, listSubCategory, title }) {
   const isTabletOrMobile = useMediaQuery({
     query: "(max-width: 1024px)",
   });
-
+  const debouncedSearchTerm = useDebounce(category, 500);
   useEffect(() => {
-    setIsLoading(true);
     const getProductsAsync = async (category) => {
       try {
         const { data } = await httpRequest.get(
@@ -41,12 +41,28 @@ function CategoryProduct({ category: cate, listSubCategory, title }) {
         );
         setProducts(data.data);
         setIsLoading(false);
-      } catch (error) {}
+      } catch (error) {
+        setIsLoading(false);
+      }
     };
-    getProductsAsync(category);
-  }, [category]);
+    if (debouncedSearchTerm) getProductsAsync(category);
+  }, [debouncedSearchTerm]);
+
+  //   setIsLoading(true);
+  //   const getProductsAsync = async (category) => {
+  //     try {
+  //       const { data } = await httpRequest.get(
+  //         "/products/categories/" + category
+  //       );
+  //       setProducts(data.data);
+  //       setIsLoading(false);
+  //     } catch (error) {}
+  //   };
+  //   getProductsAsync(category);
+  // }, [category]);
 
   const handleQueryProductSubCategory = (index) => {
+    setIsLoading(true);
     if (listSubCategory[index] === "All") {
       setCategory(cate);
     } else {
@@ -58,10 +74,8 @@ function CategoryProduct({ category: cate, listSubCategory, title }) {
   const createListProduct = () => {
     if (isLoading) {
       return (
-        <div className="container text-center py-5">
-          <Spinner animation="border" role="status">
-            <span className="visually-hidden">Loading...</span>
-          </Spinner>
+        <div className="flex-center p-5">
+          <Spinner animation="border" variant="primary" />
         </div>
       );
     }

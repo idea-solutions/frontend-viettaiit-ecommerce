@@ -30,7 +30,7 @@ function App() {
   };
 
   return (
-    <div className="App ">
+    <div className="App">
       <Suspense fallback={<div></div>}>
         <Routes>
           {clientPages.map((route, idx) => {

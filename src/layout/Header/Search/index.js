@@ -63,7 +63,7 @@ function Search({ className }) {
         <FontAwesomeIcon className="search-icon" icon={faSearch} />
       )}
       <SearchSuggest
-        isSearching={name && isSearching}
+        isSearching={(name ? true : false) && isSearching}
         products={name ? products : null}
         isVisible={isVisible}
       />
