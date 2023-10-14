@@ -33,7 +33,6 @@ function CheckOut() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [payOption, setPayOption] = useState(1);
-  console.log(payOption);
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { fullName, phoneNumber } = address;

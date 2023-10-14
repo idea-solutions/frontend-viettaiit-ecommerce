@@ -1,4 +1,4 @@
-import { Table } from "react-bootstrap";
+import { Button, Table } from "react-bootstrap";
 import Account from ".";
 import { useMediaQuery } from "react-responsive";
 import { useDispatch, useSelector } from "react-redux";
@@ -33,6 +33,21 @@ function Orders() {
 }
 
 export default Orders;
+
+const createBtnStatus = (status) => {
+  if (status === "pending")
+    return (
+      <Button variant="danger btn-xs w-50" className=" text-uppercase">
+        {" "}
+        <span className="flex-center">{status}</span>
+      </Button>
+    );
+  return (
+    <Button variant="success btn-xs w-50" className=" text-uppercase ">
+      <span className="flex-center">{status}</span>
+    </Button>
+  );
+};
 
 function OrdersUpDeskTop({ orders, navigate }) {
   return (
@@ -78,7 +93,9 @@ function OrdersUpDeskTop({ orders, navigate }) {
               <td className="align-middle p-2">
                 {formatCurrency(order.orderTotal)}
               </td>
-              <td className="align-middle p-2">{order.status}</td>
+              <td className="align-middle p-2">
+                {createBtnStatus(order.status)}
+              </td>
             </tr>
           ))
         )}
@@ -132,7 +149,9 @@ function OrdersDownDeskTop({ orders, navigate }) {
             </tr>
             <tr className="text-size-14">
               <td className="w-10 border border-white">TT thanh toán</td>
-              <td className="fw-light border border-white">{order.status}</td>
+              <td className="fw-light border border-white">
+                {createBtnStatus(order.status)}
+              </td>
             </tr>
           </tbody>{" "}
           <hr className="w-100 text-danger" />

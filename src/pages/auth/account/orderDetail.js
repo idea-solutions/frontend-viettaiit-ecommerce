@@ -1,4 +1,4 @@
-import { Col, Form, Row, Table } from "react-bootstrap";
+import { Button, Col, Form, Row, Table } from "react-bootstrap";
 import Account from ".";
 import LazyImage from "../../../components/LazyImage";
 import { useParams } from "react-router-dom";
@@ -6,6 +6,11 @@ import useDataDetail from "../../../hooks/useDataDetail";
 import { formatCurrency, formatDate } from "../../../utils/format";
 
 import { useMediaQuery } from "react-responsive";
+const createBtnStatus = (status) => {
+  if (status === "pending")
+    return <span className="flex-center text-danger">{status}</span>;
+  return <span className="flex-center text-success">{status}</span>;
+};
 
 function OrderDetail() {
   const { id } = useParams();
@@ -28,10 +33,12 @@ function OrderDetail() {
             {data?.status === "completed" ? "Đã thanh toán" : "Chưa thanh toán"}
           </span>
         </span>
-        <span>
+        <span className="d-flex gap-2">
           {" "}
-          Trạng thái vận chuyển:{" "}
-          <span className="text-primary fw-bold">{data?.status}</span>
+          <span> Trạng thái vận chuyển: </span>
+          <span className="text-primary fw-bold">
+            {createBtnStatus(data?.status)}
+          </span>
         </span>
       </div>
 
@@ -51,7 +58,6 @@ function OrderDetail() {
           <Col xs={12} lg={3}>
             <span>THANH TOÁN</span>
             <div className="border px-2 py-2 h-75">
-          
               <p>Thanh toán khi giao hàng (COD)</p>
             </div>
           </Col>
