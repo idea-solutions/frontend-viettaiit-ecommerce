@@ -57,7 +57,7 @@ const cartSlice = createSlice({
       state.isLoading = true;
     });
     builder.addCase(getCartMe.fulfilled, (state, action) => {
-      const { data  ,total ,count} = action.payload;
+      const { data, total, count } = action.payload;
       state.cart = data;
       state.total = total;
       state.countCartItem = count;

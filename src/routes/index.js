@@ -6,6 +6,7 @@ import CheckOut from "../pages/checkout";
 import OrderDetail from "../pages/auth/account/orderDetail";
 import ThankYouOrder from "../pages/checkout/thankYou";
 import Address from "../pages/auth/account/address";
+import PaymentSuccess from "../pages/checkout/payralSuccess";
 
 const Account = lazy(() => import("../pages/auth/account"));
 const Orders = lazy(() => import("../pages/auth/account/orders"));
@@ -43,7 +44,7 @@ const clientPages = [
       },
 
       { com: <VerifyEmail />, path: "xac-minh-tai-khoan" },
-      { com: <Address />, path: "dia-chi" ,protected: true },
+      { com: <Address />, path: "dia-chi", protected: true },
       { com: <ResetPassword />, path: "dat-lai-mat-khau" },
       { com: <Login />, path: "dang-nhap" },
       { com: <Register />, path: "dang-ky" },
@@ -79,6 +80,7 @@ const clientPages = [
     children: [
       { com: <CheckOut />, path: "", protected: true },
       { com: <ThankYouOrder />, path: "cam-on/:id", protected: true },
+      { com: <PaymentSuccess />, path: "thanh-cong", protected: true },
     ],
   },
   { com: <LoginSuccess />, path: "/login/success" },

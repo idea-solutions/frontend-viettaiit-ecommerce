@@ -1,4 +1,4 @@
-import { Col, Row, Table } from "react-bootstrap";
+import { Col, Form, Row, Table } from "react-bootstrap";
 import Account from ".";
 import LazyImage from "../../../components/LazyImage";
 import { useParams } from "react-router-dom";
@@ -28,7 +28,7 @@ function OrderDetail() {
             {data?.status === "completed" ? "Đã thanh toán" : "Chưa thanh toán"}
           </span>
         </span>
-        <span >
+        <span>
           {" "}
           Trạng thái vận chuyển:{" "}
           <span className="text-primary fw-bold">{data?.status}</span>
@@ -38,20 +38,20 @@ function OrderDetail() {
       <div className="d-flex gap-3 mt-3">
         <Row>
           <Col xs={12} lg={6}>
-            <span >ĐỊA CHỈ GIAO HÀNG</span>
+            <span>ĐỊA CHỈ GIAO HÀNG</span>
             <div className="border px-2 py-2 h-75 d-flex flex-column gap-1 pb-3 fw-light text-size-16">
               <span>VIẾT TÀI </span>
               <span>
-                Địa chỉ: {data?.address.residence}, {data?.address.ward}, {data?.address.district},{" "}
-                {data?.address.province}
+                Địa chỉ: {data?.address.residence}, {data?.address.ward},{" "}
+                {data?.address.district}, {data?.address.province}
               </span>
               <span>Số điện thoại: {data?.address.phoneNumber}</span>
             </div>
           </Col>
           <Col xs={12} lg={3}>
-            {" "}
             <span>THANH TOÁN</span>
             <div className="border px-2 py-2 h-75">
+          
               <p>Thanh toán khi giao hàng (COD)</p>
             </div>
           </Col>

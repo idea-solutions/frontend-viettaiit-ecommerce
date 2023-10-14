@@ -9,9 +9,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { formatCurrency } from "../../utils/format";
 import { calculatePriceForDiscount } from "../../utils/calculatePrice";
 
-import { toastInfo, toastSuccess } from "../../utils/toast";
+import { toastInfo } from "../../utils/toast";
 import { checkPhoneNumber } from "../../utils/validate";
-import { addOrderMe, getOrdersMe } from "../../features/order/orderSlice";
+
 import { setIsLoadingComp } from "../../features/loadingCompSlice";
 import FormAddress from "../../components/Form/FormAddress";
 import {
@@ -20,6 +20,8 @@ import {
 } from "../../features/formAddressSlice";
 import { useRef, useState } from "react";
 import useHideOnClickOutside from "../../hooks/useHideOnClickOutSide";
+import httpRequest from "../../api/httpRequest";
+import { handlePaymentService } from "../../services/orderService";
 function CheckOut() {
   const { cart, countCartItem, total } = useSelector((store) => store.cart);
   const { address } = useSelector((store) => store.formAddress);
@@ -28,58 +30,37 @@ function CheckOut() {
   const [isSelected, setIsSelected] = useState(false);
   const [isShowOptionAddresses, setIsShowOptionAddresses] =
     useHideOnClickOutside(optionAddressesRef);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [payOption, setPayOption] = useState(1);
+  console.log(payOption);
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { fullName, phoneNumber } = address;
     if (fullName.length < 3) return toastInfo("Họ và tên yêu cầu!");
     if (!checkPhoneNumber(phoneNumber))
       return toastInfo("Định dạng số điện thoại không hợp lệ!");
-    const productItems = [];
-    const ordersLine = [];
-    cart.cartItems.forEach((item) => {
-      const orderLine = {
-        qty: item.qty,
-        productItemId: item.productItemId,
-        price: calculatePriceForDiscount(
-          item.productItem.product.price,
-          item.productItem.product.discount
-        ),
-      };
-      const productItem = {
-        image:
-          process.env.REACT_APP_BACKEND_URL +
-          "/static/uploads/" +
-          item.productItem.image,
-        qty: item.qty,
-        price: calculatePriceForDiscount(
-          item.productItem.product.price,
-          item.productItem.product.discount
-        ),
-        colorValue: item.productItem.color.value,
-        name: item.productItem.product.name,
-        slug: item.productItem.product.slug,
-      };
-      ordersLine.push(orderLine);
-      productItems.push(productItem);
-    });
-    const inputs = {
-      productItems,
-      ordersLine,
-      address,
-    };
-    dispatch(setIsLoadingComp(true));
-    const { payload } = await dispatch(addOrderMe(inputs));
-    if (payload.status === 200) {
-      toastSuccess(payload.message);
-      dispatch(getOrdersMe());
-      navigate(clientRoutes.checkout + "/cam-on/" + payload.data.id);
+    try {
+      dispatch(setIsLoadingComp(true));
+      if (payOption === 0)
+        await handlePaymentService(
+          {
+            cart,
+            address,
+            status: "pending",
+          },
+          dispatch,
+          navigate
+        );
+      else {
+        const { data } = await httpRequest.post("/payment", { total });
+        dispatch(setIsLoadingComp(false));
+        window.open(data.redirect_url, "_self");
+      }
+    } catch (error) {
+      console.log(error);
     }
-    dispatch(setIsLoadingComp(false));
-    dispatch(resetFormAddress());
   };
-
   return (
     <div className="vh-100 ">
       <HelmetCustom title="Thanh toán" />
@@ -179,20 +160,30 @@ function CheckOut() {
                 </div>
                 <div className="mt-4">
                   <span className="fw-bold text-size-18">Thanh toán</span>
-                  <div className="d-flex justify-content-between align-items-center p-2 border ">
-                    <Form.Check
-                      type="radio"
-                      label={"Thanh toán khi giao hàng (COD)"}
-                      checked={true}
-                      className="text-size-14 "
-                    />
-                    <span className="fw-bold text-size-14">
-                      <FontAwesomeIcon
-                        icon={faMoneyBill}
-                        className="text-info"
-                      />
-                    </span>
-                  </div>
+
+                  {["Thanh toán khi giao hàng (COD)", "Chuyển khoản"].map(
+                    (title, i) => (
+                      <div
+                        className="d-flex justify-content-between align-items-center p-2 border mt-2"
+                        key={i}
+                        onClick={() => setPayOption(parseInt(i))}
+                      >
+                        <Form.Check
+                          type="radio"
+                          label={title}
+                          value={i}
+                          checked={i === payOption}
+                          className="text-size-14 "
+                        />
+                        <span className="fw-bold text-size-14">
+                          <FontAwesomeIcon
+                            icon={faMoneyBill}
+                            className="text-info"
+                          />
+                        </span>
+                      </div>
+                    )
+                  )}
                 </div>
               </Col>
             </Row>
