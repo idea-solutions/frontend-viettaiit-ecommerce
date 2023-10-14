@@ -15,12 +15,12 @@ import {
 
 import HelmetCustom from "../../../components/HelmetCustom";
 import Breadcrumb from "../../../components/Breadcrumb";
-import { toastSuccess, toastWarning } from "../../../utils/toast";
+import { toastWarning } from "../../../utils/toast";
 import { Form } from "react-bootstrap";
 import { FaFacebookF, FaGithub, FaGoogle } from "react-icons/fa";
 import useScrollTop from "../../../hooks/useScrollTop";
 import AnimationComp from "../../../components/AnimationComp";
-import { setIsLoadingComp } from "../../../features/loadingCompSlice";
+import { setIsLoadingApi } from "../../../features/loadingCompSlice";
 function Login() {
   useScrollTop();
   const [isForgotPwd, setIsForgotPwd] = useState(false);
@@ -42,13 +42,13 @@ function Login() {
       toastWarning(err);
       return;
     }
-    dispatch(setIsLoadingComp(true));
+    dispatch(setIsLoadingApi(true));
     const { payload } = await dispatch(loginAuth(inputs));
     if (payload.status === 200) {
       navigate(clientRoutes.home);
-      toastSuccess(payload.message);
+      // toastSuccess(payload.message);
     }
-    dispatch(setIsLoadingComp(false));
+    dispatch(setIsLoadingApi(false));
   };
   const handleForgotPwd = async (e) => {
     e.preventDefault();
@@ -57,9 +57,10 @@ function Login() {
       toastWarning("Email không đúng định dạng!");
       return;
     }
+    dispatch(setIsLoadingApi(true));
     await dispatch(forgotPasswordAuth({ email: emailForgot }));
+    dispatch(setIsLoadingApi(true));
   };
-
 
   const { user } = useSelector((store) => store.auth);
   if (user) return <Navigate to={clientRoutes.home} />;

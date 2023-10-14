@@ -14,14 +14,12 @@ function ProductSearch() {
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
     const name = queryParams.get("name");
-    // dispatch(setIsLoadingComp(true));
     const getProductsAsync = async () => {
       try {
         const { data } = await httpRequest.get("/products", {
           params: { name },
         });
         setProducts(data.data);
-        // dispatch(setIsLoadingComp(false));
       } catch (error) {}
     };
 

@@ -8,12 +8,9 @@ import {
   addAddressMe,
 } from "../../../features/address/addressSlice";
 import ModalConfirmation from "../../../components/Modal/ModalConfirmation";
-import { setIsLoadingComp } from "../../../features/loadingCompSlice";
+import { setIsLoadingApi } from "../../../features/loadingCompSlice";
 import FormAddress from "../../../components/Form/FormAddress";
-import {
-  resetFormAddress,
-  setFromAddress,
-} from "../../../features/formAddressSlice";
+import { resetFormAddress } from "../../../features/formAddressSlice";
 import { toastDanger } from "../../../utils/toast";
 
 function Address() {
@@ -24,10 +21,10 @@ function Address() {
   const [isAddNew, setIsAddNew] = useState(false);
   const [addressEdit, setAddressEdit] = useState(null);
   const deleteAddress = async (id) => {
-    dispatch(setIsLoadingComp(true));
+    dispatch(setIsLoadingApi(true));
     const { payload } = await dispatch(deleteAddressMe(id));
     if (payload.status === 200) await dispatch(getAddressesMe());
-    dispatch(setIsLoadingComp(false));
+    dispatch(setIsLoadingApi(false));
     setAddressId(null);
   };
 
@@ -36,10 +33,10 @@ function Address() {
     if (!phoneNumber || !province || !district || !ward || !fullName) {
       return toastDanger("Vui lòng điển thông tin!");
     } else {
-      dispatch(setIsLoadingComp(true));
+      dispatch(setIsLoadingApi(true));
       const { payload } = await dispatch(addAddressMe(address));
       if (payload.status === 201) await dispatch(getAddressesMe());
-      dispatch(setIsLoadingComp(false));
+      dispatch(setIsLoadingApi(false));
       dispatch(resetFormAddress());
       setIsAddNew(false);
     }
@@ -81,7 +78,7 @@ function Address() {
                   className="text-danger cursor"
                   onClick={() => {
                     setAddressEdit(address.id);
-                    dispatch(setFromAddress(address));
+                    // dispatch(setFromAddress(address));
                   }}
                 >
                   Sửa
@@ -100,7 +97,7 @@ function Address() {
                   className="text-danger cursor"
                   onClick={() => {
                     setAddressEdit(address.id);
-                    dispatch(setFromAddress(address));
+                    // dispatch(setFromAddress(address));
                   }}
                 >
                   Sửa

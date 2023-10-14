@@ -2,15 +2,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { AnimatePresence, motion } from "framer-motion";
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
-import { setIsLoadingComp } from "../../features/loadingCompSlice";
-function LoadingComp({}) {
-  const { isLoadingComp } = useSelector((store) => store.loadingComp);
+import { setIsLoadingApi } from "../../features/loadingCompSlice";
+function LoadingApi({}) {
+  const { isLoadingApi } = useSelector((store) => store.loadingComp);
   const location = useLocation();
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(setIsLoadingComp(true));
+    dispatch(setIsLoadingApi(true));
     const timeId = setTimeout(() => {
-      dispatch(setIsLoadingComp(false));
+      dispatch(setIsLoadingApi(false));
     }, 1);
     return () => {
       clearTimeout(timeId);
@@ -19,7 +19,7 @@ function LoadingComp({}) {
   return (
     <>
       <AnimatePresence>
-        {isLoadingComp && (
+        {isLoadingApi && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 0.5 }}
@@ -35,4 +35,4 @@ function LoadingComp({}) {
   );
 }
 
-export default LoadingComp;
+export default LoadingApi;

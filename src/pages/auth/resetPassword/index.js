@@ -9,7 +9,7 @@ import Breadcrumb from "../../../components/Breadcrumb";
 import { validateFormResetPassword } from "../../../utils/validate";
 import { toastWarning } from "../../../utils/toast";
 import { Button, Form } from "react-bootstrap";
-import { setIsLoadingComp } from "../../../features/loadingCompSlice";
+import { setIsLoadingApi } from "../../../features/loadingCompSlice";
 
 function ResetPassword() {
   const location = useLocation();
@@ -42,7 +42,7 @@ function ResetPassword() {
 
       return;
     }
-    dispatch(setIsLoadingComp(true));
+    dispatch(setIsLoadingApi(true));
     const { payload } = await dispatch(
       resetPasswordAuth({
         passwordToken,
@@ -55,7 +55,7 @@ function ResetPassword() {
     if (payload.status === 200) {
       navigate(clientRoutes.account.login);
     }
-    dispatch(setIsLoadingComp(false));
+    dispatch(setIsLoadingApi(false));
   };
   return (
     <>

@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { toast } from "react-toastify";
 import {
   registerAuthThunk,
   loginAuthThunk,
@@ -10,8 +9,7 @@ import {
   getUserSuccessThunk,
 } from "./authThunk";
 
-
-import { toastError, toastSuccess } from "../../utils/toast";
+import { toastInfo, toastSuccess } from "../../utils/toast";
 const initialState = {
   user: null,
   isLoading: false,
@@ -54,9 +52,12 @@ export const resetPasswordAuth = createAsyncThunk(
   }
 );
 
-export const getUserSuccess = createAsyncThunk("auth/getUserSuccess", async (_, thunkAPI) => {
-  return getUserSuccessThunk("/auth/login/success", thunkAPI);
-});
+export const getUserSuccess = createAsyncThunk(
+  "auth/getUserSuccess",
+  async (_, thunkAPI) => {
+    return getUserSuccessThunk("/auth/login/success", thunkAPI);
+  }
+);
 
 const authSlice = createSlice({
   name: "auth",
@@ -69,12 +70,12 @@ const authSlice = createSlice({
     });
     builder.addCase(registerAuth.fulfilled, (state, action) => {
       const { message } = action.payload;
-      toast(message);
+      toastSuccess(message);
       state.isLoading = false;
     });
     builder.addCase(registerAuth.rejected, (state, action) => {
       const { message } = action.payload;
-      toastError(message);
+      toastInfo(message);
       state.isLoading = false;
       state.isError = true;
     });
@@ -84,14 +85,14 @@ const authSlice = createSlice({
       state.isLoading = true;
     });
     builder.addCase(loginAuth.fulfilled, (state, action) => {
-      const { data } = action.payload;
+      const { data, message } = action.payload;
       state.user = data;
-      
+      toastSuccess(message);
       state.isLoading = false;
     });
     builder.addCase(loginAuth.rejected, (state, action) => {
       const { message } = action.payload;
-      toastError(message);
+      toastInfo(message);
       state.isLoading = false;
       state.isError = true;
     });
@@ -100,13 +101,13 @@ const authSlice = createSlice({
       state.isLoading = true;
     });
     builder.addCase(getUserSuccess.fulfilled, (state, action) => {
-      const { data} = action.payload;
+      const { data } = action.payload;
       state.user = data;
       state.isLoading = false;
     });
     builder.addCase(getUserSuccess.rejected, (state, action) => {
       const { message } = action.payload;
-      toastError(message);
+      toastInfo(message);
       state.isLoading = false;
       state.isError = true;
     });
@@ -123,7 +124,7 @@ const authSlice = createSlice({
     });
     builder.addCase(logoutAuth.rejected, (state, action) => {
       const { message } = action.payload;
-      toastError(message);
+      toastInfo(message);
       state.isLoading = false;
       state.isError = true;
     });
@@ -152,7 +153,7 @@ const authSlice = createSlice({
     });
     builder.addCase(forgotPasswordAuth.rejected, (state, action) => {
       const { message } = action.payload;
-      toastError(message);
+      toastInfo(message);
       state.isLoading = false;
       state.isError = true;
     });
@@ -168,7 +169,7 @@ const authSlice = createSlice({
     builder.addCase(resetPasswordAuth.rejected, (state, action) => {
       const { message } = action.payload;
       console.log(action.payload);
-      toastError(message);
+      toastInfo(message);
       state.isLoading = false;
       state.isError = true;
     });

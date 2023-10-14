@@ -2,14 +2,11 @@ import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { verifyEmailAuth } from "../../../features/auth/authSlice";
 import { useDispatch } from "react-redux";
-import {
-  setLoadingClose,
-  setLoadingShow,
-} from "../../../features/loadingSlice";
+
 import { clientRoutes } from "../../../routes";
 import HelmetCustom from "../../../components/HelmetCustom";
 import Breadcrumb from "../../../components/Breadcrumb";
-import { setIsLoadingComp } from "../../../features/loadingCompSlice";
+import { setIsLoadingApi } from "../../../features/loadingCompSlice";
 
 function VerifyEmail() {
   const location = useLocation();
@@ -20,14 +17,12 @@ function VerifyEmail() {
   const navigate = useNavigate();
   useEffect(() => {
     const verifyEmailAsync = async () => {
-      dispatch(setLoadingShow());
       await dispatch(verifyEmailAuth({ verificationToken, email }));
-      dispatch(setLoadingClose());
       navigate(clientRoutes.account.login);
     };
-    dispatch(setIsLoadingComp(true));
+    dispatch(setIsLoadingApi(true));
     verifyEmailAsync();
-    dispatch(setIsLoadingComp(false));
+    dispatch(setIsLoadingApi(false));
   }, []);
   return (
     <div className="container d-flex align-content-center justify-content-center">
