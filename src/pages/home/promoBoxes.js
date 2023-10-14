@@ -2,7 +2,6 @@ import React from "react";
 import promoBoxes from "../../assets/promoBox";
 import LazyImage from "../../components/LazyImage";
 function PromoBoxes() {
-  console.log("[HOME] promo boxes --- re-render");
   return (
     <div className="container">
       <div className="promo-box row">

@@ -4,7 +4,6 @@ import { Navigation } from "swiper/modules";
 import { sliders1} from "../../assets/sliders";
 import LazyImage from "../../components/LazyImage";
 function TopSlide() {
-  console.log("[HOME] top slide -- re-render");
   return (
     <Swiper
       navigation={true}

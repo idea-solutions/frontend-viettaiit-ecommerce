@@ -11,7 +11,6 @@ import { navigateAndAttachQuery } from "../../utils/attachQueryToURL";
 import { clientRoutes } from "../../routes";
 
 function NavBarDownDeskTop() {
-  console.log("[COMP] NavBarDownDeskTop re-render");
   const navigate = useNavigate();
   const [numberShow, setNumberShow] = useState(100);
   const { isOpen } = useSelector((store) => store.navBar);

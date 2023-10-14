@@ -22,7 +22,6 @@ import ProductNone from "../../components/Product/productNone";
 import PropTypes from "prop-types";
 import { useDebounce } from "@uidotdev/usehooks";
 function CategoryProduct({ category: cate, listSubCategory, title }) {
-  console.log(`[HOME] CategoryProduct ${cate} - re-render`);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);

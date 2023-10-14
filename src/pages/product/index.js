@@ -21,7 +21,6 @@ import NavSearch from "../../components/Search/NavSearch";
 import { getColors } from "../../features/color/colorSlice";
 import { getProviders } from "../../features/provider/providerSlice";
 
-
 const optionsName = {
   "san-pham-khuyen-mai": "Sản phẩm khuyến mãi",
   "tat-ca": "Tất cả sản phẩm",
@@ -96,7 +95,6 @@ function Products() {
                     dispatch(
                       setQueryProduct({ name: "page", value: index + 1 })
                     );
-                 
                   }}
                   key={index + 1}
                   active={page === index + 1}
@@ -125,7 +123,6 @@ function Products() {
 export default Products;
 
 const SubCategories = memo(function SubCategories({ categoryId }) {
-  console.log("SubCategories")
   const { categories } = useSelector((store) => store.category);
   const dispatch = useDispatch();
   const handleQueryProduct = (name, value) => {

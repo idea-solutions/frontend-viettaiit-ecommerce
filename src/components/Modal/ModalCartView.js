@@ -8,7 +8,7 @@ import LazyImage from "../LazyImage";
 import { useDispatch, useSelector } from "react-redux";
 import { setCartItemNewBuy } from "../../features/cart/cartSlice";
 import { formatCurrency } from "../../utils/format";
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { clientRoutes } from "../../routes";
 
 function ModalCartView({}) {

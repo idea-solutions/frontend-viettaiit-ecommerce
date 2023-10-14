@@ -1,7 +1,6 @@
 import { Button, Form } from "react-bootstrap";
 import React from "react";
 function RegisterReceiveNewsletter() {
-  console.log("[HOME] RegisterReceiveNewsletter - re-render");
   return (
     <div className=" bg-black text-white mt-5 py-5">
       <div className="container d-flex flex-column gap-2 justify-content-center align-items-center">

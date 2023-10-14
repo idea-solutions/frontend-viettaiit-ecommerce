@@ -4,7 +4,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, Col, Modal, Row } from "react-bootstrap";
-
+import PropTypes from "prop-types";
 
 function ModalConfirmation({ onSave, onReject, show, title, children }) {
   return (
@@ -57,4 +57,11 @@ function ModalConfirmation({ onSave, onReject, show, title, children }) {
   );
 }
 
+ModalConfirmation.propTypes = {
+  onSave: PropTypes.func,
+  onReject: PropTypes.func,
+  show: PropTypes.bool,
+  title: PropTypes.string,
+  children: PropTypes.node,
+};
 export default ModalConfirmation;

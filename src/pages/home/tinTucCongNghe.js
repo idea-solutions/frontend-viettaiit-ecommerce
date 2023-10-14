@@ -4,7 +4,6 @@ import { faClock } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 function TinTucCongNghe() {
-  console.log("[HOME] tin tuc cong nghe -re-render");
   return (
     <div>
       <div className="container tintuc">

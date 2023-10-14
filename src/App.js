@@ -43,7 +43,7 @@ function App() {
             /* ---- */
 
             if (route.children) return createChildrenRoute(route, Comp);
-            return <Route exact element={Comp} path={route.path} />;
+            return <Route exact element={Comp} path={route.path} key={idx + 100} />;
           })}
         </Routes>
       </Suspense>

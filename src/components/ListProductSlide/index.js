@@ -35,7 +35,6 @@ function ListProductSlide({
   cart = false,
   title,
 }) {
-  console.log("[COMP] ListProductSlide - re-render" + title);
   if (products && products.length < 0) return <ProductNone />;
   return (
     <Swiper
@@ -49,7 +48,7 @@ function ListProductSlide({
       className="list-product-slide"
     >
       {products.map((product, index) => (
-        <SwiperSlide>
+        <SwiperSlide key={index}>
           <ProductItem
             product={product}
             hiddenSold={hiddenSold}

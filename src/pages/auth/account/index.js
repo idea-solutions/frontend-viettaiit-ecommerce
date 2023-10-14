@@ -24,7 +24,6 @@ function Account({ children }) {
   };
   const location = useLocation();
   const pathname = location.pathname;
-  // console.log(pathname)
   useEffect(() => {
     dispatch(getAddressesMe());
   }, []);

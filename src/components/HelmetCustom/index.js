@@ -3,7 +3,6 @@ import React from "react";
 import logo from "../../assets/my-image.jpg";
 import PropTypes from "prop-types";
 function HelmetCustom({ title }) {
-  console.log("HelmetCustom");
   return (
     <Helmet>
       <title>{title}</title>

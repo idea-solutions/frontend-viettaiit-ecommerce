@@ -5,7 +5,6 @@ import { Button, Col, Row } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion } from "framer-motion";
 function NewInfoProduct() {
-  console.log("[HOME] new info product re-rendered");
   return (
     <div className="section-new-info mt-4">
       <div className="container">

@@ -12,7 +12,6 @@ function useDataDetail(url) {
       setIsLoading(true);
       setIsError(false);
     } catch (error) {
-      console.log("my error : ", error);
       setIsError(true);
     }
   };

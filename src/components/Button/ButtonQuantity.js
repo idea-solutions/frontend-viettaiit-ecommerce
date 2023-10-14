@@ -23,4 +23,7 @@ export default ButtonQuantity;
 ButtonQuantity.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
+  qty: PropTypes.number,
+  setQty: PropTypes.func,
+  type: PropTypes.string,
 };

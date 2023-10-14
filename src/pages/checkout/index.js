@@ -57,7 +57,6 @@ function CheckOut() {
         window.open(data.redirect_url, "_self");
       }
     } catch (error) {
-      console.log(error);
     }
   };
   return (

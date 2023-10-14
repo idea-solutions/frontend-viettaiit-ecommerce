@@ -1,9 +1,6 @@
 import { motion } from "framer-motion";
 import PropTypes from "prop-types";
-import { useLocation } from "react-router-dom";
 function AnimationComp({ children }) {
-  const location = useLocation();
-  console.log(location)
   return (
     <motion.div
       variants={animations}
@@ -28,5 +25,5 @@ const animations = {
 };
 
 AnimationComp.propTypes = {
-  children: PropTypes.node,
+  children: PropTypes.node.isRequired,
 };

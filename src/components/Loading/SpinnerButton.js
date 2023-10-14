@@ -1,5 +1,5 @@
 import { Spinner } from "react-bootstrap";
-
+import PropTypes from "prop-types";
 function SpinnerButton({
   variant = "danger",
   animation = "border",
@@ -15,3 +15,10 @@ function SpinnerButton({
 }
 
 export default SpinnerButton;
+
+SpinnerButton.propTypes = {
+  variant: PropTypes.string,
+  animation: PropTypes.string,
+  size: PropTypes.string,
+  show: PropTypes.bool,
+};

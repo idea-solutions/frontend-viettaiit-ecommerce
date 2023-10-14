@@ -2,7 +2,6 @@ import { Col, Row } from "react-bootstrap";
 import LazyImage from "../../components/LazyImage";
 import React from "react";
 function CustomersOfVietTai() {
-  console.log("[HOME] customers of viettai-re-render");
   return (
     <div className="container khachhang mt-5">
       <h3 className="text-uppercase my-3 text-center fw-bold">

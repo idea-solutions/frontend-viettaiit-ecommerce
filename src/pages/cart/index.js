@@ -134,7 +134,6 @@ function CartItemsDownDesktop({
   isLoadingChangeQty,
   setIsLoadingChangeQty,
 }) {
-  console.log("CartItemsDownDesktop");
   return (
     <>
       {countCartItem === 0 ? (
@@ -251,7 +250,6 @@ function CartItemsUpDesktop({
   isLoadingChangeQty,
   setIsLoadingChangeQty,
 }) {
-  console.log("CartItemsUpDesktop");
   return (
     <>
       {countCartItem === 0 ? (

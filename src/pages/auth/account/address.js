@@ -41,7 +41,6 @@ function Address() {
       setIsAddNew(false);
     }
   };
-  console.log(isAddNew);
   return (
     <Account>
       <h5 className=" mt-sm-4 fw-light">ĐỊA CHỈ CỦA BẠN</h5>

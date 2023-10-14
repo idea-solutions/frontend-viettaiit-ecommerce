@@ -168,7 +168,6 @@ const authSlice = createSlice({
     });
     builder.addCase(resetPasswordAuth.rejected, (state, action) => {
       const { message } = action.payload;
-      console.log(action.payload);
       toastInfo(message);
       state.isLoading = false;
       state.isError = true;

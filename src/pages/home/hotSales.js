@@ -16,7 +16,6 @@ import CountdownTimer from "../../components/CoutdownTimer";
 function HotSales() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  console.log("[HOME] hot sales - re-render");
   useEffect(() => {
     dispatch(getProductsHotSales());
   }, [dispatch]);

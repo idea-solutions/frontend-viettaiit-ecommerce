@@ -9,7 +9,6 @@ import { useNavigate } from "react-router-dom";
 import { clientRoutes } from "../../routes";
 import { setQueryProduct } from "../../features/product/productSlice";
 function DanhMucNoiBat() {
-  console.log("[HOME] danhmucnoibat --- re-render");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   useEffect(() => {

@@ -32,7 +32,6 @@ const formAddressSlice = createSlice({
         country,
         note,
       } = action.payload;
-      console.log(action.payload)
       state.address.phoneNumber = phoneNumber;
       state.address.province = province;
       state.address.fullName = fullName;

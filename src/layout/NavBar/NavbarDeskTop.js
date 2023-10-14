@@ -4,7 +4,6 @@ import HeaderBottomItem from "../Header/HeaderBottomItem";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import React from "react";
 function NavbarDeskTop() {
-  console.log("navbardesktop");
   return (
     <div className="container-xl header-bottom">
       <ul className="items">

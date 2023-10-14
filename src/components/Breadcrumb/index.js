@@ -4,8 +4,7 @@ import { clientRoutes } from "../../routes";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import PropTypes from "prop-types";
-function Breadcrumb({ title, titles = null }) {
-  console.log("Breadcrumb");
+function Breadcrumb({ title, titles = [] }) {
   const createBreadcrumb = () => {
     if (!titles)
       return (
@@ -66,4 +65,5 @@ export default React.memo(Breadcrumb);
 
 Breadcrumb.propTypes = {
   title: PropTypes.string,
+  titles: PropTypes.array,
 };

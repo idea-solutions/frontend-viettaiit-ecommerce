@@ -5,7 +5,7 @@ import { changeFormAddress } from "../../features/formAddressSlice";
 import { useEffect, useRef, useState } from "react";
 import useHideOnClickOutside from "../../hooks/useHideOnClickOutSide";
 import axios from "axios";
-
+import PropTypes from "prop-types";
 function FormAddress({ isSelected }) {
   const { user } = useSelector((store) => store.auth);
   const { address } = useSelector((store) => store.formAddress);
@@ -218,6 +218,10 @@ function FormAddress({ isSelected }) {
   );
 }
 
+FormAddress.propTypes = {
+  isSelected: PropTypes.bool,
+};
+
 export default FormAddress;
 function SelectOptions({ addresses, handleSelect, setIsShow }) {
   if (!addresses) return null;
@@ -238,3 +242,8 @@ function SelectOptions({ addresses, handleSelect, setIsShow }) {
     </div>
   );
 }
+SelectOptions.propTypes = {
+  addresses: PropTypes.array,
+  handleSelect: PropTypes.func,
+  setIsShow: PropTypes.func,
+};

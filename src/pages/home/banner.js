@@ -3,7 +3,6 @@ import React from "react";
 import { motion } from "framer-motion";
 import LazyImage from "../../components/LazyImage";
 function Banner() {
-  console.log("[HOME] banner -- re-render");
   return (
     <div className="container my-4">
       <div className="section row">
