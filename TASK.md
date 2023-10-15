@@ -65,7 +65,7 @@
     - payment
 ## VẤN ĐỀ SẼ LÀM    
 ## VẤN ĐỀ CHƯA LÀM ĐƯỢC
-    
+    - deploy
 
 ## TASK TỐI ƯU PERFORMANCE
     - ProductCategory -> Chưa thực hiện được caching query sub category product
