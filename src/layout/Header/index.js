@@ -268,9 +268,9 @@ function Header() {
                                   <div>
                                     <ButtonQuantityUpdateQty
                                       as="small"
-                                      increaseQty={() => {
+                                      increaseQty={async () => {
                                         if (item.qty > 1000) return;
-                                        updateQtyService(
+                                        await updateQtyService(
                                           {
                                             qty: 1,
                                             productItemId: item.productItemId,
@@ -280,12 +280,12 @@ function Header() {
                                       }}
                                       decreaseQty={async () => {
                                         if (item.qty === 1) {
-                                          return deleteCartItemService(
+                                          return await deleteCartItemService(
                                             item.id,
                                             dispatch
                                           );
                                         }
-                                        updateQtyService(
+                                        await updateQtyService(
                                           {
                                             qty: -1,
                                             productItemId: item.productItemId,
