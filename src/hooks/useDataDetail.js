@@ -9,7 +9,7 @@ function useDataDetail(url) {
       setIsLoading(true);
       const { data } = await httpRequest.get(url);
       setDataDetail(data.data);
-      setIsLoading(true);
+      setIsLoading(false);
       setIsError(false);
     } catch (error) {
       setIsError(true);

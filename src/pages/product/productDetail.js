@@ -34,12 +34,19 @@ import { clientRoutes } from "../../routes";
 import { setCartItemNewBuy } from "../../features/cart/cartSlice";
 import { getProductsPhuKien } from "../../features/product/productSlice";
 import SpinnerButton from "../../components/Loading/SpinnerButton";
+import { setIsLoadingComp } from "../../features/loadingCompSlice";
+import {
+  RectShape,
+  TextBlock,
+  TextRow,
+} from "react-placeholder/lib/placeholders";
+import ReactPlaceholder from "react-placeholder";
 function ProductDetail() {
   const { slug: name } = useParams();
   const [isLoadingAdd, setIsLoadingAdd] = useState(false);
   const navigate = useNavigate();
   const [qty, setQty] = useState(1);
-  const { data, _, __ } = useDataDetail("/products/" + name);
+  const { data, isLoading, __ } = useDataDetail("/products/" + name);
   const { user } = useSelector((store) => store.auth);
 
   const dispatch = useDispatch();
@@ -94,6 +101,11 @@ function ProductDetail() {
     setIsLoadingAdd(false);
   };
 
+  if (isLoading) {
+    dispatch(setIsLoadingComp(true));
+  } else {
+    dispatch(setIsLoadingComp(false));
+  }
   return (
     <div className="product-detail">
       <HelmetCustom title="Chi tiết sản phẩm" />
@@ -102,15 +114,23 @@ function ProductDetail() {
         <Row>
           <Col lg={4} xs={12} className="mb-3 overflow-hidden">
             <div className=" ">
-              <LazyImage
-                src={
-                  thumbImages &&
-                  process.env.REACT_APP_BACKEND_URL +
-                    "/static/uploads/" +
-                    thumbImages[idxSelected]
-                }
-                alt={data?.name}
-              />
+              {isLoading ? (
+                <RectShape
+                  showLoadingAnimation={true}
+                  color="#E0E0E0"
+                  style={{ width: 400, height: 400 }}
+                />
+              ) : (
+                <LazyImage
+                  src={
+                    thumbImages &&
+                    process.env.REACT_APP_BACKEND_URL +
+                      "/static/uploads/" +
+                      thumbImages[idxSelected]
+                  }
+                  alt={data?.name}
+                />
+              )}
             </div>
             <Swiper
               spaceBetween={10}
@@ -128,14 +148,22 @@ function ProductDetail() {
                     key={index}
                     onClick={() => setIdxSelected(index)}
                   >
-                    <LazyImage
-                      src={
-                        process.env.REACT_APP_BACKEND_URL +
-                        "/static/uploads/" +
-                        thumb
-                      }
-                      alt={data?.name}
-                    />
+                    {isLoading ? (
+                      <RectShape
+                        showLoadingAnimation={true}
+                        color="#E0E0E0"
+                        style={{ width: "100%", height: "100%" }}
+                      />
+                    ) : (
+                      <LazyImage
+                        src={
+                          process.env.REACT_APP_BACKEND_URL +
+                          "/static/uploads/" +
+                          thumb
+                        }
+                        alt={data?.name}
+                      />
+                    )}
                   </SwiperSlide>
                 ))}
             </Swiper>
@@ -148,146 +176,159 @@ function ProductDetail() {
             </div>
           </Col>
           <Col lg={5} xs={12}>
-            <h4 className="fw-bold">{data?.name}</h4>
-            <p className="fw-light text-size-13">
-              <span>
-                Thương hiệu : <small>{data?.provider.providerName}</small>
-              </span>
-              <span className="mx-2">|</span>
-              <span>
-                Tình trạng :{" "}
-                <small>{isInStock ? "Hết hàng" : "Còn hàng"}</small>
-              </span>
-            </p>
-            <hr />
-
-            {/* BLOCK SALES */}
-            <div className="block-sale">
-              <div className="block-sale__top py-1">
-                <span className="block-sale__top__left">
-                  <p className=" text-size-14">HOT SALE CUỐI TUẦN</p>
-                  <IconFire />
-                </span>
-                <CountdownTimer />
-              </div>
-            </div>
-
-            {/* PRICE */}
-            <div className="my-3">
-              {isSpecial ? (
-                <h5 className="text-danger text-size-22 fw-bold ">Liên hệ</h5>
-              ) : (
-                <>
-                  <span className="text-secondary fw-bold text-size-22">
-                    {formatCurrency(
-                      data?.price - (data?.price * data?.discount) / 100
-                    )}
+            {isLoading ? (
+              <TextBlock
+                color="#E0E0E0"
+                rows={12}
+                showLoadingAnimation={true}
+              />
+            ) : (
+              <>
+                {" "}
+                <h4 className="fw-bold">{data?.name}</h4>
+                <p className="fw-light text-size-13">
+                  <span>
+                    Thương hiệu : <small>{data?.provider.providerName}</small>
                   </span>
-                  <span className="text-gray-100 text-decoration-line-through opacity-25 ms-2">
-                    {formatCurrency(data?.price)}
+                  <span className="mx-2">|</span>
+                  <span>
+                    Tình trạng :{" "}
+                    <small>{isInStock ? "Hết hàng" : "Còn hàng"}</small>
                   </span>
-                </>
-              )}
-            </div>
-            <div className="my-3">
-              <p className="text-size-16">
-                <span className="text-16">
-                  Màu sắc :{" "}
-                  <small
-                    className="fw-bold ms-2"
-                    style={{ color: `${colors[idxSelected]?.value}` }}
-                  >
-                    {colors &&
-                      colors[idxSelected]?.value.slice(0, 1).toUpperCase() +
-                        colors[idxSelected]?.value.slice(1)}
-                  </small>
-                </span>
-              </p>
-              <div className="colors">
-                {colors &&
-                  colors.map((color, index) => (
-                    <span
-                      onClick={() => setIdxSelected(index)}
-                      className={`p-3 d-inline-block border-2 overflow-auto mx-1 color ${
-                        idxSelected === index ? "active" : ""
-                      } `}
-                      key={color?.id}
-                      style={{ background: `${color?.value}` }}
-                    ></span>
-                  ))}
-              </div>
-
-              <div className="my-4">
-                <div className="fw-light text-size-14">
-                  ✔️ {data?.description}
+                </p>
+                <hr />
+                {/* BLOCK SALES */}
+                <div className="block-sale">
+                  <div className="block-sale__top py-1">
+                    <span className="block-sale__top__left">
+                      <p className=" text-size-14">HOT SALE CUỐI TUẦN</p>
+                      <IconFire />
+                    </span>
+                    <CountdownTimer />
+                  </div>
                 </div>
-                <div className="fw-light text-size-14">
-                  ✔️ {data?.description}
-                </div>
-                <div className="fw-light text-size-14">
-                  ✔️ {data?.description}
-                </div>
-              </div>
-
-              {/* SO LUONG */}
-
-              {!isSpecial &&
-                (isInStock ? (
-                  <Button variant="primary w-100 btn-lg" disabled>
-                    HẾT HÀNG
-                  </Button>
-                ) : (
-                  <>
-                    <div>
-                      <span>
-                        Số lượng :{" "}
-                        <ButtonQuantity
-                          className="btn-lg"
-                          qty={qty}
-                          handleChangeQty={handleChangeQty}
-                          setQty={setQty}
-                        />
+                {/* PRICE */}
+                <div className="my-3">
+                  {isSpecial ? (
+                    <h5 className="text-danger text-size-22 fw-bold ">
+                      Liên hệ
+                    </h5>
+                  ) : (
+                    <>
+                      <span className="text-secondary fw-bold text-size-22">
+                        {formatCurrency(
+                          data?.price - (data?.price * data?.discount) / 100
+                        )}
                       </span>
-                    </div>
+                      <span className="text-gray-100 text-decoration-line-through opacity-25 ms-2">
+                        {formatCurrency(data?.price)}
+                      </span>
+                    </>
+                  )}
+                </div>
+                <div className="my-3">
+                  <p className="text-size-16">
+                    <span className="text-16">
+                      Màu sắc :{" "}
+                      <small
+                        className="fw-bold ms-2"
+                        style={{ color: `${colors[idxSelected]?.value}` }}
+                      >
+                        {colors &&
+                          colors[idxSelected]?.value.slice(0, 1).toUpperCase() +
+                            colors[idxSelected]?.value.slice(1)}
+                      </small>
+                    </span>
+                  </p>
+                  <div className="colors">
+                    {colors &&
+                      colors.map((color, index) => (
+                        <span
+                          onClick={() => setIdxSelected(index)}
+                          className={`p-3 d-inline-block border-2 overflow-auto mx-1 color ${
+                            idxSelected === index ? "active" : ""
+                          } `}
+                          key={color?.id}
+                          style={{ background: `${color?.value}` }}
+                        ></span>
+                      ))}
+                  </div>
 
-                    {/* Mua NGAY */}
-                    <div className="my-4">
-                      <Button
-                        variant="primary hover-bg-secondary"
-                        onClick={async () => {
-                          if (addItemToCart()) navigate(clientRoutes.checkout);
-                        }}
-                      >
-                        {" "}
-                        <div className="fw-bold text-size-20 mb-2 ">
-                          MUA NGAY
-                        </div>
-                        <div className="fw-light text-size-16">
-                          Giao tận nơi hoặc nhận tại cửa hàng
-                        </div>{" "}
-                      </Button>
-                      <Button
-                        variant="outline-secondary ms-4"
-                        className=" position-relative"
-                        disabled={isLoadingAdd}
-                        onClick={async () => {
-                          if (isLoadingAdd) return;
-                          await addItemToCart();
-                          if (user) await dispatch(setCartItemNewBuy(itemView));
-                        }}
-                      >
-                        <div className="fw-bold text-size-20 mb-2 ">
-                          <FontAwesomeIcon icon={faCartShopping} />
-                        </div>
-                        <div className="fw-light text-size-16">
-                          Thêm vào giỏ
-                        </div>
-                        <SpinnerButton show={isLoadingAdd} />
-                      </Button>
+                  <div className="my-4">
+                    <div className="fw-light text-size-14">
+                      ✔️ {data?.description}
                     </div>
-                  </>
-                ))}
-            </div>
+                    <div className="fw-light text-size-14">
+                      ✔️ {data?.description}
+                    </div>
+                    <div className="fw-light text-size-14">
+                      ✔️ {data?.description}
+                    </div>
+                  </div>
+
+                  {/* SO LUONG */}
+
+                  {!isSpecial &&
+                    (isInStock ? (
+                      <Button variant="primary w-100 btn-lg" disabled>
+                        HẾT HÀNG
+                      </Button>
+                    ) : (
+                      <>
+                        <div>
+                          <span>
+                            Số lượng :{" "}
+                            <ButtonQuantity
+                              className="btn-lg"
+                              qty={qty}
+                              handleChangeQty={handleChangeQty}
+                              setQty={setQty}
+                            />
+                          </span>
+                        </div>
+
+                        {/* Mua NGAY */}
+                        <div className="my-4">
+                          <Button
+                            variant="primary hover-bg-secondary"
+                            onClick={async () => {
+                              if (addItemToCart())
+                                navigate(clientRoutes.checkout);
+                            }}
+                          >
+                            {" "}
+                            <div className="fw-bold text-size-20 mb-2 ">
+                              MUA NGAY
+                            </div>
+                            <div className="fw-light text-size-16">
+                              Giao tận nơi hoặc nhận tại cửa hàng
+                            </div>{" "}
+                          </Button>
+                          <Button
+                            variant="outline-secondary ms-4"
+                            className=" position-relative"
+                            disabled={isLoadingAdd}
+                            onClick={async () => {
+                              if (isLoadingAdd) return;
+                              await addItemToCart();
+                              if (user)
+                                await dispatch(setCartItemNewBuy(itemView));
+                            }}
+                          >
+                            <div className="fw-bold text-size-20 mb-2 ">
+                              <FontAwesomeIcon icon={faCartShopping} />
+                            </div>
+                            <div className="fw-light text-size-16">
+                              Thêm vào giỏ
+                            </div>
+                            <SpinnerButton show={isLoadingAdd} />
+                          </Button>
+                        </div>
+                      </>
+                    ))}
+                </div>
+              </>
+            )}
           </Col>
           <Col lg={3} xs={12}>
             <div>

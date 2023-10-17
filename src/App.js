@@ -39,9 +39,6 @@ function App() {
               Comp = <ProtectedRoute>{Comp}</ProtectedRoute>;
             }
             if (!route.only) Comp = <Layout key={idx}>{Comp}</Layout>;
-
-            /* ---- */
-
             if (route.children) return createChildrenRoute(route, Comp);
             return <Route exact element={Comp} path={route.path} key={idx + 100} />;
           })}

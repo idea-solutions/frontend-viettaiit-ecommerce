@@ -10,7 +10,16 @@ function ButtonQuantity({
   const Comp = type;
   return (
     <Comp className={`button-quantity ${className ? className : ""}`}>
-      <Button onClick={() => setQty((prev) => prev - 1)}>-</Button>
+      <Button
+        onClick={() => {
+          if (qty === 1) {
+            return;
+          }
+          setQty((prev) => prev - 1);
+        }}
+      >
+        -
+      </Button>
       <span>
         <Form.Control name="qty" onChange={handleChangeQty} value={qty} />
       </span>

@@ -46,20 +46,7 @@ function CategoryProduct({ category: cate, listSubCategory, title }) {
     };
     if (debouncedSearchTerm) getProductsAsync(category);
   }, [debouncedSearchTerm]);
-
-  //   setIsLoading(true);
-  //   const getProductsAsync = async (category) => {
-  //     try {
-  //       const { data } = await httpRequest.get(
-  //         "/products/categories/" + category
-  //       );
-  //       setProducts(data.data);
-  //       setIsLoading(false);
-  //     } catch (error) {}
-  //   };
-  //   getProductsAsync(category);
-  // }, [category]);
-
+  
   const handleQueryProductSubCategory = (index) => {
     setIsLoading(true);
     if (listSubCategory[index] === "All") {
