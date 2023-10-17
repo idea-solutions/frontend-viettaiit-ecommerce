@@ -58,14 +58,20 @@
     - loading when change page => OK
     - Loading khi mà gọi API => OK
     - 1 user has many addresses => OK
-    - messenger plugin messenger
+    - messenger plugin messenger => OK
+    - sua loi them item to cart => OK
+    - sua loi order -> OK
+    - payment => OK
 ## VẤN ĐỀ CHƯA LÀM
     - Do futures on page account ( orders -> OK, change password, )
     - toast has only one
-    - payment
+
+
 ## VẤN ĐỀ SẼ LÀM    
 ## VẤN ĐỀ CHƯA LÀM ĐƯỢC
     - deploy
+
+    - sua loi get product detail 
 
 ## TASK TỐI ƯU PERFORMANCE
     - ProductCategory -> Chưa thực hiện được caching query sub category product

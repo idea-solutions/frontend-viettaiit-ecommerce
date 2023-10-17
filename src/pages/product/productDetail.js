@@ -270,10 +270,10 @@ function ProductDetail() {
                         variant="outline-secondary ms-4"
                         className=" position-relative"
                         disabled={isLoadingAdd}
-                        onClick={() => {
+                        onClick={async () => {
                           if (isLoadingAdd) return;
-                          addItemToCart();
-                          if (user) dispatch(setCartItemNewBuy(itemView));
+                          await addItemToCart();
+                          if (user) await dispatch(setCartItemNewBuy(itemView));
                         }}
                       >
                         <div className="fw-bold text-size-20 mb-2 ">

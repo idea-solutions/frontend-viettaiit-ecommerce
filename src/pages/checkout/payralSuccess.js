@@ -10,21 +10,22 @@ function PaymentSuccess() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   useEffect(() => {
-    dispatch(setIsLoadingComp(true));
-    handlePaymentService(
-      {
-        cart,
-        address,
-        status: "completed",
-      },
-      dispatch,
-      navigate
-    );
-    dispatch(setIsLoadingComp(false));
+    const onPaymentSuccess = async () => {
+      await handlePaymentService(
+        {
+          cart,
+          address,
+          status: "completed",
+        },
+        dispatch,
+        navigate
+      );
+    };
+    onPaymentSuccess();
   }, []);
   return (
     <div className="">
-      {/* <div>Pay ral success</div> */}
+      <h1></h1>
     </div>
   );
 }

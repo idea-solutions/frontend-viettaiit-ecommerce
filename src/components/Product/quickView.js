@@ -50,8 +50,7 @@ function QuickView({ show, onHide, slugName }) {
       qty,
       productItemId: data.productItems[idxSelected].id,
     };
-
-    addItemToCartService(inputs, dispatch);
+    await addItemToCartService(inputs, dispatch);
   };
 
   if (!data) return null;
@@ -181,9 +180,9 @@ function QuickView({ show, onHide, slugName }) {
                 </div>
                 <Button
                   variant="outline-secondary ms-4 d-flex gap-2 py-3"
-                  onClick={() => {
-                    addItemToCart();
-                    dispatch(setCartItemNewBuy(itemView));
+                  onClick={async () => {
+                    await addItemToCart();
+                    await dispatch(setCartItemNewBuy(itemView));
                   }}
                 >
                   <FontAwesomeIcon icon={faCartShopping} />

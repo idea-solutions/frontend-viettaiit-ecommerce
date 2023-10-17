@@ -48,11 +48,9 @@ export const handlePaymentService = async (
   const { payload } = await dispatch(addOrderMe(inputs));
   if (payload.status === 200) {
     toastSuccess(payload.message);
-    dispatch(getOrdersMe());
+    await dispatch(getOrdersMe());
     navigate(clientRoutes.checkout + "/cam-on/" + payload.data.id);
   }
   dispatch(setIsLoadingComp(false));
   dispatch(resetFormAddress());
 };
-
-

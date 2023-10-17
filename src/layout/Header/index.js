@@ -45,6 +45,7 @@ import {
 
 function Header() {
   const [isHoveredAccount, setIsHoveredAccount] = useState(false);
+  const [disabledUpdateQty, setDisabledUpdateQty] = useState(false);
   const [isHoveredCart, setIsHoveredCart] = useState(false);
   const { user } = useSelector((store) => store.auth);
   const { isOpen } = useSelector((store) => store.navBar);
@@ -217,7 +218,7 @@ function Header() {
                         <div className="cart__display scrollbar-primary">
                           {cart &&
                             cart.cartItems.map((item, index) => (
-                              <div className="cart__item">
+                              <div className="cart__item position-relative">
                                 <div className="left">
                                   <Link
                                     to={
@@ -267,9 +268,11 @@ function Header() {
                                   </div>
                                   <div>
                                     <ButtonQuantityUpdateQty
+                                      disabled={disabledUpdateQty}
                                       as="small"
                                       increaseQty={async () => {
                                         if (item.qty > 1000) return;
+                                        setDisabledUpdateQty(true);
                                         await updateQtyService(
                                           {
                                             qty: 1,
@@ -277,8 +280,10 @@ function Header() {
                                           },
                                           dispatch
                                         );
+                                        setDisabledUpdateQty(false);
                                       }}
                                       decreaseQty={async () => {
+                                        setDisabledUpdateQty(true);
                                         if (item.qty === 1) {
                                           return await deleteCartItemService(
                                             item.id,
@@ -292,6 +297,7 @@ function Header() {
                                           },
                                           dispatch
                                         );
+                                        setDisabledUpdateQty(false);
                                       }}
                                       qty={item.qty}
                                       className="btn-sm"

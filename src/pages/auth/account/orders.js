@@ -130,13 +130,13 @@ function OrdersDownDeskTop({ orders, navigate }) {
             <tr className="text-size-14">
               <td className="w-10 border border-white">Địa chỉ</td>
               <td className="fw-light border border-white">
-                {order.address +
+              {order.address.residence +
                   ", " +
-                  order.province +
+                  order.address.province +
                   ", " +
-                  order.district +
+                  order.address.district +
                   ", " +
-                  order.ward +
+                  order.address.ward +
                   ", "}
               </td>
             </tr>
