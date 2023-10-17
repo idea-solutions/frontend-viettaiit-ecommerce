@@ -12,10 +12,6 @@ import { validateFormRegister } from "../../../utils/validate";
 
 import { registerAuth } from "../../../features/auth/authSlice";
 
-import {
-  setLoadingClose,
-  setLoadingShow,
-} from "../../../features/loadingSlice";
 import HelmetCustom from "../../../components/HelmetCustom";
 import Breadcrumb from "../../../components/Breadcrumb";
 import { toastWarning } from "../../../utils/toast";
@@ -23,6 +19,7 @@ import { Form } from "react-bootstrap";
 import { FaFacebookF, FaGithub, FaGoogle } from "react-icons/fa";
 import useScrollTop from "../../../hooks/useScrollTop";
 import AnimationComp from "../../../components/AnimationComp";
+import { setIsLoadingComp } from "../../../features/loadingCompSlice";
 function Register() {
   useScrollTop();
   const dispatch = useDispatch();
@@ -48,12 +45,12 @@ function Register() {
       toastWarning(err);
       return;
     }
-    dispatch(setLoadingShow());
+    dispatch(setIsLoadingComp(true));
     const { payload } = await dispatch(registerAuth(inputs));
-    dispatch(setLoadingClose());
     if (payload.status === 201) {
       navigate(clientRoutes.account.login);
     }
+    dispatch(setIsLoadingComp(false));
   };
   const { user } = useSelector((store) => store.auth);
   if (user) return <Navigate to={clientRoutes.home} />;

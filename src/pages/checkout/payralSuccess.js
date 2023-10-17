@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { handlePaymentService } from "../../services/orderService";
-import { setIsLoadingComp } from "../../features/loadingCompSlice";
+import { Spinner } from "react-bootstrap";
 
 function PaymentSuccess() {
   const { cart } = useSelector((store) => store.cart);
@@ -24,8 +24,9 @@ function PaymentSuccess() {
     onPaymentSuccess();
   }, []);
   return (
-    <div className="">
-      <h1></h1>
+    <div className="container py-5 mt-2 flex-center">
+      <h1>Redirect</h1>
+      <Spinner animation="border" variant="primary" />
     </div>
   );
 }

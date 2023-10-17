@@ -1,9 +1,9 @@
-import { useNavigate, useParams } from "react-router-dom";
-import { Col, Pagination, Row } from "react-bootstrap";
+import { useParams } from "react-router-dom";
+import { Col, Pagination, Row, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Scrollbar } from "swiper/modules";
-import { memo, useCallback, useEffect, useMemo } from "react";
+import { memo, useEffect, useMemo } from "react";
 import PropTypes from "prop-types";
 // MY IMPORTS
 import useScrollTop from "../../hooks/useScrollTop";
@@ -20,6 +20,7 @@ import ProductNone from "../../components/Product/productNone";
 import NavSearch from "../../components/Search/NavSearch";
 import { getColors } from "../../features/color/colorSlice";
 import { getProviders } from "../../features/provider/providerSlice";
+import { useDebounce } from "@uidotdev/usehooks";
 
 const optionsName = {
   "san-pham-khuyen-mai": "Sản phẩm khuyến mãi",
@@ -29,11 +30,12 @@ function Products() {
   useScrollTop();
   const dispatch = useDispatch();
   const { name } = useParams();
-  const { products, query, page, totalPages } = useSelector(
+  const { products, query, page, totalPages, isLoading } = useSelector(
     (store) => store.product
   );
   const { optionChoose } = useSelector((store) => store.navSearch);
   useEffect(() => {
+    if (isLoading) return;
     dispatch(getProducts());
   }, [dispatch, query, optionChoose]);
   useEffect(() => {
@@ -67,17 +69,24 @@ function Products() {
         {/* LIST PRODUCT */}
 
         <div>
-          <Row>
-            {products && products.length > 0 ? (
-              products.map((product, index) => (
-                <Col xs={12} sm={6} md={4} lg={3} key={index}>
-                  <ProductItem product={product} />
-                </Col>
-              ))
-            ) : (
-              <ProductNone />
-            )}
-          </Row>
+          {isLoading ? (
+            <div className="flex-center p-5">
+              <Spinner animation="border" variant="primary" />
+            </div>
+          ) : (
+            <Row>
+              {products && products.length > 0 ? (
+                products.map((product, index) => (
+                  <Col xs={12} sm={6} md={4} lg={3} key={index}>
+                    <ProductItem product={product} />
+                  </Col>
+                ))
+              ) : (
+                <ProductNone />
+              )}
+            </Row>
+          )}
+
           <div className="my-4 d-flex align-items-center justify-content-center">
             <Pagination>
               <Pagination.Prev

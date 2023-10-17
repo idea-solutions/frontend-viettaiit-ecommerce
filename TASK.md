@@ -62,6 +62,10 @@
     - sua loi them item to cart => OK
     - sua loi order -> OK
     - payment => OK
+    - loading api quick view product duct => OK
+    - loading api product query : product/all => OK
+    - loading api addresses => OK
+    - spinner thanh-toan/thanh-cong => OK
 ## VẤN ĐỀ CHƯA LÀM
     - Do futures on page account ( orders -> OK, change password, )
     - toast has only one

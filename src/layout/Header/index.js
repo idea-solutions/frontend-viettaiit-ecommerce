@@ -29,7 +29,6 @@ import {
 import { clientRoutes } from "../../routes";
 
 // REDUX SLICE
-import { setLoadingClose, setLoadingShow } from "../../features/loadingSlice";
 import { logoutAuth } from "../../features/auth/authSlice";
 import LazyImage from "../../components/LazyImage";
 import NavbarDeskTop from "../NavBar/NavbarDeskTop";
@@ -42,6 +41,7 @@ import {
   deleteCartItemService,
   updateQtyService,
 } from "../../services/cartService";
+import { setIsLoadingComp } from "../../features/loadingCompSlice";
 
 function Header() {
   const [isHoveredAccount, setIsHoveredAccount] = useState(false);
@@ -127,9 +127,9 @@ function Header() {
                         <span
                           className="account__item"
                           onClick={async () => {
-                            dispatch(setLoadingShow());
+                            dispatch(setIsLoadingComp(true));
                             await dispatch(logoutAuth());
-                            dispatch(setLoadingClose());
+                            dispatch(setIsLoadingComp(false));
                           }}
                         >
                           <FontAwesomeIcon icon={faArrowLeft} size="lg" />

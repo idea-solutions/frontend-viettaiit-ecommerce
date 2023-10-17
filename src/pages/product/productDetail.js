@@ -65,7 +65,7 @@ function ProductDetail() {
     [data]
   );
   const [idxSelected, setIdxSelected] = useState(0);
-  const isSpecial = data?.productItems[idxSelected].isSpecial;
+  const isSpecial = data?.productItems[idxSelected]?.isSpecial;
   const isInStock = data?.productItems[idxSelected].qtyInStock === 0;
   // Fake phu kien tam thoi
   const { productsPhukien } = useSelector((store) => store.product);

@@ -20,8 +20,10 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { addItemToCartService } from "../../services/cartService";
 import { setCartItemNewBuy } from "../../features/cart/cartSlice";
+import SpinnerButton from "../Loading/SpinnerButton";
 function QuickView({ show, onHide, slugName }) {
   const { data } = useDataDetail("/products/" + slugName);
+  const [isLoadingApi, setIsLoadingApi] = useState(false);
   const thumbImages =
     data?.productItems.map((productItem) => productItem.image) || [];
   const colors =
@@ -50,7 +52,9 @@ function QuickView({ show, onHide, slugName }) {
       qty,
       productItemId: data.productItems[idxSelected].id,
     };
+    setIsLoadingApi(true);
     await addItemToCartService(inputs, dispatch);
+    setIsLoadingApi(false);
   };
 
   if (!data) return null;
@@ -180,13 +184,16 @@ function QuickView({ show, onHide, slugName }) {
                 </div>
                 <Button
                   variant="outline-secondary ms-4 d-flex gap-2 py-3"
+                  className=" position-relative"
                   onClick={async () => {
+                    if (isLoadingApi) return;
                     await addItemToCart();
                     await dispatch(setCartItemNewBuy(itemView));
                   }}
                 >
                   <FontAwesomeIcon icon={faCartShopping} />
                   <div className="fw-light text-size-16">Thêm vào giỏ</div>
+                  <SpinnerButton show={isLoadingApi} />
                 </Button>
               </div>
             </div>

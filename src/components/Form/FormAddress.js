@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import useHideOnClickOutside from "../../hooks/useHideOnClickOutSide";
 import axios from "axios";
 import PropTypes from "prop-types";
+import { setIsLoadingComp } from "../../features/loadingCompSlice";
 function FormAddress({ isSelected }) {
   const { user } = useSelector((store) => store.auth);
   const { address } = useSelector((store) => store.formAddress);
@@ -36,9 +37,11 @@ function FormAddress({ isSelected }) {
         localStorage.setItem("addresses", JSON.stringify(data));
       } catch (error) {}
     };
+    dispatch(setIsLoadingComp(true));
     const data = JSON.parse(localStorage.getItem("addresses"));
     if (data) setAddresses(data);
     else getAddressesAsync();
+    dispatch(setIsLoadingComp(false));
   }, []);
   const handleSelectCity = (city) => {
     dispatch(changeFormAddress({ name: "province", value: city.name }));
