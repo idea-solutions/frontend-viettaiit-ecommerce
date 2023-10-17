@@ -8,16 +8,17 @@ import { setIsLoadingComp } from "../../../features/loadingCompSlice";
 function LoginSuccess() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  console.log("login success");
   useEffect(() => {
     dispatch(setIsLoadingComp(true));
     const getUserAsync = async () => {
       const { payload } = await dispatch(getUserSuccess());
       if (payload.status === 200) {
         toastSuccess(payload.message);
+        navigate("/");
       }
     };
     getUserAsync();
-    navigate("/");
     dispatch(setIsLoadingComp(false));
   }, []);
   return <div className="">redirect home</div>;
