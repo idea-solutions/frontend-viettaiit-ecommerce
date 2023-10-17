@@ -21,7 +21,8 @@ import { setQueryProduct } from "../../features/product/productSlice";
 import ProductNone from "../../components/Product/productNone";
 import PropTypes from "prop-types";
 import { useDebounce } from "@uidotdev/usehooks";
-function CategoryProduct({ category: cate, listSubCategory, title }) {
+import { setCacheProductType } from "../../features/cacheProduct";
+function CategoryProduct({ category: cate, listSubCategory, title, list }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
@@ -35,10 +36,23 @@ function CategoryProduct({ category: cate, listSubCategory, title }) {
   useEffect(() => {
     const getProductsAsync = async (category) => {
       try {
-        const { data } = await httpRequest.get(
-          "/products/categories/" + category
-        );
+        const { data } = await httpRequest.get("/products", {
+          params: {
+            name: category,
+          },
+        });
         setProducts(data.data);
+        let type;
+        if (category.startsWith("Apple")) type = "listAppleWatch";
+        if (category.startsWith("Mac")) type = "listMac";
+        if (category.startsWith("Iphone")) type = "listIphone";
+        if (category.startsWith("Ipad")) type = "listIpad";
+        dispatch(
+          setCacheProductType({
+            type,
+            list: data.data,
+          })
+        );
         setIsLoading(false);
       } catch (error) {
         setIsLoading(false);
@@ -46,7 +60,7 @@ function CategoryProduct({ category: cate, listSubCategory, title }) {
     };
     if (debouncedSearchTerm) getProductsAsync(category);
   }, [debouncedSearchTerm]);
-  
+
   const handleQueryProductSubCategory = (index) => {
     setIsLoading(true);
     if (listSubCategory[index] === "All") {

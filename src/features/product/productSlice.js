@@ -95,7 +95,6 @@ const productSlice = createSlice({
     builder.addCase(getProductsPhuKien.fulfilled, (state, action) => {
       const { data } = action.payload;
       state.productsPhukien = data;
-
       state.isLoading = state.isError = false;
     });
     builder.addCase(getProductsPhuKien.rejected, (state, action) => {

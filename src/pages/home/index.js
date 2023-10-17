@@ -13,10 +13,13 @@ import NewInfoProduct from "./newInfoProduct";
 import TinTucCongNghe from "./tinTucCongNghe";
 import CustomerOfViettai from "./customerOfViettai";
 import useScrollTop from "../../hooks/useScrollTop";
-
+import { useSelector } from "react-redux";
 
 function Home() {
   useScrollTop();
+  const { listIphone, listMac, listAppleWatch, listIpad } = useSelector(
+    (store) => store.cacheProduct
+  );
   return (
     <>
       <HelmetCustom title="Trang chủ" />
@@ -40,20 +43,20 @@ function Home() {
         {/*  IPHONE*/}
         <CategoryProduct
           category={"IPhone"}
-          // products={productsIphone}
+          list={listIphone}
           listSubCategory={[
             "All",
-            "Iphone 14 ",
-            "Iphone 13 ",
-            "Iphone 12 ",
-            "Iphone 11 ",
+            "Iphone 14",
+            "Iphone 13",
+            "Iphone 12",
+            "Iphone 11",
           ]}
           title={"IPhone"}
         />
 
         <CategoryProduct
           category={"Ipad"}
-          // products={productsIpad}
+          list={listIpad}
           listSubCategory={[
             "All",
             "Ipad Pro",
@@ -71,6 +74,7 @@ function Home() {
         {/* Macbook */}
         <CategoryProduct
           category={"Macbook"}
+          list={listMac}
           // products={productsMacbook}
           listSubCategory={["All", "Mac Pro", "Mac Air"]}
           title={"Macbook"}
@@ -79,6 +83,7 @@ function Home() {
         {/* Apple Watch */}
         <CategoryProduct
           category={"Apple Watch"}
+          list={listAppleWatch}
           // products={productsAppleWatch}
           listSubCategory={[
             "All",

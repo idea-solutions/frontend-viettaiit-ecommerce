@@ -13,6 +13,7 @@ import cartSlice from "./cart/cartSlice";
 import orderSlice from "./order/orderSlice";
 import addressSlice from "./address/addressSlice";
 import formAddressSlice from "./formAddressSlice";
+import cacheProductSlice from "./cacheProduct";
 const rootReducer = combineReducers({
   navBar: navBarSlice,
   auth: authSlice,
@@ -28,6 +29,7 @@ const rootReducer = combineReducers({
   order: orderSlice,
   address: addressSlice,
   formAddress: formAddressSlice,
+  cacheProduct: cacheProductSlice,
 });
 
 export default rootReducer;
