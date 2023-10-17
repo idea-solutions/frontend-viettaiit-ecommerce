@@ -35,12 +35,7 @@ import { setCartItemNewBuy } from "../../features/cart/cartSlice";
 import { getProductsPhuKien } from "../../features/product/productSlice";
 import SpinnerButton from "../../components/Loading/SpinnerButton";
 import { setIsLoadingComp } from "../../features/loadingCompSlice";
-import {
-  RectShape,
-  TextBlock,
-  TextRow,
-} from "react-placeholder/lib/placeholders";
-import ReactPlaceholder from "react-placeholder";
+import { RectShape, TextBlock } from "react-placeholder/lib/placeholders";
 function ProductDetail() {
   const { slug: name } = useParams();
   const [isLoadingAdd, setIsLoadingAdd] = useState(false);
