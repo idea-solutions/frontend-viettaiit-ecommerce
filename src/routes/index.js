@@ -1,14 +1,14 @@
 import { Outlet } from "react-router-dom";
 import { clientRoutes } from "./routes";
 import { lazy } from "react";
-import Products from "../pages/product";
-import CheckOut from "../pages/checkout";
-import OrderDetail from "../pages/auth/account/orderDetail";
-import ThankYouOrder from "../pages/checkout/thankYou";
-import Address from "../pages/auth/account/address";
-import PaymentSuccess from "../pages/checkout/payralSuccess";
 
+const Products = lazy(() => import("../pages/product"));
+const CheckOut = lazy(() => import("../pages/checkout"));
+const OrderDetail = lazy(() => import("../pages/auth/account/orderDetail"));
+const ThankYouOrder = lazy(() => import("../pages/checkout/thankYou"));
+const Address = lazy(() => import("../pages/auth/account/address"));
 const Account = lazy(() => import("../pages/auth/account"));
+const PaymentSuccess = lazy(() => import("../pages/checkout/payralSuccess"));
 const Orders = lazy(() => import("../pages/auth/account/orders"));
 const Cart = lazy(() => import("../pages/cart"));
 const ProductSearch = lazy(() => import("../pages/product/productSearch"));
