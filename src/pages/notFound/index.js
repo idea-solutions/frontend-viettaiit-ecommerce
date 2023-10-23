@@ -11,7 +11,9 @@ function NotFound() {
       <div className="container">
         <div className="d-flex  align-items-center vh-100 text-white flex-column">
           <LazyImage
-            src={"/not-found.png"}
+            src={
+              "https://res.cloudinary.com/dkkh1gtoj/image/upload/v1698039166/viettaiit-ecommerce/not-found.png"
+            }
             className={"w-50 h-50 mt-5 object-fit-contain"}
           />
           <p className=" w-50 text-center text-wrap fs-4 text-primary d-flex align-items-center flex-column gap-1">

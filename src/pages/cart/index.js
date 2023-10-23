@@ -155,14 +155,7 @@ function CartItemsDownDesktop({
                     item.productItem.product.slug
                   }
                 >
-                  <LazyImage
-                    className="cursor"
-                    src={
-                      process.env.REACT_APP_BACKEND_URL +
-                      "/static/uploads/" +
-                      item.productItem.image
-                    }
-                  />
+                  <LazyImage className="cursor" src={item.productItem.image} />
                 </Link>
                 <div className="w-100">
                   <Link
@@ -276,8 +269,7 @@ function CartItemsUpDesktop({
                       <LazyImage
                         className="cursor"
                         src={
-                          process.env.REACT_APP_BACKEND_URL +
-                          "/static/uploads/" +
+                      
                           item.productItem.image
                         }
                       />

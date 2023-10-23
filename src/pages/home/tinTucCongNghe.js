@@ -16,7 +16,7 @@ function TinTucCongNghe() {
               {" "}
               <div className="image">
                 <LazyImage
-                  src={require("../../assets/images/tintuc/tintuc01.webp")}
+                  src="https://res.cloudinary.com/dkkh1gtoj/image/upload/c_fit,w_313,h_176/v1698041213/viettaiit-ecommerce/frontend-images/tin-tuc/tintuc01_axseyn.webp"
                   alt=""
                 />
               </div>
@@ -39,7 +39,7 @@ function TinTucCongNghe() {
               {" "}
               <div className="image">
                 <LazyImage
-                  src={require("../../assets/images/tintuc/tintuc02.webp")}
+                  src="https://res.cloudinary.com/dkkh1gtoj/image/upload/c_fit,w_313,h_176/v1698041220/viettaiit-ecommerce/frontend-images/tin-tuc/tintuc02_qpvq0p.webp"
                   alt=""
                 />
               </div>
@@ -62,7 +62,7 @@ function TinTucCongNghe() {
               {" "}
               <div className="image">
                 <LazyImage
-                  src={require("../../assets/images/tintuc/tintuc03.webp")}
+                  src="https://res.cloudinary.com/dkkh1gtoj/image/upload/c_fit,w_313,h_176/v1698041222/viettaiit-ecommerce/frontend-images/tin-tuc/tintuc03_w9oai1.webp"
                   alt=""
                 />
               </div>
@@ -85,7 +85,7 @@ function TinTucCongNghe() {
               {" "}
               <div className="image">
                 <LazyImage
-                  src={require("../../assets/images/tintuc/tintuc04.webp")}
+                  src="https://res.cloudinary.com/dkkh1gtoj/image/upload/c_fit,w_313,h_176/v1698041223/viettaiit-ecommerce/frontend-images/tin-tuc/tintuc04_xmhkzi.webp"
                   alt=""
                 />
               </div>

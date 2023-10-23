@@ -22,10 +22,7 @@ export const handlePaymentService = async (
       ),
     };
     const productItem = {
-      image:
-        process.env.REACT_APP_BACKEND_URL +
-        "/static/uploads/" +
-        item.productItem.image,
+      image: item.productItem.image,
       qty: item.qty,
       price: calculatePriceForDiscount(
         item.productItem.product.price,

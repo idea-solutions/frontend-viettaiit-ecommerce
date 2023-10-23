@@ -53,7 +53,7 @@ function Products() {
         <h3 className="text-center fw-bold text-size-26 mb-2">{title}</h3>
         <div
           style={{
-            backgroundImage: `url(${require("../../assets/sliders/slider_1/1.webp")})`,
+            backgroundImage: `url("https://res.cloudinary.com/dkkh1gtoj/image/upload/v1698041921/viettaiit-ecommerce/frontend-images/sliders/slider-1/1_xzscxa.webp")`,
             paddingTop: "25%",
             border: "10px",
           }}
@@ -187,8 +187,7 @@ const SubCategories = memo(function SubCategories({ categoryId }) {
               <span>
                 <LazyImage
                   src={
-                    process.env.REACT_APP_BACKEND_URL +
-                    "/static/assets/images/category/" +
+             
                     category.image
                   }
                   alt=""

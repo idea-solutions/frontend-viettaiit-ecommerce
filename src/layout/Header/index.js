@@ -78,7 +78,7 @@ function Header() {
                 width: "120px",
               }}
             >
-              <LazyImage src="/logo.png" alt="" />
+              <LazyImage src="https://res.cloudinary.com/dkkh1gtoj/image/upload/c_fit,w_200,h_60/v1698040260/viettaiit-ecommerce/logo.png" alt="" />
             </Link>
           </div>
           <Search className="max-lg-none" />
@@ -229,11 +229,7 @@ function Header() {
                                   >
                                     <LazyImage
                                       className="cursor"
-                                      src={
-                                        process.env.REACT_APP_BACKEND_URL +
-                                        "/static/uploads/" +
-                                        item.productItem.image
-                                      }
+                                      src={item.productItem.image}
                                       rounded
                                     />
                                   </Link>

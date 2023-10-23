@@ -8,7 +8,7 @@ function AuthRequired() {
       <HelmetCustom title="Yêu cầu đăng nhập" />
       <div className="container">
         <div className="d-flex pt-5 align-items-center vh-100 text-white flex-column">
-          {/* <LazyImage src="/not-found.png" /> */}
+    
           <p className=" w-50 text-center text-wrap fs-4 text-primary d-flex align-items-center flex-column gap-1">
             Vui lòng đăng nhập!
           </p>

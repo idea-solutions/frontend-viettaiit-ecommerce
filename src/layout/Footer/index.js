@@ -18,7 +18,7 @@ function Footer() {
                   width: "120px",
                 }}
               >
-                <LazyImage src="/logo.png" alt="" />
+                <LazyImage src="https://res.cloudinary.com/dkkh1gtoj/image/upload/c_fit,w_200,h_60/v1698040260/viettaiit-ecommerce/logo.png" alt="" />
               </Link>
               <div className="d-flex flex-column gap-3 text-size-16">
                 {" "}

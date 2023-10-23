@@ -41,7 +41,7 @@ function NewInfoProduct() {
               }}
             >
               <LazyImage
-                src={require("../../assets/images/section/section_banner_new_product.webp")}
+                src="https://res.cloudinary.com/dkkh1gtoj/image/upload/v1698041029/viettaiit-ecommerce/frontend-images/section/section_banner_new_product_suqcmt.webp"
                 alt=""
               />
             </motion.div>

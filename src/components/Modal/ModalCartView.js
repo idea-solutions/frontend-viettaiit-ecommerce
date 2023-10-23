@@ -42,8 +42,7 @@ function ModalCartView({}) {
           <Col xs={2}>
             <LazyImage
               src={
-                process.env.REACT_APP_BACKEND_URL +
-                "/static/uploads/" +
+                
                 cartItemNewBuy.image
               }
             />

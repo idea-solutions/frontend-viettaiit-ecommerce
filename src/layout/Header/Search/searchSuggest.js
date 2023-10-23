@@ -77,13 +77,7 @@ function SearchSuggest({ isVisible, products, isSearching }) {
                   <div className="p-2 hover-bg-gray-25">
                     <Row>
                       <Col xs={1}>
-                        <LazyImage
-                          src={
-                            process.env.REACT_APP_BACKEND_URL +
-                            "/static/uploads/" +
-                            product.image
-                          }
-                        />
+                        <LazyImage src={product.image} />
                       </Col>
                       <Col xs={11}>
                         <div className="d-flex flex-column gap-1">

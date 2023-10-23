@@ -56,8 +56,7 @@ function DanhMucNoiBat() {
               >
                 <LazyImage
                   src={
-                    process.env.REACT_APP_BACKEND_URL +
-                    "/static/assets/images/category/" +
+                 
                     category.image
                   }
                   alt={category.categoryName}

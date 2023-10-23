@@ -68,8 +68,7 @@ function ProductItem({ product, hiddenSold, isLoading, hiddenDesc, cart }) {
           >
             <LazyImage
               src={
-                process.env.REACT_APP_BACKEND_URL +
-                "/static/uploads/" +
+              
                 product.image
               }
               alt=""

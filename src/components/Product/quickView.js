@@ -70,12 +70,7 @@ function QuickView({ show, onHide, slugName }) {
           <Col xs={12} lg={5} className="mb-3 overflow-hidden">
             <div className=" ">
               <LazyImage
-                src={
-                  thumbImages &&
-                  process.env.REACT_APP_BACKEND_URL +
-                    "/static/uploads/" +
-                    thumbImages[idxSelected]
-                }
+                src={thumbImages && thumbImages[idxSelected]}
                 alt={data?.name}
               />
             </div>
@@ -95,14 +90,7 @@ function QuickView({ show, onHide, slugName }) {
                     key={index}
                     onClick={() => setIdxSelected(index)}
                   >
-                    <LazyImage
-                      src={
-                        process.env.REACT_APP_BACKEND_URL +
-                        "/static/uploads/" +
-                        thumb
-                      }
-                      alt={data?.name}
-                    />
+                    <LazyImage src={thumb} alt={data?.name} />
                   </SwiperSlide>
                 ))}
             </Swiper>

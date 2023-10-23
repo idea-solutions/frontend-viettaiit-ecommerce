@@ -99,13 +99,7 @@ function OrderDetailTableUpDesktop({ data }) {
                 <div>
                   <Row>
                     <Col xs={2}>
-                      <LazyImage
-                        src={
-                          process.env.REACT_APP_BACKEND_URL +
-                          "/static/uploads/" +
-                          orderLine.productItem.image
-                        }
-                      />
+                      <LazyImage src={orderLine.productItem.image} />
                     </Col>
                     <Col
                       xs={10}
@@ -161,13 +155,7 @@ function OrderDetailTableDownDesktop({ data }) {
         {data?.ordersLine.map((orderLine, index) => (
           <Row key={index}>
             <Col xs={3}>
-              <LazyImage
-                src={
-                  process.env.REACT_APP_BACKEND_URL +
-                  "/static/uploads/" +
-                  orderLine.productItem.image
-                }
-              />
+              <LazyImage src={orderLine.productItem.image} />
             </Col>
             <Col xs={9} className="text-size-16 fw-light mt-2">
               <div>{orderLine.productItem.product.name}</div>

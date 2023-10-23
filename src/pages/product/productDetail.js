@@ -117,12 +117,7 @@ function ProductDetail() {
                 />
               ) : (
                 <LazyImage
-                  src={
-                    thumbImages &&
-                    process.env.REACT_APP_BACKEND_URL +
-                      "/static/uploads/" +
-                      thumbImages[idxSelected]
-                  }
+                  src={thumbImages && thumbImages[idxSelected]}
                   alt={data?.name}
                 />
               )}
@@ -150,14 +145,7 @@ function ProductDetail() {
                         style={{ width: "100%", height: "100%" }}
                       />
                     ) : (
-                      <LazyImage
-                        src={
-                          process.env.REACT_APP_BACKEND_URL +
-                          "/static/uploads/" +
-                          thumb
-                        }
-                        alt={data?.name}
-                      />
+                      <LazyImage src={thumb} alt={data?.name} />
                     )}
                   </SwiperSlide>
                 ))}
@@ -165,7 +153,7 @@ function ProductDetail() {
 
             <div className=" border-2 overflow-hidden">
               <LazyImage
-                src={require("../../assets/images/productDetail/big-sales.webp")}
+                src="https://res.cloudinary.com/dkkh1gtoj/image/upload/v1698040982/viettaiit-ecommerce/frontend-images/product-detail/big-sales_btxa3w.webp"
                 alt=""
               />
             </div>
@@ -544,7 +532,7 @@ function ProductDetail() {
                     <div className="item d-flex p-2">
                       <div className="image w-100 h-100 me-2 ">
                         <LazyImage
-                          src={require("../../assets/images/tintuc/tintuc01.webp")}
+                          src="https://res.cloudinary.com/dkkh1gtoj/image/upload/v1698041213/viettaiit-ecommerce/frontend-images/tin-tuc/tintuc01_axseyn.webp"
                           alt=""
                           className="rounded-2"
                         />
@@ -563,7 +551,7 @@ function ProductDetail() {
                     <div className="item d-flex p-2">
                       <div className="image w-100 h-100 me-2 ">
                         <LazyImage
-                          src={require("../../assets/images/tintuc/tintuc02.webp")}
+                          src="https://res.cloudinary.com/dkkh1gtoj/image/upload/v1698041220/viettaiit-ecommerce/frontend-images/tin-tuc/tintuc02_qpvq0p.webp"
                           alt=""
                           className="rounded-2"
                         />
@@ -582,7 +570,7 @@ function ProductDetail() {
                     <div className="item d-flex p-2">
                       <div className="image w-100 h-100 me-2 ">
                         <LazyImage
-                          src={require("../../assets/images/tintuc/tintuc03.webp")}
+                          src="https://res.cloudinary.com/dkkh1gtoj/image/upload/v1698041222/viettaiit-ecommerce/frontend-images/tin-tuc/tintuc03_w9oai1.webp"
                           alt=""
                           className="rounded-2"
                         />
@@ -601,7 +589,7 @@ function ProductDetail() {
                     <div className="item d-flex p-2">
                       <div className="image w-100 h-100 me-2 ">
                         <LazyImage
-                          src={require("../../assets/images/tintuc/tintuc04.webp")}
+                          src="https://res.cloudinary.com/dkkh1gtoj/image/upload/v1698041223/viettaiit-ecommerce/frontend-images/tin-tuc/tintuc04_xmhkzi.webp"
                           alt=""
                           className="rounded-2"
                         />
