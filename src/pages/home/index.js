@@ -76,7 +76,7 @@ function Home() {
           category={"Macbook"}
           list={listMac}
           // products={productsMacbook}
-          listSubCategory={["All", "Mac Pro", "Mac Air"]}
+          listSubCategory={["All", "Macbook Pro", "Macbook Air"]}
           title={"Macbook"}
         />
 
