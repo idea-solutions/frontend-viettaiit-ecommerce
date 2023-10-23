@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRef, useState } from "react";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
@@ -9,6 +9,7 @@ import { toggleNavBar } from "../../features/navBarSlice";
 import { menuBottom } from "../../assets/menuBottomHeader";
 import { navigateAndAttachQuery } from "../../utils/attachQueryToURL";
 import { clientRoutes } from "../../routes";
+import { toastInfo } from "../../utils/toast";
 
 function NavBarDownDeskTop() {
   const navigate = useNavigate();
@@ -63,8 +64,14 @@ function NavBarDownDeskTop() {
                         "Tin tức",
                         "Liên hệ",
                       ].includes(item.title)
-                    )
+                    ) {
+                      if (item.title === "Trang chủ") {
+                        navigate(clientRoutes.home);
+                      } else {
+                        toastInfo("Chức năng đang được cập nhật!");
+                      }
                       return;
+                    }
                     dispatch(toggleNavBar());
                     navigateAndAttachQuery(
                       clientRoutes.product.search,

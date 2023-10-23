@@ -1,11 +1,12 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { easeInOut, motion } from "framer-motion";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { clientRoutes } from "../../routes";
 
 import PropTypes from "prop-types";
 import { navigateAndAttachQuery } from "../../utils/attachQueryToURL";
+import { toastInfo } from "../../utils/toast";
 const firstMenuItem1 = {
   initial: { y: 100, opacity: 0, display: "none" },
   hover: { y: 0, opacity: 1, display: "block" },
@@ -44,9 +45,18 @@ const HeaderBottomItem = ({ item }) => {
               "Tin tức",
               "Liên hệ",
             ].includes(item.title)
-          )
+          ) {
+            if (item.title === "Trang chủ") {
+              navigate(clientRoutes.home);
+            } else {
+              toastInfo("Chức năng đang được cập nhật!");
+            }
             return;
-          navigateAndAttachQuery(clientRoutes.product.search,navigate, { name: item.title });
+          }
+
+          navigateAndAttachQuery(clientRoutes.product.search, navigate, {
+            name: item.title,
+          });
         }}
         className="link"
       >
@@ -66,7 +76,11 @@ const HeaderBottomItem = ({ item }) => {
                 <span
                   title={subItem.title}
                   onClick={() =>
-                    navigateAndAttachQuery(clientRoutes.product.search,navigate, { name: subItem.title })
+                    navigateAndAttachQuery(
+                      clientRoutes.product.search,
+                      navigate,
+                      { name: subItem.title }
+                    )
                   }
                   className="iphone-sub-link"
                 >
@@ -76,7 +90,11 @@ const HeaderBottomItem = ({ item }) => {
                   {subItem.items.map((name, ipIdx) => (
                     <span
                       onClick={() =>
-                        navigateAndAttachQuery(clientRoutes.product.search,navigate, { name: name })
+                        navigateAndAttachQuery(
+                          clientRoutes.product.search,
+                          navigate,
+                          { name: name }
+                        )
                       }
                       title={name}
                       key={ipIdx}
@@ -98,9 +116,13 @@ const HeaderBottomItem = ({ item }) => {
             {item.subMenu.map((subItem, idx2) => (
               <SubItem2
                 onClick={() =>
-                  navigateAndAttachQuery(clientRoutes.product.search, navigate, {
-                    name: subItem.title,
-                  })
+                  navigateAndAttachQuery(
+                    clientRoutes.product.search,
+                    navigate,
+                    {
+                      name: subItem.title,
+                    }
+                  )
                 }
                 subItem={subItem}
                 key={idx2 + 10}
