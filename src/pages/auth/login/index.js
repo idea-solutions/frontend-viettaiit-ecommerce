@@ -143,7 +143,7 @@ function Login() {
                       e.preventDefault();
                       window.open(
                         process.env.REACT_APP_BACKEND_URL +
-                          "/api/v1/auth/facebook",
+                          "api/v1/auth/facebook",
                         "_self"
                       );
                     }}
@@ -160,7 +160,7 @@ function Login() {
                       e.preventDefault();
                       window.open(
                         process.env.REACT_APP_BACKEND_URL +
-                          "/api/v1/auth/google",
+                          "api/v1/auth/google",
                         "_self"
                       );
                     }}
@@ -177,7 +177,7 @@ function Login() {
                       e.preventDefault();
                       window.open(
                         process.env.REACT_APP_BACKEND_URL +
-                          "/api/v1/auth/github",
+                          "api/v1/auth/github",
                         "_self"
                       );
                     }}
