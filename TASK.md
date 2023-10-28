@@ -80,3 +80,9 @@
 ## TASK TỐI ƯU PERFORMANCE
     - ProductCategory -> Chưa thực hiện được caching query sub category product
 
+
+
+
+
+## deploy -> react
+

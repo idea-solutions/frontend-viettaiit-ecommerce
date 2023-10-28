@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { clientPages } from "./routes";
 import Layout from "./layout";
 import { Suspense } from "react";
@@ -31,25 +31,27 @@ function App() {
 
   return (
     <div className="App">
-      <Suspense fallback={<div></div>}>
-        <Routes basename={"/"}>
-          {clientPages.map((route, idx) => {
-            let Comp = <AnimatePresence>{route.com}</AnimatePresence>;
-            if (route.protected) {
-              Comp = <ProtectedRoute>{Comp}</ProtectedRoute>;
-            }
-            if (!route.only) Comp = <Layout key={idx}>{Comp}</Layout>;
-            if (route.children) return createChildrenRoute(route, Comp);
-            return (
-              <Route exact element={Comp} path={route.path} key={idx + 100} />
-            );
-          })}
-        </Routes>
-      </Suspense>
-      <LoadingComp />
-      <ToastContainer position="top-center" />
-      <ModalCartView />
-      <ButtonScrollTop />
+      <BrowserRouter>
+        <Suspense fallback={<div></div>}>
+          <Routes>
+            {clientPages.map((route, idx) => {
+              let Comp = <AnimatePresence>{route.com}</AnimatePresence>;
+              if (route.protected) {
+                Comp = <ProtectedRoute>{Comp}</ProtectedRoute>;
+              }
+              if (!route.only) Comp = <Layout key={idx}>{Comp}</Layout>;
+              if (route.children) return createChildrenRoute(route, Comp);
+              return (
+                <Route exact element={Comp} path={route.path} key={idx + 100} />
+              );
+            })}
+          </Routes>
+        </Suspense>
+        <LoadingComp />
+        <ToastContainer position="top-center" />
+        <ModalCartView />
+        <ButtonScrollTop />
+      </BrowserRouter>
     </div>
   );
 }
