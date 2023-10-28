@@ -32,7 +32,7 @@ function App() {
   return (
     <div className="App">
       <Suspense fallback={<div></div>}>
-        <Routes>
+        <Routes basename={"/"}>
           {clientPages.map((route, idx) => {
             let Comp = <AnimatePresence>{route.com}</AnimatePresence>;
             if (route.protected) {
@@ -40,7 +40,9 @@ function App() {
             }
             if (!route.only) Comp = <Layout key={idx}>{Comp}</Layout>;
             if (route.children) return createChildrenRoute(route, Comp);
-            return <Route exact element={Comp} path={route.path} key={idx + 100} />;
+            return (
+              <Route exact element={Comp} path={route.path} key={idx + 100} />
+            );
           })}
         </Routes>
       </Suspense>

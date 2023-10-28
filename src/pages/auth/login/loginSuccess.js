@@ -3,17 +3,17 @@ import { getUserSuccess } from "../../../features/auth/authSlice";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { setIsLoadingComp } from "../../../features/loadingCompSlice";
+import { toastSuccess } from "../../../utils/toast";
 
 function LoginSuccess() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  console.log("login success");
   useEffect(() => {
     dispatch(setIsLoadingComp(true));
     const getUserAsync = async () => {
       const { payload } = await dispatch(getUserSuccess());
-      console.log(payload);
       if (payload.status === 200) {
+        toastSuccess(payload.message);
         navigate("/");
       }
     };
