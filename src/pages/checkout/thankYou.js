@@ -5,15 +5,21 @@ import LazyImage from "../../components/LazyImage";
 import { Button, Col, Row } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleCheck, faPrint } from "@fortawesome/free-solid-svg-icons";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import useDataDetail from "../../hooks/useDataDetail";
 import { formatCurrency } from "../../utils/format";
+import { useEffect } from "react";
+import { getAddressesMe } from "../../features/address/addressSlice";
 
 function ThankYouOrder() {
   const { id } = useParams();
   const { user } = useSelector((store) => store.auth);
   const { data, _, __ } = useDataDetail("/orders/" + id);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAddressesMe());
+  }, []);
   return (
     <>
       <HelmetCustom title="ViettaiIT cảm ơn" />
@@ -23,7 +29,10 @@ function ThankYouOrder() {
             to={clientRoutes.home}
             className={`logo d-block fs-4 text-white rounded w-15`}
           >
-            <LazyImage src="https://res.cloudinary.com/dkkh1gtoj/image/upload/c_fit,w_200,h_60/v1698040260/viettaiit-ecommerce/logo.png" alt="" />
+            <LazyImage
+              src="https://res.cloudinary.com/dkkh1gtoj/image/upload/c_fit,w_200,h_60/v1698040260/viettaiit-ecommerce/logo.png"
+              alt=""
+            />
           </Link>
         </div>
 
@@ -47,7 +56,9 @@ function ThankYouOrder() {
                 <span className="text-size-21 fw-bold">Thông tin mua hàng</span>
                 <span className="text-size-14 ">{data?.address.fullName}</span>
                 <span className="text-size-14 ">{user.email}</span>
-                <span className="text-size-14 ">{data?.address.phoneNumber}</span>
+                <span className="text-size-14 ">
+                  {data?.address.phoneNumber}
+                </span>
 
                 <span className="text-size-21 fw-bold mt-2">
                   Phương thức thanh toán
@@ -61,7 +72,8 @@ function ThankYouOrder() {
                 <span className="text-size-14 ">{data?.address.fullName}</span>
                 <span className="text-size-14 ">{data?.address.address}</span>
                 <span className="text-size-14 ">
-                  {data?.address.ward}, {data?.address.district}, {data?.address.province}
+                  {data?.address.ward}, {data?.address.district},{" "}
+                  {data?.address.province}
                 </span>
 
                 <span className="text-size-21 fw-bold mt-2">
@@ -84,12 +96,7 @@ function ThankYouOrder() {
                       <Row className="px-2 py-1 ">
                         <Col xs={2}>
                           <div className=" position-relative">
-                            <LazyImage
-                              src={
-                       
-                                orderLine.productItem.image
-                              }
-                            />
+                            <LazyImage src={orderLine.productItem.image} />
                             <div className="px-1 text-size-12 rounded-circle w-5 h-5 d-inline-block position-absolute top--10 right-1 bg-info text-white">
                               {orderLine.qty}
                             </div>
