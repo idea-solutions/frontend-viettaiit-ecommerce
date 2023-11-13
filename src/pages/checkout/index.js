@@ -18,10 +18,11 @@ import {
   resetFormAddress,
   setFromAddress,
 } from "../../features/formAddressSlice";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useHideOnClickOutside from "../../hooks/useHideOnClickOutSide";
 import httpRequest from "../../api/httpRequest";
 import { handlePaymentService } from "../../services/orderService";
+import { getAddressesMe } from "../../features/address/addressSlice";
 function CheckOut() {
   const { cart, countCartItem, total } = useSelector((store) => store.cart);
   const { address } = useSelector((store) => store.formAddress);
@@ -33,6 +34,10 @@ function CheckOut() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [payOption, setPayOption] = useState(1);
+
+  useEffect(() => {
+    dispatch(getAddressesMe());
+  }, [dispatch]);
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { fullName, phoneNumber } = address;
@@ -56,8 +61,7 @@ function CheckOut() {
         dispatch(setIsLoadingComp(false));
         window.open(data.redirect_url, "_self");
       }
-    } catch (error) {
-    }
+    } catch (error) {}
   };
   return (
     <div className="vh-100 ">
@@ -72,7 +76,10 @@ function CheckOut() {
                 to={clientRoutes.home}
                 className={`logo d-block fs-4 text-white rounded w-15`}
               >
-                <LazyImage src="https://res.cloudinary.com/dkkh1gtoj/image/upload/c_fit,w_200,h_60/v1698040260/viettaiit-ecommerce/logo.png" alt="" />
+                <LazyImage
+                  src="https://res.cloudinary.com/dkkh1gtoj/image/upload/c_fit,w_200,h_60/v1698040260/viettaiit-ecommerce/logo.png"
+                  alt=""
+                />
               </Link>
             </div>
             <Row className="">
@@ -203,10 +210,7 @@ function CheckOut() {
                       <div className="d-flex gap-1 align-items-center">
                         <div className=" position-relative">
                           <LazyImage
-                            src={
-                        
-                              item.productItem.image
-                            }
+                            src={item.productItem.image}
                             alt=""
                             style={{ width: "45px" }}
                             className="border border-info rounded-5"
