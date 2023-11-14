@@ -5,16 +5,21 @@ import LazyImage from "../../components/LazyImage";
 import { Button, Col, Row } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleCheck, faPrint } from "@fortawesome/free-solid-svg-icons";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import useDataDetail from "../../hooks/useDataDetail";
 import { formatCurrency } from "../../utils/format";
+import { getAddressesMe } from "../../features/address/addressSlice";
+import { useEffect } from "react";
 
 function ThankYouOrder() {
   const { id } = useParams();
   const { user } = useSelector((store) => store.auth);
   const { data, _, __ } = useDataDetail("/orders/" + id);
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAddressesMe());
+  }, [dispatch]);
   return (
     <>
       <HelmetCustom title="ViettaiIT cảm ơn" />

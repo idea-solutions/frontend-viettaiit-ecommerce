@@ -18,11 +18,10 @@ import {
   resetFormAddress,
   setFromAddress,
 } from "../../features/formAddressSlice";
-import { useEffect, useRef, useState } from "react";
+import {  useRef, useState } from "react";
 import useHideOnClickOutside from "../../hooks/useHideOnClickOutSide";
 import httpRequest from "../../api/httpRequest";
 import { handlePaymentService } from "../../services/orderService";
-import { getAddressesMe } from "../../features/address/addressSlice";
 function CheckOut() {
   const { cart, countCartItem, total } = useSelector((store) => store.cart);
   const { address } = useSelector((store) => store.formAddress);
@@ -35,9 +34,7 @@ function CheckOut() {
   const navigate = useNavigate();
   const [payOption, setPayOption] = useState(1);
 
-  useEffect(() => {
-    dispatch(getAddressesMe());
-  }, [dispatch]);
+ 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { fullName, phoneNumber } = address;
