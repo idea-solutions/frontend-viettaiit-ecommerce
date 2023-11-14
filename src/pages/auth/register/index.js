@@ -116,11 +116,13 @@ function Register() {
                   <button
                     type="submit"
                     className="btn btn-facebook"
+                    disabled={true}
                     onClick={(e) => {
                       e.preventDefault();
+                
                       window.open(
-                        process.env.REACT_APP_BACKEND_URL +
-                          "api/v1/auth/facebook",
+                   
+                          "https://viettai.click/api/v1/auth/facebook",
                         "_self"
                       );
                     }}
@@ -133,11 +135,13 @@ function Register() {
                   <button
                     type="submit"
                     className="btn btn-google"
+                    disabled={true}
                     onClick={(e) => {
                       e.preventDefault();
+                  
                       window.open(
-                        process.env.REACT_APP_BACKEND_URL +
-                          "api/v1/auth/google",
+               
+                          "https://viettai.click/api/v1/auth/google",
                         "_self"
                       );
                     }}
@@ -150,11 +154,13 @@ function Register() {
                   <button
                     type="submit"
                     className="btn btn-github"
+                    disabled={true}
                     onClick={(e) => {
                       e.preventDefault();
+                  
                       window.open(
-                        process.env.REACT_APP_BACKEND_URL +
-                          "api/v1/auth/github",
+               
+                          "https://viettai.click/api/v1/auth/github",
                         "_self"
                       );
                     }}

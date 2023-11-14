@@ -15,7 +15,7 @@ import {
 
 import HelmetCustom from "../../../components/HelmetCustom";
 import Breadcrumb from "../../../components/Breadcrumb";
-import { toastWarning } from "../../../utils/toast";
+import {  toastWarning } from "../../../utils/toast";
 import { Form } from "react-bootstrap";
 import { FaFacebookF, FaGithub, FaGoogle } from "react-icons/fa";
 import useScrollTop from "../../../hooks/useScrollTop";
@@ -139,11 +139,13 @@ function Login() {
                 <div className="mb-3 d-flex justify-content-center gap-2 align-items-center">
                   <button
                     className="btn btn-facebook"
+                    disabled={true}
                     onClick={(e) => {
                       e.preventDefault();
+              
                       window.open(
-                        process.env.REACT_APP_BACKEND_URL +
-                          "api/v1/auth/facebook",
+                      
+                          "https://viettai.click/api/v1/auth/facebook",
                         "_self"
                       );
                     }}
@@ -156,11 +158,13 @@ function Login() {
                   <button
                     type="submit"
                     className="btn btn-google"
+                    disabled={true}
                     onClick={(e) => {
                       e.preventDefault();
+                  
                       window.open(
-                        process.env.REACT_APP_BACKEND_URL +
-                          "api/v1/auth/google",
+              
+                          "https://viettai.click/api/v1/auth/google",
                         "_self"
                       );
                     }}
@@ -173,11 +177,13 @@ function Login() {
                   <button
                     type="submit"
                     className="btn btn-github"
+                    disabled={true}
                     onClick={(e) => {
                       e.preventDefault();
+                    
                       window.open(
-                        process.env.REACT_APP_BACKEND_URL +
-                          "api/v1/auth/github",
+                 
+                          "https://viettai.click/api/v1/auth/github",
                         "_self"
                       );
                     }}
