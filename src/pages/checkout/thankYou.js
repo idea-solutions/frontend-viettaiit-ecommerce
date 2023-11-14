@@ -18,8 +18,9 @@ function ThankYouOrder() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getAddressesMe());
-  }, [dispatch]);
+    const getAllAddressesMeAsync = async () => await dispatch(getAddressesMe());
+    getAllAddressesMeAsync();
+  }, []);
   return (
     <>
       <HelmetCustom title="ViettaiIT cảm ơn" />
