@@ -59,7 +59,7 @@ function Login() {
     }
     dispatch(setIsLoadingComp(true));
     await dispatch(forgotPasswordAuth({ email: emailForgot }));
-    dispatch(setIsLoadingComp(true));
+    dispatch(setIsLoadingComp(false));
   };
 
   const { user } = useSelector((store) => store.auth);
